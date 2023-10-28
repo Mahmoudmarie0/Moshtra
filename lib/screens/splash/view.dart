@@ -1,17 +1,31 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// hello from adham
-//hello mahmoud
+
+
+import '../onboarding/view.dart';
+
+
 class SplashScreen extends StatelessWidget{
   @override
+
+
+  @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
-    //mahmoud ahmed
-    var a;
+  return Scaffold(
+    body: Text(
+      'hello',
+
+    ),
+
+
+
+    );
+
+
+
+
+
   }
-
-
-
-
-
-
 }

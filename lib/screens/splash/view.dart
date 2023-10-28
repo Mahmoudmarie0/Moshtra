@@ -1,31 +1,18 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-
-import '../onboarding/view.dart';
-
-
+// hello from adham
+//hello mahmoud
+// mido
 class SplashScreen extends StatelessWidget{
   @override
-
-
-  @override
   Widget build(BuildContext context) {
-  return Scaffold(
-    body: Text(
-      'hello',
-
-    ),
-
-
-
-    );
-
-
-
-
-
+    throw UnimplementedError();
+    //mahmoud ahmed
+    var a;
   }
+
+
+
+
+
+
 }

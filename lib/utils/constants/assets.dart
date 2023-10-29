@@ -1,5 +1,5 @@
 class AssetsPaths{
-  static String MoshtraLogo = "assets/images/quickmart.svg";
+  static String MoshtraLogo = "assets/images/logo.svg";
 
 
 

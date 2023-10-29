@@ -30,6 +30,9 @@ dependencies:
     #AppIcon
   flutter_launcher_icons: ^0.13.1
 
+    #HexColor
+  hexcolor: ^3.0.1
+
 
 
   cupertino_icons: ^1.0.2

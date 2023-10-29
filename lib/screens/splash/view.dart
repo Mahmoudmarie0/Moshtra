@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
 return Scaffold(
   body: Center(
 
-    child:BounceInUp( duration: const Duration(milliseconds: 2000) ,child: SvgPicture.asset(AssetsPaths.MoshtraLogo,height:64,width: 284,)),
+    child:BounceInUp( duration: const Duration(milliseconds: 2000) ,child: SvgPicture.asset(AssetsPaths.MoshtraLogo,height:64.h,width: 284.w,)),
 
 
 

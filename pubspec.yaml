@@ -27,6 +27,9 @@ dependencies:
     #Responsive
   flutter_screenutil: ^5.9.0
 
+    #AppIcon
+  flutter_launcher_icons: ^0.13.1
+
 
 
   cupertino_icons: ^1.0.2
@@ -34,6 +37,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.svg"
 
 
 

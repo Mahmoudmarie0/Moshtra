@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
 return Scaffold(
   body: Center(
 
-    child:BounceInUp( duration: const Duration(milliseconds: 2000) ,child: SvgPicture.asset(AssetsPaths.MoshtraLogo)),
+    child:BounceInUp( duration: const Duration(milliseconds: 2000) ,child: SvgPicture.asset(AssetsPaths.MoshtraLogo,height:64,width: 284,)),
 
 
 

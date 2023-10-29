@@ -7,9 +7,11 @@ class OnBoarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body:
-      Text(
-        "hello",
 
+      Center(
+        child: Text(
+          "Splash Screen",style: TextStyle( fontWeight: FontWeight.w700,fontSize:40),
+        ),
       ),
 
 

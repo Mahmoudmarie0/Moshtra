@@ -1,15 +1,15 @@
-plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
-}
-
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
+//implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
         localProperties.load(reader)
     }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -21,6 +21,18 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+//plugins {
+//  //  id("com.android.application")
+//
+//    // Add the Google services Gradle plugin
+//    //id("com.google.gms.google-services")
+//
+//
+//}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.example.moshtra"
@@ -45,7 +57,7 @@ android {
         applicationId "com.example.moshtra"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 19 //flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -64,4 +76,18 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+//dependencies {
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    // Import the Firebase BoM
+//    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+//
+//
+//    // TODO: Add the dependencies for Firebase products you want to use
+//    // When using the BoM, don't specify versions in Firebase dependencies
+//    implementation("com.google.firebase:firebase-analytics")
+//
+//
+//    // Add the dependencies for any other desired Firebase products
+//    // https://firebase.google.com/docs/android/setup#available-libraries
+//}
+//apply plugin: 'com.google.gms.google-services'

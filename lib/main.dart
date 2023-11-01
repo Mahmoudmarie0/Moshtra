@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:moshtra/screens/splash/view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+
+SharedPreferences ? sharedPref;
+void main() async {
   runApp(const MyApp());
+  sharedPref=await SharedPreferences.getInstance();
 }
 //main
 class MyApp extends StatelessWidget {

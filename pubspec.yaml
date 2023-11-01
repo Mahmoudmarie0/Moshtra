@@ -18,6 +18,15 @@ dependencies:
     #SvgPicture
   flutter_svg: ^2.0.8
 
+    #Smooth_Page_indicator
+  smooth_page_indicator: ^1.1.0
+
+    #animatedText
+  animated_text_kit: ^4.2.2
+
+    #SharedPref
+  shared_preferences: ^2.2.2
+
     #Get
   get: ^4.6.6
 

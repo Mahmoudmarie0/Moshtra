@@ -7,4 +7,5 @@ class AssetsPaths{
   static String Facebook = "assets/images/facebook.svg";
   static String Google = "assets/images/google.svg";
   static String Apple = "assets/images/apple.svg";
+  static String PassSucess = "assets/images/PassCreateSucess.png";
 }

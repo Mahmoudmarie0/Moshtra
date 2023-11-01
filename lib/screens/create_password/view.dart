@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:moshtra/screens/paswword_created_success/view.dart';
+import 'package:moshtra/screens/register/view.dart';
 
 
 class CreatePassword extends StatelessWidget {
@@ -20,7 +24,7 @@ class CreatePassword extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {
-
+                              Get.to(Home());
                             },
                             child: Icon(Icons.arrow_back,
                               size: 32,),
@@ -106,7 +110,9 @@ class CreatePassword extends StatelessWidget {
               margin: EdgeInsets.only(left: 22, right: 22, top: 30,bottom: 23),
               width: 331,
               child: TextButton(
-                onPressed: (){},
+                onPressed: (){
+                  Get.to(CreatPasswordSuccesfully());
+                },
                 child: Text(
                   "Save",
                   style: TextStyle(

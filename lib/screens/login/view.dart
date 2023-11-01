@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:moshtra/screens/createpassword/view.dart';
 import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
 import '../../main.dart';
@@ -139,7 +140,9 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 30.h,),
-                          Center(child: TextButton(onPressed: (){}, child: Text("Forgot password?",style: TextStyle(fontWeight: FontWeight.w700,fontSize:16.sp,color: AppColors.DarkGreen),))),
+                          Center(child: TextButton(onPressed: (){
+                            Get.to(CreatePassword());
+                          }, child: Text("Forgot password?",style: TextStyle(fontWeight: FontWeight.w700,fontSize:16.sp,color: AppColors.DarkGreen),))),
                         ],
                       ),
                     ),

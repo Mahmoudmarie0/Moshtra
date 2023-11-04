@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:moshtra/global_controller/my_bindings.dart';
 import 'package:moshtra/screens/splash/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: scale),
           child: GetMaterialApp(
+            initialBinding: MyBindings(),
             debugShowCheckedModeBanner: false,
             title: 'Moshtra',
             theme: ThemeData(
@@ -34,6 +37,7 @@ class MyApp extends StatelessWidget {
               highlightColor: Colors.transparent,
               fontFamily: "IBMPlex",
             ),
+            builder: EasyLoading.init(),
             home: child!,
           ),
         );

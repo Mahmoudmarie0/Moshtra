@@ -42,6 +42,16 @@ dependencies:
     #HexColor
   hexcolor: ^3.0.1
 
+    #Check Internet Connection
+  connectivity_plus: ^5.0.0
+  restart_app: ^1.2.1
+
+    #lottie
+  lottie: ^2.7.0
+
+    #easy_loading
+  flutter_easyloading: ^3.0.5
+
 
 
   cupertino_icons: ^1.0.2

@@ -2,17 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
-
 import 'package:moshtra/screens/login/controller/controller.dart';
-import 'package:moshtra/screens/register/view.dart';
-import '../../main.dart';
-import '../../utils/constants/assets.dart';
-import '../../utils/constants/colors.dart';
-import '../create_password/view.dart';
 
 class LoginScreen extends StatelessWidget {
   //const LoginScreen({super.key});
@@ -20,7 +13,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+//hi
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

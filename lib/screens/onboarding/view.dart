@@ -133,7 +133,7 @@ class OnBoardingScreen extends StatelessWidget {
   Widget buildOnBoardItem(BoardingModel model) => Stack(
     alignment: Alignment.topLeft,
     children: [
-      FadeInUp(
+      FadeInLeft(
         from: 150,
         duration: const Duration(milliseconds: 1300),
         child: Align(
@@ -179,8 +179,8 @@ class OnBoardingScreen extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  width: 160.w,
-                  height: 52.h,
+                  width: 319.w,
+                  height: 50.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.r),
                     color:  AppColors.orange,
@@ -189,6 +189,7 @@ class OnBoardingScreen extends StatelessWidget {
                       onPressed: (){
                         controller.onSubmit();
                       },
+
                       child: Text(
                         model.btntext,
                         style: TextStyle(

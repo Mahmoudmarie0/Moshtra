@@ -34,7 +34,7 @@ class OnboardingController extends GetxController
       boardingList.add(BoardingModel(
           image:AssetsPaths.ShapeOnBoarding2 ,
           height: 270.h,
-          width: 337.w,
+          width: 300.w,
           text: "Track order !!",
           subtext: "Easily track your order and stay updated",
           btntext: 'Next'.tr));
@@ -57,7 +57,7 @@ class OnboardingController extends GetxController
       boardingList.add(BoardingModel(
           image:AssetsPaths.ShapeOnBoarding2 ,
           height: 270.h,
-          width: 337.w,
+          width: 300.w,
           text: "Track order !!",
           subtext: "Easily track your order and stay updated",
           btntext: 'Next'.tr));

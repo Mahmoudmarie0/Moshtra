@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:hexcolor/hexcolor.dart';
 
 class AppColors{
@@ -8,6 +10,13 @@ class AppColors{
   static HexColor LightGrey = HexColor("#F6F6F7");
   static HexColor LightGrey1 = HexColor("#A4A5B4");
   static HexColor DarkGreen = HexColor("#07AA83");
+  static HexColor blue =  HexColor("#037EEE");
+  static HexColor white =  HexColor("#FFFFFF");
+  static const Color lightWhite = const Color.fromRGBO(255, 255, 255, 0.5);
+  static const Color lightblue = const Color.fromRGBO(3, 126,230, 0.2);
+  static HexColor orange = HexColor('#F88160');
+
+
 
 
 

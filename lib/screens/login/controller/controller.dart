@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:moshtra/screens/onboarding/view.dart';
 
 class LoginController extends GetxController{
   bool oobscureText=true;
@@ -16,7 +15,7 @@ class LoginController extends GetxController{
   void buttonFunction()
   {
     if(formKey.currentState!.validate()) {
-      Get.offAll(() => OnBoarding());
+    //  Get.offAll(() => OnBoarding());
     }
   }
 

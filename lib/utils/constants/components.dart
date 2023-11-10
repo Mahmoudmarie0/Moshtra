@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -33,4 +34,13 @@ SnackbarController GetSnackbarError({required String message,required HexColor C
   duration: Duration(seconds: 2),
 
 
+);
+
+//ButtonStyle
+final ButtonStyle button = ElevatedButton.styleFrom(
+    minimumSize: Size(350, 60),
+    backgroundColor: Color(0xfff88160),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(50)),
+    )
 );

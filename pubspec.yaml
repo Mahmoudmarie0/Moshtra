@@ -18,6 +18,9 @@ dependencies:
     #SvgPicture
   flutter_svg: ^2.0.8
 
+    #pinput
+  pinput: ^3.0.0
+
     #Smooth_Page_indicator
   smooth_page_indicator: ^1.1.0
 

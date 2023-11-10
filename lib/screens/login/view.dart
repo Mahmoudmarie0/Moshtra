@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:moshtra/screens/EmailConfirmation/view.dart';
 import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
 
@@ -102,7 +103,10 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        TextButton(onPressed: (){}, child:
+                        TextButton(
+                            onPressed: (){
+                              Get.to(EmailConfirmation());
+                        }, child:
                         Text("Forgot Password?",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300,color:AppColors.LightGrey1 ),)
 
                         ),
@@ -140,7 +144,7 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("Don’t have an account yet? Register",style: TextStyle(fontSize: 12.sp,color:Colors.black,fontWeight:FontWeight.w300),),
+                          Text("Don’t have an account yet? ",style: TextStyle(fontSize: 12.sp,color:Colors.black,fontWeight:FontWeight.w300),),
                           TextButton(
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.zero,
@@ -152,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                               Get.to(RegisterScreen());
                             },
                             child:
-                          Text("here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
+                          Text("Register Here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
                           ),
 
 

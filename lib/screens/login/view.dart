@@ -27,7 +27,6 @@ class LoginScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.blue,
       body: Column(
-
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Row(
@@ -66,12 +65,19 @@ class LoginScreen extends StatelessWidget {
                       TextFormField (
                         controller: emailController,
                         decoration: InputDecoration(
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                          suffixIcon: Icon(Icons.email_sharp),
+                           // floatingLabelBehavior: FloatingLabelBehavior.always,
                             border:OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: AppColors.blue,
+                                width: 2.0),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
                             labelText: 'Email',
-                            hintText: 'Enter your email',
-                            hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
-                           labelStyle: TextStyle(color: Colors.black),
+                           // hintText: 'Enter your email',
+                            //hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
+                          // labelStyle: TextStyle(color: Colors.black),
                         ),
                       ),
                       SizedBox(height: 36.h,),
@@ -82,7 +88,7 @@ class LoginScreen extends StatelessWidget {
 
                           decoration: InputDecoration(
 
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            //floatingLabelBehavior: FloatingLabelBehavior.always,
                             suffixIcon: GestureDetector(onTap: (){
                                 controller.ontap();
                                 },
@@ -90,11 +96,17 @@ class LoginScreen extends StatelessWidget {
                                 child: Icon(controller.oobscureText?Icons.visibility:Icons.visibility_off_outlined),
                               ),
                             border:OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppColors.blue,
+                                  width: 2.0),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                             labelText: 'Password',
-                            hintText: 'Enter your password',
-                            hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
+                            //hintText: 'Enter your password',
+                           // hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
 
-                            labelStyle: TextStyle(color: Colors.black),
+                          //  labelStyle: TextStyle(color: Colors.black),
                           ),
                           obscureText:controller.oobscureText,
                         ),
@@ -104,6 +116,10 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                         TextButton(
+                            style: TextButton.styleFrom(
+                      splashFactory: NoSplash.splashFactory,
+                            ),
+
                             onPressed: (){
                               Get.to(EmailConfirmation());
                         }, child:

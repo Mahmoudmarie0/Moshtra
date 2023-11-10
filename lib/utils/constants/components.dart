@@ -10,19 +10,18 @@ import 'colors.dart';
 
 
 //SnackBar
-SnackbarController GetSnackbarError({required String message,required HexColor Color}) =>Get.snackbar(
-
+SnackbarController GetSnackbarError({required String message,required HexColor Color}) =>Get. snackbar(
     '',
     '',
   snackPosition: SnackPosition.BOTTOM,
   colorText: AppColors.white,
-  borderRadius: 100,
+  borderRadius: 75,
   backgroundColor:Color,
   padding: EdgeInsets.symmetric(vertical: 15.h),
   titleText: Row(
-    mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      SizedBox(width:16.w ,),
+      SizedBox(width:5 .w ,),
       SvgPicture.asset(AssetsPaths.SallaSmallIcon, width: 20.w, height: 20.h,),
       SizedBox(width: 9.w,),
       Text(message,style: TextStyle(fontSize:14.sp,fontWeight: FontWeight.w400,color: AppColors.white,)),

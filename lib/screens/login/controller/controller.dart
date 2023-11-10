@@ -27,12 +27,6 @@ class LoginController extends GetxController{
 
   }
 
-  void buttonFunction()
-  {
-    if(formKey.currentState!.validate()) {
-    //  Get.offAll(() => OnBoarding());
-    }
-  }
 
   void validateCredentials(String email, String password) {
     if(email.isEmpty || password.isEmpty)

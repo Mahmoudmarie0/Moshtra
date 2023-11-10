@@ -14,13 +14,7 @@ class EmailConfirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: AppColors.grey, // Change cursor color
-          )),
-      home: Scaffold(
+      return Scaffold(
         resizeToAvoidBottomInset : false,
         backgroundColor: AppColors.blue,
         body: Container(
@@ -68,19 +62,20 @@ class EmailConfirmation extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
                         child: SizedBox(
-                          child: TextField(
+                          child: TextFormField(
                             controller: confirmationController,
                             // obscureText: true,
                             decoration: InputDecoration(
                               suffixIcon: Icon(Icons.email_sharp),
                               // suffixIconColor: Color(0xff037eee),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 1,
-                                  // color: Color(0xfff88160)
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                              // enabledBorder: OutlineInputBorder(
+                              //
+                              //   borderSide: BorderSide(
+                              //     width: 1,
+                              //     // color: Color(0xfff88160)
+                              //   ),
+                              //   borderRadius: BorderRadius.circular(10),
+                              // ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: AppColors.blue,
@@ -89,7 +84,7 @@ class EmailConfirmation extends StatelessWidget {
                               ),
                               border: OutlineInputBorder(),
                               labelText: 'Email Address',
-                              labelStyle: TextStyle(color: AppColors.black),
+
                             ),
                           ),
                         ),
@@ -120,7 +115,7 @@ class EmailConfirmation extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+
   }
 }

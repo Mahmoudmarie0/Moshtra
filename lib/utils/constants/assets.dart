@@ -13,5 +13,6 @@ class AssetsPaths{
   static String Ellipse = "assets/images/Ellipse.svg";
   static String OrLoginWith = "assets/images/OrLoginWith.svg";
   static String SallaSmallIcon = "assets/images/SallaSmallIcon.svg";
+  static String arrowBack="assets/images/Icon.svg";
 
 }

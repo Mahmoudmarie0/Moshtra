@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:moshtra/screens/login/view.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/components.dart';
+import '../../NewPassword/view.dart';
 
 class EmailVerificationController extends GetxController {
 
@@ -20,7 +20,7 @@ class EmailVerificationController extends GetxController {
 
   void validateOTP() {
     if(isCompleted){
-      Get.to(LoginScreen());
+      Get.to(NewPasswordScreen());
     }
     else
     {

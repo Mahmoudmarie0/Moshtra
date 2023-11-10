@@ -12,5 +12,6 @@ class AssetsPaths{
   static String WifiLostSVG = "assets/images/wifi_lost1.json";
   static String Ellipse = "assets/images/Ellipse.svg";
   static String OrLoginWith = "assets/images/OrLoginWith.svg";
+  static String SallaSmallIcon = "assets/images/SallaSmallIcon.svg";
 
 }

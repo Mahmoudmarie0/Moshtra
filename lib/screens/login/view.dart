@@ -16,8 +16,12 @@ class LoginScreen extends StatelessWidget {
   //const LoginScreen({super.key});
   LoginController loginController=Get.put(LoginController());
 
+
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.blue,
@@ -59,6 +63,7 @@ class LoginScreen extends StatelessWidget {
 
                     children: [
                       TextFormField (
+                        controller: emailController,
                         decoration: InputDecoration(
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                             border:OutlineInputBorder(),
@@ -72,6 +77,7 @@ class LoginScreen extends StatelessWidget {
                       GetBuilder<LoginController>(
                         init: LoginController(),
                         builder: (controller)=>TextFormField (
+                          controller: passwordController,
 
                           decoration: InputDecoration(
 
@@ -86,6 +92,7 @@ class LoginScreen extends StatelessWidget {
                             labelText: 'Password',
                             hintText: 'Enter your password',
                             hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
+
                             labelStyle: TextStyle(color: Colors.black),
                           ),
                           obscureText:controller.oobscureText,
@@ -113,6 +120,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                         child: MaterialButton(
                             onPressed: (){
+                              String email = emailController.text;
+                              String password = passwordController.text;
+                             loginController.validateCredentials(email, password);
                               //  controller.onSubmit();
                             },
                             child: Text(

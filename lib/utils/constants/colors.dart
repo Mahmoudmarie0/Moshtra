@@ -15,6 +15,11 @@ class AppColors{
   static const Color lightWhite = const Color.fromRGBO(255, 255, 255, 0.5);
   static const Color lightblue = const Color.fromRGBO(3, 126,230, 0.2);
   static HexColor orange = HexColor('#F88160');
+  static HexColor Green = HexColor('#31C440');
+  static HexColor Red = HexColor('#EA4335');
+
+
+
 
 
 

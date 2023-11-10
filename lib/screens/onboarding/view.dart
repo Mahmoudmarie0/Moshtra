@@ -6,12 +6,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../global_controller/main_app_controller.dart';
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
 import 'controller.dart';
 import 'model.dart';
+
+// Hello EveryBody
+
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});

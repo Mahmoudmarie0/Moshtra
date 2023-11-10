@@ -11,7 +11,7 @@ import 'package:moshtra/screens/register/view.dart';
 
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
-// HELLO ABO AL ADAHIM
+// Hello mahmoud
 class LoginScreen extends StatelessWidget {
   //const LoginScreen({super.key});
   LoginController loginController=Get.put(LoginController());

@@ -5,7 +5,8 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/components.dart';
-import '../../HomeScreen/view.dart';
+import '../../Home_layout/view.dart';
+
 
 class RegisterController extends GetxController{
   bool oobscureText=true;
@@ -32,7 +33,7 @@ class RegisterController extends GetxController{
       GetSnackbarError( message: 'Please fill in all fields ',Color: AppColors.Red);
     else {
       GetSnackbarError( message: 'Your account has been created successfully ',Color: AppColors.Green);
-      Get.to(HomeScreen());
+      Get.to(HomeLayout());
       // Perform login or other actions
     }
   }

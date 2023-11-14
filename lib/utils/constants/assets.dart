@@ -14,5 +14,10 @@ class AssetsPaths{
   static String OrLoginWith = "assets/images/OrLoginWith.svg";
   static String SallaSmallIcon = "assets/images/SallaSmallIcon.svg";
   static String arrowBack="assets/images/Icon.svg";
+  static String Home="assets/images/Home.svg";
+  static String Categories="assets/images/category.svg";
+  static String MyCart="assets/images/shopping-cart.svg";
+  static String Wishlist="assets/images/wishlist.svg";
+  static String Profile="assets/images/profile.svg";
 
 }

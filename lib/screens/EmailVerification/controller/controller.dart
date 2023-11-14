@@ -27,5 +27,6 @@ class EmailVerificationController extends GetxController {
         GetSnackbarError(
             message: 'Please Enter Your OTP Code', Color: AppColors.Red);
     }
+    isCompleted=false;
   }
 }

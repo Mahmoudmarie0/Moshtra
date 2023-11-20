@@ -21,6 +21,8 @@ class AssetsPaths{
   static String Profile="assets/images/profile.svg";
   static String MoshtraLogoBlack="assets/images/LOGOBlack.svg";
   static String SearchIcon="assets/images/search-icon.svg";
+  static String Mobile="assets/images/mobile.svg";
+
 
 
 }

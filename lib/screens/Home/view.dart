@@ -34,7 +34,10 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(AssetsPaths.MoshtraLogoBlack),
                     Spacer(),
-                  SvgPicture.asset(AssetsPaths.SearchIcon),
+                  Icon(
+                    Icons.search_rounded,
+                  ),
+
 
                   ],
                 ),
@@ -83,8 +86,6 @@ class HomeScreen extends StatelessWidget {
               //
               // ),
 
-              
-              
             ]
             ),
           ),
@@ -97,59 +98,115 @@ Widget products(HomeModel model,context)=> SingleChildScrollView(
   physics: BouncingScrollPhysics(),
   child:Column(
     children: [
-      CarouselSlider(items: model.data!.banners.map(
-            (e) =>
-          Image(
-  
-            image:NetworkImage('${e.image}'),
-  
-            width: double.infinity,
-  
-            fit: BoxFit.cover,
-  
-          ),).toList(),
+      CarouselSlider(
+        items: model.data!.banners.map(
+              (e) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24.r), // Adjust the radius as needed
+              // Optionally, you can add other decoration properties like color or border
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12.0), // Same radius as Container
+              child: Image(
+                image: NetworkImage('${e.image}'),
+                width: 328.w,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ).toList(),
         options: CarouselOptions(
-  
-          height: 250.0,
-  
+          height: 158.h,
+
           initialPage: 0,
-  
-          viewportFraction:1.0 ,
-  
+          viewportFraction: 1.0,
           enableInfiniteScroll: true,
-  
           reverse: false,
-  
           autoPlay: true,
-  
           autoPlayInterval: Duration(seconds: 3),
-  
           autoPlayAnimationDuration: Duration(seconds: 1),
-  
           autoPlayCurve: Curves.fastOutSlowIn,
-  
           scrollDirection: Axis.horizontal,
-  
-  
-  
-  
-  
-        ),),
-      Container(
-        color: Colors.white38,
-        child: GridView.count(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          mainAxisSpacing:1.0 ,
-          crossAxisSpacing: 1.0,
-          childAspectRatio: 1/1.90,
-          children: List.generate(model.data!.products.length, (index) =>buildGridProduct(model.data!.products[index])),
-  
-  
-  
-  
         ),
+      ),
+      SizedBox(height: 40.h,),
+      // Row(
+      //   children: [
+      //     Text('Categories',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18.sp),),
+      //     Spacer(),
+      //     TextButton(
+      //       onPressed: () {  },
+      //       child:Text("SEE ALL",style: TextStyle(color: AppColors.orange,fontWeight: FontWeight.w700,fontSize: 10.sp),),
+      //     ),
+      //   ],
+      //
+      //
+      // ),
+      // Container(
+      //   //color: Colors.cyanAccent,
+      //     height: 60.h,
+      //     width: 328.w,
+      //   child: Row(
+      //     children: [
+      //       Column(
+      //         children: [
+      //           Container(
+      //               height: 29.h,
+      //               width: 60.w,
+      //               child: SvgPicture.asset(AssetsPaths.Mobile,)
+      //           ),
+      //           Text('ma'),
+      //
+      //         ],
+      //
+      //
+      //       ),
+      //
+      //
+      //     ],
+      //
+      //   ),
+      //
+      //
+      //
+      // ),
+      Container(
+        padding: EdgeInsets.zero,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.r)),
+       // color: Colors.white38,
+        child: Column(
+         children: [
+           Row(
+               children: [
+                 Text('Latest Products',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18.sp),),
+                 Spacer(),
+                 TextButton(
+                   onPressed: () {  },
+                   child:Text("SEE ALL",style: TextStyle(color: AppColors.orange,fontWeight: FontWeight.w700,fontSize: 10.sp),),
+                      ),
+                       ],
+
+
+),
+           GridView.count(
+             shrinkWrap: true,
+             physics: NeverScrollableScrollPhysics(),
+             crossAxisCount: 2,
+             mainAxisSpacing:1.0 ,
+             crossAxisSpacing: 1.0,
+             childAspectRatio: 1/1.90,
+             children: List.generate(model.data!.products.length, (index) =>buildGridProduct(model.data!.products[index])),
+
+
+
+
+           ),
+
+             ],
+             ) ,
+
+
+
       ),
     ],
   ),

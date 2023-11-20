@@ -1,1 +1,7 @@
-class Endpoints{}
+
+
+class Endpoints {
+  static String Home = "home";
+}
+
+

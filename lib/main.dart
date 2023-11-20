@@ -7,12 +7,15 @@ import 'package:moshtra/global_controller/my_bindings.dart';
 import 'package:moshtra/screens/splash/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Dio/DioHelper.dart';
+
 
 SharedPreferences ? sharedPref;
 void main() async {
   runApp(const MyApp());
   sharedPref=await SharedPreferences.getInstance();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  DioHelper.init();
 }
 //main
 class MyApp extends StatelessWidget {

@@ -26,7 +26,7 @@ class HomeLayout extends StatelessWidget {
           return Directionality(
             textDirection:TextDirection.ltr,
             child:Scaffold(
-              resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: false,
               backgroundColor: Colors.white,
               body: IndexedStack(
                 index: Controller.CurrentIndex,
@@ -41,7 +41,7 @@ class HomeLayout extends StatelessWidget {
 
               ),
               bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed, // Fixed
+               // type: BottomNavigationBarType.fixed, // Fixed
                 backgroundColor: Colors.white70,
 
                 elevation: 0,

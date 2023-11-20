@@ -43,3 +43,17 @@ final ButtonStyle button = ElevatedButton.styleFrom(
       borderRadius: BorderRadius.all(Radius.circular(50)),
     )
 );
+
+
+//print FullText
+void printFullText(String text){
+  final pattern =RegExp('.{1,800}');
+  pattern.allMatches(text).forEach((match) =>print(match.group(0)));
+
+
+
+}
+
+
+//empty token
+String ? token='';

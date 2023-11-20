@@ -18,8 +18,17 @@ dependencies:
     #SvgPicture
   flutter_svg: ^2.0.8
 
+  #Dio
+  dio: ^5.3.2
+
+  #carousel_slider
+  carousel_slider: ^4.2.1
+
     #pinput
   pinput: ^3.0.0
+
+  #conditional_builder
+  conditional_builder_null_safety: ^0.0.6
 
     #Smooth_Page_indicator
   smooth_page_indicator: ^1.1.0

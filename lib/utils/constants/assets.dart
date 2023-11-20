@@ -19,5 +19,8 @@ class AssetsPaths{
   static String MyCart="assets/images/shopping-cart.svg";
   static String Wishlist="assets/images/wishlist.svg";
   static String Profile="assets/images/profile.svg";
+  static String MoshtraLogoBlack="assets/images/LOGOBlack.svg";
+  static String SearchIcon="assets/images/search-icon.svg";
+
 
 }

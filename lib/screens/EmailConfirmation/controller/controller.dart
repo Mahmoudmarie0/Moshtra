@@ -13,7 +13,7 @@ class EmailConfirmationController extends GetxController {
       GetSnackbarError(
           message: 'Please Enter Your Email', Color: AppColors.Red);
     else {
-      Get.to(EmailVerification());
+      Get.to(EmailVerification(),transition:  Transition.leftToRight);
     }
   }
 }

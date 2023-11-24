@@ -169,7 +169,7 @@ class LoginScreen extends StatelessWidget {
                               splashFactory: NoSplash.splashFactory,
                             ),
                             onPressed: (){
-                              Get.to(RegisterScreen());
+                              Get.to(RegisterScreen(),transition:  Transition.leftToRight);
                             },
                             child:
                           Text("Register Here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),

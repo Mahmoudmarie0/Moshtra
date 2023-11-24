@@ -1,5 +1,4 @@
 
-
 class HomeModel{
   bool ? status;
   HomeDataModel ? data;
@@ -11,6 +10,7 @@ class HomeModel{
   }
 
 }
+
 
 
 class HomeDataModel{
@@ -32,6 +32,7 @@ class HomeDataModel{
 }
 
 
+
 class BannerModel{
   int  ?id;
   String ? image;
@@ -43,6 +44,7 @@ class BannerModel{
   }
 
 }
+
 
 
 class ProductModel{

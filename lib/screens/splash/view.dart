@@ -37,10 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
             const Duration(seconds: 3),
                 () {
               if (sharedPref!.getBool('onboarding') == null) {
-                Get.offAll(() => OnBoardingScreen());
+                Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
               }
               else {
-                Get.offAll(() => LoginScreen());
+                Get.offAll(() => LoginScreen(),transition: Transition.upToDown);
               }
             }
         );

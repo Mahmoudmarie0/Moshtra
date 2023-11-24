@@ -20,7 +20,7 @@ class EmailVerificationController extends GetxController {
 
   void validateOTP() {
     if(isCompleted){
-      Get.to(NewPasswordScreen());
+      Get.to(NewPasswordScreen(),transition:  Transition.leftToRight);
     }
     else
     {

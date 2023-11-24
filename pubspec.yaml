@@ -18,6 +18,9 @@ dependencies:
     #SvgPicture
   flutter_svg: ^2.0.8
 
+  #FlutterSwitch
+  flutter_switch: ^0.3.2
+
   #Dio
   dio: ^5.3.2
 

@@ -33,7 +33,7 @@ class RegisterController extends GetxController{
       GetSnackbarError( message: 'Please fill in all fields ',Color: AppColors.Red);
     else {
       GetSnackbarError( message: 'Your account has been created successfully ',Color: AppColors.Green);
-      Get.to(HomeLayout());
+      Get.to(HomeLayout(),transition:  Transition.leftToRight);
       // Perform login or other actions
     }
   }

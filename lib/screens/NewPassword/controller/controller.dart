@@ -24,7 +24,7 @@ class NewPasswordController extends GetxController{
       GetSnackbarError( message: 'Please Enter Password ',Color: AppColors.Red);
     else {
       GetSnackbarError( message: 'Your Password has been changed successfully ',Color: AppColors.Green);
-      Get.to(LoginScreen());
+      Get.to(LoginScreen(),transition:  Transition.leftToRight);
       // Perform login or other actions
     }
   }

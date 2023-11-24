@@ -22,6 +22,15 @@ class AssetsPaths{
   static String MoshtraLogoBlack="assets/images/LOGOBlack.svg";
   static String SearchIcon="assets/images/search-icon.svg";
   static String Mobile="assets/images/mobile.svg";
+  static String LogoutIcon="assets/images/logout.svg";
+  static String ShippingAddressIcon="assets/images/box.svg";
+  static String PaymentMethodIcon="assets/images/card-tick.svg";
+  static String OrderHistoryIcon="assets/images/receipt-edit.svg";
+  static String PrivacyPolicyIcon="assets/images/privacy.svg";
+  static String TermsConditionIcon="assets/images/terms.svg";
+  static String FAQsIcon="assets/images/faq.svg";
+  static String ChangePassIcon="assets/images/lock.svg";
+  static String DarkThemeIcon="assets/images/Dark.svg";
 
 
 

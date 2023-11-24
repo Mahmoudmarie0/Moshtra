@@ -181,6 +181,9 @@ Widget products(HomeModel model,context)=> SingleChildScrollView(
                  Text('Latest Products',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18.sp),),
                  Spacer(),
                  TextButton(
+                   style: TextButton.styleFrom(
+                     splashFactory: NoSplash.splashFactory,
+                   ),
                    onPressed: () {  },
                    child:Text("SEE ALL",style: TextStyle(color: AppColors.orange,fontWeight: FontWeight.w700,fontSize: 10.sp),),
                       ),

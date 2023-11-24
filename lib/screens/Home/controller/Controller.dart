@@ -19,19 +19,20 @@ class HomeController extends GetxController{
 
 
 
-@override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getHomeData();
-    update();
-  }
+// @override
+//   void onInit() {
+//     // TODO: implement onInit
+//     super.onInit();
+//     getHomeData();
+//     update();
+//   }
 
 
   @override
   void onReady() {
     // TODO: implement onReady
     getHomeData();
+    update();
 
   }
     void getHomeData(){

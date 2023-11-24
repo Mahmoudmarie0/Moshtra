@@ -9,6 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:moshtra/main.dart';
+import 'package:moshtra/screens/Home/view.dart';
+import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/screens/login/view.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
@@ -38,6 +40,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 () {
               if (sharedPref!.getBool('onboarding') == null) {
                 Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
+              }
+             else if (sharedPref!.getBool('HomeLaypit') == null) {
+                Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
               }
               else {
                 Get.offAll(() => LoginScreen(),transition: Transition.upToDown);

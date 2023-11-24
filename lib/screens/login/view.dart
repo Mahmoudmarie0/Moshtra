@@ -169,6 +169,7 @@ class LoginScreen extends StatelessWidget {
                               splashFactory: NoSplash.splashFactory,
                             ),
                             onPressed: (){
+
                               Get.to(RegisterScreen(),transition:  Transition.leftToRight);
                             },
                             child:

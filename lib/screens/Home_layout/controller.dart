@@ -1,8 +1,17 @@
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
+import '../../main.dart';
+
 class HomeLayoutController extends GetxController
 {
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    sharedPref!.setBool('HomeLayout', true);
+  }
 
   bool bottom_Item_1_pressed = true;
   bool bottom_Item_2_pressed = false;

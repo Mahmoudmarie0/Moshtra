@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import 'assets.dart';
 import 'colors.dart';
 
@@ -35,6 +34,7 @@ SnackbarController GetSnackbarError({required String message,required HexColor C
 
 );
 
+
 //ButtonStyle
 final ButtonStyle button = ElevatedButton.styleFrom(
     minimumSize: Size(350, 60),
@@ -49,10 +49,18 @@ final ButtonStyle button = ElevatedButton.styleFrom(
 void printFullText(String text){
   final pattern =RegExp('.{1,800}');
   pattern.allMatches(text).forEach((match) =>print(match.group(0)));
-
-
-
 }
+
+
+//Divider
+Widget MyDivider() => Padding(
+  padding: const EdgeInsetsDirectional.symmetric(vertical: 30),
+  child:   Container(
+    width: double.infinity,
+    height: 1,
+    color: Colors.grey[300],
+  ),
+);
 
 
 //empty token

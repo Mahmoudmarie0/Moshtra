@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
           padding:  EdgeInsets.only(top: 44,left: 16,right: 16),
           child: SingleChildScrollView(
             child: Column(
-
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
@@ -37,12 +36,8 @@ class HomeScreen extends StatelessWidget {
                   Icon(
                     Icons.search_rounded,
                   ),
-
-
                   ],
                 ),
-
-
               ),
               SizedBox(height: 24.h,),
               GetBuilder<HomeController>(
@@ -53,7 +48,6 @@ class HomeScreen extends StatelessWidget {
                         builder:(context)=>products(Controller.homeModel!,Get.context),
                         fallback: (context)=>Center(child: CircularProgressIndicator())
                     );
-
                   }
               ),
               // Row(
@@ -85,7 +79,6 @@ class HomeScreen extends StatelessWidget {
               //
               //
               // ),
-
             ]
             ),
           ),
@@ -93,7 +86,9 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-//mah
+
+
+//product widget
 Widget products(HomeModel model,context)=> SingleChildScrollView(
   physics: BouncingScrollPhysics(),
   child:Column(
@@ -218,30 +213,18 @@ Widget products(HomeModel model,context)=> SingleChildScrollView(
 
 
 
+//GridProduct
 Widget buildGridProduct(ProductModel model)=>Container(
   color:Colors.white,
-  child:   Column(
+  child:Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Stack(
         alignment: AlignmentDirectional.bottomStart,
         children: [
           Image(image: NetworkImage(model.image!),
-
           height: 200.h,
-
           width: double.infinity,
-
-
-
-
-
-
-
-
-
-
-
           ),
           if(model.discount!=0)
           Container(
@@ -253,8 +236,6 @@ Widget buildGridProduct(ProductModel model)=>Container(
                 fontSize: 8.0,
                 color: AppColors.white,
               ),
-
-
             ),
           ),
         ],
@@ -263,66 +244,30 @@ Widget buildGridProduct(ProductModel model)=>Container(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
             Text(model.name!,
-
               maxLines: 2,
-
               overflow: TextOverflow.ellipsis,
-
               style: TextStyle(
-
                 fontSize: 14.0,
-
                 height: 1.3,
-
-
-
-
-
               ),
-
-
-
             ),
-
             Row(
-
               children: [
-
                 Text(
-
                   '\$'+"${model.price!.round()}",
-
                   style: TextStyle(
-
                     fontSize: 12.0,
-
                     height: 1.3,
-
                     color: AppColors.blue,
-
-
-
-
-
-
-
                   ),
-
-
-
                 ),
-
                 SizedBox(
-
                   width: 5.0,
-
                 ),
                  if(model.discount!=0)
                 Text(
-
                   '\$'+"${model.price!.round()}",
 
                   style: TextStyle(

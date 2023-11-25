@@ -206,7 +206,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         children: [
                           IconButton(
                               onPressed: (){
-                                itemCount--;
+                                if(itemCount > 1) {
+                                  itemCount--;
+                                }
                                 setState(() {});
                               },
                               icon: Icon(

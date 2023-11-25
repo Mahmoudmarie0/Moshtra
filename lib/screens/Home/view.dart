@@ -5,16 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import 'package:moshtra/screens/Home/model.dart';
+import 'package:moshtra/screens/Home_layout/controller.dart';
+import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 
 import '../../utils/constants/assets.dart';
+import '../Categories/model.dart';
 import 'controller/Controller.dart';
 
 class HomeScreen extends StatelessWidget {
 
   HomeController homeController=Get.put(HomeController(),permanent: true);
+  HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +49,8 @@ class HomeScreen extends StatelessWidget {
                   init: HomeController(),
                   builder: (Controller){
                     return ConditionalBuilder(
-                        condition: Controller.homeModel!=null,
-                        builder:(context)=>products(Controller.homeModel!,Get.context),
+                        condition: Controller.homeModel!=null &&  Controller.categoriesModel!=null,
+                        builder:(context)=>products(Controller.homeModel!,Controller.categoriesModel!,Get.context),
                         fallback: (context)=>Center(child: CircularProgressIndicator())
                     );
                   }
@@ -89,7 +94,7 @@ class HomeScreen extends StatelessWidget {
 
 
 //product widget
-Widget products(HomeModel model,context)=> SingleChildScrollView(
+Widget products(HomeModel model,CategoriesModel categoriesModel,context)=> SingleChildScrollView(
   physics: BouncingScrollPhysics(),
   child:Column(
     children: [
@@ -125,46 +130,49 @@ Widget products(HomeModel model,context)=> SingleChildScrollView(
         ),
       ),
       SizedBox(height: 40.h,),
-      // Row(
-      //   children: [
-      //     Text('Categories',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18.sp),),
-      //     Spacer(),
-      //     TextButton(
-      //       onPressed: () {  },
-      //       child:Text("SEE ALL",style: TextStyle(color: AppColors.orange,fontWeight: FontWeight.w700,fontSize: 10.sp),),
-      //     ),
-      //   ],
-      //
-      //
-      // ),
-      // Container(
-      //   //color: Colors.cyanAccent,
-      //     height: 60.h,
-      //     width: 328.w,
-      //   child: Row(
-      //     children: [
-      //       Column(
-      //         children: [
-      //           Container(
-      //               height: 29.h,
-      //               width: 60.w,
-      //               child: SvgPicture.asset(AssetsPaths.Mobile,)
-      //           ),
-      //           Text('ma'),
-      //
-      //         ],
-      //
-      //
-      //       ),
-      //
-      //
-      //     ],
-      //
-      //   ),
-      //
-      //
-      //
-      // ),
+      Row(
+        children: [
+          Text('Categories',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18.sp),),
+          Spacer(),
+          TextButton(
+            style: TextButton.styleFrom(
+              splashFactory: NoSplash.splashFactory,
+            ),
+            onPressed: () {
+
+              Get.to(HomeLayout(),transition: Transition.downToUp);
+
+            },
+            child:Text("SEE ALL",style: TextStyle(color: AppColors.orange,fontWeight: FontWeight.w700,fontSize: 10.sp),),
+          ),
+        ],
+
+
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10.0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100.0,
+              child: ListView.separated(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context,index)=>buildCategoryItem(categoriesModel.data!.data[index],),
+                separatorBuilder: (context,index)=>SizedBox(
+                  width: 10.0,
+                ),
+                itemCount: categoriesModel.data!.data.length,),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+          ],
+        ),
+      ),
       Container(
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.r)),
@@ -313,6 +321,47 @@ Widget buildGridProduct(ProductModel model)=>Container(
       ),
     ],
   ),
+);
+
+
+
+
+
+Widget buildCategoryItem(DataModel model)=>  Stack(
+  alignment: AlignmentDirectional.bottomCenter,
+  children: [
+    Image(
+      image: NetworkImage(model.image!),
+      height: 100.0,
+      width: 100.0,
+      fit: BoxFit.cover,
+
+    ),
+    Container(
+        color: Colors.black.withOpacity(.8),
+        width: 100.0,
+
+
+
+
+        child: Text(model.name!,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow:TextOverflow.ellipsis ,
+          style: TextStyle(
+            color: Colors.white,
+
+
+          ),
+        ))
+
+
+
+
+  ],
+
+
+
 );
 
 

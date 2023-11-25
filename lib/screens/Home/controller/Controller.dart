@@ -12,10 +12,13 @@ import 'package:moshtra/utils/constants/components.dart';
 
 import 'package:moshtra/utils/constants/endpoints.dart';
 
+import '../../Categories/model.dart';
+
 
 
 class HomeController extends GetxController{
       HomeModel? homeModel;
+      CategoriesModel? categoriesModel;
 
 
 
@@ -32,6 +35,7 @@ class HomeController extends GetxController{
   void onReady() {
     // TODO: implement onReady
     getHomeData();
+    getCategoriesData();
     update();
 
   }
@@ -51,6 +55,18 @@ class HomeController extends GetxController{
       update();
 
     }
+  void getCategoriesData(){
+    DioHelper.getData(url: Endpoints.getCategories,
+      token: token,
+    ).then((value){
+      if(value!=null)
+        categoriesModel=CategoriesModel.fromJson(value.data);
+    }).catchError((error){
+      print(error.toString());
+    });
+    update();
+
+  }
 
 
 

@@ -6,6 +6,8 @@ import '../../main.dart';
 class HomeLayoutController extends GetxController
 {
 
+
+
   @override
   void onInit() {
     // TODO: implement onInit

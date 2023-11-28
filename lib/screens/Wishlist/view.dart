@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:moshtra/screens/Wishlist/model.dart';
+
+import 'package:moshtra/utils/constants/colors.dart';
 
 import '../../utils/constants/assets.dart';
 
@@ -102,7 +103,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           appBar: AppBar(
             title: Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Text('WishList', style: TextStyle(color: Colors.grey),),
+              child: Text('WishList', style: TextStyle(color: AppColors.black,fontWeight: FontWeight.w400),),
             ),
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,

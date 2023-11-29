@@ -61,70 +61,7 @@ class OnBoardingScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Column(
-          //   children: [
-          //     Padding(
-          //       padding: EdgeInsets.only(top: 50.h,left: 30.w,right: 30.w),
-          //       child: Row(
-          //         children: [
-          //           InkWell(
-          //             child: Container(
-          //               padding: EdgeInsets.zero,
-          //               height: 40.h,
-          //               width: 69.w,
-          //               decoration: BoxDecoration(
-          //                 borderRadius: BorderRadius.circular(1000.r),
-          //                 color: Colors.white,
-          //               ),
-          //               child: Row(
-          //                 mainAxisAlignment: MainAxisAlignment.center,
-          //                 children: [
-          //                   Text('translate_btn'.tr,style: TextStyle(
-          //                     fontWeight: FontWeight.w500,
-          //                     fontSize: 12.sp,
-          //                   ),),
-          //                   SizedBox(width: 6.w,),
-          //                   SvgPicture.asset(AssetsPaths.LanguageLogoSVG),
-          //                 ],
-          //               ),
-          //             ),
-          //             onTap: (){
-          //               controller.onLangTapped();
-          //             },
-          //           ),
-          //           const Spacer(),
-          //           InkWell(
-          //             onTap: (){
-          //               Get.offAll(()=>LoginScreen(),transition: Transition.downToUp);
-          //             },
-          //             child: Container(
-          //               padding: EdgeInsets.zero,
-          //               height: 40.h,
-          //               width: 69.w,
-          //               decoration: BoxDecoration(
-          //                 borderRadius: BorderRadius.circular(1000.r),
-          //                 color: Colors.white,
-          //               ),
-          //               child: Row(
-          //                 mainAxisAlignment: MainAxisAlignment.center,
-          //                 children: [
-          //                   Text('skip_btn'.tr,style: TextStyle(
-          //                     fontWeight: FontWeight.w500,
-          //                     fontSize: 12.sp,
-          //                   ),),
-          //                   SizedBox(width: 8.w,),
-          //                   sharedPref!.getString("lang")=="en"?SvgPicture.asset(AssetsPaths.ButtonRightArrowSVG) :SvgPicture.asset(AssetsPaths.ButtonLeftArrowSVG),
-          //                 ],
-          //               ),
-          //             ),
-          //           ),
-          //
-          //         ],
-          //       ),
-          //     ),
-          //     SizedBox(height: 15.h,),
-          //   ],
-          // ),
+
         ],
       ),
     );

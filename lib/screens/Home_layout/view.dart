@@ -31,11 +31,12 @@ class HomeLayout extends StatelessWidget {
               body: IndexedStack(
                 index: Controller.CurrentIndex,
                 children: [
-                  ProfileScreen(),
+                  HomeScreen(),
                   CategoriesScreen(),
                   MyCartScreen(),
                   WishlistScreen(),
-                  HomeScreen(),
+                  ProfileScreen(),
+
 
                 ],
 
@@ -47,33 +48,32 @@ class HomeLayout extends StatelessWidget {
 
                 elevation: 0,
                 items: [
-                  BottomNavigationBarItem (
+                  BottomNavigationBarItem(
                     icon: Container(
-                      width: 87.w,
-                      height: 52.h,
+                      width: 360.w,
+                      height: 60.h,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(30.r)),
-                      //   color: Controller.bottom_Item_3_pressed ? AppColors.orange : Colors.white,
+                      //   color: Controller.bottom_Item_1_pressed ? AppColors.orange : Colors.white,
                       // ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            AssetsPaths.Profile,
+                            AssetsPaths.Home,
                             width: 16.w ,
                             height: 16.h ,
                             fit: BoxFit.scaleDown,
-                            color:Controller. bottom_Item_1_pressed ? AppColors.orange : AppColors.grey3,
+                            color: Controller.bottom_Item_1_pressed ? AppColors.orange : AppColors.grey3,
                           ),
                           SizedBox(
                             width: 6.w,
                           ),
                           Text(
-                            'Profile',
+                            'Home',
                             style: TextStyle(
-                                color: Controller.bottom_Item_1_pressed ? AppColors.black:AppColors.grey,
+                                color:Controller.bottom_Item_1_pressed ? AppColors.black:AppColors.grey,
                                 fontSize:12.sp,
-
                                 fontWeight: Controller.bottom_Item_1_pressed ? FontWeight.w500 : FontWeight.w400
                             ),
                           ),
@@ -186,32 +186,33 @@ class HomeLayout extends StatelessWidget {
                     ),
                     label: '',
                   ),
-                  BottomNavigationBarItem(
+                  BottomNavigationBarItem (
                     icon: Container(
-                      width: 360.w,
-                      height: 60.h,
+                      width: 87.w,
+                      height: 52.h,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(30.r)),
-                      //   color: Controller.bottom_Item_1_pressed ? AppColors.orange : Colors.white,
+                      //   color: Controller.bottom_Item_3_pressed ? AppColors.orange : Colors.white,
                       // ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            AssetsPaths.Home,
+                            AssetsPaths.Profile,
                             width: 16.w ,
                             height: 16.h ,
                             fit: BoxFit.scaleDown,
-                            color: Controller.bottom_Item_5_pressed ? AppColors.orange : AppColors.grey3,
+                            color:Controller. bottom_Item_5_pressed ? AppColors.orange : AppColors.grey3,
                           ),
                           SizedBox(
                             width: 6.w,
                           ),
                           Text(
-                            'Home',
+                            'Profile',
                             style: TextStyle(
-                                color:Controller.bottom_Item_5_pressed ? AppColors.black:AppColors.grey,
+                                color: Controller.bottom_Item_5_pressed ? AppColors.black:AppColors.grey,
                                 fontSize:12.sp,
+
                                 fontWeight: Controller.bottom_Item_5_pressed ? FontWeight.w500 : FontWeight.w400
                             ),
                           ),
@@ -220,6 +221,7 @@ class HomeLayout extends StatelessWidget {
                     ),
                     label: '',
                   ),
+
 
                 ],
                 showSelectedLabels: false,

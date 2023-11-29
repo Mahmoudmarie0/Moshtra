@@ -15,6 +15,14 @@ class HomeLayoutController extends GetxController
     sharedPref!.setBool('HomeLayout', true);
   }
 
+  void SeeAll(){
+    NavButtonSwitch(1);
+    update();
+  }
+
+
+
+
   bool bottom_Item_1_pressed = true;
   bool bottom_Item_2_pressed = false;
   bool bottom_Item_3_pressed = false;

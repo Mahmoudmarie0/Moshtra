@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 import '../../utils/constants/assets.dart';
-import '../Categories/view.dart';
+
+import '../Home_layout/controller.dart';
 
 class MyCartScreen extends StatelessWidget {
-  const MyCartScreen({super.key});
+   MyCartScreen({super.key});
+  HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -21,19 +26,20 @@ class MyCartScreen extends StatelessWidget {
               Lottie.asset(AssetsPaths.CartListEmpty),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
-                child: Text('Your wishlist is empty',
+                child: Text('Your Cart is empty',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 24,
-                    color: Color(0xff1C1B1B),
+                    color: AppColors.black,
                   ),
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
                 child: Text(
-                  'Tap heart button to start saving your favorite\nitems.',
+                  'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.',
+
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -44,12 +50,15 @@ class MyCartScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
+
                   onPressed: () {
+                    homeLayoutController.SeeAll();
 
                    // Get.to(CategoriesScreen(),transition: Transition.upToDown);
                     // Go To Categories
                   },
                   style: ElevatedButton.styleFrom(
+                      splashFactory: NoSplash.splashFactory,
                       minimumSize: Size(328, 60),
                       backgroundColor: AppColors.orange,
                       shape: RoundedRectangleBorder(

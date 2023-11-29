@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../utils/constants/components.dart';
+
 import 'controller/Controller.dart';
 import 'model.dart';
 class CategoriesScreen extends StatelessWidget {
-  CategoriesController categoriesController=Get.put(CategoriesController());
+  CategoriesScreen({super.key});
+  //CategoriesController categoriesController=Get.put(CategoriesController());
   Widget build(BuildContext context) {
+
+
     return  GetBuilder<CategoriesController>(
       init: CategoriesController(),
       builder : (controller)=>
@@ -23,10 +28,18 @@ class CategoriesScreen extends StatelessWidget {
 
 
 }
+
+
+
+
+
+
+
+
+
 Widget buildCatItem(DataModel model)=>  Padding(
   padding: const EdgeInsets.all(20.0),
-  child:
-  Row(
+  child: Row(
     children: [
       Image(
         image:
@@ -66,6 +79,9 @@ Widget buildCatItem(DataModel model)=>  Padding(
 
   ),
 );
+
+
+
 
 
 

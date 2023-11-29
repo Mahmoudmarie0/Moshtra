@@ -112,7 +112,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ),
           body: ListView.builder(
             itemBuilder: (context , index) => buildFavItem(),
-            itemCount: 1,
+            itemCount: 3,
           ),
         ),
       );
@@ -207,12 +207,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         children: [
                           IconButton(
                               onPressed: (){
+
+
                                 if(itemCount > 1) {
                                   itemCount--;
                                 }
                                 setState(() {});
                               },
                               icon: Icon(
+                                
                                 Icons.remove,
                                 color: Colors.grey,
                               )),

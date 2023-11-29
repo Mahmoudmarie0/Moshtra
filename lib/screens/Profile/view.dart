@@ -5,14 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:moshtra/screens/login/view.dart';
+
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 import 'controller/Controller.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+   ProfileScreen({super.key});
+  ProfileCopntroller profileCopntroller=Get.put(ProfileCopntroller());
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,8 @@ class ProfileScreen extends StatelessWidget {
                     Spacer(),
                     InkWell(
                         onTap:(){
-                          Get.to(LoginScreen(),transition: Transition.upToDown);
+                          profileCopntroller.logOutPopUp(Get.context);
+                         // Get.to(LoginScreen(),transition: Transition.upToDown);
                         } ,
                         child: SvgPicture.asset(AssetsPaths.LogoutIcon)),
 

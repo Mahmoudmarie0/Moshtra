@@ -32,8 +32,11 @@ class AssetsPaths{
   static String ChangePassIcon="assets/images/lock.svg";
   static String DarkThemeIcon="assets/images/Dark.svg";
   static String CartListEmpty="assets/images/CartIsEmpty.json";
-
   static String Watch = "assets/images/watch.png";
+  static String ColorsText= "assets/images/Colors and text.svg";
+  static String FavIcon= "assets/images/favIcon.svg";
+  static String Logout= "assets/images/logout.json";
+  static String Trush= "assets/images/trash.svg";
 
 
 }

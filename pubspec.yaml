@@ -30,6 +30,9 @@ dependencies:
     #pinput
   pinput: ^3.0.0
 
+  #Shimmer
+  shimmer: ^3.0.0
+
   #conditional_builder
   conditional_builder_null_safety: ^0.0.6
 

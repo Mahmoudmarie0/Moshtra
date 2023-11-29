@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:moshtra/utils/constants/colors.dart';
 
 import '../../utils/constants/assets.dart';
+import '../../utils/constants/components.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -119,9 +122,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget buildFavItem() => Padding(
-    padding: const EdgeInsets.all(25.0),
+    padding: const EdgeInsets.only( left : 20.0 , right: 20.0 , bottom: 25.0 , top: 5.0),
     child: Container(
-      height: 135,
+      height: 120,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -131,8 +134,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               Image.asset(
                 AssetsPaths.Watch,
                 fit: BoxFit.contain,
-                width: 130,
-                height: 130,
+                width: 120,
+                height: 120,
               ),
               if(1 != 0)
                 Container(
@@ -156,108 +159,179 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Loop Silicone Strong Magnetic Watch",
-                  maxLines: 2,
+                  "Loop Silicone Strong Magnetic Watch ",
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "\$15.25",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    if( 1 != 0)
-                      Text(
-                        "\$20",
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                          fontWeight: FontWeight.w500,
-
-                        ),
-                      ),
-                  ],
-                ),
+                // SizedBox(
+                //   height: 10,
+                // ),
                 Spacer(),
                 Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 0,
-                          color: Colors.grey
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "\$15.25",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          IconButton(
-                              onPressed: (){
-
-
-                                if(itemCount > 1) {
-                                  itemCount--;
-                                }
-                                setState(() {});
-                              },
-                              icon: Icon(
-                                
-                                Icons.remove,
-                                color: Colors.grey,
-                              )),
+                        SizedBox(width: 5,),
+                        if( 1 != 0)
                           Text(
-                            "${itemCount.toString()}",
+                            "\$20",
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          IconButton(
-                              onPressed: (){
-                                itemCount++;
-                                setState(() {});
-                              },
-                              icon: Icon(
-                                Icons.add,
-                                color: Colors.grey,
-                              )),
-                        ],
-                      ),
+                      ],
                     ),
                     Spacer(),
-                    IconButton(
-                        onPressed: (){
-
-                          // ShopCubit.get(context).changeFavorites(model.product.id)
-
-                        },
-                        icon: CircleAvatar(
-                          radius: 15.0,
-                          backgroundColor:
-                          //ShopCubit.get(context).favorites[model.id]
-                          true ? Colors.red : Colors.grey,
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 14.0,
-                            color: Colors.white,
+                    Row(
+                      children: [
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //     border: Border.all(
+                        //       width: 0,
+                        //       color: Colors.grey
+                        //     ),
+                        //     borderRadius: BorderRadius.circular(10),
+                        //   ),
+                        //   child: Row(
+                        //     children: [
+                        //       IconButton(
+                        //           onPressed: (){
+                        //
+                        //
+                        //             if(itemCount > 1) {
+                        //               itemCount--;
+                        //             }
+                        //             setState(() {});
+                        //           },
+                        //           icon: Icon(
+                        //
+                        //             Icons.remove,
+                        //             color: Colors.grey,
+                        //           )),
+                        //       Text(
+                        //         "${itemCount.toString()}",
+                        //         style: TextStyle(
+                        //           fontSize: 12,
+                        //           color: Colors.grey,
+                        //         ),
+                        //       ),
+                        //       IconButton(
+                        //           onPressed: (){
+                        //             itemCount++;
+                        //             setState(() {});
+                        //           },
+                        //           icon: Icon(
+                        //             Icons.add,
+                        //             color: Colors.grey,
+                        //           )),
+                        //     ],
+                        //   ),
+                        // ),
+                        GestureDetector(
+                          child: SvgPicture.asset(
+                              AssetsPaths.Trash
                           ),
-                        ))
+                          onTap: (){
+                            showModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(topRight: Radius.circular(25) , topLeft: Radius.circular(25) )
+                                ),
+                                context: context,
+                                builder: (context){
+                                  return Container(
+                                    padding: EdgeInsets.only(top: 20,),
+                                    alignment: Alignment.center,
+                                    height: 220,
+
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Delete product from wishlist',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Column(
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+
+                                              },
+                                              child: Text('Delete a product' ,
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              style: button,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            GestureDetector(
+                                              onTap: (){
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                'Cancel',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                            );
+                          },
+                        )
+
+                        // IconButton(
+                        //     onPressed: (){
+                        //
+                        //       // ShopCubit.get(context).changeFavorites(model.product.id)
+                        //
+                        //     },
+                        //     icon: CircleAvatar(
+                        //       radius: 15.0,
+                        //       backgroundColor:
+                        //       //ShopCubit.get(context).favorites[model.id]
+                        //       true ? Colors.red : Colors.grey,
+                        //       child: Icon(
+                        //         Icons.favorite_border,
+                        //         size: 14.0,
+                        //         color: Colors.white,
+                        //       ),
+                        //     ))
+                      ],
+                    )
                   ],
-                )
+                ),
               ],
             ),
           )

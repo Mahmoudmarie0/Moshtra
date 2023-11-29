@@ -36,7 +36,7 @@ class AssetsPaths{
   static String ColorsText= "assets/images/Colors and text.svg";
   static String FavIcon= "assets/images/favIcon.svg";
   static String Logout= "assets/images/logout.json";
-  static String Trush= "assets/images/trash.svg";
+  static String Trash= "assets/images/trash.svg";
 
 
 }

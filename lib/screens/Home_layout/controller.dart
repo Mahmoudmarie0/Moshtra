@@ -20,6 +20,13 @@ class HomeLayoutController extends GetxController
     update();
   }
 
+  void Details(){
+    NavButtonSwitch(5);
+    update();
+
+
+  }
+
 
 
 
@@ -28,6 +35,7 @@ class HomeLayoutController extends GetxController
   bool bottom_Item_3_pressed = false;
   bool bottom_Item_4_pressed = false;
   bool bottom_Item_5_pressed = false;
+  bool bottom_Item_6_pressed = false;
   int? CurrentIndex=0;
 
 
@@ -38,7 +46,7 @@ class HomeLayoutController extends GetxController
   }
   void NavButtonSwitch(int index){
 
-    if(index!=5) {
+    if(index!=6) {
       changeIndex(index);
       if (index == 0) {
         if (bottom_Item_1_pressed) {}
@@ -90,6 +98,17 @@ class HomeLayoutController extends GetxController
           bottom_Item_1_pressed = false;
         }
       }
+      else if (index == 5) {
+        if (bottom_Item_6_pressed) {}
+        else {
+          bottom_Item_5_pressed = false;
+          bottom_Item_4_pressed = false;
+          bottom_Item_3_pressed = false;
+          bottom_Item_2_pressed = false;
+          bottom_Item_1_pressed = false;
+        }
+      }
+
     }
   }
 

@@ -201,7 +201,8 @@ class HomeController extends GetxController{
 
 //GridProduct
   Widget buildGridProduct(ProductModel model)=>InkWell(
-    onTap:()=> Get.to(DetailsScreen()),
+    onTap:()=>homeLayoutController.Details(),
+        //Get.to(DetailsScreen()),
     child: Container(
       color:Colors.white,
       child:Column(

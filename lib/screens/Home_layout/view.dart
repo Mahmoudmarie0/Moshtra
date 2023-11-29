@@ -10,6 +10,7 @@ import 'package:moshtra/screens/Wishlist/view.dart';
 
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
+import '../Details/view.dart';
 import '../Home/view.dart';
 import 'controller.dart';
 
@@ -36,6 +37,7 @@ class HomeLayout extends StatelessWidget {
                   MyCartScreen(),
                   WishlistScreen(),
                   ProfileScreen(),
+                  DetailsScreen(),
 
 
                 ],

@@ -45,15 +45,16 @@ class HomeLayout extends StatelessWidget {
 
               ),
               bottomNavigationBar: BottomNavigationBar(
-               // type: BottomNavigationBarType.fixed, // Fixed
+                type: BottomNavigationBarType.fixed,
+                // Fixed
                 backgroundColor: Colors.white70,
 
                 elevation: 0,
                 items: [
                   BottomNavigationBarItem(
                     icon: Container(
-                      width: 360.w,
-                      height: 60.h,
+                      width: 300.w,
+                      height: 50.h,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(30.r)),
                       //   color: Controller.bottom_Item_1_pressed ? AppColors.orange : Colors.white,
@@ -120,8 +121,8 @@ class HomeLayout extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     icon: Container(
-                      width: 87.w,
-                      height: 52.h,
+                      width: 300.w,
+                      height: 50.h,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(30.r)),
                       //   color: Controller.bottom_Item_3_pressed ? AppColors.orange : Colors.white,
@@ -155,8 +156,8 @@ class HomeLayout extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     icon: Container(
-                      width: 87.w,
-                      height: 52.h,
+                      width: 300.w,
+                      height: 50.h,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(30.r)),
                       //   color: Controller.bottom_Item_3_pressed ? AppColors.orange : Colors.white,
@@ -190,8 +191,8 @@ class HomeLayout extends StatelessWidget {
                   ),
                   BottomNavigationBarItem (
                     icon: Container(
-                      width: 87.w,
-                      height: 52.h,
+                      width: 300.w,
+                      height: 50.h,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.all(Radius.circular(30.r)),
                       //   color: Controller.bottom_Item_3_pressed ? AppColors.orange : Colors.white,

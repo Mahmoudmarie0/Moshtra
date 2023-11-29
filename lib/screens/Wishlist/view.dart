@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+
 import 'package:lottie/lottie.dart';
 
 import 'package:moshtra/utils/constants/colors.dart';
@@ -275,11 +275,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                         Column(
                                           children: [
                                             ElevatedButton(
+
                                               onPressed: () {
 
                                               },
+
                                               child: Text('Delete a product' ,
                                                 style: TextStyle(
+
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                 ),

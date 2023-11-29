@@ -37,6 +37,7 @@ SnackbarController GetSnackbarError({required String message,required HexColor C
 
 //ButtonStyle
 final ButtonStyle button = ElevatedButton.styleFrom(
+    splashFactory: NoSplash.splashFactory,
     minimumSize: Size(350, 60),
     backgroundColor: Color(0xfff88160),
     shape: RoundedRectangleBorder(

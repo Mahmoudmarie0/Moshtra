@@ -13,6 +13,7 @@ class HomeLayoutController extends GetxController
     // TODO: implement onInit
     super.onInit();
     sharedPref!.setBool('HomeLayout', true);
+    update();
   }
 
   void SeeAll(){
@@ -50,6 +51,7 @@ class HomeLayoutController extends GetxController
       changeIndex(index);
       if (index == 0) {
         if (bottom_Item_1_pressed) {}
+
         else {
           bottom_Item_1_pressed = true;
           bottom_Item_2_pressed = false;

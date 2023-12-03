@@ -46,7 +46,7 @@ dependencies:
   shared_preferences: ^2.2.2
 
     #Get
-  get: ^4.6.6
+  get: ^4.6.1
 
     #AnimateDo
   animate_do: ^3.1.2
@@ -70,7 +70,8 @@ dependencies:
     #easy_loading
   flutter_easyloading: ^3.0.5
 
-
+    #loading_indicator
+  loading_indicator: ^3.1.1
 
   cupertino_icons: ^1.0.2
 

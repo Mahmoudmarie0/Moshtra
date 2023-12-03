@@ -9,7 +9,7 @@ class CategoriesModel{
 
 }
 class CategoriesDataModel{
-  int? current_page;
+  dynamic current_page;
   List<DataModel> data=[];
   CategoriesDataModel.fromJson(Map<String,dynamic>json){
     current_page=json['current_page'];
@@ -19,9 +19,9 @@ class CategoriesDataModel{
   }
 }
 class DataModel{
-  int? id;
-  String? name;
-  String? image;
+  dynamic id;
+  dynamic name;
+  dynamic image;
   DataModel.fromJson(Map<String,dynamic>json){
     id=json['id'];
     name=json['name'];

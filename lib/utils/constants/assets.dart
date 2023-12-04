@@ -37,6 +37,11 @@ class AssetsPaths{
   static String FavIcon= "assets/images/favIcon.svg";
   static String Logout= "assets/images/logout.json";
   static String Trash= "assets/images/trash.svg";
-
+  static String GroupColor2= "assets/images/GroupColors2.svg";
+  static String MyCartWhite= "assets/images/mycartWhite.svg";
+  static String WatchPic= "assets/images/Rectangle 10.png";
+  static String Rating= "assets/images/Ratings.svg";
+  static String Indicator ="assets/images/Progress Indicators.svg";
+  static String MoshtraLogoSmall= "assets/images/MoshtraLogoSmall.svg";
 
 }

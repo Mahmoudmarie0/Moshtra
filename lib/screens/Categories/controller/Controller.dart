@@ -17,9 +17,10 @@ class CategoriesController extends GetxController{
     // TODO: implement onInit
     super.onInit();
   getCategoriesData();
+  update();
   }
-   void getCategoriesData(){
-      DioHelper.getData(url: Endpoints.getCategories,
+   void getCategoriesData()async{
+    await  DioHelper.getData(url: Endpoints.getCategories,
         token: token,
       ).then((value){
         if(value!=null)

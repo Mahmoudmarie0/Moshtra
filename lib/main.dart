@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
               fontFamily: "IBMPlex",
             ),
             builder: EasyLoading.init(),
+
             home: child!,
           ),
         );

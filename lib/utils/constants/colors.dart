@@ -20,6 +20,7 @@ class AppColors{
   static HexColor grey3 = HexColor('#B3B3B4');
   static HexColor grey300 = HexColor('#oxFFE0E0E0');
   static HexColor grey4=HexColor("6F7384");
+  static HexColor grey5=HexColor("F4F5FD");
 
 
 

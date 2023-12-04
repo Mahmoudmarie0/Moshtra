@@ -14,7 +14,7 @@ import '../Details/view.dart';
 import '../Home/view.dart';
 import 'controller.dart';
 
-class HomeLayout extends StatelessWidget {
+  class HomeLayout extends StatelessWidget {
 
 
   HomeLayout({super.key});

@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:moshtra/firebase_options.dart';
 import 'package:moshtra/global_controller/my_bindings.dart';
+import 'package:moshtra/screens/Categories/Electronic/electronic.dart';
 import 'package:moshtra/screens/splash/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +15,8 @@ import 'Dio/DioHelper.dart';
 
 SharedPreferences ? sharedPref;
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
   sharedPref=await SharedPreferences.getInstance();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

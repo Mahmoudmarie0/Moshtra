@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "534400976621",
+    "project_id": "moshtraa",
+    "storage_bucket": "moshtraa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534400976621:android:c1577f55900562bb25eee4",
+        "android_client_info": {
+          "package_name": "com.example.moshtra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnaYtFLs4n8O0jbi8m2UxHcZvCrb5WfCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

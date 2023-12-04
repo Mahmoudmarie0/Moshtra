@@ -87,6 +87,7 @@ class RegisterScreen extends StatelessWidget {
                           ),//name
                           SizedBox(height: 36.h,),
                           TextFormField (
+
                             controller: emailController,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(

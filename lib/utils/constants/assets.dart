@@ -43,5 +43,10 @@ class AssetsPaths{
   static String Rating= "assets/images/Ratings.svg";
   static String Indicator ="assets/images/Progress Indicators.svg";
   static String MoshtraLogoSmall= "assets/images/MoshtraLogoSmall.svg";
+  static String Iphone="assets/images/iphone.webp";
+  static String RealmiPhone="assets/images/RealmePhone.webp";
+static String Earbuds="assets/images/airbuds.jpg";
+  static String EarWirless="assets/images/earwire.jpg";
+  static String Speaker="assets/images/JplSpeaker.jpg";
 
 }

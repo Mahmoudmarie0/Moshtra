@@ -5,7 +5,7 @@ import 'package:moshtra/screens/Home_layout/controller.dart';
 import '../../utils/constants/components.dart';
 
 import 'controller/Controller.dart';
-import 'model.dart';
+
 class CategoriesScreen extends StatelessWidget {
   CategoriesScreen({super.key});
   HomeLayoutController homeLayoutController=Get.put(HomeLayoutController());
@@ -13,19 +13,23 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    return  GetBuilder<CategoriesController>(
-      init: CategoriesController(),
-      builder : (controller)=>
-          ListView.separated(
-            itemBuilder: (context,index)=>controller.buildCatItem(controller.categoriesModel!.data!.data[index]),
-            separatorBuilder: (context,index)=>MyDivider(),
-            itemCount:controller.categoriesModel!.data!.data.length,
-          ),
-
-
-
-
+    return Scaffold(
+      body: Text("ojkwhqdiu"),
     );
+
+      // GetBuilder<CategoriesController>(
+      // init: CategoriesController(),
+      // builder : (controller)=>
+      //     ListView.separated(
+      //       itemBuilder: (context,index)=>controller.buildCatItem(controller.categoriesModel!.data!.data[index]),
+      //       separatorBuilder: (context,index)=>MyDivider(),
+      //       itemCount:controller.categoriesModel!.data!.data.length,
+      //     ),
+
+
+
+
+
   }
 
 

@@ -10,6 +10,7 @@ import 'package:moshtra/screens/Wishlist/view.dart';
 
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
+import '../Categories/Electronic/electronic.dart';
 import '../Details/view.dart';
 import '../Home/view.dart';
 import 'controller.dart';
@@ -38,6 +39,7 @@ import 'controller.dart';
                   WishlistScreen(),
                   ProfileScreen(),
                   DetailsScreen(),
+                  Electronic(),
 
 
                 ],

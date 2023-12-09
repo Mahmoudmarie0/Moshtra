@@ -1,5 +1,6 @@
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:moshtra/screens/Categories/Electronic/electronic.dart';
 
 import '../../main.dart';
 
@@ -24,8 +25,11 @@ class HomeLayoutController extends GetxController
   void Details(){
     NavButtonSwitch(5);
     update();
+  }
 
-
+  void Electronic(){
+    NavButtonSwitch(6);
+    update();
   }
 
 
@@ -37,6 +41,7 @@ class HomeLayoutController extends GetxController
   bool bottom_Item_4_pressed = false;
   bool bottom_Item_5_pressed = false;
   bool bottom_Item_6_pressed = false;
+  bool bottom_Item_7_pressed = false;
   int? CurrentIndex=0;
 
 
@@ -47,7 +52,7 @@ class HomeLayoutController extends GetxController
   }
   void NavButtonSwitch(int index){
 
-    if(index!=6) {
+    if(index!=7) {
       changeIndex(index);
       if (index == 0) {
         if (bottom_Item_1_pressed) {}
@@ -103,6 +108,17 @@ class HomeLayoutController extends GetxController
       else if (index == 5) {
         if (bottom_Item_6_pressed) {}
         else {
+          bottom_Item_5_pressed = false;
+          bottom_Item_4_pressed = false;
+          bottom_Item_3_pressed = false;
+          bottom_Item_2_pressed = false;
+          bottom_Item_1_pressed = false;
+        }
+      }
+      else if (index == 6) {
+        if (bottom_Item_7_pressed) {}
+        else {
+          bottom_Item_6_pressed = false;
           bottom_Item_5_pressed = false;
           bottom_Item_4_pressed = false;
           bottom_Item_3_pressed = false;

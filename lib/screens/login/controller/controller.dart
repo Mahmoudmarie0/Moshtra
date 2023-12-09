@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +34,22 @@ class LoginController extends GetxController{
     if(email.isEmpty || password.isEmpty)
       GetSnackbarError( message: 'Please Enter Your Email OR Password',Color: AppColors.Red);
     else {
-      Get.to(HomeLayout());
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email, password: password
+
+      ).then((value) => {
+        print("login success"),
+        print(value.user!.email),
+        print(value.user!.uid),
+      Get.to(HomeLayout()),
+
+      }).catchError((error){
+        print(error.toString());
+        GetSnackbarError( message: "Email or Password not correct",Color: AppColors.Red);
+        
+
+      });
+
       // Perform login or other actions
     }
   }

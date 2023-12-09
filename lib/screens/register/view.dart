@@ -189,9 +189,10 @@ class RegisterScreen extends StatelessWidget {
                             child: MaterialButton(
                                 onPressed: (){
                                   String name=nameController.text;
-                                  String email=nameController.text;
+                                  String email=emailController.text;
                                   String phoneNumber=phoneNumberController.text;
                                   String confirmPassword=ConfirmpasswordController.text;
+
                                   registerController.validateRegisterCredentials(name, email, phoneNumber, confirmPassword);
                                 },
                                 child: Text(

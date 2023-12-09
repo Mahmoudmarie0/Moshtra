@@ -95,3 +95,34 @@
 //
 //
 // }
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../models/category_model.dart';
+import '../../../service/home_service.dart';
+
+class CategoryController extends GetxController {
+  ValueNotifier<bool>get loading=>_loading;
+  ValueNotifier<bool>_loading=ValueNotifier(false);
+
+  List <CategoryModel> get categoryModel => _categoryModel;
+  List <CategoryModel> _categoryModel = [];
+
+
+  CategoryController(){
+    getCategory();
+  }
+
+
+  getCategory() async {
+    _loading.value=true;
+    HomeService().getCategory().then((value) {
+      for (int i = 0; i < value.length; i++) {
+        _categoryModel.add(CategoryModel.fromJson(value[i].data() as Map));
+        _loading.value=false;
+      }
+      update();
+    });
+  }
+}

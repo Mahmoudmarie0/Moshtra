@@ -98,6 +98,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:moshtra/screens/Details/controller/controller.dart';
+import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 
@@ -184,20 +186,23 @@ child: TextFormField(
           itemBuilder: (context,index){
             return Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.grey.shade100,
+                SingleChildScrollView(
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey.shade100,
 
-                  ),
-                  height: 60.h,
-                  width: 60.w,
+                      ),
+                      height: 60.h,
+                      width: 60.w,
 
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image .network(controller.categoryModel[index].image as String),
-                  ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image .network(controller.categoryModel[index].image as String),
+                      ),
+                    ),
                 ),
+
                 SizedBox(height: 1.h,),
                 Text(controller.categoryModel[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
               ],
@@ -228,18 +233,23 @@ child: TextFormField(
               width: MediaQuery.of(context).size.width*.4,
               child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey.shade100,
-
-                    ),
-
-                    width: MediaQuery.of(context).size.width*.4,
-
+                  GestureDetector(
+                    onTap: (){
+                      Get.to(DetailsScreen(controller.productModel[index]));
+                    },
                     child: Container(
-                      height:220,
-                        child: Image.network(controller.productModel[index].image as String,fit:BoxFit.fill ,),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey.shade100,
+
+                      ),
+
+                      width: MediaQuery.of(context).size.width*.4,
+
+                      child: Container(
+                        height:220,
+                          child: Image.network(controller.productModel[index].image as String,fit:BoxFit.fill ,),
+                      ),
                     ),
                   ),
                   SizedBox(height: 12.h,),

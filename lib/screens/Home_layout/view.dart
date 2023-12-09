@@ -2,11 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Categories/view.dart';
+import 'package:moshtra/screens/Details/controller/controller.dart';
+import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/MyCart/view.dart';
 import 'package:moshtra/screens/Profile/view.dart';
 import 'package:moshtra/screens/Wishlist/view.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
@@ -15,10 +20,12 @@ import '../Details/view.dart';
 import '../Home/view.dart';
 import 'controller.dart';
 
+
   class HomeLayout extends StatelessWidget {
+  HomeController controller = Get.put(HomeController());
 
 
-  HomeLayout({super.key});
+    HomeLayout({super.key});
 
   Widget build(BuildContext context) {
     return GetBuilder<HomeLayoutController>(
@@ -38,7 +45,7 @@ import 'controller.dart';
                   MyCartScreen(),
                   WishlistScreen(),
                   ProfileScreen(),
-                  DetailsScreen(),
+                  // DetailsScreen(),
                   Electronic(),
 
 

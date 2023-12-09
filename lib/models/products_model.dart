@@ -1,5 +1,11 @@
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:moshtra/screens/Details/controller/extension.dart';
+
 class ProductModel{
-  String ?name,image ,description,color,Sized,price;
+  String ?name,image ,description,Sized,price;
+  Color? color;
 
   ProductModel({
       this.name,
@@ -17,7 +23,7 @@ class ProductModel{
    name=map['name'];
     image=map['image'];
     description=map['description'];
-    color=map['color'];
+    color= HexColor.fromHex(map['color']);
     Sized=map['Sized'];
     price=map['price'];
   }

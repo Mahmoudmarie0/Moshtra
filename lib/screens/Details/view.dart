@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:moshtra/models/products_model.dart';
+import 'package:moshtra/utils/constants/assets.dart';
+import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
 import 'controller/controller.dart';
@@ -15,109 +19,218 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.blueAccent
+        appBar: AppBar(
+          backgroundColor: AppColors.grey,
+          elevation: 0,
+          iconTheme: IconThemeData(
+              color: Colors.black
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: AppColors.grey
+                ),
+                height: 290.h,
+                width: double.infinity,
+                child: Image.network(
+                  model.image as String,
+                  fit: BoxFit.contain,
+                  width: 360.w,
+                  height: 290.h ,
+                ),
               ),
-              width: MediaQuery.of(context).size.width,
-                height: 270,
-                child: Image.network(model.image as String,)
-            ),
-            SizedBox(height: 15,),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.all(18),
-                    child: Column(
-                      children: [
-                        CustomText(text: model.name as String,fontSize: 26,),
-                        SizedBox(height: 15,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(16),
-                              width: MediaQuery.of(context).size.width * .45,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border:Border.all(color: Colors.grey) ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  CustomText(text: 'Size',color: Colors.black,),
-                                  CustomText(text: model.Sized as String,color: Colors.black,),
-                                ],
+              Container(
+                margin: EdgeInsets.only(top: 250),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
+                  color: Colors.white,
+                ),
+                width: double.infinity,
+                height: 600.h,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 24, right: 6),
+                            width: 62.w,
+                            height: 24.h,
+                            decoration: BoxDecoration(
+                                color: Color(0xff1f8bda),
+                                borderRadius: BorderRadius.circular(8)
+                            ),
+                            child: Center(
+                              child: Text('Top Rated',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                  )
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(16),
-                              width: MediaQuery.of(context).size.width * .4,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border:Border.all(color: Colors.grey) ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  CustomText(text: 'Color',),
-                                  Container(
-                                    width: 30,
-                                    height: 20,
-                                    padding: EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 24),
+                            width: 81.w,
+                            height: 24.h,
+                            decoration: BoxDecoration(
+                                color: AppColors.green,
+                                borderRadius: BorderRadius.circular(8)
+                            ),
+                            child: Center(
+                              child: Text('Free Shipping',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 10,
+                                  color: Colors.white,
+
+                                ),),
+                            ),
+                          ),
+
+
+
+                        ],
+                      ),
+                      SizedBox(height: 6.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(model.name as String ,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ), ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(model.price as String,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w600,
+                                ),)
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 15.h,),
+                      Text('Details:' ,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500
+                        ),),
+                      SizedBox(height: 10.h,),
+                      CustomText(
+                        text: model.description as String,
+                        fontweight: FontWeight.w300,
+                        fontSize: 18,
+                        height: 2.5,
+                      ),
+                      SizedBox(height: 10.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            width: MediaQuery.of(context).size.width * .4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomText(text: 'Size',color: Colors.black,fontweight: FontWeight.w300,),
+                                CustomText(text: model.Sized as String,color: Colors.black,fontweight: FontWeight.w200,),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            width: MediaQuery.of(context).size.width * .4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomText(text: 'Color',color: Colors.black,fontweight: FontWeight.w300,),
+                                Container(
+                                  width: 30,
+                                  height: 20,
+                                  padding: EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
                                       border: Border.all(color: Colors.grey),
                                       borderRadius: BorderRadius.circular(20),
                                       color: model.color
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 15,),
-                        CustomText(text: 'Details' ,fontSize: 18,),
-                        SizedBox(height: 20,),
-                        CustomText(
-                          text: model.description as String,
-                          fontSize: 18,
-                          height: 2.5,
-                        )
-                      ],
+                                  ),
 
-                    )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      CustomText(text: 'PRICE',
-                        fontSize: 18,
-                        color:Colors.grey ,),
-                      SizedBox(height: 10,),
-                      CustomText(text: model.price.toString(),color: Colors.blue,
-                      fontSize: 18,
-                      fontweight: FontWeight.w300,)
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 30.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 60.h,
+                            width: 160.w,
+                            child: ElevatedButton(onPressed: (){},
+                              child: Text('Buy Now', style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.grey5,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  )
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 8.w,),
+                          Container(
+                            width: 160.w,
+                            height: 60.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: AppColors.orange
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                MaterialButton(onPressed: (){},
+                                  child: Text('Add To Cart',
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                ),
+                                SvgPicture.asset(AssetsPaths.MyCartWhite),
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.all(20),
-                      child: ElevatedButton(onPressed: (){}
-                          , child: CustomText(text: 'Add',color: Colors.white,)))
-
-                ],
-              ),
-            )
-          ],
+                ),
+              )
+            ],
+          ),
         )
-        ,),
     );
   }
 }

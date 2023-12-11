@@ -93,11 +93,14 @@
 //     ;
 //   }
 // }
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:moshtra/screens/Categories/view.dart';
 import 'package:moshtra/screens/Details/controller/controller.dart';
 import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
@@ -116,39 +119,54 @@ class HomeScreen extends StatelessWidget {
       init: HomeController(),
       builder:(controller)=>controller.loading.value ?Center(child: CircularProgressIndicator()): Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Container(
+        body: SingleChildScrollView(
+          child: Container(
 
-          padding: EdgeInsets.only(top:60,left: 20,right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-             SearchTextFormField(),
-              SizedBox(
-                height: 35,
-              ),
-              CustomText(text: 'Categories',fontSize: 18,fontweight: FontWeight.w800,),
-              SizedBox(height: 30.h,),
-              ListViewCategory(),
-              SizedBox(height: 30.h,),
-            Row(
-              mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+            padding: EdgeInsets.only(top:60,left: 5,right: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(text: 'Best Selling',fontSize: 18,fontweight: FontWeight.w800,),
-                CustomText(text: 'See All',fontSize: 16,fontweight: FontWeight.w400,color: AppColors.orange,),
+               SearchTextFormField(),
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16,right: 16),
+                  child: Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                    children: [
+                      CustomText(text: 'Categories',fontSize: 18,fontweight: FontWeight.w800,),
+                      TextButton(onPressed: (){Get.to(CategoriesScreen());},
+                          child:   CustomText(text: 'See All',fontSize: 16,fontweight: FontWeight.w500,color: AppColors.orange,),
+                      )
+
+                    ],
 
 
 
 
+                  ),
+                ),
+                SizedBox(height: 10.h,),
+                ListViewCategory(),
+                SizedBox(height: 10.h,),
+              Padding(
+                padding: const EdgeInsets.only(left: 16,right: 16),
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                  children: [
+                    CustomText(text: 'Latest Products',fontSize: 18,fontweight: FontWeight.w800,),
+                  ],
 
+
+
+
+                ),
+              ),
+                SizedBox(height: 4.h,),
+               ListViewProduct(),
               ],
-
-
-
-
             ),
-              SizedBox(height: 30.h,),
-             ListViewProduct(),
-            ],
           ),
         ),
 
@@ -181,20 +199,21 @@ child: TextFormField(
       builder:(controller)=> Container(
         height: 100.h,
         child: ListView.separated(
-          itemCount:controller.categoryModel.length ,
+          itemCount:4,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context,index){
             return Column(
               children: [
                 SingleChildScrollView(
                   child: Container(
+
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(12),
                         color: Colors.grey.shade100,
 
                       ),
                       height: 60.h,
-                      width: 60.w,
+                      width: 76.w,
 
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -224,55 +243,64 @@ child: TextFormField(
   ListViewProduct() {
     return GetBuilder<HomeController>(
       builder:(controller)=> Container(
-        height: 350.h,
-        child: ListView.separated(
-          itemCount: controller.productModel.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context,index){
-            return Container(
-              width: MediaQuery.of(context).size.width*.4,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Get.to(DetailsScreen(controller.productModel[index]));
-                    },
+        height: 900.h,
+
+
+        child:GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
+             shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: 1/1.20,
+                crossAxisCount: 2,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 0.5,
+
+            ),
+            itemCount: controller.productModel.length,
+            itemBuilder: (context,index){
+           return Container(
+            width: MediaQuery.of(context).size.width*.4,
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Get.to(DetailsScreen(controller.productModel[index]));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      color: Colors.grey.shade100,
+
+                    ),
+
+                    width: MediaQuery.of(context).size.width*.4,
+
                     child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.grey.shade100,
+                      height:138,
+                      width: 160,
 
-                      ),
-
-                      width: MediaQuery.of(context).size.width*.4,
-
-                      child: Container(
-                        height:220,
-                          child: Image.network(controller.productModel[index].image as String,fit:BoxFit.fill ,),
-                      ),
+                      child: Image.network(controller.productModel[index].image as String,fit:BoxFit.fill,),
                     ),
                   ),
-                  SizedBox(height: 12.h,),
-                  CustomText(text: controller.productModel[index].name as String,alignment: Alignment.bottomLeft,fontweight: FontWeight.w600 ),
-                  SizedBox(height: 9.h,),
-                  CustomText(text: controller.productModel[index].description as String,alignment: Alignment.bottomLeft,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 2,),
-                  SizedBox(height: 5.h,),
-                  CustomText(text: controller.productModel[index].price.toString() as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.bottomLeft,),
+                ),
+                SizedBox(height: 9.h,),
+                CustomText(text: controller.productModel[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                SizedBox(height: 5.h,),
+                CustomText(text: controller.productModel[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                SizedBox(height: 5.h,),
+                CustomText(text: controller.productModel[index].price.toString() as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
 
-                ],
-              ),
-            );
-
-
-
-          }, separatorBuilder: ( context,  index) =>SizedBox(
-          width: 20,
-        ),
+              ],
+            ),
+          );
 
 
 
-        ),
+        })
+
+
+
       ),
     );
   }

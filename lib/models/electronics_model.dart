@@ -29,40 +29,23 @@
 //   }
 //
 // }
-import 'package:moshtra/models/electronics_model.dart';
-
-class CategoryModel {
-  ElectronicsModel ? electronicsModel;
-  String ? name, image;
-
-  CategoryModel({ this.name, this.image,this.electronicsModel});
-
-  CategoryModel.fromJson(Map<dynamic, dynamic>map){
-    if (map == null) {
+class ElectronicsModel{
+  String ? name,image;
+  ElectronicsModel({ this.name, this.image});
+  ElectronicsModel.fromJson(Map<dynamic,dynamic>map){
+    if(map==null){
       return;
     }
-    name = map['name'];
-    image = map['image'];
-    electronicsModel=map['Electronics'];
+    name=map['name'];
+    image=map['image'];
   }
-
   //return directly of name and image
-  toJson() {
-    return {
-      'name': name,
-      'image': image,
-
+  toJson(){
+    return{
+      'name':name,
+      'image':image,
     };
+
   }
-}
 
-
-
-
-
-
-
-
-
-
-
+  }

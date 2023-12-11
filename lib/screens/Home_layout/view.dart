@@ -15,7 +15,7 @@ import 'package:pinput/pinput.dart';
 
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
-import '../Categories/Electronic/electronic.dart';
+import '../Categories/Electronic/electronics.dart';
 import '../Details/view.dart';
 import '../Home/view.dart';
 import 'controller.dart';
@@ -46,7 +46,7 @@ import 'controller.dart';
                   WishlistScreen(),
                   ProfileScreen(),
                   // DetailsScreen(),
-                  Electronic(),
+                 // ElectronicScreen(),
 
 
                 ],

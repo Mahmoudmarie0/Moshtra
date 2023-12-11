@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:moshtra/firebase_options.dart';
 import 'package:moshtra/global_controller/my_bindings.dart';
-import 'package:moshtra/screens/Categories/Electronic/electronic.dart';
+import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 import 'package:moshtra/screens/splash/view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

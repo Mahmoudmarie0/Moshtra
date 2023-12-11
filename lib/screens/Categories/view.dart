@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/models/electronics_model.dart';
+import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
+import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 
 
 import '../../utils/constants/colors.dart';
@@ -51,11 +54,11 @@ class CategoriesScreen extends StatelessWidget {
     return GetBuilder<CategoryController>(
       builder: (controller) =>
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
-              color: Colors.grey.shade50,
-
-            ),
+            // decoration: BoxDecoration(
+            //   borderRadius: BorderRadius.circular(16.0),
+            //   color: Colors.grey.shade50,
+            //
+            // ),
               height: 700.h,
               child: GridView.builder(
                   shrinkWrap: true,
@@ -70,7 +73,14 @@ class CategoriesScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                    return Column(
                      children: [
-                       Container(
+                       GestureDetector(
+                         onTap:() {
+                           Get.to(ElectronicsScreen(controller.electronicsModel[index]));
+                         },
+
+
+                    child:  Container(
+
                          decoration: BoxDecoration(
                            borderRadius: BorderRadius.circular(50),
                            color: Colors.grey.shade100,
@@ -84,7 +94,7 @@ class CategoriesScreen extends StatelessWidget {
                            child: Image .network(controller.categoryModel[index].image as String),
                          ),
                        ),
-
+                       ),
                        SizedBox(height: 1.h,),
                        Text(controller.categoryModel[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
                      ],

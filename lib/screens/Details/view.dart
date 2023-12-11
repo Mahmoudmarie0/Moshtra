@@ -19,13 +19,6 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.grey,
-          elevation: 0,
-          iconTheme: IconThemeData(
-              color: Colors.black
-          ),
-        ),
         body: SingleChildScrollView(
           child: Stack(
             children: [
@@ -49,7 +42,7 @@ class DetailsScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
                 width: double.infinity,
-                height: 600.h,
+                height: 450,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Column(
@@ -127,107 +120,126 @@ class DetailsScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500
                         ),),
                       SizedBox(height: 10.h,),
-                      CustomText(
-                        text: model.description as String,
-                        fontweight: FontWeight.w300,
-                        fontSize: 18,
-                        height: 2.5,
-                      ),
-                      SizedBox(height: 10.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(16),
-                            width: MediaQuery.of(context).size.width * .4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomText(text: 'Size',color: Colors.black,fontweight: FontWeight.w300,),
-                                CustomText(text: model.Sized as String,color: Colors.black,fontweight: FontWeight.w200,),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(16),
-                            width: MediaQuery.of(context).size.width * .4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CustomText(text: 'Color',color: Colors.black,fontweight: FontWeight.w300,),
-                                Container(
-                                  width: 30,
-                                  height: 20,
-                                  padding: EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: model.color
-                                  ),
+                      Text(
+                        model.description as String,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
 
-                                )
-                              ],
-                            ),
-                          )
-                        ],
                       ),
-                      SizedBox(height: 30.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 60.h,
-                            width: 160.w,
-                            child: ElevatedButton(onPressed: (){},
-                              child: Text('Buy Now', style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.grey5,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)
-                                  )
+                      Spacer(),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(16),
+                              width: MediaQuery.of(context).size.width * .4,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('Size',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600
+                                    ),),
+                                  Text(model.Sized as String,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                    ),),
+                                ],
                               ),
                             ),
-                          ),
-                          SizedBox(width: 8.w,),
-                          Container(
-                            width: 160.w,
-                            height: 60.h,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.r),
-                                color: AppColors.orange
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                MaterialButton(onPressed: (){},
-                                  child: Text('Add To Cart',
+                            Container(
+                              padding: EdgeInsets.all(16),
+                              width: MediaQuery.of(context).size.width * .4,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('Color',
                                     style: TextStyle(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14.sp,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),),
+                                  Container(
+                                    width: 30,
+                                    height: 20,
+                                    padding: EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: model.color
                                     ),
-                                  ),
-                                ),
-                                SvgPicture.asset(AssetsPaths.MyCartWhite),
-                              ],
+
+                                  )
+                                ],
+                              ),
                             ),
-                          )
-                        ],
-                      )
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 70,),
 
                     ],
                   ),
                 ),
-              )
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 681),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 60.h,
+                      width: 160.w,
+                      child: ElevatedButton(onPressed: (){},
+                        child: Text('Buy Now', style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.grey5,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)
+                            )
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8.w,),
+                    Container(
+                      width: 160.w,
+                      height: 60.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          color: AppColors.orange
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          MaterialButton(onPressed: (){},
+                            child: Text('Add To Cart',
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ),
+                          SvgPicture.asset(AssetsPaths.MyCartWhite),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )//Buy button
+
             ],
           ),
         )

@@ -99,6 +99,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/models/electronics_model.dart';
+import 'package:moshtra/models/smart_watches_model.dart';
 
 import '../../../models/category_model.dart';
 import '../../../service/home_service.dart';
@@ -113,10 +114,13 @@ class CategoryController extends GetxController {
 
   List <ElectronicsModel> get electronicsModel=>_electronicsModel;
   List <ElectronicsModel> _electronicsModel=[];
+  List <SmartWatchesModel> get smartwatchesModel=>_smartwatchesModel;
+  List <SmartWatchesModel> _smartwatchesModel=[];
 
   CategoryController(){
     getCategory();
     getElectronics();
+    getSmartWatches();
   }
 
 
@@ -142,5 +146,15 @@ class CategoryController extends GetxController {
 
     });
 
+  }
+  getSmartWatches()async {
+    _loading.value = true;
+    HomeService().getSmartWatches().then((value) {
+      for (int i = 0; i < value.length; i++) {
+        _smartwatchesModel.add(SmartWatchesModel.fromJson(value[i].data()as Map));
+        _loading.value = false;
+      }
+      update();
+    });
   }
 }

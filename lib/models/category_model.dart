@@ -30,12 +30,14 @@
 //
 // }
 import 'package:moshtra/models/electronics_model.dart';
+import 'package:moshtra/models/smart_watches_model.dart';
 
 class CategoryModel {
   ElectronicsModel ? electronicsModel;
+  SmartWatchesModel? smartWatchesModel;
   String ? name, image;
 
-  CategoryModel({ this.name, this.image,this.electronicsModel});
+  CategoryModel({ this.name, this.image,this.electronicsModel,this.smartWatchesModel});
 
   CategoryModel.fromJson(Map<dynamic, dynamic>map){
     if (map == null) {
@@ -44,6 +46,7 @@ class CategoryModel {
     name = map['name'];
     image = map['image'];
     electronicsModel=map['Electronics'];
+    smartWatchesModel=map['SmartWatches'];
   }
 
   //return directly of name and image

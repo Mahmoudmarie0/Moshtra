@@ -8,8 +8,8 @@ class HomeService {
       .collection('Categories');
   CollectionReference _productCollectionRef = FirebaseFirestore.instance
       .collection("Products");
-  CollectionReference _electronicCollectionRef = FirebaseFirestore.instance
-      .collection("Electronic");
+  CollectionReference _smartwatchesCollectionRef = FirebaseFirestore.instance
+      .collection("SmartWatches");
   CollectionReference _electronicsCollectionRef = FirebaseFirestore.instance
       .collection("Electronics");
   CollectionReference _bannersCollectionRef = FirebaseFirestore.instance
@@ -35,12 +35,12 @@ class HomeService {
      return value.docs;
   }
 
-  Future<List<QueryDocumentSnapshot>> getElectronic() async {
+  Future<List<QueryDocumentSnapshot>> getSmartWatches() async {
     var value = await FirebaseFirestore.instance
     .collection("Categories")
     .doc("402rlzLRvORxZt8Ysi2J")
     .collection("Electronics")
-    .doc("402rlzLRvORxZt8Ysi2J")
+    .doc("ADDQTeRGTM23ZaS0tanU")
     .collection("SmartWatches")
     .get();
     return value.docs;

@@ -86,7 +86,7 @@ class CategoriesScreen extends StatelessWidget {
                            color: Colors.grey.shade100,
 
                          ),
-                         height: 60.h,
+                         height: 90.h,
                          width: 80.w,
 
                          child: Padding(

@@ -29,15 +29,19 @@
 //   }
 //
 // }
+import 'package:moshtra/models/smart_watches_model.dart';
+
 class ElectronicsModel{
+  SmartWatchesModel? smartWatchesModel;
   String ? name,image;
-  ElectronicsModel({ this.name, this.image});
+  ElectronicsModel({ this.name, this.image,this.smartWatchesModel});
   ElectronicsModel.fromJson(Map<dynamic,dynamic>map){
     if(map==null){
       return;
     }
     name=map['name'];
     image=map['image'];
+    smartWatchesModel=map['SmartWatches'];
   }
   //return directly of name and image
   toJson(){

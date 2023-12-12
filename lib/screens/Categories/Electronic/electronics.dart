@@ -624,9 +624,12 @@
 // }
  import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:moshtra/models/electronics_model.dart';
 import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
+import 'package:moshtra/screens/Categories/Electronic/smartwatches/smartwatches.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
@@ -647,8 +650,8 @@ class ElectronicsScreen  extends StatelessWidget {
 
         body: SingleChildScrollView(
           child: Container(
+           padding: EdgeInsets.only(top: 60, left: 20, right: 20),
 
-            padding: EdgeInsets.only(top: 60, left: 20, right: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -671,10 +674,11 @@ class ElectronicsScreen  extends StatelessWidget {
     return GetBuilder<ElectronicsController>(
       builder: (controller) =>
           Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Colors.grey.shade50,
 
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.grey.shade100,
+                  shape: BoxShape.rectangle
               ),
               height: 700.h,
               child: GridView.builder(
@@ -690,21 +694,25 @@ class ElectronicsScreen  extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Container(
+                      GestureDetector(
+                      onTap:() {
+                    Get.to(SmartWatchesScreen(controller.smartwatchesModel[index]));
+                  },
+                    child:  Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: Colors.grey.shade100,
-
+                          shape: BoxShape.rectangle
                         ),
                         height: 100.h,
-                        width: 70.w,
+                        width: 6000.w,
 
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image .network(controller.electronicsModel[index].image as String),
                         ),
                       ),
-
+                      ),
                       SizedBox(height: 1.h,),
                       Text(controller.electronicsModel[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
                     ],

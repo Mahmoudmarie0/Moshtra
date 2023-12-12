@@ -696,7 +696,7 @@ class ElectronicsScreen  extends StatelessWidget {
                           color: Colors.grey.shade100,
 
                         ),
-                        height: 90.h,
+                        height: 100.h,
                         width: 70.w,
 
                         child: Padding(

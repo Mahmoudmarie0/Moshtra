@@ -25,11 +25,21 @@ class HomeService {
   }
 
   Future<List<QueryDocumentSnapshot>> getElectronics() async {
-    var value = await _electronicsCollectionRef.get();
-    return value.docs;
+    var value = await FirebaseFirestore.instance
+        .collection("Categories")
+        .doc("402rlzLRvORxZt8Ysi2J")
+        .collection("Electronics")
+        .get();
+     return value.docs;
   }
   Future<List<QueryDocumentSnapshot>> getElectronic() async {
-    var value = await _electronicCollectionRef.get();
+    var value = await FirebaseFirestore.instance
+    .collection("Categories")
+    .doc("402rlzLRvORxZt8Ysi2J")
+    .collection("Electronics")
+    .doc("402rlzLRvORxZt8Ysi2J")
+    .collection("SmartWatches")
+    .get();
     return value.docs;
   }
 }

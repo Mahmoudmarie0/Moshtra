@@ -87,7 +87,7 @@ class CategoriesScreen extends StatelessWidget {
 
                          ),
                          height: 60.h,
-                         width: 60.w,
+                         width: 80.w,
 
                          child: Padding(
                            padding: const EdgeInsets.all(8.0),

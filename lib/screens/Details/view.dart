@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:moshtra/models/cart_product_model.dart';
 import 'package:moshtra/models/products_model.dart';
+import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
+import '../MyCart/view.dart';
 import 'controller/controller.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -220,20 +224,35 @@ class DetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.r),
                           color: AppColors.orange
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MaterialButton(onPressed: (){},
-                            child: Text('Add To Cart',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14.sp,
+                      child: GetBuilder<CartViewModel>(
+                        init: Get.put(CartViewModel()),
+                        builder: (controller) => Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MaterialButton(
+                              onPressed: (){
+                                controller.addProduct(
+                                  CartProductModel(
+                                    name: model.name,
+                                    price: model.price,
+                                    quantity: 1,
+                                    image: model.image,
+                                    productId: model.productId
+                                  )
+                                );
+                                showSnackBarFun(context);
+                              },
+                              child: Text('Add To Cart',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                ),
                               ),
                             ),
-                          ),
-                          SvgPicture.asset(AssetsPaths.MyCartWhite),
-                        ],
+                            SvgPicture.asset(AssetsPaths.MyCartWhite),
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -244,5 +263,58 @@ class DetailsScreen extends StatelessWidget {
           ),
         )
     );
+  }
+
+
+  showSnackBarFun(context){
+    SnackBar snackBar = SnackBar(
+      dismissDirection: DismissDirection.up,
+      behavior: SnackBarBehavior.floating,
+      duration: Duration.millisecondsPerSecond.milliseconds,
+      elevation: 0.5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15)
+      ),
+      backgroundColor: AppColors.white,
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 120,
+          left: 15,
+          right: 15
+        ),
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.task_alt_rounded,
+                  color: AppColors.Green,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'The product has been added to\nyour cart',
+                  style: TextStyle(
+                    color: AppColors.black,
+                  ),
+                )
+              ],
+            ),
+            GestureDetector(
+                child: Text('View Cart'
+                    ,style: TextStyle(
+                    color: AppColors.orange
+                  ),
+                ),
+              onTap: (){ Get.to(MyCartScreen()); },
+            )
+          ],
+        )
+
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

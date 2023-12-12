@@ -81,6 +81,10 @@ dependencies:
   firebase_storage: ^11.5.5
   cloud_firestore: ^4.13.5
 
+  #sqflite
+  sqflite: ^2.3.0
+  path: ^1.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

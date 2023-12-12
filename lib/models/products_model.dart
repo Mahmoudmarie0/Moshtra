@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:moshtra/screens/Details/controller/extension.dart';
 
 class ProductModel{
-  String ?name,image ,description,Sized,price,sub_description;
+  String ?name,image ,description,Sized,price,sub_description,productId;
   Color? color;
 
   ProductModel({
@@ -15,7 +15,7 @@ class ProductModel{
       this.Sized,
       this.price,
       this.sub_description,
-
+      this.productId
   });
 
 
@@ -30,6 +30,7 @@ class ProductModel{
     Sized=map['Sized'];
     price=map['price'];
     sub_description=map['sub_description'];
+    productId=map['productId'];
   }
 
   toJson(){
@@ -41,6 +42,7 @@ class ProductModel{
       'Sized':Sized,
       'price':price,
       'sub_description':sub_description,
+      'productId':productId
     };
 
 }}

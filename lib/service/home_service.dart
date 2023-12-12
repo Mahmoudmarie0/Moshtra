@@ -12,6 +12,8 @@ class HomeService {
       .collection("Electronic");
   CollectionReference _electronicsCollectionRef = FirebaseFirestore.instance
       .collection("Electronics");
+  CollectionReference _bannersCollectionRef = FirebaseFirestore.instance
+      .collection('Banners');
 
   Future<List<QueryDocumentSnapshot>> getCategory() async {
     var value = await _categoryCollectionRef.get();
@@ -32,6 +34,7 @@ class HomeService {
         .get();
      return value.docs;
   }
+
   Future<List<QueryDocumentSnapshot>> getElectronic() async {
     var value = await FirebaseFirestore.instance
     .collection("Categories")
@@ -42,4 +45,13 @@ class HomeService {
     .get();
     return value.docs;
   }
+
+  Future<List<QueryDocumentSnapshot>> getBanners() async {
+    var value = await _bannersCollectionRef.get();
+    return value.docs;
+  }
+
+
+
+
 }

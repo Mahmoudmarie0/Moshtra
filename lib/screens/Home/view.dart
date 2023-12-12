@@ -95,6 +95,7 @@
 // }
 
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -121,12 +122,61 @@ class HomeScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Container(
-
             padding: EdgeInsets.only(top:60,left: 5,right: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                SearchTextFormField(),
+                SizedBox(
+                  height: 15,
+                ),
+                CarouselSlider(items: controller.bannerModel.map(
+                      (e) =>
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24.r), // Adjust the radius as needed
+                          // Optionally, you can add other decoration properties like color or border
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Image(
+
+                            image:NetworkImage('${e.Image}'),
+
+                            width: 400.w,
+
+                            fit: BoxFit.cover,
+
+                          ),
+                        ),
+                      ),).toList(),
+                  options: CarouselOptions(
+
+                    height: 200.0,
+
+                    initialPage: 0,
+
+                    viewportFraction:1.0 ,
+
+                    enableInfiniteScroll: true,
+
+                    reverse: false,
+
+                    autoPlay: true,
+
+                    autoPlayInterval: Duration(seconds: 3),
+
+                    autoPlayAnimationDuration: Duration(seconds: 1),
+
+                    autoPlayCurve: Curves.fastOutSlowIn,
+
+                    scrollDirection: Axis.horizontal,
+
+
+
+
+
+                  ),),
                 SizedBox(
                   height: 15,
                 ),
@@ -243,7 +293,7 @@ child: TextFormField(
   ListViewProduct() {
     return GetBuilder<HomeController>(
       builder:(controller)=> Container(
-        height: 900.h,
+        height: 700.h,
 
 
         child:GridView.builder(

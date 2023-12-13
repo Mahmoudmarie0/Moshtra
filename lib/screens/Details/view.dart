@@ -128,7 +128,7 @@ class DetailsScreen extends StatelessWidget {
                         model.description as String,
                         style: TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.w400),
+                            fontWeight: FontWeight.w400,),
 
                       ),
                       Spacer(),
@@ -191,7 +191,7 @@ class DetailsScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 70,),
+                      SizedBox(height: 30,),
 
                     ],
                   ),

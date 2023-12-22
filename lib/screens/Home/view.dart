@@ -134,16 +134,19 @@ class HomeScreen extends StatelessWidget {
                       (e) =>
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24.r), // Adjust the radius as needed
+                          borderRadius: BorderRadius.circular(15.r),
+                          // Adjust the radius as needed
                           // Optionally, you can add other decoration properties like color or border
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(24.0),
+                          borderRadius: BorderRadius.circular(15.0),
                           child: Image(
 
                             image:NetworkImage('${e.Image}'),
 
                             width: 400.w,
+                            height: 150.h,
+
 
                             fit: BoxFit.cover,
 
@@ -324,6 +327,7 @@ child: TextFormField(
                     ),
 
                     width: MediaQuery.of(context).size.width*.4,
+                    height: 135.h,
 
                     child: Container(
                       height:138,
@@ -338,7 +342,7 @@ child: TextFormField(
                 SizedBox(height: 5.h,),
                 CustomText(text: controller.productModel[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                 SizedBox(height: 5.h,),
-                CustomText(text: controller.productModel[index].price.toString() as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+                CustomText(text: controller.productModel[index].price.toString()+' EGP' as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
 
               ],

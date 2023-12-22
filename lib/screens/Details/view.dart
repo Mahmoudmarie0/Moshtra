@@ -28,7 +28,7 @@ class DetailsScreen extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: AppColors.grey
+                    color: AppColors.white
                 ),
                 height: 290.h,
                 width: double.infinity,

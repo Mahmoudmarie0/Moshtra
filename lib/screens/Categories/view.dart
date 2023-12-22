@@ -65,7 +65,7 @@ class CategoriesScreen extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                     crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0
+                    mainAxisSpacing: 3.0
                   ),
 
                   itemCount: controller.categoryModel.length,
@@ -86,8 +86,8 @@ class CategoriesScreen extends StatelessWidget {
                            color: Colors.grey.shade100,
 
                          ),
-                         height: 90.h,
-                         width: 80.w,
+                         height: 65.h,
+                         width: 65.w,
 
                          child: Padding(
                            padding: const EdgeInsets.all(8.0),

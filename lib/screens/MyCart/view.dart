@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
@@ -81,8 +82,10 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       )
                   ),
                   child: Text(
+
                     'Explore Categories',
                     style: TextStyle(
+                      color: HexColor('#FFFFFF'),
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
@@ -231,6 +234,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       onPressed: (){},
                       child: Text('Checkout(${controller.cartProductModel.length})' ,
                         style: TextStyle(
+                          color: HexColor('#FFFFFF'),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

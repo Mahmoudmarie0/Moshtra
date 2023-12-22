@@ -29,7 +29,7 @@ class OnBoardingScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.topLeft,
         children: [
-          SvgPicture.asset(AssetsPaths.OnBoarding,height: 312.54.h ,width:425.w,),
+          SvgPicture.asset(AssetsPaths.OnBoarding,height: 305.h ,width:470.w,),
           GetBuilder<OnboardingController>(
             builder: (controller)
             {
@@ -79,7 +79,7 @@ class OnBoardingScreen extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Column(
             children: [
-              SizedBox(height: 310.h,),
+              SizedBox(height: 290.h,),
               Stack(
 
                 alignment: Alignment.center,

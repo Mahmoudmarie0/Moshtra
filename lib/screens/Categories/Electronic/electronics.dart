@@ -686,7 +686,7 @@ class ElectronicsScreen  extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0
+                    mainAxisSpacing: 55.0
                 ),
 
                 itemCount: controller.electronicsModel.length,
@@ -704,7 +704,7 @@ class ElectronicsScreen  extends StatelessWidget {
                           color: Colors.grey.shade100,
                           shape: BoxShape.rectangle
                         ),
-                        height: 100.h,
+                        height: 135.h,
                         width: 6000.w,
 
                         child: Padding(

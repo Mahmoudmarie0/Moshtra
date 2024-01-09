@@ -9,7 +9,7 @@ import '../../utils/constants/assets.dart';
 import '../../utils/constants/components.dart';
 
 class WishlistScreen extends StatelessWidget {
-  const WishlistScreen({super.key});
+  //const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

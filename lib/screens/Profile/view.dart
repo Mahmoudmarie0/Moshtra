@@ -12,7 +12,7 @@ import 'package:moshtra/utils/constants/colors.dart';
 import 'controller/Controller.dart';
 
 class ProfileScreen extends StatelessWidget {
-   ProfileScreen({super.key});
+ //  ProfileScreen({super.key});
   ProfileCopntroller profileCopntroller=Get.put(ProfileCopntroller());
 
   @override

@@ -9,7 +9,7 @@ import '../../main.dart';
 import '../constants/assets.dart';
 
 class NoConnectionView extends StatelessWidget {
-  const NoConnectionView({super.key});
+  //onst NoConnectionView({super.key});
 
   @override
   Widget build(BuildContext context) {

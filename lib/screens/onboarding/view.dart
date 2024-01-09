@@ -16,7 +16,7 @@ import 'model.dart';
 
 
 class OnBoardingScreen extends StatelessWidget {
-  OnBoardingScreen({super.key});
+  //OnBoardingScreen({super.key});
 
   final OnboardingController controller = Get.put(OnboardingController());
   final MainAppController mainAppController = Get.find();

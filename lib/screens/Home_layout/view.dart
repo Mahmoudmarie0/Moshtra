@@ -25,7 +25,7 @@ import 'controller.dart';
   HomeController controller = Get.put(HomeController());
 
 
-    HomeLayout({super.key});
+   // HomeLayout({super.key});
 
   Widget build(BuildContext context) {
     return GetBuilder<HomeLayoutController>(

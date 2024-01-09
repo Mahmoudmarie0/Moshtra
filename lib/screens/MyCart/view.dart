@@ -17,7 +17,7 @@ import '../Home_layout/controller.dart';
 import '../checkout/checkout_view.dart';
 
 class MyCartScreen extends StatefulWidget {
-   MyCartScreen({super.key});
+   //MyCartScreen({super.key});
 
   @override
   State<MyCartScreen> createState() => _MyCartScreenState();

@@ -59,7 +59,7 @@ class NetworkController extends GetxController{
     }
 
     Get.dialog(
-      const NoConnectionView(),
+       NoConnectionView(),
       barrierDismissible: false,
       useSafeArea: false,
     );

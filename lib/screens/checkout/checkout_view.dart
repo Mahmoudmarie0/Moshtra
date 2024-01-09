@@ -6,7 +6,7 @@ import 'package:moshtra/utils/constants/delevery.dart';
 import 'package:status_change/status_change.dart';
 
 class CheckOutView extends StatefulWidget {
-  const CheckOutView({super.key});
+  //const CheckOutView({super.key});
 
   @override
   State<CheckOutView> createState() => _CheckOutViewState();
@@ -50,7 +50,7 @@ class _CheckOutViewState extends State<CheckOutView> {
                 connectorTheme:ConnectorThemeData(space: 1.0, thickness: 1.0),
               ),
 
-              builder: StatusChangeTileBuilder.connected(
+              builder:  StatusChangeTileBuilder.connected(
                 itemWidth: (_) =>
                 MediaQuery.of(context).size.width / _processes.length,
                 nameWidgetBuilder: (context, index){

@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      child: CheckOutView(),
+      child: SplashScreen(),
     );
 
   }

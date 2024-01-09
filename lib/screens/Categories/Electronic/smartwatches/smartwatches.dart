@@ -49,57 +49,62 @@ class SmartWatchesScreen extends StatelessWidget{
       builder:(controller)=> Container(
           height: 700.h,
 
-          child:GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1/1.20,
-                crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 0.5,
+          child:SingleChildScrollView(
+            child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1/1.20,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 0.5,
 
-              ),
-              itemCount: controller.smartwatchesModel.length,
-              itemBuilder: (context,index){
-                return Container(
-                  width: MediaQuery.of(context).size.width*.4,
-                  child: Column(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            color: Colors.grey.shade100,
+                ),
+                itemCount: controller.smartwatchesModel.length,
+                itemBuilder: (context,index){
+                  return Container(
+                    width: MediaQuery.of(context).size.width*.4,
+                    child: Column(
+                      children: [
 
+                        Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              color: Colors.grey.shade100,
+
+                            ),
+
+                            width: MediaQuery.of(context).size.width*.4,
+
+                            child: Container(
+                              height:100,
+                              width: 150,
+
+                              child: Image.network(controller.smartwatchesModel[index].image as String,fit:BoxFit.fill,),
+                            ),
                           ),
+                        SizedBox(height: 9.h,),
+                        CustomText(text: controller.smartwatchesModel[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                        SizedBox(height: 5.h,),
+                        CustomText(text: controller.smartwatchesModel[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                        SizedBox(height: 5.h,),
+                        CustomText(text: controller.smartwatchesModel[index].price.toString()+' EGP' as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
-                          width: MediaQuery.of(context).size.width*.4,
-
-                          child: Container(
-                            height:138,
-                            width: 160,
-
-                            child: Image.network(controller.smartwatchesModel[index].image as String,fit:BoxFit.fill,),
-                          ),
-                        ),
-                      SizedBox(height: 9.h,),
-                      CustomText(text: controller.smartwatchesModel[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
-                      SizedBox(height: 5.h,),
-
-                      CustomText(text: controller.smartwatchesModel[index].price.toString() as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
-
-
-                    ],
-                  ),
-                );
+                      ],
+                    ),
+                  );
 
 
 
-              })
+                }),
+          )
 
 
 
       ),
+
     );
   }
 
 }
+

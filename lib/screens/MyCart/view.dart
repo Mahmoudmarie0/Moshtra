@@ -14,6 +14,7 @@ import '../../utils/constants/assets.dart';
 
 import '../../utils/constants/components.dart';
 import '../Home_layout/controller.dart';
+import '../checkout/checkout_view.dart';
 
 class MyCartScreen extends StatefulWidget {
    MyCartScreen({super.key});
@@ -231,7 +232,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 ),
                 GetBuilder<CartViewModel>(
                   builder:(controller) => ElevatedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Get.to(CheckOutView());
+                      },
                       child: Text('Checkout(${controller.cartProductModel.length})' ,
                         style: TextStyle(
                           color: HexColor('#FFFFFF'),

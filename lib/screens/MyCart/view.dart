@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
+import 'package:moshtra/screens/checkout/Payment_method_screen.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
@@ -319,7 +320,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 ),
                 GetBuilder<FavViewModel>(
                   builder:(controller) => ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      Get.to(PaymentMethodScreen());
+                    },
                     child: Text('Checkout(${controller.favProductModel.length})' ,
                       style: TextStyle(
                         fontSize: 18,

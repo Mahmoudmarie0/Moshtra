@@ -9,11 +9,14 @@ import '../../EmailVerification/view.dart';
 class EmailConfirmationController extends GetxController {
 
   void validateEmail(String email) {
-    if (email.isEmpty)
+    if (email.isEmpty) {
       GetSnackbarError(
           message: 'Please Enter Your Email', Color: AppColors.Red);
-    else {
-      Get.to(EmailVerification(),transition:  Transition.leftToRight);
+
+      return;
     }
+    // else {
+    //   Get.to(EmailVerification(),transition:  Transition.leftToRight);
+    // }
   }
 }

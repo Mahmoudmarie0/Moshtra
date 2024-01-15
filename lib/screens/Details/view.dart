@@ -224,8 +224,8 @@ class DetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.r),
                           color: AppColors.orange
                       ),
-                      child: GetBuilder<CartViewModel>(
-                        init: Get.put(CartViewModel()),
+                      child: GetBuilder<FavViewModel>(
+                        init: Get.put(FavViewModel()),
                         builder: (controller) => Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

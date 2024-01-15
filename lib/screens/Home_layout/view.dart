@@ -43,7 +43,7 @@ import 'controller.dart';
                   HomeScreen(),
                   CategoriesScreen(),
                   MyCartScreen(),
-                  WishlistScreen(),
+                  MyFavScreen(),
                   ProfileScreen(),
                   // DetailsScreen(),
                  // ElectronicScreen(),

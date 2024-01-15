@@ -1,22 +1,38 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
-
+import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/utils/constants/colors.dart';
+import 'package:moshtra/utils/custom_text/view.dart';
 
 import '../../utils/constants/assets.dart';
-import '../../utils/constants/components.dart';
 
-class WishlistScreen extends StatelessWidget {
-  //const WishlistScreen({super.key});
+import '../../utils/constants/components.dart';
+import '../Home_layout/controller.dart';
+import 'database/fav_database_helper.dart';
+
+class MyFavScreen extends StatefulWidget {
+  //MyCartScreen({super.key});
+
+  @override
+  State<MyFavScreen> createState() => _MyFavScreenState();
+}
+
+class _MyFavScreenState extends State<MyFavScreen> {
+  HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
 
   @override
   Widget build(BuildContext context) {
-    return false ? buildEmptyWishList() : FavoriteScreen();
+
+    return favListScreen();
+
   }
 
-  Widget buildEmptyWishList() {
+  Widget buildEmptyFavList() {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -26,19 +42,20 @@ class WishlistScreen extends StatelessWidget {
               Lottie.asset(AssetsPaths.CartListEmpty),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
-                child: Text('Your wishlist is empty',
+                child: Text('Your Favorite is empty',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 24,
-                    color: Color(0xff1C1B1B),
+                    color: AppColors.black,
                   ),
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
                 child: Text(
-                  'Tap heart button to start saving your favorite\nitems.',
+                  'Looks like you have not added anything in your \nFavorite. Go ahead and explore top categories.',
+
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -49,15 +66,19 @@ class WishlistScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    // Go To Categories
 
+                  onPressed: () {
+                    homeLayoutController.SeeAll();
+
+                    // Get.to(CategoriesScreen(),transition: Transition.upToDown);
+                    // Go To Categories
                   },
                   style: ElevatedButton.styleFrom(
+                      splashFactory: NoSplash.splashFactory,
                       minimumSize: Size(328, 60),
-                      backgroundColor: Color(0xff1C1B1B),
+                      backgroundColor: AppColors.orange,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
                       )
                   ),
                   child: Text(
@@ -68,278 +89,258 @@ class WishlistScreen extends StatelessWidget {
                     ),
                   )
               ),
-
-              // Icon Button Heart
-
             ]
         ),
       ),
     );
   }
-}
 
-
-
-class FavoriteScreen extends StatefulWidget {
-
-
-  @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
-}
-
-class _FavoriteScreenState extends State<FavoriteScreen> {
-
-  int itemCount = 1;
-
-  BackButton() => IconButton(
-    onPressed: (){},
-    icon: Icon(Icons.arrow_back),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-
-    return
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          appBar: AppBar(
-            title: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text('WishList', style: TextStyle(color: AppColors.black,fontWeight: FontWeight.w400),),
-            ),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            // centerTitle: true,
-
-          ),
-          body: ListView.builder(
-            itemBuilder: (context , index) => buildFavItem(),
-            itemCount: 3,
-          ),
-        ),
-      );
-  }
-
-  Widget buildFavItem() => Padding(
-    padding: const EdgeInsets.only( left : 20.0 , right: 20.0 , bottom: 25.0 , top: 5.0),
-    child: Container(
-      height: 120,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget favListScreen() {
+    return GetBuilder<FavViewModel>(
+      init: Get.put(FavViewModel()),
+      builder: (controller) => controller.favProductModel.length == 0 ? buildEmptyFavList() :
+      Column(
         children: [
-          Stack(
-            alignment: AlignmentDirectional.bottomStart,
-            children: [
-              Image.asset(
-                AssetsPaths.Watch,
-                fit: BoxFit.contain,
-                width: 120,
-                height: 120,
-              ),
-              if(1 != 0)
-                Container(
-                  color: Colors.red,
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child:
-                  Text('DISCOUNT',
-                    style: TextStyle(
-                      fontSize: 8,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
-            ],
-          ),
-          SizedBox(
-            width: 10,
-          ),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Loop Silicone Strong Magnetic Watch ",
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                // SizedBox(
-                //   height: 10,
-                // ),
-                Spacer(),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "\$15.25",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 328.w,
+                      height: 120.h,
+                      child: Row(
+                        children: [
+                          Container(
+                              width: 120.w,
+                              height: 120.h,
+                              child: Image.network(
+                                controller.favProductModel[index].image!,
+                              )
                           ),
-                        ),
-                        SizedBox(width: 5,),
-                        if( 1 != 0)
-                          Text(
-                            "\$20",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                              decoration: TextDecoration.lineThrough,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                      ],
-                    ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     border: Border.all(
-                        //       width: 0,
-                        //       color: Colors.grey
-                        //     ),
-                        //     borderRadius: BorderRadius.circular(10),
-                        //   ),
-                        //   child: Row(
-                        //     children: [
-                        //       IconButton(
-                        //           onPressed: (){
-                        //
-                        //
-                        //             if(itemCount > 1) {
-                        //               itemCount--;
-                        //             }
-                        //             setState(() {});
-                        //           },
-                        //           icon: Icon(
-                        //
-                        //             Icons.remove,
-                        //             color: Colors.grey,
-                        //           )),
-                        //       Text(
-                        //         "${itemCount.toString()}",
-                        //         style: TextStyle(
-                        //           fontSize: 12,
-                        //           color: Colors.grey,
-                        //         ),
-                        //       ),
-                        //       IconButton(
-                        //           onPressed: (){
-                        //             itemCount++;
-                        //             setState(() {});
-                        //           },
-                        //           icon: Icon(
-                        //             Icons.add,
-                        //             color: Colors.grey,
-                        //           )),
-                        //     ],
-                        //   ),
-                        // ),
-                        GestureDetector(
-                          child: SvgPicture.asset(
-                              AssetsPaths.Trash
-                          ),
-                          onTap: (){
-                            showModalBottomSheet(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(topRight: Radius.circular(25) , topLeft: Radius.circular(25) )
-                                ),
-                                context: context,
-                                builder: (context){
-                                  return Container(
-                                    padding: EdgeInsets.only(top: 20,),
-                                    alignment: Alignment.center,
-                                    height: 220,
-
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Delete product from wishlist',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 20,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Column(
-                                          children: [
-                                            ElevatedButton(
-
-                                              onPressed: () {
-
-                                              },
-
-                                              child: Text('Delete a product' ,
-                                                style: TextStyle(
-
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              style: button,
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            GestureDetector(
-                                              onTap: (){
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text(
-                                                'Cancel',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(left: 10 , right: 10 , top: 8),
+                                  width: 165,
+                                  child: Text(
+                                    controller.favProductModel[index].name!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
                                     ),
-                                  );
-                                }
-                            );
-                          },
-                        )
-
-                        // IconButton(
-                        //     onPressed: (){
-                        //
-                        //       // ShopCubit.get(context).changeFavorites(model.product.id)
-                        //
-                        //     },
-                        //     icon: CircleAvatar(
-                        //       radius: 15.0,
-                        //       backgroundColor:
-                        //       //ShopCubit.get(context).favorites[model.id]
-                        //       true ? Colors.red : Colors.grey,
-                        //       child: Icon(
-                        //         Icons.favorite_border,
-                        //         size: 14.0,
-                        //         color: Colors.white,
-                        //       ),
-                        //     ))
-                      ],
-                    )
-                  ],
-                ),
-              ],
+                                  )),
+                              Container(
+                                margin: EdgeInsets.only(left: 10 , right: 10),
+                                child:
+                                Text(
+                                  '${controller.favProductModel[index].price!.toString()} EGP' ,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400
+                                  ),
+                                ),
+                              ),
+                              // Container(
+                              //   width: 96.w,
+                              //   height: 32.h,
+                              //   child: Row(
+                              //     crossAxisAlignment: CrossAxisAlignment.center,
+                              //     children: [
+                              //       Expanded(
+                              //           child: IconButton(
+                              //               onPressed: () {
+                              //                 if(controller.favProductModel[index].quantity! > 1) {
+                              //                   controller.decreaseQuantity(index);
+                              //                   setState(() {});
+                              //                 }
+                              //               },
+                              //               icon: Icon(Icons.remove))),
+                              //       Spacer(),
+                              //       Expanded(
+                              //           child: Text(
+                              //             controller.favProductModel[index].quantity.toString(),
+                              //             style: TextStyle(fontWeight: FontWeight.bold),
+                              //           )),
+                              //       Expanded(
+                              //           child: IconButton(
+                              //               onPressed: () {
+                              //                 controller.increaseQuantity(index);
+                              //                 setState(() {});
+                              //               },
+                              //               icon: Icon(Icons.add)))
+                              //     ],
+                              //   ),
+                              // )
+                            ],
+                          ),
+                          Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  // Checkbox(value: true, onChanged: (bool? value) {}),
+                                  // GetBuilder(
+                                  //   init: Get.put(CartViewModel()),
+                                  //   builder: (controller) => GestureDetector(
+                                  //     child: SvgPicture.asset(
+                                  //         AssetsPaths.Trash
+                                  //     ),
+                                  //     onTap: (){
+                                  //       showModalBottomSheet(
+                                  //           shape: RoundedRectangleBorder(
+                                  //               borderRadius: BorderRadius.only(topRight: Radius.circular(25) , topLeft: Radius.circular(25) )
+                                  //           ),
+                                  //           context: context,
+                                  //           builder: (context){
+                                  //             return Container(
+                                  //               padding: EdgeInsets.only(top: 20,),
+                                  //               alignment: Alignment.center,
+                                  //               height: 220,
+                                  //
+                                  //               child: Column(
+                                  //                 crossAxisAlignment: CrossAxisAlignment.start,
+                                  //                 children: [
+                                  //                   Text(
+                                  //                     'Delete product from wishlist',
+                                  //                     style: TextStyle(
+                                  //                       fontWeight: FontWeight.w500,
+                                  //                       fontSize: 20,
+                                  //                     ),
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 15,
+                                  //                   ),
+                                  //                   Column(
+                                  //                     children: [
+                                  //                       ElevatedButton(
+                                  //
+                                  //                         onPressed: () {
+                                  //                           controller.deleteProduct(index);
+                                  //                           Navigator.of(context).pop();
+                                  //                           setState(() {});
+                                  //                         },
+                                  //
+                                  //
+                                  //
+                                  //                         child: Text('Delete a product' ,
+                                  //                           style: TextStyle(
+                                  //
+                                  //                             fontSize: 18,
+                                  //                             fontWeight: FontWeight.bold,
+                                  //                           ),
+                                  //                         ),
+                                  //                         style: button,
+                                  //                       ),
+                                  //                       SizedBox(
+                                  //                         height: 20,
+                                  //                       ),
+                                  //                       GestureDetector(
+                                  //                         onTap: (){
+                                  //                           Navigator.of(context).pop();
+                                  //                         },
+                                  //                         child: Text(
+                                  //                           'Cancel',
+                                  //                           style: TextStyle(
+                                  //                             fontWeight: FontWeight.w500,
+                                  //                             fontSize: 16,
+                                  //                           ),
+                                  //                         ),
+                                  //                       ),
+                                  //                     ],
+                                  //                   ),
+                                  //                 ],
+                                  //               ),
+                                  //             );
+                                  //           }
+                                  //       );
+                                  //     },
+                                  //   ),
+                                  // ),
+                                  GetBuilder<FavViewModel>(
+                                    init: Get.put(FavViewModel()),
+                                    builder: (controller) => GestureDetector(
+                                      onTap: (){
+                                        // CartDatabaseHelper.db.deleteProduct(controller.cartProductModel[index].productId!);
+                                        controller.deleteProduct(index);
+                                        //controller.getAllProduct();
+                                        setState(() {});
+                                      },
+                                      child: SvgPicture.asset(
+                                          AssetsPaths.Trash
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                itemCount: controller.favProductModel.length,
+              ),
             ),
-          )
+          ),
+          // Container(
+          //   padding: EdgeInsets.only(left: 25 , right: 25),
+          //   height: 100,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           CustomText(
+          //             text: 'TOTAL',
+          //             fontSize: 18,
+          //             color: Colors.grey,
+          //             fontweight: FontWeight.w400,
+          //           ),
+          //           SizedBox(
+          //             height: 10,
+          //           ),
+          //           GetBuilder<FavViewModel>(
+          //             init: Get.put(FavViewModel()),
+          //             builder: (controller) => CustomText(
+          //               text: '${controller.totalPrice}  EGP',
+          //               fontSize: 22,
+          //               color: Colors.black,
+          //               fontweight: FontWeight.w500,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       GetBuilder<FavViewModel>(
+          //         builder:(controller) => ElevatedButton(
+          //           onPressed: (){},
+          //           child: Text('Checkout(${controller.favProductModel.length})' ,
+          //             style: TextStyle(
+          //               fontSize: 18,
+          //               fontWeight: FontWeight.bold,
+          //             ),
+          //           ),
+          //           style: ElevatedButton.styleFrom(
+          //               splashFactory: NoSplash.splashFactory,
+          //               minimumSize: Size(150, 50),
+          //               backgroundColor: Color(0xfff88160),
+          //               shape: RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+          //               )
+          //           ),
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // )
         ],
       ),
-    ),
-  );
+    );
+  }
 }

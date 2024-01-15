@@ -69,5 +69,11 @@ class CartDatabaseHelper {
     );
   }
 
+  deleteProduct(String productId) async {
+    var dbClient = await database;
+    return await dbClient.delete(tableCartProduct , where: '$columnProductId = ?' , whereArgs: [productId] );
+
+  }
+
 
 }

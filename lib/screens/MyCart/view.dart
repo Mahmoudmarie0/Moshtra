@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
@@ -14,10 +13,10 @@ import '../../utils/constants/assets.dart';
 
 import '../../utils/constants/components.dart';
 import '../Home_layout/controller.dart';
-import '../checkout/checkout_view.dart';
+import 'database/card_database_helper.dart';
 
 class MyCartScreen extends StatefulWidget {
-   //MyCartScreen({super.key});
+  //MyCartScreen({super.key});
 
   @override
   State<MyCartScreen> createState() => _MyCartScreenState();
@@ -83,10 +82,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       )
                   ),
                   child: Text(
-
                     'Explore Categories',
                     style: TextStyle(
-                      color: HexColor('#FFFFFF'),
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
@@ -99,104 +96,194 @@ class _MyCartScreenState extends State<MyCartScreen> {
   }
 
   Widget cartListScreen() {
-    return GetBuilder<CartViewModel>(
-      init: Get.put(CartViewModel()),
-      builder: (controller) => controller.cartProductModel.length == 0 ? buildEmptyCartList() :
+    return GetBuilder<FavViewModel>(
+      init: Get.put(FavViewModel()),
+      builder: (controller) => controller.favProductModel.length == 0 ? buildEmptyCartList() :
       Column(
         children: [
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 328.w,
-                          height: 120.h,
-                          child: Row(
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 328.w,
+                      height: 120.h,
+                      child: Row(
+                        children: [
+                          Container(
+                              width: 120.w,
+                              height: 120.h,
+                              child: Image.network(
+                                controller.favProductModel[index].image!,
+                              )
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                  width: 120.w,
-                                  height: 120.h,
-                                  child: Image.network(
-                                    controller.cartProductModel[index].image!,
-                                  )
+                                  margin: EdgeInsets.only(left: 10 , right: 10 , top: 8),
+                                  width: 165,
+                                  child: Text(
+                                    controller.favProductModel[index].name!,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
+                                    ),
+                                  )),
+                              Container(
+                                margin: EdgeInsets.only(left: 10 , right: 10),
+                                child:
+                                Text(
+                                  '${controller.favProductModel[index].price!.toString()} EGP' ,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400
+                                  ),
+                                ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              Container(
+                                width: 96.w,
+                                height: 32.h,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                        child: IconButton(
+                                            onPressed: () {
+                                              if(controller.favProductModel[index].quantity! > 1) {
+                                                controller.decreaseQuantity(index);
+                                                setState(() {});
+                                              }
+                                            },
+                                            icon: Icon(Icons.remove))),
+                                    Spacer(),
+                                    Expanded(
+                                        child: Text(
+                                          controller.favProductModel[index].quantity.toString(),
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        )),
+                                    Expanded(
+                                        child: IconButton(
+                                            onPressed: () {
+                                              controller.increaseQuantity(index);
+                                              setState(() {});
+                                            },
+                                            icon: Icon(Icons.add)))
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Container(
-                                      margin: EdgeInsets.only(left: 10 , right: 10 , top: 8),
-                                      width: 165,
-                                      child: Text(
-                                        controller.cartProductModel[index].name!,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20,
-                                        ),
-                                      )),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 10 , right: 10),
-                                    child:
-                                    Text(
-                                      '${controller.cartProductModel[index].price!.toString()} EGP' ,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400
+                                  // Checkbox(value: true, onChanged: (bool? value) {}),
+                                  // GetBuilder(
+                                  //   init: Get.put(CartViewModel()),
+                                  //   builder: (controller) => GestureDetector(
+                                  //     child: SvgPicture.asset(
+                                  //         AssetsPaths.Trash
+                                  //     ),
+                                  //     onTap: (){
+                                  //       showModalBottomSheet(
+                                  //           shape: RoundedRectangleBorder(
+                                  //               borderRadius: BorderRadius.only(topRight: Radius.circular(25) , topLeft: Radius.circular(25) )
+                                  //           ),
+                                  //           context: context,
+                                  //           builder: (context){
+                                  //             return Container(
+                                  //               padding: EdgeInsets.only(top: 20,),
+                                  //               alignment: Alignment.center,
+                                  //               height: 220,
+                                  //
+                                  //               child: Column(
+                                  //                 crossAxisAlignment: CrossAxisAlignment.start,
+                                  //                 children: [
+                                  //                   Text(
+                                  //                     'Delete product from wishlist',
+                                  //                     style: TextStyle(
+                                  //                       fontWeight: FontWeight.w500,
+                                  //                       fontSize: 20,
+                                  //                     ),
+                                  //                   ),
+                                  //                   SizedBox(
+                                  //                     height: 15,
+                                  //                   ),
+                                  //                   Column(
+                                  //                     children: [
+                                  //                       ElevatedButton(
+                                  //
+                                  //                         onPressed: () {
+                                  //                           controller.deleteProduct(index);
+                                  //                           Navigator.of(context).pop();
+                                  //                           setState(() {});
+                                  //                         },
+                                  //
+                                  //
+                                  //
+                                  //                         child: Text('Delete a product' ,
+                                  //                           style: TextStyle(
+                                  //
+                                  //                             fontSize: 18,
+                                  //                             fontWeight: FontWeight.bold,
+                                  //                           ),
+                                  //                         ),
+                                  //                         style: button,
+                                  //                       ),
+                                  //                       SizedBox(
+                                  //                         height: 20,
+                                  //                       ),
+                                  //                       GestureDetector(
+                                  //                         onTap: (){
+                                  //                           Navigator.of(context).pop();
+                                  //                         },
+                                  //                         child: Text(
+                                  //                           'Cancel',
+                                  //                           style: TextStyle(
+                                  //                             fontWeight: FontWeight.w500,
+                                  //                             fontSize: 16,
+                                  //                           ),
+                                  //                         ),
+                                  //                       ),
+                                  //                     ],
+                                  //                   ),
+                                  //                 ],
+                                  //               ),
+                                  //             );
+                                  //           }
+                                  //       );
+                                  //     },
+                                  //   ),
+                                  // ),
+                                  GetBuilder<FavViewModel>(
+                                    init: Get.put(FavViewModel()),
+                                    builder: (controller) => GestureDetector(
+                                      onTap: (){
+                                        // CartDatabaseHelper.db.deleteProduct(controller.cartProductModel[index].productId!);
+                                        controller.deleteProduct(index);
+                                        //controller.getAllProduct();
+                                        setState(() {});
+                                      },
+                                      child: SvgPicture.asset(
+                                          AssetsPaths.Trash
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    width: 96.w,
-                                    height: 32.h,
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  controller.decreaseQuantity(index);
-                                                  setState(() {});
-                                                },
-                                                icon: Icon(Icons.remove))),
-                                        Spacer(),
-                                        Expanded(
-                                            child: Text(
-                                              controller.cartProductModel[index].quantity.toString(),
-                                              style: TextStyle(fontWeight: FontWeight.bold),
-                                            )),
-                                        Expanded(
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  controller.increaseQuantity(index);
-                                                  setState(() {});
-                                                },
-                                                icon: Icon(Icons.add)))
-                                      ],
-                                    ),
-                                  )
                                 ],
-                              ),
-                              Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      // Checkbox(value: true, onChanged: (bool? value) {}),
-                                      SvgPicture.asset(
-                                          AssetsPaths.Trash
-                                      ),
-                                    ],
-                                  )),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    itemCount: controller.cartProductModel.length,
-                  ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                itemCount: controller.favProductModel.length,
+              ),
             ),
           ),
           Container(
@@ -219,8 +306,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    GetBuilder<CartViewModel>(
-                      init: Get.put(CartViewModel()),
+                    GetBuilder<FavViewModel>(
+                      init: Get.put(FavViewModel()),
                       builder: (controller) => CustomText(
                         text: '${controller.totalPrice}  EGP',
                         fontSize: 22,
@@ -230,18 +317,15 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     ),
                   ],
                 ),
-                GetBuilder<CartViewModel>(
+                GetBuilder<FavViewModel>(
                   builder:(controller) => ElevatedButton(
-                      onPressed: (){
-                        Get.to(CheckOutView());
-                      },
-                      child: Text('Checkout(${controller.cartProductModel.length})' ,
-                        style: TextStyle(
-                          color: HexColor('#FFFFFF'),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    onPressed: (){},
+                    child: Text('Checkout(${controller.favProductModel.length})' ,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
                     style: ElevatedButton.styleFrom(
                         splashFactory: NoSplash.splashFactory,
                         minimumSize: Size(150, 50),
@@ -260,8 +344,3 @@ class _MyCartScreenState extends State<MyCartScreen> {
     );
   }
 }
-
-
-
-
-

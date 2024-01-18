@@ -1,9 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/models/cart_product_model.dart';
 import 'package:moshtra/models/products_model.dart';
+import 'package:moshtra/screens/Home/view.dart';
+import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
@@ -16,7 +20,6 @@ class DetailsScreen extends StatelessWidget {
 
 
   ProductModel model;
-
 
   DetailsScreen(this.model);
 
@@ -32,11 +35,25 @@ class DetailsScreen extends StatelessWidget {
                 ),
                 height: 290.h,
                 width: double.infinity,
-                child: Image.network(
-                  model.image as String,
-                  fit: BoxFit.contain,
-                  width: 360.w,
-                  height: 290.h ,
+                child: Stack(
+                    alignment: Alignment.center,
+                    children:[
+                      Image.network(
+                        model.image as String,
+                        fit: BoxFit.contain,
+                        width: 360.w,
+                        height: 290.h ,
+                      ),
+                      Positioned(
+                          top: 50,
+                          left: 20,
+                          child: GestureDetector(
+                              onTap: (){
+                                Get.to(HomeLayout());
+                              },
+                              child: Icon(Icons.arrow_back_ios))),
+
+                    ]
                 ),
               ),
               Container(
@@ -107,7 +124,7 @@ class DetailsScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(model.price as String,
+                              Text('${model.price as String} EGP',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: Colors.blue,
@@ -127,8 +144,8 @@ class DetailsScreen extends StatelessWidget {
                       Text(
                         model.description as String,
                         style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,),
 
                       ),
                       Spacer(),
@@ -175,6 +192,7 @@ class DetailsScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                     ),),
                                   Container(
+
                                     width: 30,
                                     height: 20,
                                     padding: EdgeInsets.all(12),
@@ -198,11 +216,13 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 681),
+
+                margin: EdgeInsets.only(top: 800),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
+
                       height: 60.h,
                       width: 160.w,
                       child: ElevatedButton(onPressed: (){},
@@ -224,21 +244,21 @@ class DetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.r),
                           color: AppColors.orange
                       ),
-                      child: GetBuilder<FavViewModel>(
-                        init: Get.put(FavViewModel()),
+                      child: GetBuilder<CartViewModel>(
+                        init: Get.put(CartViewModel()),
                         builder: (controller) => Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             MaterialButton(
                               onPressed: (){
                                 controller.addProduct(
-                                  CartProductModel(
-                                    name: model.name,
-                                    price: model.price,
-                                    quantity: 1,
-                                    image: model.image,
-                                    productId: model.productId
-                                  )
+                                    CartProductModel(
+                                        name: model.name,
+                                        price: model.price,
+                                        quantity: 1,
+                                        image: model.image,
+                                        productId: model.productId
+                                    )
                                 );
                                 showSnackBarFun(context);
                               },
@@ -268,18 +288,18 @@ class DetailsScreen extends StatelessWidget {
 
   showSnackBarFun(context){
     SnackBar snackBar = SnackBar(
-      dismissDirection: DismissDirection.up,
-      behavior: SnackBarBehavior.floating,
-      duration: Duration.millisecondsPerSecond.milliseconds,
-      elevation: 0.5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)
-      ),
-      backgroundColor: AppColors.white,
+        dismissDirection: DismissDirection.up,
+        behavior: SnackBarBehavior.floating,
+        duration: Duration.millisecondsPerSecond.milliseconds,
+        elevation: 0.5,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+        ),
+        backgroundColor: AppColors.white,
         margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 120,
-          left: 15,
-          right: 15
+            bottom: MediaQuery.of(context).size.height - 120,
+            left: 15,
+            right: 15
         ),
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,11 +323,11 @@ class DetailsScreen extends StatelessWidget {
               ],
             ),
             GestureDetector(
-                child: Text('View Cart'
-                    ,style: TextStyle(
+              child: Text('View Cart'
+                ,style: TextStyle(
                     color: AppColors.orange
-                  ),
                 ),
+              ),
               onTap: (){ Get.to(MyCartScreen()); },
             )
           ],

@@ -97,9 +97,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
   }
 
   Widget cartListScreen() {
-    return GetBuilder<FavViewModel>(
-      init: Get.put(FavViewModel()),
-      builder: (controller) => controller.favProductModel.length == 0 ? buildEmptyCartList() :
+    return GetBuilder<CartViewModel>(
+      init: Get.put(CartViewModel()),
+      builder: (controller) => controller.cartProductModel.length == 0 ? buildEmptyCartList() :
       Column(
         children: [
           Expanded(
@@ -118,7 +118,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                               width: 120.w,
                               height: 120.h,
                               child: Image.network(
-                                controller.favProductModel[index].image!,
+                                controller.cartProductModel[index].image!,
                               )
                           ),
                           Column(
@@ -129,7 +129,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                   margin: EdgeInsets.only(left: 10 , right: 10 , top: 8),
                                   width: 165,
                                   child: Text(
-                                    controller.favProductModel[index].name!,
+                                    controller.cartProductModel[index].name!,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 20,
@@ -139,7 +139,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                 margin: EdgeInsets.only(left: 10 , right: 10),
                                 child:
                                 Text(
-                                  '${controller.favProductModel[index].price!.toString()} EGP' ,
+                                  '${controller.cartProductModel[index].price!.toString()} EGP' ,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
@@ -156,7 +156,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     Expanded(
                                         child: IconButton(
                                             onPressed: () {
-                                              if(controller.favProductModel[index].quantity! > 1) {
+                                              if(controller.cartProductModel[index].quantity! > 1) {
                                                 controller.decreaseQuantity(index);
                                                 setState(() {});
                                               }
@@ -165,7 +165,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     Spacer(),
                                     Expanded(
                                         child: Text(
-                                          controller.favProductModel[index].quantity.toString(),
+                                          controller.cartProductModel[index].quantity.toString(),
                                           style: TextStyle(fontWeight: FontWeight.bold),
                                         )),
                                     Expanded(
@@ -262,8 +262,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                   //     },
                                   //   ),
                                   // ),
-                                  GetBuilder<FavViewModel>(
-                                    init: Get.put(FavViewModel()),
+                                  GetBuilder<CartViewModel>(
+                                    init: Get.put(CartViewModel()),
                                     builder: (controller) => GestureDetector(
                                       onTap: (){
                                         // CartDatabaseHelper.db.deleteProduct(controller.cartProductModel[index].productId!);
@@ -283,7 +283,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     ),
                   );
                 },
-                itemCount: controller.favProductModel.length,
+                itemCount: controller.cartProductModel.length,
               ),
             ),
           ),
@@ -307,8 +307,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    GetBuilder<FavViewModel>(
-                      init: Get.put(FavViewModel()),
+                    GetBuilder<CartViewModel>(
+                      init: Get.put(CartViewModel()),
                       builder: (controller) => CustomText(
                         text: '${controller.totalPrice}  EGP',
                         fontSize: 22,
@@ -318,12 +318,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     ),
                   ],
                 ),
-                GetBuilder<FavViewModel>(
+                GetBuilder<CartViewModel>(
                   builder:(controller) => ElevatedButton(
                     onPressed: (){
                       Get.to(PaymentMethodScreen());
                     },
-                    child: Text('Checkout(${controller.favProductModel.length})' ,
+                    child: Text('Checkout(${controller.cartProductModel.length})' ,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

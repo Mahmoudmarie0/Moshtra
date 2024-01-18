@@ -221,7 +221,7 @@ class OrderConfirmScreen extends StatelessWidget {
                   ],
                 ),
 
-                GetBuilder<FavViewModel>(
+                GetBuilder<CartViewModel>(
                   builder:(controller) => ElevatedButton(
                     onPressed: (){
                       Get.to(OredrSuccessScreen());

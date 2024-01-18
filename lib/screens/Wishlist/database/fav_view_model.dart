@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Wishlist/database/fav_database_helper.dart';
 
 import '../../../models/fav_product_model.dart';
@@ -7,8 +9,13 @@ import '../../../models/fav_product_model.dart';
 class FavViewModel extends GetxController {
 
   var dbHelper = FavDatabaseHelper.db;
-
   ValueNotifier<bool> get loading => ValueNotifier<bool>(false);
+
+  // ProductModel? model;
+
+  // List <ProductModel> _productModel=[];
+  // List <ProductModel> get productModel=>_productModel;
+
 
   List<FavProductModel> _favProductModel = [];
   List<FavProductModel> get favProductModel => _favProductModel;

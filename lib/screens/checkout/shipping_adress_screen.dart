@@ -74,7 +74,7 @@ class ShippingAdress extends StatelessWidget {
                     labelText: "Country",
                   ),
                 ),
-                GetBuilder<FavViewModel>(
+                GetBuilder<CartViewModel>(
                   builder:(controller) => ElevatedButton(
                     onPressed: (){
                       Get.to(OrderConfirmScreen());

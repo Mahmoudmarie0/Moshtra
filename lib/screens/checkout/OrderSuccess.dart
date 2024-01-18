@@ -7,6 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:moshtra/screens/Home/view.dart';
 import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
+import 'package:moshtra/screens/Wishlist/database/fav_view_model.dart';
 class OredrSuccessScreen extends StatelessWidget {
   // const ({super.key});
 

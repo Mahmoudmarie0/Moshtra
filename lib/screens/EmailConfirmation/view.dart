@@ -164,6 +164,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                           },
                           child: Text('Reset Your Password' ,
                             style: TextStyle(
+                              color: AppColors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),

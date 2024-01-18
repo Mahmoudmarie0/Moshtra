@@ -277,7 +277,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ],
                 ),
 
-                GetBuilder<FavViewModel>(
+                GetBuilder<CartViewModel>(
                   builder:(controller) => ElevatedButton(
                     onPressed: (){
                       Get.to(ShippingAdress());

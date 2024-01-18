@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../../../models/cart_product_model.dart';
 import 'card_database_helper.dart';
 
-class FavViewModel  extends GetxController {
+class CartViewModel  extends GetxController {
 
   double get totalPrice => _totalPrice;
   double _totalPrice = 0.0;
@@ -15,9 +15,9 @@ class FavViewModel  extends GetxController {
 
 
   List<CartProductModel> _cartProductModel = [];
-  List<CartProductModel> get favProductModel => _cartProductModel;
+  List<CartProductModel> get cartProductModel => _cartProductModel;
 
-  FavViewModel(){
+  CartViewModel(){
     getAllProduct();
   }
 

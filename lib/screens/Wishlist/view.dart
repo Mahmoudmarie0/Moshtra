@@ -5,15 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
-import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/utils/constants/colors.dart';
-import 'package:moshtra/utils/custom_text/view.dart';
 
 import '../../utils/constants/assets.dart';
 
-import '../../utils/constants/components.dart';
 import '../Home_layout/controller.dart';
-import 'database/fav_database_helper.dart';
+import 'database/fav_view_model.dart';
 
 class MyFavScreen extends StatefulWidget {
   //MyCartScreen({super.key});
@@ -84,6 +81,7 @@ class _MyFavScreenState extends State<MyFavScreen> {
                   child: Text(
                     'Explore Categories',
                     style: TextStyle(
+                      color: AppColors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),

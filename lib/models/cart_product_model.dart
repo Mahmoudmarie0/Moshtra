@@ -1,4 +1,3 @@
-
 class CartProductModel{
   String ?name ,image , price ,productId;
   int? quantity;

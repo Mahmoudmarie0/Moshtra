@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:moshtra/models/products_model.dart';
+import 'package:moshtra/service/home_service.dart';
 
 import '../../../models/cart_product_model.dart';
 import 'card_database_helper.dart';
@@ -12,6 +14,9 @@ class CartViewModel  extends GetxController {
 
   ValueNotifier<bool> get loading => ValueNotifier<bool>(false);
 
+  List <ProductModel> get productModel=>_productModel;
+  List <ProductModel> _productModel=[];
+
 
 
   List<CartProductModel> _cartProductModel = [];
@@ -19,6 +24,7 @@ class CartViewModel  extends GetxController {
 
   CartViewModel(){
     getAllProduct();
+    getBestSellingProducts();
   }
 
   getAllProduct() async {
@@ -29,6 +35,19 @@ class CartViewModel  extends GetxController {
     loading.value = false;
     getTotalPrice();
     update();
+  }
+
+
+  getBestSellingProducts()async{
+    loading.value=true;
+    HomeService().getBestSelling().then((value) {
+      for(int i=0;i<value.length;i++){
+        _productModel.add(ProductModel.fromJson(value[i].data() as Map));
+        loading.value=false;
+      }
+      //print(_productModel.length);
+      update();
+    });
   }
 
 

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:moshtra/main.dart';
 import 'package:moshtra/screens/EmailConfirmation/view.dart';
 import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
@@ -64,6 +65,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextFormField (
                         controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           suffixIcon: Icon(Icons.email_sharp),
                            // floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -75,12 +77,10 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                             labelText: 'Email',
-                           // hintText: 'Enter your email',
-                            //hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
-                          // labelStyle: TextStyle(color: Colors.black),
+
                         ),
                       ),
-                      SizedBox(height: 36.h,),
+                      SizedBox(height: 20.h,),
                       GetBuilder<LoginController>(
                         init: LoginController(),
                         builder: (controller)=>TextFormField (
@@ -130,7 +130,7 @@ class LoginScreen extends StatelessWidget {
                         ],
 
                       ),
-                      SizedBox(height: 36.h,),
+                      SizedBox(height: 20.h,),
                       Container(
                         width: 319.w,
                         height: 50.h,
@@ -143,6 +143,7 @@ class LoginScreen extends StatelessWidget {
                               String email = emailController.text;
                               String password = passwordController.text;
                              loginController.validateCredentials(email, password);
+                             sharedPref!.setBool('login', true);
                               //  controller.onSubmit();
                             },
                             child: Text(

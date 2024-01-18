@@ -26,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
     TextEditingController nameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController phoneNumberController = TextEditingController();
-    TextEditingController ConfirmpasswordController = TextEditingController();
+    TextEditingController PasswordController = TextEditingController();
     bool isChecked = false;
     return Scaffold(
 
@@ -61,13 +61,14 @@ class RegisterScreen extends StatelessWidget {
                     color: AppColors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only( left: 27,right: 27,top: 44),
+                    padding: const EdgeInsets.only( left: 27,right: 27,top: 0),
                     child: Container(
                       width:320.w ,
                       height:439.h ,
                       child: ListView(
                         children: [
                           TextFormField (
+
 
                             controller:nameController,
                             decoration: InputDecoration(
@@ -77,16 +78,17 @@ class RegisterScreen extends StatelessWidget {
                                     width: 2.0),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                            //  floatingLabelBehavior: FloatingLabelBehavior.always,
                               border:OutlineInputBorder(),
                               labelText: 'Name',
-                             // hintText: 'ُEnter Your Name',
-                              //hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
-                        //      labelStyle: TextStyle(color: Colors.black),
                             ),
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(10),
+                                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                              ]
                           ),//name
-                          SizedBox(height: 36.h,),
+                          SizedBox(height: 20.h,),
                           TextFormField (
+                            keyboardType: TextInputType.emailAddress,
 
                             controller: emailController,
                             decoration: InputDecoration(
@@ -99,21 +101,23 @@ class RegisterScreen extends StatelessWidget {
                               //floatingLabelBehavior: FloatingLabelBehavior.always,
                               border:OutlineInputBorder(),
                               labelText: 'Email',
-                             // hintText: 'Enter Your email',
-                              //hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
-                             // labelStyle: TextStyle(color: Colors.black),
+
                             ),
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(50),
+
+                              ]
                           ),//email
-                          SizedBox(height: 36.h,),
+                          SizedBox(height: 20.h,),
                           TextFormField (
                             controller: phoneNumberController,
+
                             decoration: InputDecoration(
+                              prefixText: '+20',
                               //floatingLabelBehavior: FloatingLabelBehavior.always,
                               border:OutlineInputBorder(),
                               labelText: 'Phone Number',
-                             // hintText: 'Enter phone number',
-                             // hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
-                             // labelStyle: TextStyle(color: Colors.black),
+
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: AppColors.blue,
@@ -121,12 +125,17 @@ class RegisterScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(10),
+                                FilteringTextInputFormatter.digitsOnly ,
+                              ]
                           ),//phone number
-                          SizedBox(height: 36.h,),
+                          SizedBox(height: 20.h,),
                           GetBuilder<LoginController>(
                             init: LoginController(),
                             builder: (controller)=>TextFormField (
-                              controller: ConfirmpasswordController,
+                              controller: PasswordController,
+
 
                               decoration: InputDecoration(
 
@@ -139,9 +148,6 @@ class RegisterScreen extends StatelessWidget {
                                 ),
                                 border:OutlineInputBorder(),
                                 labelText: 'Password',
-                               // hintText: 'Your password, at least 8 character.',
-                                //hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
-                                //labelStyle: TextStyle(color: Colors.black),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: AppColors.blue,
@@ -153,31 +159,7 @@ class RegisterScreen extends StatelessWidget {
                             ),
 
                           ),//password_1
-                          SizedBox(height: 15.h,), //password_2
-                          // GetBuilder<RegisterController>(
-                          //   init: RegisterController(),
-                          //   builder:(controller)=> Row(
-                          //     children: [
-                          //       Checkbox(value:isChecked, onChanged: (bool ? value){
-                          //         isChecked=value!;
-                          //
-                          //
-                          //       },
-                          //
-                          //         checkColor:AppColors.white,
-                          //
-                          //       ),
-                          //       Text(
-                          //         'I agree to the Privacy Policy',
-                          //         style: TextStyle(
-                          //           decoration: TextDecoration.underline,
-                          //           color: Colors.blue,
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          //
-                          // ),
+                          SizedBox(height: 10.h,), //password_2
                           SizedBox(height: 18.h,),
                           Container(
                             width: 319.w,
@@ -191,7 +173,7 @@ class RegisterScreen extends StatelessWidget {
                                   String name=nameController.text;
                                   String email=emailController.text;
                                   String phoneNumber=phoneNumberController.text;
-                                  String confirmPassword=ConfirmpasswordController.text;
+                                  String confirmPassword=PasswordController.text;
 
                                   registerController.validateRegisterCredentials(name, email, phoneNumber, confirmPassword);
                                 },

@@ -41,9 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
               if (sharedPref!.getBool('onboarding') == null) {
                 Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
               }
-             else if (sharedPref!.getBool('HomeLaypit') == null) {
-                Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
-              }
+
               else {
                 Get.offAll(() => LoginScreen(),transition: Transition.upToDown);
               }

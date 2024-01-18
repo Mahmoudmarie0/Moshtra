@@ -1,13 +1,18 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:lottie/lottie.dart';
 import 'package:moshtra/screens/Home/view.dart';
 import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/screens/Wishlist/database/fav_view_model.dart';
+import 'package:moshtra/utils/constants/assets.dart';
+import 'package:moshtra/utils/constants/colors.dart';
 class OredrSuccessScreen extends StatelessWidget {
   // const ({super.key});
 
@@ -18,7 +23,7 @@ class OredrSuccessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(children: [
-            Image.asset("assets/images/success.png",height: 250,),
+            Lottie.asset(AssetsPaths.Sucess),
             SizedBox(height: 15),
             Text("Success!",style: TextStyle(
                 fontSize: 40,
@@ -40,6 +45,7 @@ class OredrSuccessScreen extends StatelessWidget {
               ),),
           ],
           ),
+          SizedBox(height: 15.h,),
           GetBuilder<FavViewModel>(
             builder:(controller) => ElevatedButton(
               onPressed: (){
@@ -48,9 +54,17 @@ class OredrSuccessScreen extends StatelessWidget {
 
               child: Text('Continue Shopping' ,
                 style: TextStyle(
-                  color: Colors.black,
+                  color: AppColors.white,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              style: ElevatedButton.styleFrom(
+                  splashFactory: NoSplash.splashFactory,
+                  minimumSize: Size(150, 50),
+                  backgroundColor: Color(0xfff88160),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  )
               ),
             ),
           ),

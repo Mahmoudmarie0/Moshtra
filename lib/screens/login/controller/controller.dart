@@ -45,8 +45,12 @@ class LoginController extends GetxController{
 
       }).catchError((error){
         print(error.toString());
-        GetSnackbarError( message: "Email or Password not correct",Color: AppColors.Red);
-        
+        if(error is FirebaseAuthException && error.code=='invalid-email')
+          GetSnackbarError( message: "The email address is badly formatted.",Color: AppColors.Red);
+
+        else {
+          GetSnackbarError( message: "Wrong Password",Color: AppColors.Red);
+        }
 
       });
 

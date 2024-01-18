@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:moshtra/main.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 
 import '../../../utils/constants/colors.dart';
@@ -80,6 +81,7 @@ class ProfileCopntroller extends GetxController{
                               ),
                               child: MaterialButton(
                                   onPressed: (){
+                                    sharedPref!.setBool('login', false);
                                     Get.offAll(()=>LoginScreen(),transition: Transition.downToUp);
 
                                   },

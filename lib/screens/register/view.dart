@@ -83,7 +83,7 @@ class RegisterScreen extends StatelessWidget {
                               labelText: 'Name',
                             ),
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(10),
+                                LengthLimitingTextInputFormatter(15),
                                 FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                               ]
                           ),//name

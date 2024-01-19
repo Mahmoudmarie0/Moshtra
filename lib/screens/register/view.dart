@@ -72,6 +72,7 @@ class RegisterScreen extends StatelessWidget {
 
                             controller:nameController,
                             decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.person),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: AppColors.blue,
@@ -92,6 +93,7 @@ class RegisterScreen extends StatelessWidget {
 
                             controller: emailController,
                             decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.email),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: AppColors.blue,
@@ -113,6 +115,7 @@ class RegisterScreen extends StatelessWidget {
                             controller: phoneNumberController,
 
                             decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.phone),
                               prefixText: '+20',
                               //floatingLabelBehavior: FloatingLabelBehavior.always,
                               border:OutlineInputBorder(),

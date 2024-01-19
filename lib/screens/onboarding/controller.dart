@@ -15,8 +15,10 @@ class OnboardingController extends GetxController
   final MainAppController mainAppController = Get.find();
   bool isLast = false;
   var boardController = PageController();
-  List<BoardingModel> boardingList = [];
 
+
+
+  List<BoardingModel> boardingList = [];
 
 
   @override
@@ -102,19 +104,6 @@ class OnboardingController extends GetxController
     }
   }
 
-  // void onLangTapped(){
-  //   if(sharedPref!.getString('lang') == 'ar'){
-  //     mainAppController.changeAppLang('en');
-  //   }
-  //   else {
-  //     mainAppController.changeAppLang('ar');
-  //   }
-  //   boardingList =[];
-  //   boardingList.add(BoardingModel(image: sharedPref!.getString('lang') == 'en'? AssetsPaths.OnBoarding1ENSVG:AssetsPaths.OnBoarding1SVG,height:420,width: 420 ,text: "login_is_easy".tr,subtext: 'onboarding_description_1'.tr,btntext: 'start_btn'.tr));
-  //   boardingList.add(BoardingModel(image: sharedPref!.getString('lang') == 'en'? AssetsPaths.OnBoarding2ENSVG:AssetsPaths.OnBoarding2SVG,height:349,width: 353 ,text: "view_invoices".tr,subtext: 'onboarding_description_2'.tr,btntext: 'next_btn'.tr));
-  //   boardingList.add(BoardingModel(image:sharedPref!.getString('lang') == 'en' ? AssetsPaths.OnBoarding3ENSVG:AssetsPaths.OnBoarding3SVG,height:366,width: 349,text: "invoices_management".tr,subtext: 'onboarding_description_3'.tr,btntext: 'enter_btn'.tr));
-  //   update();
-  // }
 
 
 

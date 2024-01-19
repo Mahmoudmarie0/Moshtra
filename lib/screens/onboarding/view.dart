@@ -12,7 +12,6 @@ import '../../utils/constants/colors.dart';
 import 'controller.dart';
 import 'model.dart';
 
-// Hello jOOO
 
 
 class OnBoardingScreen extends StatelessWidget {

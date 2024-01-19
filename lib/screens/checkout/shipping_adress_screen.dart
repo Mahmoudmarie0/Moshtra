@@ -54,7 +54,7 @@ else if(PhoneNumber.length!=10){
   GetSnackbarError( message: "Enter correct phone number",Color: AppColors.Red);
 }
 else{
-  Get.to(OredrSuccessScreen());
+  Get.to(OrderConfirmScreen());
 
 }
   }

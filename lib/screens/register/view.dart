@@ -132,12 +132,15 @@ class RegisterScreen extends StatelessWidget {
                           ),//phone number
                           SizedBox(height: 20.h,),
                           GetBuilder<LoginController>(
+
                             init: LoginController(),
                             builder: (controller)=>TextFormField (
+                              keyboardType: TextInputType.visiblePassword,
                               controller: PasswordController,
 
 
                               decoration: InputDecoration(
+
 
                                // floatingLabelBehavior: FloatingLabelBehavior.always,
                                 suffixIcon: GestureDetector(onTap: (){

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //used to connect to sevice
 
 class HomeService {
+  //take instance of collection from firestore
   CollectionReference _categoryCollectionRef = FirebaseFirestore.instance
       .collection('Categories');
   CollectionReference _productCollectionRef = FirebaseFirestore.instance

@@ -30,6 +30,7 @@ class HomeController extends GetxController{
   ValueNotifier<bool>get loading=>_loading;
 ValueNotifier<bool>_loading=ValueNotifier(false);
 
+//get method to retutn list _categoryModel
   List <CategoryModel> get categoryModel=>_categoryModel;
 List <CategoryModel> _categoryModel=[];
 

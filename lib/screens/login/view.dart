@@ -10,10 +10,12 @@ import 'package:moshtra/main.dart';
 import 'package:moshtra/screens/EmailConfirmation/view.dart';
 import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
-
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
-// Hello mahmoud
+
+
+
+
 class LoginScreen extends StatelessWidget {
   //const LoginScreen({super.key});
   LoginController loginController=Get.put(LoginController());
@@ -22,8 +24,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.blue,
@@ -77,13 +81,17 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                             labelText: 'Email',
-
                         ),
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(50),
+
+                          ]
                       ),
                       SizedBox(height: 20.h,),
                       GetBuilder<LoginController>(
                         init: LoginController(),
                         builder: (controller)=>TextFormField (
+                          keyboardType: TextInputType.visiblePassword,
                           controller: passwordController,
 
                           decoration: InputDecoration(
@@ -103,10 +111,7 @@ class LoginScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             labelText: 'Password',
-                            //hintText: 'Enter your password',
-                           // hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
 
-                          //  labelStyle: TextStyle(color: Colors.black),
                           ),
                           obscureText:controller.oobscureText,
                         ),
@@ -126,9 +131,7 @@ class LoginScreen extends StatelessWidget {
                         Text("Forgot Password?",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300,color:AppColors.LightGrey1 ),)
 
                         ),
-
                         ],
-
                       ),
                       SizedBox(height: 20.h,),
                       Container(
@@ -176,11 +179,7 @@ class LoginScreen extends StatelessWidget {
                             child:
                           Text("Register Here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
                           ),
-
-
-
                         ],
-
                       ),
                       SizedBox(height: 29.h,),
                       SvgPicture.asset(AssetsPaths.OrLoginWith),
@@ -191,82 +190,16 @@ class LoginScreen extends StatelessWidget {
                           SvgPicture.asset(AssetsPaths.Google),
                           SvgPicture.asset(AssetsPaths.Facebook),
                           SvgPicture.asset(AssetsPaths.Apple),
-
                         ],
-
-
-
                       ),
-
-
-
-
-
-
-
-
-
                     ],
-
-
-
-
                   ),
-
-
-
-
-
-
                 ),
               ),
-
-
-
-
-
-            //   Column(
-            //     children: [
-            //   TextField (
-            //   decoration: InputDecoration(
-            //   border:OutlineInputBorder(),
-            //       labelText: 'Enter Name',
-            //       hintText: 'Enter Your Name'
-            //   ),
-            // ),
-            //
-            //
-            //
-            //
-            //
-            // ],
-            //
-            //
-            //
-            //
-            //   ),
-
-
-
             ),
           ),
-
-
-
-
-
         ],
-
-
-
-
       ),
-
-
-
-
-
-
     );
   }
 }

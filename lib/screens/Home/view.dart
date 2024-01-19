@@ -1,98 +1,3 @@
-// import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:get/get.dart';
-// import 'package:moshtra/utils/constants/colors.dart';
-// import 'controller/Controller.dart';
-// class HomeScreen extends StatelessWidget {
-//
-//   HomeController homeController=Get.put(HomeController());
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: AppColors.blue,
-//         resizeToAvoidBottomInset: false,
-//         body: Column(
-//           mainAxisAlignment: MainAxisAlignment.end,
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.only(top: 35,left: 16,right: 16),
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 children: [
-//                   Padding(
-//                     padding: const EdgeInsets.only(top: 12,left: 8,right: 8),
-//                     child: TextField(
-//
-//                      // controller: _searchController,
-//                       decoration: InputDecoration(
-//
-//                         hintText: 'Search in Moshtra',
-//                         prefixIcon: Icon(Icons.search),
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(20.0),
-//
-//                         ),
-//                         fillColor: AppColors.white,
-//                         filled: true,
-//                       ),
-//                     ),
-//                   ),
-//                   GetBuilder<HomeController>(
-//                     builder: (Controller)=>
-//                         ConditionalBuilder(
-//                             condition: Controller.categoriesModel!=null,
-//                             builder:(context)=>Controller.CategoryListView( Controller.categoriesModel!,Get.context!),
-//                             fallback: (context)=>Center(child: CircularProgressIndicator())
-//                         ),
-//
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(top:4),
-//               child: Container(
-//               width: 430.w,
-//               height: 550.h,
-//               decoration: BoxDecoration(
-//               borderRadius: BorderRadius.only(topRight:Radius.circular(22.r),topLeft: Radius.circular(22.r)),
-//               color: AppColors.white,),
-//                 child: GetBuilder<HomeController>(
-//                   builder: (Controller)=>
-//                       ConditionalBuilder(
-//                           condition: Controller.homeModel!=null ,
-//                           builder:(context)=>Controller.products(Controller.homeModel!,Get.context!),
-//                           fallback: (context)=>Center(child: CircularProgressIndicator())
-//                       ),
-//
-//                 ),
-//               ),
-//             ),
-//
-//
-//
-//
-//
-//
-//           ],
-//
-//
-//
-//
-//         ),
-//
-//
-//
-//
-//     )
-//
-//
-//     ;
-//   }
-// }
-
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -108,35 +13,43 @@ import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/Wishlist/database/fav_view_model.dart';
 import 'package:moshtra/utils/constants/assets.dart';
-
 import '../../models/products_model.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../Wishlist/view.dart';
 
+
+
+
 class HomeScreen extends StatelessWidget {
 
   ProductModel? model;
-
-
   final List<String> names=<String>['men','s','s','s','s'];
+
   @override
   Widget build(BuildContext context) {
 
     return GetBuilder<HomeController>(
+
       init: HomeController(),
+
       builder:(controller)=>controller.loading.value ?Center(child: CircularProgressIndicator()): Scaffold(
         resizeToAvoidBottomInset: false,
+
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(top:60,left: 5,right: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 SearchTextFormField(),
+
                 SizedBox(
                   height: 15,
                 ),
+
+
                 CarouselSlider(items: controller.bannerModel.map(
                       (e) =>
                       Container(

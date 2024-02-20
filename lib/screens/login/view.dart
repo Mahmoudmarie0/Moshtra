@@ -12,6 +12,7 @@ import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/custom_widgets/global_widgets/app_button.dart';
 
 
 
@@ -134,30 +135,22 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 20.h,),
-                      Container(
-                        width: 319.w,
-                        height: 50.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.r),
-                          color:  AppColors.orange,
-                        ),
-                        child: MaterialButton(
-                            onPressed: (){
-                              String email = emailController.text;
-                              String password = passwordController.text;
-                             loginController.validateCredentials(email, password);
-                             sharedPref!.setBool('login', true);
-                              //  controller.onSubmit();
-                            },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                color:  AppColors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 17.sp,
-                              ),
-                            )
-                        ),
+
+                      buttonWidget(
+                          text: "Login",
+                          width: 319,
+                          height: 50,
+                          radius: 50,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                          onPress: (){
+                            String email = emailController.text;
+                            String password = passwordController.text;
+                            loginController.validateCredentials(email, password);
+                            sharedPref!.setBool('login', true);
+
+                           //   controller.onSubmit();
+                          },
                       ),
                       SizedBox(height: 20.h,),
                       Row(
@@ -203,4 +196,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+
 

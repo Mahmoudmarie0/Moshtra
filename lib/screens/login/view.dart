@@ -12,6 +12,7 @@ import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
+import '../../utils/custom_widgets/global_widgets/app_button.dart';
 
 
 
@@ -143,7 +144,11 @@ class LoginScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
                           onPress: (){
-                             sharedPref!.setBool('login', true);
+                            String email = emailController.text;
+                            String password = passwordController.text;
+                            loginController.validateCredentials(email, password);
+                            sharedPref!.setBool('login', true);
+
                            //   controller.onSubmit();
                           },
                       ),
@@ -192,50 +197,5 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class buttonWidget extends StatelessWidget {
-  final String text;
-  final int width;
-  final int height;
-  final int radius;
-  final Function onPress;
-  final FontWeight fontWeight;
-  final int fontSize;
 
-
-  const buttonWidget({
-    Key? key, required this.text, required this.width, required this.height, required this.radius, required this.onPress, required this.fontWeight, required this.fontSize,
-
-  }) : super(key: key);
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 319.w,
-      height: 50.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius.r),//BorderRadius.circular(50.r),
-        color: AppColors.orange,
-      ),
-      child: MaterialButton(
-          onPressed: (){
-            onPress;
-
-          // sharedPref!.setBool('login', true);
-            //  controller.onSubmit();
-          },
-          child: Text(
-            //"Login",
-            text,
-            style: TextStyle(
-              color:  AppColors.white,
-              fontWeight:fontWeight, //FontWeight.w500,
-              fontSize: fontSize.sp,//17.sp,
-            ),
-          )
-      ),
-    );
-  }
-}
 

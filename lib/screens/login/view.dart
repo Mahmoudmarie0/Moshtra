@@ -22,7 +22,6 @@ class LoginScreen extends StatelessWidget {
   LoginController loginController=Get.put(LoginController());
 
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -150,7 +149,8 @@ class LoginScreen extends StatelessWidget {
                             sharedPref!.setBool('login', true);
 
                            //   controller.onSubmit();
-                          },
+                          }, color: AppColors.white,
+                        conColor: AppColors.orange,
                       ),
                       SizedBox(height: 20.h,),
                       Row(

@@ -11,10 +11,12 @@ class buttonWidget extends StatelessWidget {
   final void Function()? onPress;
   final FontWeight fontWeight;
   final int fontSize;
+  final Color color;
+  final Color conColor;
 
 
   const buttonWidget({
-    Key? key, required this.text, required this.width, required this.height, required this.radius, required this.onPress, required this.fontWeight, required this.fontSize,
+    Key? key, required this.text, required this.width, required this.height, required this.radius, required this.onPress, required this.fontWeight, required this.fontSize, required this.color, required this.conColor,
 
   }) : super(key: key);
 
@@ -26,7 +28,8 @@ class buttonWidget extends StatelessWidget {
       height: 50.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius.r),
-        color: AppColors.orange,
+        color:conColor,
+        //AppColors.orange,
       ),
       child: MaterialButton(
           onPressed: onPress,
@@ -34,7 +37,8 @@ class buttonWidget extends StatelessWidget {
             //"Login",
             text,
             style: TextStyle(
-              color:  AppColors.white,
+              color: color,
+              //AppColors.white,
               fontWeight:fontWeight,
               fontSize: fontSize.sp,
             ),

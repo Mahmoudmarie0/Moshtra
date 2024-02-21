@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:moshtra/main.dart';
 import 'package:moshtra/utils/constants/assets.dart';
-
+import 'package:moshtra/utils/custom_widgets/global_widgets/app_button.dart';
 import '../../../utils/constants/colors.dart';
 import '../../login/view.dart';
 
 class ProfileCopntroller extends GetxController{
+
   bool isToggled=false;
+
   OnSwitch(bool value){
     isToggled=true;
     isToggled=value;
@@ -18,9 +20,7 @@ class ProfileCopntroller extends GetxController{
   }
 
   void navigateBack(){
-
     Get.back();
-
   }
 
   Future logOutPopUp(context) async => await showDialog(context: context, builder: (context)=>Directionality(
@@ -40,7 +40,6 @@ class ProfileCopntroller extends GetxController{
             padding: EdgeInsets.symmetric(vertical: 14.h),
             child: Column(
               children: [
-
                 SizedBox(height: 20.h,),
                 Expanded(
                   child: SingleChildScrollView(
@@ -57,7 +56,6 @@ class ProfileCopntroller extends GetxController{
                           ),
                           textAlign: TextAlign.center,
                         ),
-
                       ],
                     ),
                   ),
@@ -67,57 +65,20 @@ class ProfileCopntroller extends GetxController{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
-
                       Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              width: 122.w,
-                              height: 36.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(26.r),
-                                color: AppColors.orange,
-                              ),
-                              child: MaterialButton(
-                                  onPressed: (){
-                                    sharedPref!.setBool('login', false);
-                                    Get.offAll(()=>LoginScreen(),transition: Transition.downToUp);
+                            child: buttonWidget(text: 'Yes', width: 122, height: 36, radius: 26, onPress: () {
+                              sharedPref!.setBool('login', false);
+                              Get.offAll(()=>LoginScreen(),transition: Transition.downToUp);
 
-                                  },
-                                  child: Text(
-                                    "Yes",
-                                    style: TextStyle(
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12.sp,
-                                    ),
-                                  )
-                              ),
-                            ),
+                            }, fontWeight: FontWeight.w500, fontSize: 12, color: AppColors.white, conColor: AppColors.orange,)
+
                           ),
                           SizedBox(width: 7.h,),
                           Expanded(
-                            child: Container(
-                              width: 122.w,
-                              height: 36.h,
-                              decoration: BoxDecoration(
-
-                                borderRadius: BorderRadius.circular(26.r),
-                                color: AppColors.white,
-                              ),
-                              child: MaterialButton(
-                                  onPressed: (){navigateBack();},
-                                  child: Text(
-                                    'No'.tr,
-                                    style: TextStyle(
-                                      color: AppColors.black,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12.sp,
-                                    ),
-                                  )
-                              ),
-                            ),
+                            child:
+                              buttonWidget(text: 'No', width: 122, height: 36, radius: 26, onPress: () { navigateBack();}, fontWeight: FontWeight.w500, fontSize: 12, color:  AppColors.black,conColor: AppColors.white,)
                           ),
                           SizedBox(height: 33.h,),
                         ],

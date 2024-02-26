@@ -12,7 +12,6 @@ import 'package:moshtra/screens/login/controller/controller.dart';
 import 'package:moshtra/screens/register/view.dart';
 import '../../utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
-import '../../utils/custom_widgets/global_widgets/app_button.dart';
 
 
 
@@ -22,17 +21,17 @@ class LoginScreen extends StatelessWidget {
   LoginController loginController=Get.put(LoginController());
 
 
+
   @override
   Widget build(BuildContext context) {
 
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    GlobalKey<FormState> formKey = GlobalKey();
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.blue,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      body: ListView(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -54,138 +53,159 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 45),
             child: Container(
               width: 375.w,
-              height: 570.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topRight:Radius.circular(20.r),topLeft: Radius.circular(20.r)),
                 color: AppColors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.only( left: 27,right: 27,top: 44),
+                padding: const EdgeInsets.only( left: 27,right: 27,top: 70,bottom: 20),
                 child: Container(
                   width:320.w ,
-                  height:439.h ,
-                  child:  Column(
+                  child:  Form(
+                    key: formKey,
+                    child: Column(
 
-                    children: [
-                      TextFormField (
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(Icons.email_sharp),
-                           // floatingLabelBehavior: FloatingLabelBehavior.always,
-                            border:OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: AppColors.blue,
-                                width: 2.0),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                            labelText: 'Email',
+                      children: [
+                        TextFormField (
+                          validator: (data)
+                          {
+                            if (data!.isEmpty)
+                              return 'Please enter your e-mail';
+                          },
+                            controller: emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.email_sharp),
+                              // floatingLabelBehavior: FloatingLabelBehavior.always,
+                              border:OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.blue,
+                                    width: 2.0),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              labelText: 'Email',
+                            ),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(50),
+
+                            ]
                         ),
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(50),
+                        SizedBox(height: 20.h,),
+                        GetBuilder<LoginController>(
+                          init: LoginController(),
+                          builder: (controller)=>TextFormField (
+                            validator: (data)
+                            {
+                              if (data!.isEmpty)
+                                return 'Please enter your password';
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                            controller: passwordController,
 
-                          ]
-                      ),
-                      SizedBox(height: 20.h,),
-                      GetBuilder<LoginController>(
-                        init: LoginController(),
-                        builder: (controller)=>TextFormField (
-                          keyboardType: TextInputType.visiblePassword,
-                          controller: passwordController,
+                            decoration: InputDecoration(
 
-                          decoration: InputDecoration(
-
-                            //floatingLabelBehavior: FloatingLabelBehavior.always,
-                            suffixIcon: GestureDetector(onTap: (){
+                              //floatingLabelBehavior: FloatingLabelBehavior.always,
+                              suffixIcon: GestureDetector(onTap: (){
                                 controller.ontap();
-                                },
+                              },
 
                                 child: Icon(controller.oobscureText?Icons.visibility:Icons.visibility_off_outlined),
                               ),
-                            border:OutlineInputBorder(),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: AppColors.blue,
-                                  width: 2.0),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            labelText: 'Password',
+                              border:OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.blue,
+                                    width: 2.0),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              labelText: 'Password',
 
+                            ),
+                            obscureText:controller.oobscureText,
                           ),
-                          obscureText:controller.oobscureText,
-                        ),
 
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        TextButton(
-                            style: TextButton.styleFrom(
-                      splashFactory: NoSplash.splashFactory,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                  splashFactory: NoSplash.splashFactory,
+                                ),
+
+                                onPressed: (){
+                                  Get.to(EmailConfirmation());
+                                }, child:
+                            Text("Forgot Password?",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300,color:AppColors.LightGrey1 ),)
+
                             ),
-
-                            onPressed: (){
-                              Get.to(EmailConfirmation());
-                        }, child:
-                        Text("Forgot Password?",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300,color:AppColors.LightGrey1 ),)
-
+                          ],
                         ),
-                        ],
-                      ),
-                      SizedBox(height: 20.h,),
-
-                      buttonWidget(
-                          text: "Login",
-                          width: 319,
-                          height: 50,
-                          radius: 50,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17,
-                          onPress: (){
-                            String email = emailController.text;
-                            String password = passwordController.text;
-                            loginController.validateCredentials(email, password);
-                            sharedPref!.setBool('login', true);
-
-                           //   controller.onSubmit();
-                          }, color: AppColors.white,
-                        conColor: AppColors.orange,
-                      ),
-                      SizedBox(height: 20.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text("Don’t have an account yet? ",style: TextStyle(fontSize: 12.sp,color:Colors.black,fontWeight:FontWeight.w300),),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: Size(0, 10),
+                        SizedBox(height: 20.h,),
+                        Container(
+                          width: 319.w,
+                          height: 50.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.r),
+                            color:  AppColors.orange,
+                          ),
+                          child: MaterialButton(
+                              onPressed: (){
+                                String email = emailController.text;
+                                String password = passwordController.text;
+                                if(formKey.currentState!.validate())
+                                {
+                                  loginController.validateCredentials(email, password);
+                                }
+                                sharedPref!.setBool('login', true);
+                                //  controller.onSubmit();
+                              },
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  color:  AppColors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 17.sp,
+                                ),
+                              )
+                          ),
+                        ),
+                        SizedBox(height: 20.h,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("Don’t have an account yet? ",style: TextStyle(fontSize: 12.sp,color:Colors.black,fontWeight:FontWeight.w300),),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                minimumSize: Size(0, 10),
                                 alignment: Alignment.centerLeft,
-                              splashFactory: NoSplash.splashFactory,
-                            ),
-                            onPressed: (){
+                                splashFactory: NoSplash.splashFactory,
+                              ),
+                              onPressed: (){
 
-                              Get.to(RegisterScreen(),transition:  Transition.leftToRight);
-                            },
-                            child:
-                          Text("Register Here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 29.h,),
-                      SvgPicture.asset(AssetsPaths.OrLoginWith),
-                      SizedBox(height: 16.h,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(AssetsPaths.Google),
-                          SvgPicture.asset(AssetsPaths.Facebook),
-                          SvgPicture.asset(AssetsPaths.Apple),
-                        ],
-                      ),
-                    ],
+                                Get.to(RegisterScreen(),transition:  Transition.leftToRight);
+                              },
+                              child:
+                              Text("Register Here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 29.h,),
+                        SvgPicture.asset(AssetsPaths.OrLoginWith),
+                        SizedBox(height: 16.h,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(AssetsPaths.Google),
+                            SvgPicture.asset(AssetsPaths.Facebook),
+                            SvgPicture.asset(AssetsPaths.Apple),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -196,6 +216,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
 

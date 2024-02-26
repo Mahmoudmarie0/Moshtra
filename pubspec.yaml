@@ -10,6 +10,7 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
+  modal_progress_hud_nsn: ^0.5.1
   flutter:
     sdk: flutter
   status_change: ^2.0.0

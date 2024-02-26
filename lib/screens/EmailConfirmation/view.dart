@@ -23,6 +23,8 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
 
   final _confirmationController = TextEditingController();
 
+
+
   void dispose(){
     _confirmationController.dispose();
     super.dispose();
@@ -30,6 +32,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey = GlobalKey();
     return Scaffold(
       resizeToAvoidBottomInset : false,
       backgroundColor: AppColors.blue,
@@ -94,86 +97,97 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                   color: AppColors.white,
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 5 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 10 , bottom: 10 , top: 30),
-                      child: Text(
-                        'Enter your email address for verification.',
-                        style: TextStyle(
-                          color: AppColors.grey,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
-                      child: SizedBox(
-                        child: TextFormField(
-                          controller: _confirmationController,
-                          // obscureText: true,
-                          decoration: InputDecoration(
-                            suffixIcon: Icon(Icons.email_sharp),
-                            // suffixIconColor: Color(0xff037eee),
-                            // enabledBorder: OutlineInputBorder(
-                            //
-                            //   borderSide: BorderSide(
-                            //     width: 1,
-                            //     // color: Color(0xfff88160)
-                            //   ),
-                            //   borderRadius: BorderRadius.circular(10),
-                            // ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: AppColors.blue,
-                                  width: 2.0),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            border: OutlineInputBorder(),
-                            labelText: 'Email Address',
-
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 10 , bottom: 10 , top: 30),
+                        child: Text(
+                          'Enter your email address for verification.',
+                          style: TextStyle(
+                            color: AppColors.grey,
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () async {
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
+                        child: SizedBox(
+                          child: TextFormField(
+                            validator: (data)
+                            {
+                              if (data!.isEmpty)
+                                return 'Please enter your e-mail';
+                            },
+                            controller: _confirmationController,
+                            // obscureText: true,
+                            decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.email_sharp),
+                              // suffixIconColor: Color(0xff037eee),
+                              // enabledBorder: OutlineInputBorder(
+                              //
+                              //   borderSide: BorderSide(
+                              //     width: 1,
+                              //     // color: Color(0xfff88160)
+                              //   ),
+                              //   borderRadius: BorderRadius.circular(10),
+                              // ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.blue,
+                                    width: 2.0),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              border: OutlineInputBorder(),
+                              labelText: 'Email Address',
 
-                            // String email = confirmationController.text;
-                            //
-                            //
-                            // try {
-                            //   await FirebaseAuth.instance
-                            //       .sendPasswordResetEmail(
-                            //       email: email.trim());
-                            //   showSnackBarFun(context , 'Check Your Email');
-                            // }on FirebaseAuthException catch(e) {
-                            //
-                            //   if(email.isEmpty){
-                            //     emailConfirmation.validateEmail(email);
-                            //   }
-                            //   else {
-                            //     showSnackBarFun(
-                            //         context, 'Invalid Email Address');
-                            //   }
-                            // }
-                            verifyEmail();
-                          },
-                          child: Text('Reset Your Password' ,
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          style: button,
                         ),
                       ),
-                    )
-                  ],
+                      Container(
+                        margin: EdgeInsets.only(top: 20),
+                        child: Center(
+                          child: ElevatedButton(
+                            onPressed: () async {
+
+                              // String email = confirmationController.text;
+                              //
+                              //
+                              // try {
+                              //   await FirebaseAuth.instance
+                              //       .sendPasswordResetEmail(
+                              //       email: email.trim());
+                              //   showSnackBarFun(context , 'Check Your Email');
+                              // }on FirebaseAuthException catch(e) {
+                              //
+                              //   if(email.isEmpty){
+                              //     emailConfirmation.validateEmail(email);
+                              //   }
+                              //   else {
+                              //     showSnackBarFun(
+                              //         context, 'Invalid Email Address');
+                              //   }
+                              // }
+                              if(formKey.currentState!.validate())
+                              {
+                                verifyEmail();
+                              }
+                            },
+                            child: Text('Reset Your Password' ,
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: button,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

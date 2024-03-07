@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:payment/utils/styles.dart';
+
+import '../styles.dart';
+
 
 class Total_price extends StatelessWidget {
-  const Total_price({super.key,  required this.price});
+  const Total_price({required this.price});
   final String price;
 
   @override

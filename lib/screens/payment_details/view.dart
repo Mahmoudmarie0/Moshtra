@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../utils/constants/colors.dart';
+import '../../utils/custom_widgets/build_appbar.dart';
 import '../../utils/custom_widgets/global_widgets/app_button.dart';
 
 import '../../utils/custom_widgets/custom_button.dart';
 import '../../utils/custom_widgets/custom_credit_card.dart';
 import '../../utils/custom_widgets/payment_method_list_view.dart';
-import '../utils/custom_widgets/build_appbar.dart';
+
 
 
 class PaymentDetails extends StatefulWidget {

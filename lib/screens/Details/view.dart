@@ -26,7 +26,6 @@ class DetailsScreen extends StatefulWidget {
   ProductModel model;
 
 
-
   DetailsScreen(this.model);
 
   @override
@@ -34,6 +33,43 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+
+  List<QueryDocumentSnapshot> data = [];
+
+  CollectionReference cart = FirebaseFirestore.instance.collection('cart');
+
+  bool isNotExist = true;
+  int count = 1;
+
+
+  getData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('cart').get() as QuerySnapshot<Object?>;
+    data = [];
+    data.addAll(querySnapshot.docs);
+    print('DataLength => ${data.length}');
+
+    for(int i = 0 ; i < data.length ; i++){
+      if(data[i]['userId'] == FirebaseAuth.instance.currentUser!.uid && data[i]['productId'] == widget.model.productId){
+        count++;
+      }
+    }
+
+    if(count > 1)
+      isNotExist = false;
+
+    print('isExist => ${isNotExist}');
+    print('Counter => ${count}');
+
+    setState(() {});
+  }
+
+  @override
+  void initState(){
+    getData();
+    super.initState();
+  }
+
+
   final controller = ScrollController();
   CollectionReference messages =
         FirebaseFirestore.instance
@@ -389,16 +425,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   children: [
                                     MaterialButton(
                                       onPressed: (){
-                                        controller.addProduct(
-                                            CartProductModel(
-                                                name: widget.model.name,
-                                                price: widget.model.price,
-                                                quantity: 1,
-                                                image: widget.model.image,
-                                                productId: widget.model.productId
-                                            )
-                                        );
-                                        showSnackBarFun(context);
+                                        getData();
+
+
+                                        if(isNotExist) {
+                                          cart.add({
+                                            'image': widget.model.image,
+                                            'name': widget.model.name,
+                                            'price': widget.model.price,
+                                            'quantity': 1.toString(),
+                                            'productId': widget.model.productId,
+                                            'userId': FirebaseAuth.instance.currentUser!
+                                                .uid.toString(),
+                                            'createdAt': DateTime.now(),
+                                          });
+
+                                          showSnackBarFun(context , 'The product has been added to\nyour cart');
+                                          count = 1;
+                                          isNotExist = true;
+                                        }else{
+                                          showSnackBarFun(context , 'The product already existed');
+                                          count = 1;
+                                          isNotExist = true;
+                                        }
+
                                       },
                                       child: Text('Add To Cart',
                                         style: TextStyle(
@@ -430,7 +480,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  showSnackBarFun(context){
+  showSnackBarFun(context , String msg){
     SnackBar snackBar = SnackBar(
         dismissDirection: DismissDirection.up,
         behavior: SnackBarBehavior.floating,
@@ -459,7 +509,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   width: 10,
                 ),
                 Text(
-                  'The product has been added to\nyour cart',
+                  msg,
                   style: TextStyle(
                     color: AppColors.black,
                   ),

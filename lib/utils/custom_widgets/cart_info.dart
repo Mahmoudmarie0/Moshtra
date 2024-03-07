@@ -1,10 +1,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:payment/utils/styles.dart';
+
+
+import '../styles.dart';
 
 class OrderInfoItem extends StatelessWidget {
-  const OrderInfoItem({super.key, required this.title, required this.value});
+  const OrderInfoItem({required this.title, required this.value});
   final String title,value;
 
 

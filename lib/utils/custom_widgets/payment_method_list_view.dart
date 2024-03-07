@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:payment/widgets/payment_method_item.dart';
+import 'package:moshtra/utils/custom_widgets/payment_method_item.dart';
+
 
 class PaymentMethodsListView extends StatefulWidget {
-  PaymentMethodsListView({super.key});
+  PaymentMethodsListView();
 
   @override
   State<PaymentMethodsListView> createState() => _PaymentMethodsListViewState();

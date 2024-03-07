@@ -8,13 +8,14 @@ import 'package:get/route_manager.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 
+import '../../utils/custom_widgets/build_appbar.dart';
 import '../../utils/custom_widgets/global_widgets/app_button.dart';
 
 import '../../utils/custom_widgets/cart_info.dart';
 import '../../utils/custom_widgets/custom_button.dart';
 import '../../utils/custom_widgets/total_price.dart';
 import '../payment_details/view.dart';
-import '../utils/custom_widgets/build_appbar.dart';
+
 
 class MyCart extends StatelessWidget {
   const MyCart({key});

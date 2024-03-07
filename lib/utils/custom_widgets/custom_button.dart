@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:payment/utils/styles.dart';
+
+import '../styles.dart';
 
 class CustomButton extends StatelessWidget {
    final void Function()? onTap;
    final String txt;
   const CustomButton({
-    super.key, this.onTap, required this.txt,
+    this.onTap, required this.txt,
   });
 
   @override

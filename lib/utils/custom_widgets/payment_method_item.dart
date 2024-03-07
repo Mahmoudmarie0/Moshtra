@@ -7,7 +7,7 @@ class PaymentMethoditem extends StatelessWidget {
   final String img;
 
   const PaymentMethoditem({
-    super.key,   required this.isActive, required this.img,
+    required this.isActive, required this.img,
   });
 
   @override

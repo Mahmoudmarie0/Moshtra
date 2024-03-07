@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:payment/widgets/total_price.dart';
+import 'package:moshtra/utils/custom_widgets/total_price.dart';
+
 
 class ThankYouViewBody extends StatelessWidget {
   const ThankYouViewBody({Key? key}) : super(key: key);

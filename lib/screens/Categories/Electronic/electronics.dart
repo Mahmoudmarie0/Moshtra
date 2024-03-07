@@ -622,21 +622,27 @@
 //
 //       );
 // }
- import 'package:flutter/material.dart';
+ import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:moshtra/models/electronics_model.dart';
+import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
 import 'package:moshtra/screens/Categories/Electronic/smartwatches/smartwatches.dart';
+import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
-class ElectronicsScreen  extends StatelessWidget {
-  ElectronicsModel electronicsModel;
 
-  ElectronicsScreen(this.electronicsModel);
+class ElectronicsScreen  extends StatelessWidget {
+  List<ProductModel> products = [];
+  ElectronicsScreen(this.products);
+
+
 
 
   @override
@@ -655,10 +661,13 @@ class ElectronicsScreen  extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(
-                  text: 'Electronics',
-                  fontSize: 18,
-                  fontweight: FontWeight.w800,),
+                GestureDetector(
+                  onTap: (){},
+                  child: CustomText(
+                    text: 'Electronics',
+                    fontSize: 18,
+                    fontweight: FontWeight.w800,),
+                ),
                 SizedBox(height: 30.h,),
                 GridViewElectronics(),
 
@@ -689,14 +698,14 @@ class ElectronicsScreen  extends StatelessWidget {
                     mainAxisSpacing: 55.0
                 ),
 
-                itemCount: controller.electronicsModel.length,
+                itemCount: products.length,
 
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
                       GestureDetector(
                       onTap:() {
-                    Get.to(SmartWatchesScreen(controller.smartwatchesModel[index]));
+                    Get.to(DetailsScreen(products[index]));
                   },
                     child:  Container(
                         decoration: BoxDecoration(
@@ -709,12 +718,12 @@ class ElectronicsScreen  extends StatelessWidget {
 
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Image .network(controller.electronicsModel[index].image as String),
+                          child: Image .network(products[index].image as String),
                         ),
                       ),
                       ),
                       SizedBox(height: 1.h,),
-                      Text(controller.electronicsModel[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
+                      Text(products[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
                     ],
                   );
                 },

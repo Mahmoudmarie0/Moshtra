@@ -1,5 +1,6 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:moshtra/screens/Details/controller/extension.dart';
 
@@ -32,6 +33,15 @@ class ProductModel{
     sub_description=map['sub_description'];
     productId=map['productId'];
   }
+  ProductModel.fromSnapshot(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
+      :productId = snapshot.id,
+        name = snapshot['name'],
+        image = snapshot['image'],
+        description = snapshot['description'],
+        Sized = snapshot['Sized'],
+        price = snapshot['price'],
+        sub_description = snapshot['sub_description'],
+        color = HexColor.fromHex(snapshot['color']);
 
   toJson(){
     return{
@@ -44,5 +54,6 @@ class ProductModel{
       'sub_description':sub_description,
       'productId':productId
     };
+
 
 }}

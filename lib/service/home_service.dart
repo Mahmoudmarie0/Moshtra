@@ -1,4 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:moshtra/models/new_Category_model.dart';
+
+import '../models/new_Sub_category_model.dart';
+import '../models/products_model.dart';
 
 
 //used to connect to sevice
@@ -42,6 +46,7 @@ class HomeService {
   }
 
 
+
   Future<List<QueryDocumentSnapshot>> getSmartWatches() async {
     var value = await FirebaseFirestore.instance
     .collection("Categories")
@@ -54,9 +59,29 @@ class HomeService {
   }
 
 
+
+
   Future<List<QueryDocumentSnapshot>> getBanners() async {
     var value = await _bannersCollectionRef.get();
     return value.docs;
+  }
+
+    void getSubCat() async{
+    final QuerySnapshot<Map<String,dynamic>>SubCatQuery = await FirebaseFirestore.instance
+        .collection('Categories').get();
+    final SubCat = SubCatQuery.docs.map((subcat) => Sub_Cat.fromSnapshot(subcat)).toList();
+
+    print(SubCat[0].name);
+
+    for(Sub_Cat sub in SubCat)
+    {
+      final QuerySnapshot<Map<String,dynamic>> cat_productsQuery = await FirebaseFirestore.instance
+      .collection('Categories').doc(sub.id).collection('Electronics').get();
+      final catProduct = cat_productsQuery.docs.map((product) => ProductModel.fromSnapshot(product)).toList();
+      sub.product = catProduct;
+
+    }
+
   }
 
 

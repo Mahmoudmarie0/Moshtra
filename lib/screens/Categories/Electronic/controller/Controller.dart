@@ -109,19 +109,25 @@ import '../../../../models/electronics_model.dart';
 import '../../../../service/home_service.dart';
 
 class ElectronicsController extends GetxController {
-  ValueNotifier<bool>get loading=>_loading;
-  ValueNotifier<bool>_loading=ValueNotifier(false);
+  ValueNotifier<bool> get loading => _loading;
+  ValueNotifier<bool>_loading = ValueNotifier(false);
 
   List <ElectronicsModel> get electronicsModel => _electronicsModel;
   List <ElectronicsModel> _electronicsModel = [];
 
-  List <SmartWatchesModel> get smartwatchesModel=>_smartwatchesModel;
-  List <SmartWatchesModel> _smartwatchesModel=[];
+  List<ElectronicsModel> get CatProduct => _CatProduct;
+  List<ElectronicsModel> _CatProduct = [];
 
-  ElectronicsController(){
-    getElectronics();
-    getSmartWatches();
+  List <SmartWatchesModel> get smartwatchesModel => _smartwatchesModel;
+  List <SmartWatchesModel> _smartwatchesModel = [];
+
+  ElectronicsController() {
+    // getElectronics();
+    // getSmartWatches();
   }
+
+
+
 
 
   getElectronics() async {
@@ -143,4 +149,10 @@ class ElectronicsController extends GetxController {
       }
       update();
     });
-  }}
+  }
+
+  SubCatQuery() async{
+
+  }
+
+}

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/models/electronics_model.dart';
+import 'package:moshtra/models/new_Category_model.dart';
 import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
 import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 
@@ -17,6 +18,7 @@ import 'controller/Controller.dart';
 class CategoriesScreen extends StatelessWidget {
 
   final List<String> names = <String>['men', 's', 's', 's', 's'];
+
 
 
   //CategoriesController categoriesController=Get.put(CategoriesController());
@@ -67,27 +69,32 @@ class CategoriesScreen extends StatelessWidget {
                         mainAxisSpacing: 3.0
                       ),
 
-                      itemCount: controller.categoryModel.length,
+                      itemCount: controller.CatModel.length,
 
                       itemBuilder: (context, index) {
                        return Column(
                          children: [
                            GestureDetector(
-                             onTap:() {
-                               Get.to(ElectronicsScreen(controller.electronicsModel[index]));
-                             },
+                             onTap:() async{
+                               await controller.LoadData(index);
+                               if(controller.CatModel[index].product.isNotEmpty)
+                               {
+                                 Get.to(ElectronicsScreen(controller.CatModel[index].product.toList()));
+                                 print(controller.CatModel[index].product[0].name);
+                               }
+                               },
 
 
                         child: Container(
-                        height:130,
+                        height:115,
                         width: 150,
                          // decoration:BoxDecoration(borderRadius:BorderRadius.circular(50.r), ) ,
-                        child: Image.network(controller.categoryModel[index].image as String,fit:BoxFit.fill,),
+                        child: Image.network(controller.CatModel[index].image as String,fit:BoxFit.fill,),
                         ),
                         ),
-                        SizedBox(height: 9.h,),
-                        CustomText(text: controller.categoryModel[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
-                        SizedBox(height: 10.h,),
+                        SizedBox(height: 4.h,),
+                        CustomText(text: controller.CatModel[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                        SizedBox(height: 6.h,),
 
 
                          ],

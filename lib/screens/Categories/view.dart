@@ -78,6 +78,8 @@ class CategoriesScreen extends StatelessWidget {
                              onTap:() async{
                                await controller.LoadData(index);
                                if(controller.CatModel[index].product.isNotEmpty)
+
+
                                {
                                  Get.to(ElectronicsScreen(controller.CatModel[index].product.toList()));
                                  print(controller.CatModel[index].product[0].name);

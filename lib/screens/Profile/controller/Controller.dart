@@ -68,8 +68,9 @@ class ProfileCopntroller extends GetxController{
                       Row(
                         children: [
                           Expanded(
-                            child: buttonWidget(text: 'Yes', width: 122, height: 36, radius: 26, onPress: () {
-                              sharedPref!.setBool('login', false);
+                            child: buttonWidget(text: 'Yes', width: 119.w, height: 33.h, radius: 26, onPress: () {
+                              sharedPref!.setBool('HomeLayout', false);
+                              sharedPref!.setBool('onboarding', true);
                               Get.offAll(()=>LoginScreen(),transition: Transition.downToUp);
 
                             }, fontWeight: FontWeight.w500, fontSize: 12, color: AppColors.white, conColor: AppColors.orange,)
@@ -78,7 +79,7 @@ class ProfileCopntroller extends GetxController{
                           SizedBox(width: 7.h,),
                           Expanded(
                             child:
-                              buttonWidget(text: 'No', width: 122, height: 36, radius: 26, onPress: () { navigateBack();}, fontWeight: FontWeight.w500, fontSize: 12, color:  AppColors.black,conColor: AppColors.white,)
+                              buttonWidget(text: 'No', width: 113.w, height: 33.h, radius: 26, onPress: () { navigateBack();}, fontWeight: FontWeight.w500, fontSize: 12, color:  AppColors.black,conColor: AppColors.white,)
                           ),
                           SizedBox(height: 33.h,),
                         ],

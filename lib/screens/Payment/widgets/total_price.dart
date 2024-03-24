@@ -1,41 +1,28 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-import '../styles.dart';
-
-class OrderInfoItem extends StatelessWidget {
-  const OrderInfoItem({required this.title, required this.value});
-  final String title,value;
+import '../../../utils/styles.dart';
 
 
+class Total_price extends StatelessWidget {
+  const Total_price({required this.price});
+  final String price;
   @override
   Widget build(BuildContext context) {
     return  Row(
       children: [
         Text(
-          title,
+          "Total",
           textAlign: TextAlign.center,
-          style: Styles.style18,
+          style: Styles.style24,
         ),
         Spacer(),
         Text(
-          value,
+          price,
           textAlign: TextAlign.center,
-          style: Styles.style18,
+          style: Styles.style24,
         ),
-
-
-
-
-
-
-
       ],
-
-
-
     );
   }
 }

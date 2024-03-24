@@ -3,33 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:moshtra/firebase_options.dart';
 import 'package:moshtra/global_controller/my_bindings.dart';
 import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 import 'package:moshtra/screens/checkout/OrderSuccess.dart';
 import 'package:moshtra/screens/splash/view.dart';
+import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Dio/DioHelper.dart';
-// adham khalil
-//test
-//test1
+
+
 SharedPreferences ? sharedPref;
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp( MyApp());
   sharedPref=await SharedPreferences.getInstance();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  DioHelper.init();
+  //DioHelper.init();
+  Stripe.publishableKey=ApiKeys.publishableKey;
 }
-//main
+
 class MyApp extends StatelessWidget {
 
   //const MyApp({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
       },
       child: SplashScreen(),
     );
-//test
+
   }
 }
 

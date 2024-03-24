@@ -1,29 +1,22 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:moshtra/utils/constants/colors.dart';
-
-
-import '../../utils/custom_widgets/build_appbar.dart';
-import '../../utils/custom_widgets/global_widgets/app_button.dart';
-
-import '../../utils/custom_widgets/cart_info.dart';
-import '../../utils/custom_widgets/custom_button.dart';
-import '../../utils/custom_widgets/total_price.dart';
-import '../payment_details/view.dart';
-
+import '../../../utils/custom_widgets/build_appbar.dart';
+import '../widgets/cart_info.dart';
+import '../../../utils/custom_widgets/global_widgets/app_button.dart';
+import '../widgets/payment_method_bottom_sheet.dart';
+import '../widgets/total_price.dart';
 
 class MyCart extends StatelessWidget {
-  const MyCart({key});
-
+   MyCart({key});
+  dynamic  total=Get.arguments;
+   final int sum=Get.arguments+8;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: buildAppBar(title: 'My Cart'),
+      backgroundColor: AppColors.white,
+      appBar: buildAppBar(title: 'My Cart',SearchDisplay:false),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -33,23 +26,17 @@ class MyCart extends StatelessWidget {
             SizedBox(height:20 ,),
                       OrderInfoItem(
               title: 'Order Subtotal',
-              value: r'$42.97',
-
-
+              value: '$total EGP',
             ),
                       SizedBox(height:3 ,),
                       OrderInfoItem(
                         title: 'Discount',
-                        value: r'$0',
-
-
+                        value: r'0 EGP',
                       ),
                       SizedBox(height:3 ,),
                       OrderInfoItem(
                         title: 'Shipping',
-                        value: r'$8',
-
-
+                        value: r'8 EGP',
                       ),
                       SizedBox(height:17 ,),
                       Divider(
@@ -58,22 +45,23 @@ class MyCart extends StatelessWidget {
                         color: Color(0xFFC6C6C6),
                       ),
                       Total_price(
-                        price: r'$50.97',
+
+                        price: '$sum EGP',
 
                       ),
                       SizedBox(height:16 ,),
-            // CustomButton(
-            //   onTap: (){
-            //     Get.to(PaymentDetails());
-            //   }, txt: 'Complete Payment',
-            // ),
                       buttonWidget(
                         text: 'Complete Payment',
                         width: 350,
                         height: 73,
                         radius: 15,
                         onPress: () {
-                          Get.to(PaymentDetails());
+                         Get.bottomSheet(
+
+                                  PaymentMethodsBottomSheet(),
+                           settings: RouteSettings(arguments:sum),
+
+                              );
                         },
                         fontWeight: FontWeight.w500,
                         fontSize: 22,
@@ -84,13 +72,7 @@ class MyCart extends StatelessWidget {
                       ),
                       SizedBox(height:60 ,),
 
-
-
-
                   ],
-
-
-
                 ),
           ),
     );

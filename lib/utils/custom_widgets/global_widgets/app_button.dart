@@ -5,8 +5,8 @@ import '../../constants/colors.dart';
 
 class buttonWidget extends StatelessWidget {
   final String text;
-  final int width;
-  final int height;
+  final dynamic width;
+  final dynamic height;
   final int radius;
   final void Function()? onPress;
   final FontWeight fontWeight;
@@ -16,7 +16,7 @@ class buttonWidget extends StatelessWidget {
 
 
   const buttonWidget({
-    Key? key, required this.text, required this.width, required this.height, required this.radius, required this.onPress, required this.fontWeight, required this.fontSize, required this.color, required this.conColor,
+    Key? key, required this.text, required this.width,  required this.height, required this.radius, required this.onPress, required this.fontWeight, required this.fontSize, required this.color, required this.conColor,
 
   }) : super(key: key);
 

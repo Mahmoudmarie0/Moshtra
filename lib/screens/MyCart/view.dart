@@ -1,26 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import 'package:lottie/lottie.dart';
-import 'package:moshtra/models/products_model.dart';
-import 'package:moshtra/screens/Details/view.dart';
-import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
-import 'package:moshtra/screens/checkout/Payment_method_screen.dart';
+import 'package:moshtra/screens/Payment/myCartPayment/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
-
 import '../../models/cart_model.dart';
 import '../../utils/constants/assets.dart';
-
-import '../../utils/constants/components.dart';
 import '../Home_layout/controller.dart';
-import 'database/card_database_helper.dart';
+
 
 class MyCartScreen extends StatefulWidget {
   //MyCartScreen({super.key});
@@ -31,15 +22,11 @@ class MyCartScreen extends StatefulWidget {
 
 class _MyCartScreenState extends State<MyCartScreen> {
   HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
-
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
-  double totalPrice = 0.0;
-
+  int totalPrice = 0;
   @override
   Widget build(BuildContext context) {
-
     return cartListScreen();
-
   }
 
   Widget buildEmptyCartList() {
@@ -80,8 +67,6 @@ class _MyCartScreenState extends State<MyCartScreen> {
                   onPressed: () {
                     homeLayoutController.SeeAll();
 
-                    // Get.to(CategoriesScreen(),transition: Transition.upToDown);
-                    // Go To Categories
                   },
                   style: ElevatedButton.styleFrom(
                       splashFactory: NoSplash.splashFactory,
@@ -111,7 +96,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
         stream: cart.orderBy('createdAt').snapshots(),
         builder: (context , snapshot) {
           List<Cart> cartList = [];
-          totalPrice = 0.0;
+          totalPrice = 0;
 
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             if( snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid ) {
@@ -123,8 +108,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
             }
           }
 
-          // print(' CartLength => ${cartList.length} ');
-          // print(' UserId => ${FirebaseAuth.instance.currentUser!.uid} ');
+
 
           if(cartList.length == 0)
             return buildEmptyCartList();
@@ -206,7 +190,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                             .toString(),
                                                       });
 
-                                                      totalPrice -= double.parse(
+                                                      totalPrice -= int.parse(
                                                           cartList[index].price);
 
                                                       setState(() {});
@@ -232,7 +216,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                           .toString(),
                                                     });
 
-                                                    totalPrice += double.parse(
+                                                    totalPrice += int.parse(
                                                         cartList[index].price);
 
                                                     setState(() {});
@@ -309,7 +293,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(PaymentMethodScreen());
+                          Get.to(()=>MyCart(),arguments: totalPrice );
+
                         },
                         child: Text(
                           'Checkout(${cartList.length})',

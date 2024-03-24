@@ -1,28 +1,32 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../styles.dart';
 
+import '../../../utils/styles.dart';
 
-class Total_price extends StatelessWidget {
-  const Total_price({required this.price});
-  final String price;
+class OrderInfoItem extends StatelessWidget {
+  const OrderInfoItem({required this.title, required this.value});
+  final String title,value;
+
 
   @override
   Widget build(BuildContext context) {
     return  Row(
       children: [
         Text(
-          "Total",
+          title,
           textAlign: TextAlign.center,
-          style: Styles.style24,
+          style: Styles.style18,
         ),
         Spacer(),
         Text(
-          price,
+          value,
           textAlign: TextAlign.center,
-          style: Styles.style24,
+          style: Styles.style18,
         ),
+
+
 
 
 

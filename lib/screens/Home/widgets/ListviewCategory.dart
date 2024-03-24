@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-
 import '../../../utils/constants/colors.dart';
 import '../controller/Controller.dart';
 
 Widget ListViewCategory() {
   return GetBuilder<HomeController>(
     builder:(controller)=> Container(
+      padding: EdgeInsets.only(left: 10,right: 10),
       height: 100.h,
       child: ListView.separated(
+        padding: EdgeInsets.zero,
         itemCount:4,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context,index){
@@ -21,7 +22,7 @@ Widget ListViewCategory() {
 
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey.shade100,
+                    color: AppColors.white,
 
                   ),
                   height: 60.h,
@@ -29,7 +30,7 @@ Widget ListViewCategory() {
 
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image .network(controller.categoryModel[index].image as String),
+                    child: Image.network(controller.categoryModel[index].image as String),
                   ),
                 ),
               ),

@@ -14,6 +14,7 @@ class HomeLayoutController extends GetxController
     // TODO: implement onInit
     super.onInit();
     sharedPref!.setBool('HomeLayout', true);
+    sharedPref!.setBool('onboarding', false);
     update();
   }
 

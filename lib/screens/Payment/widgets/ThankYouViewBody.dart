@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:moshtra/utils/custom_widgets/total_price.dart';
+import 'package:moshtra/screens/Payment/widgets/total_price.dart';
 
 
 class ThankYouViewBody extends StatelessWidget {
@@ -86,7 +85,6 @@ class ThankYouViewBody extends StatelessWidget {
                                   height: 0,
                                 ),
                               ),
-
                               TextSpan(
                                 text: 'Mastercard **78 ',
                                 style: TextStyle(
@@ -95,17 +93,12 @@ class ThankYouViewBody extends StatelessWidget {
                                   fontSize: 16,
                                   height: 0,
                                   fontFamily: 'Inter',
-
                                 ),
                               ),
                             ],
                           ),
                         )
-                        
-
                       ],
-
-
                     ),
 
                   ),
@@ -140,10 +133,7 @@ class ThankYouViewBody extends StatelessWidget {
                               ),
                             ),
                             ),
-
-
                   ],
-
                 ),
                   SizedBox(
                     height: ((MediaQuery.sizeOf(context).height*.2+20)/2)-29,
@@ -165,12 +155,9 @@ class ThankYouViewBody extends StatelessWidget {
                 child: Container(
                   color:const Color(0XFFB8B8B8),
                   height: 2,
-
                 ),
               ),
             )),
-
-
           )),
           Positioned(
             left: -20,
@@ -203,8 +190,6 @@ class ThankYouViewBody extends StatelessWidget {
     ),
 
           ))
-
-
         ],
       ),
     ) ;
@@ -239,7 +224,6 @@ final String title,value;
           ),
         )
       ],
-
     );
   }
 }

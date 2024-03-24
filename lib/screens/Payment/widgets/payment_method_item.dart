@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:moshtra/utils/constants/colors.dart';
 
 class PaymentMethoditem extends StatelessWidget {
   final bool isActive;
@@ -19,19 +20,10 @@ class PaymentMethoditem extends StatelessWidget {
           shape:    RoundedRectangleBorder(
             side:  BorderSide(
                 width: 1.50,
-                color:isActive?const Color(0xFF34A853):Colors.grey,
+                color:isActive? AppColors.blue:Colors.grey,
             ),
             borderRadius: BorderRadius.circular(15),
           ),
-          shadows: [
-            BoxShadow(
-              color: isActive?const Color(0xFF34A853):Colors.white,
-              blurRadius: 4,
-              offset: Offset(0, 0),
-              spreadRadius: 0,
-            ),
-          ]
-
       ),
       duration: const Duration(microseconds: 300),
       child:Container(

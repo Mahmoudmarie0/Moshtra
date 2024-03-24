@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:moshtra/utils/custom_widgets/payment_method_item.dart';
+import 'package:moshtra/screens/Payment/widgets/payment_method_item.dart';
 
 
 class PaymentMethodsListView extends StatefulWidget {
@@ -13,9 +13,6 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
   final List<String>PaymentMethodsItems=const[
     "assets/images/credit.svg",
     "assets/images/paypal.svg",
-    "assets/images/ApplePay.svg",
-
-
   ];
 int activeIndex=0;
   @override
@@ -34,7 +31,6 @@ int activeIndex=0;
                 onTap: (){
                   activeIndex=index;
                   setState(() {
-
                   });
                 },
                 child: PaymentMethoditem(
@@ -42,9 +38,7 @@ int activeIndex=0;
                   img: PaymentMethodsItems[index],),
               ),
             );
-
           }
-
       ),
     );
   }

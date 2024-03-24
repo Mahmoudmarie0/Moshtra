@@ -21,6 +21,11 @@ class AppColors{
   static HexColor grey300 = HexColor('#oxFFE0E0E0');
   static HexColor grey4=HexColor("6F7384");
   static HexColor grey5=HexColor("F4F5FD");
+  static HexColor grayish_blue=HexColor("F4F6F9");
+  static const Color placeholder = Color(0xff99ADBE);
+
+
+
 
 
 

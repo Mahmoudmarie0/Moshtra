@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-
 import '../../../models/fav_product_model.dart';
 import '../../../utils/constants/assets.dart';
 import '../../../utils/constants/colors.dart';
@@ -18,6 +15,7 @@ import '../controller/Controller.dart';
 ListViewProduct() {
   return GetBuilder<HomeController>(
     builder:(controller)=> GridView.builder(
+      padding: EdgeInsets.zero,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -48,8 +46,8 @@ ListViewProduct() {
                     height: 135.h,
 
                     child: Container(
-                      height:138,
-                      width: 160,
+                      height:138.h,
+                      width: 160.w,
 
 
                       child: Stack(
@@ -57,7 +55,7 @@ ListViewProduct() {
 
                           children:[
 
-                            Image.network(controller.productModel[index].image as String,fit:BoxFit.fill,),
+                            Image.network(controller.productModel[index].image as String,fit:BoxFit.cover,width: 100,),
 
                             GetBuilder<FavViewModel>(
                               init: Get.put(FavViewModel()),

@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+
 import 'package:moshtra/main.dart';
 
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/components.dart';
+import '../../../Home_layout/view.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/components.dart';
-import '../../Home_layout/view.dart';
-//mahm
+
 class LoginController extends GetxController{
   bool oobscureText=true;
   var formKey = GlobalKey<FormState>();

@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/components.dart';
+import '../../../Home_layout/view.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/components.dart';
-import '../../Home_layout/view.dart';
+
 
 
 class RegisterController extends GetxController{

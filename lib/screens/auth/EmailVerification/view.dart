@@ -4,9 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../utils/constants/colors.dart';
-import '../../utils/constants/components.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/components.dart';
 import 'controller/controller.dart';
 
 class EmailVerification extends StatelessWidget {

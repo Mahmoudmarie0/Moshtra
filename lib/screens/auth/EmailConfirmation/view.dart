@@ -1,13 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:moshtra/utils/constants/colors.dart';
-import '../../utils/constants/assets.dart';
-import '../../utils/constants/components.dart';
+import '../../../utils/constants/assets.dart';
+import '../../../utils/constants/components.dart';
 import 'controller/controller.dart';
 
 class EmailConfirmation extends StatefulWidget {
@@ -71,21 +68,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
 
 
             ),
-            // Container(
-            //     alignment: Alignment.topRight,
-            //     child: SvgPicture.asset(AssetsPaths.Ellipse)
-            // ),
-            // Container(
-            //   padding: EdgeInsets.only(left: 30),
-            //   alignment: Alignment.centerLeft,
-            //   child: Text('Confirmation\nEmail' ,
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.w400,
-            //       color: AppColors.white,
-            //       fontSize: 40,
-            //     ),
-            //   ),
-            // ),
+
             SizedBox(
               height: 50,
             ),
@@ -124,15 +107,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                             // obscureText: true,
                             decoration: InputDecoration(
                               suffixIcon: Icon(Icons.email_sharp),
-                              // suffixIconColor: Color(0xff037eee),
-                              // enabledBorder: OutlineInputBorder(
-                              //
-                              //   borderSide: BorderSide(
-                              //     width: 1,
-                              //     // color: Color(0xfff88160)
-                              //   ),
-                              //   borderRadius: BorderRadius.circular(10),
-                              // ),
+
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: AppColors.blue,
@@ -152,24 +127,6 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                           child: ElevatedButton(
                             onPressed: () async {
 
-                              // String email = confirmationController.text;
-                              //
-                              //
-                              // try {
-                              //   await FirebaseAuth.instance
-                              //       .sendPasswordResetEmail(
-                              //       email: email.trim());
-                              //   showSnackBarFun(context , 'Check Your Email');
-                              // }on FirebaseAuthException catch(e) {
-                              //
-                              //   if(email.isEmpty){
-                              //     emailConfirmation.validateEmail(email);
-                              //   }
-                              //   else {
-                              //     showSnackBarFun(
-                              //         context, 'Invalid Email Address');
-                              //   }
-                              // }
                               if(formKey.currentState!.validate())
                               {
                                 verifyEmail();

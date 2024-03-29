@@ -2,18 +2,15 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:moshtra/main.dart';
-import 'package:moshtra/screens/Home/view.dart';
 import 'package:moshtra/screens/Home_layout/view.dart';
-import 'package:moshtra/screens/login/view.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import '../../utils/constants/colors.dart';
+import '../auth/login/view.dart';
 import '../onboarding/view.dart';
 
 
@@ -29,7 +26,7 @@ class SplashScreen extends StatefulWidget{
 class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> watchNetworkState() async {
-    ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+ //   ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
 
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       print('=====Called onConnectivityChanged');
@@ -41,12 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
               if (sharedPref!.getBool('onboarding') == null) {
                 Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
               }
-
               else if (sharedPref!.getBool('onboarding') == true){
                 Get.offAll(() => LoginScreen(),transition: Transition.upToDown);
-
               }
-
               else {
                 Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
               }
@@ -68,11 +62,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
     subscription.cancel();
   }
-
-
-
-
-
 
 
   @override

@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/components.dart';
+
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/components.dart';
 import '../../NewPassword/view.dart';
 
 class EmailVerificationController extends GetxController {

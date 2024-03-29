@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,7 +7,8 @@ import 'package:moshtra/main.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/custom_widgets/global_widgets/app_button.dart';
 import '../../../utils/constants/colors.dart';
-import '../../login/view.dart';
+import '../../auth/login/view.dart';
+
 
 class ProfileCopntroller extends GetxController{
 

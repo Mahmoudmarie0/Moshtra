@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
 import '../../global_controller/main_app_controller.dart';
 import '../../main.dart';
 import '../../utils/constants/assets.dart';
-import '../login/view.dart';
+import '../auth/login/view.dart';
 import 'model.dart';
 
 class OnboardingController extends GetxController

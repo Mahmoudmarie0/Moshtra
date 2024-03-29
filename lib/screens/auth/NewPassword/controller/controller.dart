@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:moshtra/screens/login/view.dart';
+import '../../../../utils/constants/colors.dart';
+import '../../../../utils/constants/components.dart';
+import '../../login/view.dart';
 
-import '../../../utils/constants/colors.dart';
-import '../../../utils/constants/components.dart';
 
 
 class NewPasswordController extends GetxController{

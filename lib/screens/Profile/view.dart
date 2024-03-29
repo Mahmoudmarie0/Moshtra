@@ -4,15 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
-
+import '../Chatbot/view.dart';
 import 'controller/Controller.dart';
 
 class ProfileScreen extends StatelessWidget {
- //  ProfileScreen({super.key});
+   ProfileScreen({key});
   ProfileCopntroller profileCopntroller=Get.put(ProfileCopntroller());
 
   @override
@@ -34,9 +32,6 @@ class ProfileScreen extends StatelessWidget {
                         Text("Hello,mahmoud",style: TextStyle(fontSize:16,fontWeight: FontWeight.w600 ,color: AppColors.white),),
                         Text("mahmoudmarie500@gmail.com",style: TextStyle(fontSize:16,fontWeight: FontWeight.w500 ,color: AppColors.white)),
                       ],
-
-
-
                     ),
                     Spacer(),
                     InkWell(
@@ -45,11 +40,7 @@ class ProfileScreen extends StatelessWidget {
                          // Get.to(LoginScreen(),transition: Transition.upToDown);
                         } ,
                         child: SvgPicture.asset(AssetsPaths.LogoutIcon)),
-
-
-
                   ],
-
                 ),
               ),
                Padding(
@@ -58,8 +49,9 @@ class ProfileScreen extends StatelessWidget {
                    width: 430.w,
                    height: 600.h,
                    decoration: BoxDecoration(
-                     borderRadius: BorderRadius.only(topRight:Radius.circular(20.r),topLeft: Radius.circular(20.r)),
-                     color: AppColors.white,
+
+                     borderRadius: BorderRadius.only(topRight:Radius.circular(20.r),topLeft: Radius.circular(20.r),),
+                     color: AppColors.grayish_blue,
                    ),
                    child: Padding(
                      padding: const EdgeInsets.only(top: 16,left: 16,right: 16),
@@ -77,9 +69,6 @@ class ProfileScreen extends StatelessWidget {
                              Spacer(),
                              Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
                            ],
-
-
-
 
                          ),
                          SizedBox(height: 8.h,),
@@ -99,9 +88,6 @@ class ProfileScreen extends StatelessWidget {
                              Spacer(),
                              Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
                            ],
-
-
-
 
                          ),
                          SizedBox(height: 8.h,),
@@ -252,14 +238,8 @@ class ProfileScreen extends StatelessWidget {
                                    controller.OnSwitch(value);
                                  },
                                ),
-
                              ),
-
                            ],
-
-
-
-
                          ),
                          SizedBox(height: 8.h,),
                          Divider(
@@ -268,6 +248,28 @@ class ProfileScreen extends StatelessWidget {
                            indent: 0,
                            endIndent: 0,
                            color: AppColors.LightGrey,
+                         ),
+
+
+                         SizedBox(height: 20.h,),
+                         //
+                         Text("Customer Support",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
+                         SizedBox(height:24.h ,),
+                         GestureDetector(
+                           onTap: ()=>Get.to(ChatScreen()),
+                           child: Row(
+                             children: [
+                               SvgPicture.asset(AssetsPaths.ChangePassIcon),
+                               SizedBox(width: 12.w,),
+                               Text("Technical Support",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                               Spacer(),
+                               Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                             ],
+
+
+
+
+                           ),
                          ),
 
 

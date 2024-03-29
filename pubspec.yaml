@@ -36,6 +36,12 @@ dependencies:
   #Shimmer
   shimmer: ^3.0.0
 
+  #web_view
+  webview_flutter: ^4.7.0
+
+  #url_lancher
+  url_launcher: ^6.0.12
+
   #conditional_builder
   conditional_builder_null_safety: ^0.0.6
 

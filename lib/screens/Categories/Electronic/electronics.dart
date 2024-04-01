@@ -622,17 +622,11 @@
 //
 //       );
 // }
- import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:moshtra/models/electronics_model.dart';
 import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
-import 'package:moshtra/screens/Categories/Electronic/smartwatches/smartwatches.dart';
 import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';

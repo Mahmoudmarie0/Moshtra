@@ -3,13 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/models/electronics_model.dart';
-import 'package:moshtra/models/new_Category_model.dart';
-import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
 import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 
 
-import '../../utils/constants/colors.dart';
 
 
 import '../../utils/custom_text/view.dart';

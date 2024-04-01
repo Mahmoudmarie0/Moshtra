@@ -2,14 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:lottie/lottie.dart';
-import 'package:moshtra/screens/Home/view.dart';
 import 'package:moshtra/screens/Home_layout/view.dart';
-import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/screens/Wishlist/database/fav_view_model.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';

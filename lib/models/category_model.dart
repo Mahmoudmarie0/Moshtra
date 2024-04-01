@@ -40,9 +40,6 @@ class CategoryModel {
   CategoryModel({ this.name, this.image,this.electronicsModel,this.smartWatchesModel});
 
   CategoryModel.fromJson(Map<dynamic, dynamic>map){
-    if (map == null) {
-      return;
-    }
     name = map['name'];
     image = map['image'];
     electronicsModel=map['Electronics'];

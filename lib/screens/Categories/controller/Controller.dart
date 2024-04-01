@@ -102,7 +102,6 @@ import 'package:get/get.dart';
 import 'package:moshtra/models/electronics_model.dart';
 import 'package:moshtra/models/smart_watches_model.dart';
 
-import '../../../models/category_model.dart';
 import '../../../models/new_Category_model.dart';
 import '../../../models/new_Sub_category_model.dart';
 import '../../../models/products_model.dart';

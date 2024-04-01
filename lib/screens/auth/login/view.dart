@@ -45,12 +45,9 @@ class LoginScreen extends StatelessWidget {
 
             ],
 
-
-
-
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 45),
+            padding: const EdgeInsets.only(top: 115),
             child: Container(
               width: 375.w,
               decoration: BoxDecoration(
@@ -71,6 +68,7 @@ class LoginScreen extends StatelessWidget {
                           {
                             if (data!.isEmpty)
                               return 'Please enter your e-mail';
+                            return null;
                           },
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
@@ -99,6 +97,7 @@ class LoginScreen extends StatelessWidget {
                             {
                               if (data!.isEmpty)
                                 return 'Please enter your password';
+                              return null;
                             },
                             keyboardType: TextInputType.visiblePassword,
                             controller: passwordController,

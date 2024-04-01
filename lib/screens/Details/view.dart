@@ -1,18 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/models/cart_product_model.dart';
 import 'package:moshtra/models/products_model.dart';
-import 'package:moshtra/screens/Home/view.dart';
 import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
-import 'package:moshtra/utils/custom_text/view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:moshtra/models/comment_model.dart';
 
@@ -20,7 +15,6 @@ import 'package:moshtra/models/comment_model.dart';
 import '../MyCart/view.dart';
 import 'Components/ChatBubble.dart';
 import 'Components/Details_Tabs.dart';
-import 'controller/controller.dart';
 
 class DetailsScreen extends StatefulWidget {
   ProductModel model;

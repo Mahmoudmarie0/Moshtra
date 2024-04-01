@@ -99,13 +99,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/models/electronics_model.dart';
-import 'package:moshtra/models/electronics_model.dart';
 import 'package:moshtra/models/smart_watches_model.dart';
-import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 
-import '../../../../models/category_model.dart';
-import '../../../../models/category_model.dart';
-import '../../../../models/electronics_model.dart';
 import '../../../../service/home_service.dart';
 
 class ElectronicsController extends GetxController {

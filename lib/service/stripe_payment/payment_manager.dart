@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:moshtra/screens/Payment/thankyou/view.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
 
 abstract class PaymentManager{

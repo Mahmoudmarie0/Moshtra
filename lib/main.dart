@@ -9,12 +9,18 @@ import 'package:moshtra/firebase_options.dart';
 import 'package:moshtra/global_controller/my_bindings.dart';
 import 'package:moshtra/screens/splash/view.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 SharedPreferences ? sharedPref;
 void main() async {
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  ResponsiveSizingConfig.instance.setCustomBreakpoints(
+    const ScreenBreakpoints(desktop: 800, tablet: 450, watch: 200),
+  );
 
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

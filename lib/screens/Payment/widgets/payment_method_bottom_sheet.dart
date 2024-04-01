@@ -33,7 +33,7 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
             ),
             buttonWidget(
               onPress: () {
-                PaymentManager.makePayment(sum,"USD");
+                PaymentManager.makePayment(sum,"EGP");
 
 
               },

@@ -5,11 +5,9 @@
 
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
-import 'package:moshtra/main.dart';
 import 'package:moshtra/models/banner_model.dart';
 import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/service/home_service.dart';

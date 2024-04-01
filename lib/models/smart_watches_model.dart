@@ -20,9 +20,6 @@ Color? color;
 
 
   SmartWatchesModel.fromJson(Map<dynamic,dynamic>map){
-    if(map==null){
-      return;
-    }
     name=map['name'];
     image=map['image'];
     description=map['description'];

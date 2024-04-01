@@ -90,7 +90,7 @@ ListViewProduct() {
                 SizedBox(height: 5.h,),
                 CustomText(text: controller.productModel[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                 SizedBox(height: 5.h,),
-                CustomText(text: controller.productModel[index].price.toString()+' EGP' as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+                CustomText(text: controller.productModel[index].price.toString()+' EGP',color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
 
               ],

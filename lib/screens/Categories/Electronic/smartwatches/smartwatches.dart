@@ -112,12 +112,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/models/smart_watches_model.dart';
 import 'package:moshtra/screens/Categories/Electronic/smartwatches/Controller.dart';
-import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
@@ -219,7 +216,7 @@ class SmartWatchesScreen extends StatelessWidget{
                         SizedBox(height: 5.h,),
                         CustomText(text: controller.smartwatchesModel[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                         SizedBox(height: 5.h,),
-                        CustomText(text: controller.smartwatchesModel[index].price.toString()+' EGP' as String,color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+                        CustomText(text: controller.smartwatchesModel[index].price.toString()+' EGP',color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
                       ],
                     ),

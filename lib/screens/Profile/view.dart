@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/screens/Profile/privacy/view.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import '../Chatbot/view.dart';
@@ -13,8 +12,6 @@ import 'controller/Controller.dart';
 
 class ProfileScreen extends StatelessWidget {
    ProfileScreen({key});
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileCopntroller>(
@@ -27,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 52,left: 16,right: 16),
+                    padding: const EdgeInsets.only(top: 20,left: 16,right: 16),
                     child: Row(
                       children: [
                         Column(
@@ -48,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top:25 ),
+                    padding: const EdgeInsets.only(top:20 ),
                     child: Container(
                       width: 430.w,
                       height: 600.h,
@@ -58,84 +55,60 @@ class ProfileScreen extends StatelessWidget {
                         color: AppColors.grayish_blue,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 16,left: 16,right: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 12.h,),
-                            Text("Personal Information",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
-                            SizedBox(height:24.h ,),
-                            Row(
-                              children: [
-                                SvgPicture.asset(AssetsPaths.ShippingAddressIcon),
-                                SizedBox(width: 12.w,),
-                                Text("Shipping Address",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                              ],
-
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 12.h,),
-                            Row(
-                              children: [
-                                SvgPicture.asset(AssetsPaths.PaymentMethodIcon),
-                                SizedBox(width: 12.w,),
-                                Text("Payment Method",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                              ],
-
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 12.h,),
-                            Row(
-                              children: [
-                                SvgPicture.asset(AssetsPaths.OrderHistoryIcon),
-
-                                SizedBox(width: 12.w,),
-                                Text("Order History",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                              ],
-
-
-
-
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 20.h,),
-                            //
-                            Text("Support & Information",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
-                            SizedBox(height:24.h ,),
-                            InkWell(
-                              onTap: controller.launchURL ,
-                              child: Row(
+                        padding: const EdgeInsets.only(left: 16,right: 16),
+                        child: ListView(
+                         // shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          children: [Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 12.h,),
+                              Text("Personal Information",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
+                              SizedBox(height:24.h ,),
+                              Row(
                                 children: [
-                                  SvgPicture.asset(AssetsPaths.PrivacyPolicyIcon),
+                                  SvgPicture.asset(AssetsPaths.ShippingAddressIcon),
                                   SizedBox(width: 12.w,),
-                                  Text("Privacy Policy",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                  Text("Shipping Address",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                  Spacer(),
+                                  Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                ],
+
+                              ),
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+                              SizedBox(height: 12.h,),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(AssetsPaths.PaymentMethodIcon),
+                                  SizedBox(width: 12.w,),
+                                  Text("Payment Method",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                  Spacer(),
+                                  Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                ],
+
+                              ),
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+                              SizedBox(height: 12.h,),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(AssetsPaths.OrderHistoryIcon),
+
+                                  SizedBox(width: 12.w,),
+                                  Text("Order History",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
                                   Spacer(),
                                   Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
                                 ],
@@ -144,144 +117,48 @@ class ProfileScreen extends StatelessWidget {
 
 
                               ),
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 12.h,),
-                            Row(
-                              children: [
-                                SvgPicture.asset(AssetsPaths.TermsConditionIcon),
-                                SizedBox(width: 12.w,),
-                                Text("Terms & Conditions",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                              ],
-
-
-
-
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 12.h,),
-                            Row(
-                              children: [
-                                SvgPicture.asset(AssetsPaths.FAQsIcon),
-
-                                SizedBox(width: 12.w,),
-                                Text("FAQs",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                              ],
-
-
-
-
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 20.h,),
-                            //
-                            Text("Account Management",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
-                            SizedBox(height:24.h ,),
-                            InkWell(
-                              onTap: ()=>Get.to(NewPasswordScreen()),
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(AssetsPaths.ChangePassIcon),
-                                  SizedBox(width: 12.w,),
-                                  Text("Change Password",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                  Spacer(),
-                                  Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                                ],
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
                               ),
-                            ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-                            SizedBox(height: 12.h,),
-                            InkWell(
-                            onTap:(){
-                              controller.deleteAccountPopUp(Get.context); },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.delete,color:AppColors.placeholder ,),
-                                  //SvgPicture.asset(AssetsPaths.ChangePassIcon),
-                                  SizedBox(width: 12.w,),
-                                  Text("Delete Account",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                                  Spacer(),
-                                  Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
-                                ],
+                              SizedBox(height: 20.h,),
+                              //
+                              Text("Support & Information",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
+                              SizedBox(height:24.h ,),
+                              InkWell(
+                                onTap: controller.launchURL ,
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(AssetsPaths.PrivacyPolicyIcon),
+                                    SizedBox(width: 12.w,),
+                                    Text("Privacy Policy",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                    Spacer(),
+                                    Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                  ],
+
+
+
+
+                                ),
                               ),
-                            ),
-                            // Row(
-                            //   children: [
-                            //     SvgPicture.asset(AssetsPaths.DarkThemeIcon),
-                            //     SizedBox(width: 12.w,),
-                            //     Text("Dark Theme",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
-                            //     Spacer(),
-                            //     GetBuilder<ProfileCopntroller>(
-                            //       init: ProfileCopntroller(),
-                            //       builder: (controller)=> FlutterSwitch(
-                            //         height: 20.h,
-                            //         width: 29.33.w,
-                            //         //  padding: 4.0,
-                            //         toggleSize: 13.45,
-                            //         borderRadius: 10.0,
-                            //         activeColor: AppColors.orange,
-                            //         value: controller.isToggled,
-                            //         onToggle: (value) {
-                            //
-                            //           controller.OnSwitch(value);
-                            //         },
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            SizedBox(height: 8.h,),
-                            Divider(
-                              height: 1,
-                              thickness: 1,
-                              indent: 0,
-                              endIndent: 0,
-                              color: AppColors.LightGrey,
-                            ),
-
-
-                            SizedBox(height: 20.h,),
-                            //
-                            Text("Customer Support",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
-                            SizedBox(height:24.h ,),
-                            GestureDetector(
-                              onTap: ()=>Get.to(ChatScreen()),
-                              child: Row(
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+                              SizedBox(height: 12.h,),
+                              Row(
                                 children: [
-                                  SvgPicture.asset(AssetsPaths.ChangePassIcon),
+                                  SvgPicture.asset(AssetsPaths.TermsConditionIcon),
                                   SizedBox(width: 12.w,),
-                                  Text("Technical Support",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                  Text("Terms & Conditions",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
                                   Spacer(),
                                   Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
                                 ],
@@ -290,7 +167,130 @@ class ProfileScreen extends StatelessWidget {
 
 
                               ),
-                            ),
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+                              SizedBox(height: 12.h,),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(AssetsPaths.FAQsIcon),
+
+                                  SizedBox(width: 12.w,),
+                                  Text("FAQs",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                  Spacer(),
+                                  Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                ],
+
+
+
+
+                              ),
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+                              SizedBox(height: 20.h,),
+                              //
+                              Text("Account Management",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
+                              SizedBox(height:24.h ,),
+                              InkWell(
+                                onTap: ()=>Get.to(NewPasswordScreen()),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(AssetsPaths.ChangePassIcon),
+                                    SizedBox(width: 12.w,),
+                                    Text("Change Password",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                    Spacer(),
+                                    Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+                              SizedBox(height: 12.h,),
+                              InkWell(
+                              onTap:(){
+                                controller.deleteAccountPopUp(Get.context); },
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.delete,color:AppColors.placeholder ,),
+                                    //SvgPicture.asset(AssetsPaths.ChangePassIcon),
+                                    SizedBox(width: 12.w,),
+                                    Text("Delete Account",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                    Spacer(),
+                                    Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                  ],
+                                ),
+                              ),
+                              // Row(
+                              //   children: [
+                              //     SvgPicture.asset(AssetsPaths.DarkThemeIcon),
+                              //     SizedBox(width: 12.w,),
+                              //     Text("Dark Theme",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                              //     Spacer(),
+                              //     GetBuilder<ProfileCopntroller>(
+                              //       init: ProfileCopntroller(),
+                              //       builder: (controller)=> FlutterSwitch(
+                              //         height: 20.h,
+                              //         width: 29.33.w,
+                              //         //  padding: 4.0,
+                              //         toggleSize: 13.45,
+                              //         borderRadius: 10.0,
+                              //         activeColor: AppColors.orange,
+                              //         value: controller.isToggled,
+                              //         onToggle: (value) {
+                              //
+                              //           controller.OnSwitch(value);
+                              //         },
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              SizedBox(height: 8.h,),
+                              Divider(
+                                height: 1,
+                                thickness: 1,
+                                indent: 0,
+                                endIndent: 0,
+                                color: AppColors.LightGrey,
+                              ),
+
+
+                              SizedBox(height: 20.h,),
+                              //
+                              Text("Customer Support",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
+                              SizedBox(height:24.h ,),
+                              GestureDetector(
+                                onTap: ()=>Get.to(ChatScreen()),
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(AssetsPaths.ChangePassIcon),
+                                    SizedBox(width: 12.w,),
+                                    Text("Technical Support",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                    Spacer(),
+                                    Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
+                                  ],
+
+
+
+
+                                ),
+                              ),
 
 
 
@@ -302,12 +302,13 @@ class ProfileScreen extends StatelessWidget {
 
 
 
-                          ],
+                            ],
 
 
 
 
 
+                          ),]
                         ),
                       ),
 

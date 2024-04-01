@@ -102,6 +102,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                             {
                               if (data!.isEmpty)
                                 return 'Please enter your e-mail';
+                              return null;
                             },
                             controller: _confirmationController,
                             // obscureText: true,
@@ -205,7 +206,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
           .sendPasswordResetEmail(
           email: _confirmationController.text.trim());
       showSnackBarFun(context , 'Check Your Email');
-    }on FirebaseAuthException catch(e) {
+    }on FirebaseAuthException {
       showSnackBarFun(context, 'Invalid Email Address');
     }
   }

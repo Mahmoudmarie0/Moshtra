@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:moshtra/models/products_model.dart';
 
-import 'new_Sub_category_model.dart';
 
 class Cat_Model {
   String? id,name,image;

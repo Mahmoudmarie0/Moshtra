@@ -76,6 +76,9 @@ dependencies:
     #lottie
   lottie: ^2.7.0
 
+  #responsive
+  responsive_builder: ^0.7.0
+
     #easy_loading
   flutter_easyloading: ^3.0.5
 

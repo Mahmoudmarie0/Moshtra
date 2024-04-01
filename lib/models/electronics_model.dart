@@ -36,9 +36,6 @@ class ElectronicsModel{
   String ? name,image;
   ElectronicsModel({ this.name, this.image,this.smartWatchesModel});
   ElectronicsModel.fromJson(Map<dynamic,dynamic>map){
-    if(map==null){
-      return;
-    }
     name=map['name'];
     image=map['image'];
     smartWatchesModel=map['SmartWatches'];

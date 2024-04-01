@@ -1,6 +1,5 @@
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 
 import '../../main.dart';
 

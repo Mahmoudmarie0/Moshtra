@@ -78,6 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 {
                                   if(data!.isEmpty)
                                     return 'Name is required';
+                                  return null;
                                 },
                                 controller:nameController,
                                 decoration: InputDecoration(
@@ -102,6 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               {
                                 if(data!.isEmpty)
                                   return 'Email is required' ;
+                                return null;
                               },
                                 keyboardType: TextInputType.emailAddress,
 
@@ -129,12 +131,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               {
                                 if (data!.isEmpty)
                                   return 'mobile is required';
-                                else if(data!.length < 10)
+                                else if(data.length < 10)
                                   return 'Invalid Phone number';
                                 else if (data[0] != '1')
                                   return 'Invalid Phone number';
                                 else if (data[1] != '0' && data[1] != '1' && data[1] != '2' && data[1] != '5')
                                   return 'Invalid Phone number';
+                                return null;
                               },
                                 controller: phoneNumberController,
 
@@ -164,8 +167,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               builder: (controller)=>TextFormField (
                                 validator: (data)
                                 {
-                                  if (data!.isEmpty || data!.length < 8 || !data.contains(RegExp(r'[a-zA-Z]')))
+                                  if (data!.isEmpty || data.length < 8 || !data.contains(RegExp(r'[a-zA-Z]')))
                                     return 'weak password';
+                                  return null;
                                 },
                                 keyboardType: TextInputType.visiblePassword,
                                 controller: PasswordController,

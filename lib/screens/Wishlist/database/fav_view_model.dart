@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Wishlist/database/fav_database_helper.dart';
 
 import '../../../models/fav_product_model.dart';

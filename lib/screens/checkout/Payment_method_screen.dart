@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/screens/checkout/shipping_adress_screen.dart';
 import 'package:moshtra/utils/constants/colors.dart';

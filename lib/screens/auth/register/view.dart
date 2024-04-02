@@ -33,7 +33,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     TextEditingController emailController = TextEditingController();
     TextEditingController phoneNumberController = TextEditingController();
     TextEditingController PasswordController = TextEditingController();
-
+    TextEditingController AddressController = TextEditingController();
+    bool isChecked = false;
 
     GlobalKey<FormState> formKey = GlobalKey();
     return ModalProgressHUD(
@@ -78,7 +79,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 {
                                   if(data!.isEmpty)
                                     return 'Name is required';
-                                  return null;
                                 },
                                 controller:nameController,
                                 decoration: InputDecoration(
@@ -99,12 +99,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),//name
                             SizedBox(height: 20.h,),
                             TextFormField (
-                              validator: (data)
-                              {
-                                if(data!.isEmpty)
-                                  return 'Email is required' ;
-                                return null;
-                              },
+                                validator: (data)
+                                {
+                                  if(data!.isEmpty)
+                                    return 'Email is required' ;
+                                },
                                 keyboardType: TextInputType.emailAddress,
 
                                 controller: emailController,
@@ -127,18 +126,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),//email
                             SizedBox(height: 20.h,),
                             TextFormField (
-                              validator: (data)
-                              {
-                                if (data!.isEmpty)
-                                  return 'mobile is required';
-                                else if(data.length < 10)
-                                  return 'Invalid Phone number';
-                                else if (data[0] != '1')
-                                  return 'Invalid Phone number';
-                                else if (data[1] != '0' && data[1] != '1' && data[1] != '2' && data[1] != '5')
-                                  return 'Invalid Phone number';
-                                return null;
-                              },
+                                validator: (data)
+                                {
+                                  if(data!.isEmpty)
+                                    return 'Address is required' ;
+                                },
+                                keyboardType: TextInputType.streetAddress,
+
+                                controller: AddressController,
+                                decoration: InputDecoration(
+                                  suffixIcon: Icon(Icons.location_on),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: AppColors.blue,
+                                        width: 2.0),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  //floatingLabelBehavior: FloatingLabelBehavior.always,
+                                  border:OutlineInputBorder(),
+                                  labelText: 'Address',
+
+                                ),
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(50),
+                                ]
+                            ),//address
+                            SizedBox(height: 20.h,),
+                            TextFormField (
+                                validator: (data)
+                                {
+                                  if (data!.isEmpty)
+                                    return 'mobile is required';
+                                  else if(data!.length < 10)
+                                    return 'Invalid Phone number';
+                                  else if (data[0] != '1')
+                                    return 'Invalid Phone number';
+                                  else if (data[1] != '0' && data[1] != '1' && data[1] != '2' && data[1] != '5')
+                                    return 'Invalid Phone number';
+                                },
+                                keyboardType: TextInputType.phone,
                                 controller: phoneNumberController,
 
                                 decoration: InputDecoration(
@@ -167,9 +193,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               builder: (controller)=>TextFormField (
                                 validator: (data)
                                 {
-                                  if (data!.isEmpty || data.length < 8 || !data.contains(RegExp(r'[a-zA-Z]')))
+                                  if (data!.isEmpty || data!.length < 8 || !data.contains(RegExp(r'[a-zA-Z]')))
                                     return 'weak password';
-                                  return null;
                                 },
                                 keyboardType: TextInputType.visiblePassword,
                                 controller: PasswordController,

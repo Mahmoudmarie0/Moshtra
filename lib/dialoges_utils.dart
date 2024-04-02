@@ -30,7 +30,7 @@ void showMessage(BuildContext context,String message,
     );
   });
 }
-void showProgressDialog(BuildContext context,
+void showProgressDialog(BuildContext context, 
     String message,{bool isCancelable =true}){
   showDialog(context: context, builder: (buildContext){
     return AlertDialog(

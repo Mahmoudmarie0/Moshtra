@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:moshtra/models/cart_product_model.dart';
 import 'package:moshtra/screens/checkout/OrderSuccess.dart';
 import 'package:moshtra/screens/checkout/Payment_method_screen.dart';
 import 'package:moshtra/screens/checkout/shipping_adress_screen.dart';
@@ -10,6 +13,11 @@ import 'package:moshtra/utils/constants/colors.dart';
 import '../MyCart/database/cart_view_model.dart';
 class OrderConfirmScreen extends StatelessWidget {
   //const OrderConfirmScreen({super.key});
+
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController AddressController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +70,87 @@ class OrderConfirmScreen extends StatelessWidget {
                               ),),
                             TextButton(
                               onPressed: () {
-                                Get.to(ShippingAdress());
+                                showDialog(context: context,
+                                    builder: (context)=> Dialog(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(16),
+                                        child: Form(
+                                          key: formKey,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text('Change Data',style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16
+                                              ),),
+                                              SizedBox(height: 20.h,),
+                                              TextFormField (
+                                                  validator: (data)
+                                                  {
+                                                    if (data!.isEmpty)
+                                                      return 'mobile is required';
+                                                    else if(data!.length < 10)
+                                                      return 'Invalid Phone number';
+                                                    else if (data[0] != '1')
+                                                      return 'Invalid Phone number';
+                                                    else if (data[1] != '0' && data[1] != '1' && data[1] != '2' && data[1] != '5')
+                                                      return 'Invalid Phone number';
+                                                  },
+                                                  keyboardType: TextInputType.phone,
+                                                  controller: phoneNumberController,
+
+                                                  decoration: InputDecoration(
+                                                    suffixIcon: Icon(Icons.phone),
+                                                    prefixText: '+20',
+                                                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                                                    border:OutlineInputBorder(),
+                                                    labelText: 'Phone Number',
+
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: AppColors.blue,
+                                                          width: 2.0),
+                                                      borderRadius: BorderRadius.circular(8.0),
+                                                    ),
+                                                  ),
+                                                  inputFormatters: [
+                                                    LengthLimitingTextInputFormatter(10),
+                                                    FilteringTextInputFormatter.digitsOnly ,
+                                                  ]
+                                              ),
+                                              SizedBox(height: 10.h,),
+                                              TextFormField (
+                                                  validator: (data)
+                                                  {
+                                                    if(data!.isEmpty)
+                                                      return 'Address is required' ;
+                                                  },
+                                                  keyboardType: TextInputType.streetAddress,
+
+                                                  controller: AddressController,
+                                                  decoration: InputDecoration(
+                                                    suffixIcon: Icon(Icons.villa),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: AppColors.blue,
+                                                          width: 2.0),
+                                                      borderRadius: BorderRadius.circular(8.0),
+                                                    ),
+                                                    //floatingLabelBehavior: FloatingLabelBehavior.always,
+                                                    border:OutlineInputBorder(),
+                                                    labelText: 'Address',
+
+                                                  ),
+                                                  inputFormatters: [
+                                                    LengthLimitingTextInputFormatter(50),
+                                                  ]
+                                              ),
+                                              //address
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ));
                               },
                               child:Text("Change",
                                 style: TextStyle(fontSize: 18,

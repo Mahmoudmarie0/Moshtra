@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -41,6 +42,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   bool isNotExist = true;
   int count = 1;
+
 
 
   getData() async {
@@ -145,32 +147,44 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    TabBar(
-                                        indicatorColor: Colors.transparent,
-                        
-                                        onTap: (index)
-                                        {
-                                          if (index == 0)
-                                          {
-                                            first = true;
-                                            second = false;
-                                            setState(() {
-                                            });
-                                          }
-                                          else
-                                          {
-                        
-                                            first = false;
-                                            second = true;
-                                            setState(() {
-                        
-                                            });
-                                          }
-                                        },
-                                        tabs: [
-                                          TabItem('Details',first!),
-                                          TabItem('Comments',second!),
-                                        ]
+                                    Center(
+                                      child: Container(
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(12),
+                                          color: Color.fromRGBO(240, 241, 245, 1),
+                                        ),
+                                        width: MediaQuery.of(context).size.width * .9,
+                                        child: TabBar(
+                                            dividerColor: Colors.transparent,
+                                            indicatorColor: Colors.transparent,
+                                            indicator: BoxDecoration(),
+
+                                            onTap: (index)
+                                            {
+                                              if (index == 0)
+                                              {
+                                                first = true;
+                                                second = false;
+                                                setState(() {
+                                                });
+                                              }
+                                              else
+                                              {
+
+                                                first = false;
+                                                second = true;
+                                                setState(() {
+
+                                                });
+                                              }
+                                            },
+                                            tabs: [
+                                              TabItem('Details',first!),
+                                              TabItem('Comments',second!),
+                                            ]
+                                        ),
+                                      ),
                                     ),
                                     Expanded(
                                       child: TabBarView(children: [

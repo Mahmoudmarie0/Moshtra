@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 //
 // class DetailsTabs extends StatefulWidget {
@@ -41,16 +43,35 @@ class TabItem extends StatelessWidget {
   TabItem(this.name,this.selected);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 8,horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: selected ? Colors.blue : Colors.transparent,
-        border: Border.all(color: Colors.blue,width: 2)
-      ),
-      child: Text(name,style: TextStyle(
-        color: selected ? Colors.white : Colors.blue
-      ),),
+    return Column(
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 8,horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: selected ? Colors.blue : Colors.transparent,
+            border: Border.all(color: Colors.blue,width: 2)
+          ),
+          child: Text(name,style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            color: selected ? Colors.white : Colors.blue
+        ),),
+        ),
+        SizedBox(height: 3,),
+        Visibility(
+          visible: selected,
+          child: Container(
+            width: 5,
+            height: 5,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blue
+            ),
+          ),)
+      ],
     );
   }
 }

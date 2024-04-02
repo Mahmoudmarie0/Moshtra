@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+ import 'package:firebase_messaging/firebase_messaging.dart';
 import '../models/new_Sub_category_model.dart';
 import '../models/products_model.dart';
 
@@ -82,6 +82,38 @@ class HomeService {
     }
 
   }
+
+
+
+
+}
+
+
+
+
+class FirebaseNotification{
+//1-create instance of Firebase Messaging
+  final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+
+
+//2-function to intialize notifications
+
+Future<void>initNotification()async{
+
+
+
+  // request permission for the user
+  await firebaseMessaging.requestPermission();
+
+  //fetch fcm token for the device
+  final fcmToken = await firebaseMessaging.getToken();
+  print('Token: $fcmToken');
+
+}
+
+//3-function to receive notifications
+//4-function to intialize foreground and background settings
+
 
 
 

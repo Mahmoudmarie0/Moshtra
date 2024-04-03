@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/screens/MyCart/database/cart_view_model.dart';
 import 'package:moshtra/screens/checkout/shipping_adress_screen.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 class PaymentMethodScreen extends StatefulWidget {
@@ -276,28 +275,28 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ],
                 ),
                 SizedBox(height: 25.h),
-                GetBuilder<CartViewModel>(
-                  builder:(controller) => ElevatedButton(
-                    onPressed: (){
-                      Get.to(ShippingAdress());
-                    },
-
-                    child: Text('Confirm Payment' ,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        splashFactory: NoSplash.splashFactory,
-                        minimumSize: Size(150, 50),
-                        backgroundColor: Color(0xfff88160),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        )
-                    ),
-                  ),
-                ),
+                // GetBuilder<CartViewModel>(
+                //   builder:(controller) => ElevatedButton(
+                //     onPressed: (){
+                //       Get.to(ShippingAdress());
+                //     },
+                //
+                //     child: Text('Confirm Payment' ,
+                //       style: TextStyle(
+                //         color: AppColors.white,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     style: ElevatedButton.styleFrom(
+                //         splashFactory: NoSplash.splashFactory,
+                //         minimumSize: Size(150, 50),
+                //         backgroundColor: Color(0xfff88160),
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.all(Radius.circular(10)),
+                //         )
+                //     ),
+                //   ),
+                // ),
               ],
               ),
             ),

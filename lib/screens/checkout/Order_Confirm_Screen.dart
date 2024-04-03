@@ -10,7 +10,7 @@ import 'package:moshtra/screens/checkout/shipping_adress_screen.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 
-import '../MyCart/database/cart_view_model.dart';
+
 class OrderConfirmScreen extends StatelessWidget {
   //const OrderConfirmScreen({super.key});
 
@@ -310,28 +310,28 @@ class OrderConfirmScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20.h,),
 
-                GetBuilder<CartViewModel>(
-                  builder:(controller) => ElevatedButton(
-                    onPressed: (){
-                      Get.to(OredrSuccessScreen());
-                    },
-
-                    child: Text('Confirm Order' ,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        splashFactory: NoSplash.splashFactory,
-                        minimumSize: Size(150, 50),
-                        backgroundColor: Color(0xfff88160),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        )
-                    ),
-                  ),
-                ),
+                // GetBuilder<CartViewModel>(
+                //   builder:(controller) => ElevatedButton(
+                //     onPressed: (){
+                //       Get.to(OredrSuccessScreen());
+                //     },
+                //
+                //     child: Text('Confirm Order' ,
+                //       style: TextStyle(
+                //         color: AppColors.white,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     style: ElevatedButton.styleFrom(
+                //         splashFactory: NoSplash.splashFactory,
+                //         minimumSize: Size(150, 50),
+                //         backgroundColor: Color(0xfff88160),
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.all(Radius.circular(10)),
+                //         )
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

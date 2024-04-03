@@ -23,7 +23,7 @@ class MyCartScreen extends StatefulWidget {
 class _MyCartScreenState extends State<MyCartScreen> {
   HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
-  int totalPrice = 0;
+  double totalPrice = 0;
   @override
   Widget build(BuildContext context) {
     return cartListScreen();
@@ -108,8 +108,6 @@ class _MyCartScreenState extends State<MyCartScreen> {
             }
           }
 
-
-
           if(cartList.length == 0)
             return buildEmptyCartList();
           else
@@ -179,22 +177,21 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                           Expanded(
                                               child: IconButton(
                                                   onPressed: () {
-                                                    if (int.parse(cartList[index]
-                                                        .quantity) > 1) {
-                                                      cart.doc(snapshot.data!
-                                                          .docs[index].id)
-                                                          .update({
-                                                        'quantity': (int.parse(
-                                                            cartList[index]
-                                                                .quantity) - 1)
-                                                            .toString(),
-                                                      });
+                                                    for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
+                                                      if (snapshot.data!.docs[i].get('userId') ==
+                                                          FirebaseAuth.instance.currentUser!.uid &&
+                                                          snapshot.data!.docs[i].get('productId') ==
+                                                              cartList[index].productId) {
+                                                        if (int.parse(cartList[index].quantity) > 1 ) {
+                                                          cart.doc(snapshot.data!.docs[i].id).update(
+                                                              {'quantity': (int.parse(cartList[index].quantity) - 1).toString()});
 
-                                                      totalPrice -= int.parse(
-                                                          cartList[index].price);
-
-                                                      setState(() {});
+                                                          totalPrice -= double.parse(
+                                                              cartList[index].price);
+                                                        }
+                                                      }
                                                     }
+                                                    setState(() {});
                                                   },
                                                   icon: Icon(Icons.remove))),
                                           Spacer(),
@@ -208,17 +205,18 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                           Expanded(
                                               child: IconButton(
                                                   onPressed: () {
-                                                    cart.doc(snapshot.data!
-                                                        .docs[index].id).update({
-                                                      'quantity': (int.parse(
-                                                          cartList[index]
-                                                              .quantity) + 1)
-                                                          .toString(),
-                                                    });
+                                                    for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
+                                                      if (snapshot.data!.docs[i].get('userId') ==
+                                                          FirebaseAuth.instance.currentUser!.uid &&
+                                                          snapshot.data!.docs[i].get('productId') ==
+                                                              cartList[index].productId) {
+                                                        cart.doc(snapshot.data!.docs[i].id).update(
+                                                            {'quantity': (int.parse(cartList[index].quantity) + 1).toString()});
 
-                                                    totalPrice += int.parse(
-                                                        cartList[index].price);
-
+                                                        totalPrice += double.parse(
+                                                            cartList[index].price);
+                                                      }
+                                                    }
                                                     setState(() {});
                                                   },
                                                   icon: Icon(Icons.add)))
@@ -234,16 +232,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
 
                                         GestureDetector(
                                           onTap: () async {
-                                            // CartDatabaseHelper.db.deleteProduct(controller.cartProductModel[index].productId!);
-                                            //controller.deleteProduct(index);
-                                            //controller.getAllProduct();
-
-                                            await cart.doc(
-                                                snapshot.data!.docs[index].id)
-                                                .delete();
-
-                                            print(' CartLength => ${cartList.length} ');
-
+                                            for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
+                                              if (snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid &&
+                                                  snapshot.data!.docs[i].get('productId') == cartList[index].productId){
+                                                cart.doc(snapshot.data!.docs[i].id).delete();
+                                              }
+                                            }
 
                                             setState(() {});
                                           },

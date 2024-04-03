@@ -10,8 +10,8 @@ import '../widgets/total_price.dart';
 
 class MyCart extends StatelessWidget {
    MyCart({key});
-  dynamic  total=Get.arguments;
-   final int sum=Get.arguments+8;
+   dynamic  total=Get.arguments;
+   final double sum=Get.arguments+8;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

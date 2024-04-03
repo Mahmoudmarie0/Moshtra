@@ -92,9 +92,17 @@ dependencies:
   firebase_core: ^2.27.0
   firebase_storage: ^11.6.9
   cloud_firestore: ^4.13.5
+  firebase_messaging: ^14.7.21
+
+
+  #notifications
+  flutter_local_notifications: ^17.0.0
+
+
 
   #flutter_stripe
   flutter_stripe: ^10.1.1
+
 
   #sqflite
   sqflite: ^2.3.0

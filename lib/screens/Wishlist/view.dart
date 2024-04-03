@@ -171,7 +171,12 @@ class _MyFavScreenState extends State<MyFavScreen> {
                                         GestureDetector(
                                           onTap: () async{
 
-                                            await fav.doc(snapshot.data!.docs[index].id).delete();
+                                            for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
+                                              if (snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid &&
+                                                  snapshot.data!.docs[i].get('productId') == favtList[index].productId){
+                                                fav.doc(snapshot.data!.docs[i].id).delete();
+                                              }
+                                            }
 
                                             setState(() {});
                                           },

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
  import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../models/new_Sub_category_model.dart';
 import '../models/products_model.dart';
 
@@ -91,31 +92,50 @@ class HomeService {
 
 
 
-class FirebaseNotification{
-//1-create instance of Firebase Messaging
-  final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+// class FirebaseNotification{
+// //1-create instance of Firebase Messaging
+//
+//
+// //2-function to intialize notifications
+//
+// Future<void>initNotification()async{
+//
+//   if(pla)
+//
+//   //final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+//   // request permission for the user
+//   // NotificationSettings settings = await firebaseMessaging.requestPermission(
+//   //   alert: true,
+//   //   announcement: false,
+//   //   badge: true,
+//   //   carPlay: false,
+//   //   criticalAlert: false,
+//   //   provisional: false,
+//   //   sound: true,
+//   // );
+//   //
+//   // if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+//   //   print('User granted permission');
+//   // } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+//   //   print('User granted provisional permission');
+//   // } else {
+//   //   print('User declined or has not accepted permission');
+//   // }
+//   //
+//   // //fetch fcm token for the device
+//   // final fcmToken = await firebaseMessaging.getToken();
+//   // print('Token: $fcmToken');
+//   isRefreshToken();
+// }
+//
+// //3-function to receive notifications
+// //4-function to intialize foreground and background settings
+//
+//
+//
+//
 
 
-//2-function to intialize notifications
-
-Future<void>initNotification()async{
 
 
-
-  // request permission for the user
-  await firebaseMessaging.requestPermission();
-
-  //fetch fcm token for the device
-  final fcmToken = await firebaseMessaging.getToken();
-  print('Token: $fcmToken');
-
-}
-
-//3-function to receive notifications
-//4-function to intialize foreground and background settings
-
-
-
-
-
-}
+//}

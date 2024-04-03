@@ -32,7 +32,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-  await FirebaseNotification().initNotification();
+  //await FirebaseNotification().initNotification();
   runApp( MyApp());
   sharedPref=await SharedPreferences.getInstance();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/components.dart';
@@ -11,6 +13,8 @@ import '../../../Home_layout/view.dart';
 class RegisterController extends GetxController{
   bool oobscureText=true;
 
+  Position? position;
+  List<Placemark>? placemarks;
   var formKey = GlobalKey<FormState>();
 
   void ontap(){
@@ -71,6 +75,56 @@ class RegisterController extends GetxController{
     update();
   }
 
+
+
+
+
+  Future<bool> _handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      GetSnackbarError( message: "Location services are disabled. Please enable it",Color: AppColors.Red);
+      return false;
+
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        GetSnackbarError( message: " Location permissions are denied",Color: AppColors.Red);
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      GetSnackbarError( message: "Location permissions are permanently denied",Color: AppColors.Red);
+      return false;
+
+    }
+    return true;
+  }
+
+
+
+  Future<String>getCurrentLocation() async
+  {
+    final hasPermission = await _handleLocationPermission();
+    if (!hasPermission) return '';
+    Position newPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high
+    );
+    position = newPosition;
+
+    placemarks = await placemarkFromCoordinates(
+      position!.latitude,
+      position!.longitude,
+    );
+    Placemark pMark = placemarks![0];
+    String completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+    // String completeAddress = '${pMark.street}, ${pMark.subLocality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea}, ${pMark.country}';
+    return completeAddress;
+  }
 
 
 

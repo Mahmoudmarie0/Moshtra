@@ -39,55 +39,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     TextEditingController AddressController = TextEditingController();
     bool isChecked = false;
 
-    Position? position;
-    List<Placemark>? placemarks;
-
-
-    Future<bool> _handleLocationPermission() async {
-      bool serviceEnabled;
-      LocationPermission permission;
-
-      serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        GetSnackbarError( message: "Location services are disabled. Please enable it",Color: AppColors.Red);
-        return false;
-
-      }
-      permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          GetSnackbarError( message: " Location permissions are denied",Color: AppColors.Red);
-          return false;
-        }
-      }
-      if (permission == LocationPermission.deniedForever) {
-        GetSnackbarError( message: "Location permissions are permanently denied",Color: AppColors.Red);
-        return false;
-
-      }
-      return true;
-    }
-
-    getCurrentLocation() async
-    {
-      final hasPermission = await _handleLocationPermission();
-      if (!hasPermission) return;
-      Position newPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high
-      );
-      position = newPosition;
-
-      placemarks = await placemarkFromCoordinates(
-        position!.latitude,
-        position!.longitude,
-      );
-      Placemark pMark = placemarks![0];
-      String completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
-      // String completeAddress = '${pMark.street}, ${pMark.subLocality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea}, ${pMark.country}';
-      AddressController.text = completeAddress;
-
-    }
 
 
     GlobalKey<FormState> formKey = GlobalKey();
@@ -190,9 +141,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 controller: AddressController,
                                 decoration: InputDecoration(
                                   suffixIcon: GestureDetector(
-                                    onTap: ()
+                                    onTap: ()async
                                     {
-                                      getCurrentLocation();
+                                      AddressController.text = await registerController.getCurrentLocation();
                                     },
                                       child: Icon(Icons.location_on)),
                                   focusedBorder: OutlineInputBorder(

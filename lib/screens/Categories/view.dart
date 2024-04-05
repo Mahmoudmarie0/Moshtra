@@ -77,7 +77,8 @@ class CategoriesScreen extends StatelessWidget {
 
 
                                {
-                                 Get.to(ElectronicsScreen(controller.CatModel[index].product.toList()));
+
+                                 Get.to(ElectronicsScreen(controller.CatModel[index].product.toList(),controller.CatModel[index].name.toString()));
                                  print(controller.CatModel[index].product[0].name);
                                }
                                },

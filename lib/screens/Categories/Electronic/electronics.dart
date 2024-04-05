@@ -634,7 +634,8 @@ import 'package:moshtra/utils/custom_text/view.dart';
 
 class ElectronicsScreen  extends StatelessWidget {
   List<ProductModel> products = [];
-  ElectronicsScreen(this.products);
+  String catName;
+  ElectronicsScreen(this.products,this.catName);
 
 
 
@@ -650,7 +651,7 @@ class ElectronicsScreen  extends StatelessWidget {
 
         body: SingleChildScrollView(
           child: Container(
-           padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+            padding: EdgeInsets.only(top: 60, left: 20, right: 20),
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -658,7 +659,7 @@ class ElectronicsScreen  extends StatelessWidget {
                 GestureDetector(
                   onTap: (){},
                   child: CustomText(
-                    text: 'Electronics',
+                    text: catName,
                     fontSize: 18,
                     fontweight: FontWeight.w800,),
                 ),
@@ -680,45 +681,56 @@ class ElectronicsScreen  extends StatelessWidget {
 
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Colors.grey.shade100,
+                  color: Colors.grey.shade50,
                   shape: BoxShape.rectangle
               ),
               height: 700.h,
               child: GridView.builder(
                 shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 55.0
+                gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1/1.20,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 0.5,
+
                 ),
 
                 itemCount: products.length,
 
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      GestureDetector(
-                      onTap:() {
-                    Get.to(DetailsScreen(products[index]));
-                  },
-                    child:  Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.grey.shade100,
-                          shape: BoxShape.rectangle
-                        ),
-                        height: 135.h,
-                        width: 6000.w,
+                  return Container(
+                    width: MediaQuery.of(context).size.width*.4,
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap:() {
+                            Get.to(DetailsScreen(products[index]));
+                          },
+                          child:  Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              color: Colors.white,
+                            ),
+                            width: MediaQuery.of(context).size.width*.4,
+                            height: 135.h,
 
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image .network(products[index].image as String),
+                            child: Container(
+                              height:138.h,
+                              width: 160.w,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image .network(products[index].image as String),
+                            ),
+                          ),
                         ),
-                      ),
-                      ),
-                      SizedBox(height: 1.h,),
-                      Text(products[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
-                    ],
+                        SizedBox(height: 9.h,),
+                        CustomText(text: products[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, maxLine: 1,),
+                        SizedBox(height: 5.h,),
+                        CustomText(text: products[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                        SizedBox(height: 5.h,),
+                        CustomText(text: products[index].price.toString()+' EGP',color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+
+                      ],
+                    ),
                   );
                 },
 
@@ -727,6 +739,3 @@ class ElectronicsScreen  extends StatelessWidget {
     );
   }
 }
-
-
-

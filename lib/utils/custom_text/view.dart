@@ -16,10 +16,10 @@ class CustomText extends StatelessWidget {
   CustomText({
     this.text = '',
     this.fontSize = 16,
-   this. fontweight=FontWeight.w100,
+    this. fontweight=FontWeight.w100,
     this.color = Colors.black,
     this.alignment = Alignment.topLeft,
-      this.maxLine,
+    this.maxLine,
     this.height = 1,
   });
 
@@ -30,10 +30,11 @@ class CustomText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: color,
-          height: height,
-          fontSize: fontSize,
-          fontWeight: fontweight,
+            color: color,
+            height: height,
+            fontSize: fontSize,
+            fontWeight: fontweight,
+            overflow: TextOverflow.ellipsis
         ),
         maxLines: maxLine,
       ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geocoding/geocoding.dart';
@@ -22,6 +23,9 @@ class RegisterController extends GetxController{
     update();
   }
 
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+
   void buttonFunction()
   {
     if(formKey.currentState!.validate()) {
@@ -29,8 +33,8 @@ class RegisterController extends GetxController{
     }
   }
 
-  void validateRegisterCredentials(String name, String email,String phoneNumber,String password) {
-    if(name.isEmpty||email.isEmpty || phoneNumber.isEmpty || password.isEmpty)
+  void validateRegisterCredentials(String name, String email,String phoneNumber,String password,String address) {
+    if(name.isEmpty||email.isEmpty || phoneNumber.isEmpty || password.isEmpty || address.isEmpty)
       GetSnackbarError( message: 'Please fill in all fields ',Color: AppColors.Red);
 
     else if(phoneNumber.length!=10){
@@ -129,6 +133,18 @@ class RegisterController extends GetxController{
 
 
 
+
+
+  addUser(String name, String email, String phoneNumber, String address){
+    users.add(
+      {
+        'name' : name,
+        'email' : email,
+        'phoneNumber' : phoneNumber,
+        'address' : address
+      }
+    );
+  }
 
 
 

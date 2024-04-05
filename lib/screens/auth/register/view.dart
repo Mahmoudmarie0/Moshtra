@@ -40,7 +40,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     bool isChecked = false;
 
 
-
     GlobalKey<FormState> formKey = GlobalKey();
     return ModalProgressHUD(
       inAsyncCall: isLoading,
@@ -248,13 +247,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     String email=emailController.text;
                                     String phoneNumber=phoneNumberController.text;
                                     String confirmPassword=PasswordController.text;
+                                    String address = AddressController.text;
 
                                     if (formKey.currentState!.validate())
                                     {
                                       isLoading = true;
                                       // setState(() {
                                       // });
-                                      registerController.validateRegisterCredentials(name, email, phoneNumber, confirmPassword);
+                                      registerController.validateRegisterCredentials(name, email, phoneNumber, confirmPassword, address);
+                                      registerController.addUser(name, email, phoneNumber, address);
                                       isLoading = false;
                                       // setState(() {
                                       // });

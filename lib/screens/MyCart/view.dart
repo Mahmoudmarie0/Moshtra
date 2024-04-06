@@ -23,7 +23,7 @@ class MyCartScreen extends StatefulWidget {
 class _MyCartScreenState extends State<MyCartScreen> {
   HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
-  double totalPrice = 0;
+  dynamic totalPrice = 0;
   @override
   Widget build(BuildContext context) {
     return cartListScreen();

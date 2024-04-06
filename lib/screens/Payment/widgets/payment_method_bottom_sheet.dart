@@ -9,7 +9,7 @@ import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 
 class PaymentMethodsBottomSheet extends StatelessWidget {
   @override
-  final double sum=Get.arguments+8;
+  final int sum=Get.arguments+8;
   Widget build(BuildContext context) {
 
     return Container(

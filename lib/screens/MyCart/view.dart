@@ -169,7 +169,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     ),
                                     Container(
                                       width: 96.w,
-                                      height: 32.h,
+                                      height: 24.h,
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment
                                             .center,

@@ -5,7 +5,7 @@ import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
 abstract class PaymentManager{
 
 //3
-  static Future<void>makePayment(double amount ,String currency )async{
+  static Future<void>makePayment(int amount ,String currency )async{
     try{
       String clientSecret=  await _getClientSecret((amount*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);

@@ -12,8 +12,8 @@ import '../widgets/total_price.dart';
 
 class MyCart extends StatelessWidget {
    MyCart({key});
-   double  total=Get.arguments;
-   final double sum=Get.arguments+8;
+   dynamic  total=Get.arguments;
+   final dynamic sum=Get.arguments+8;
 
    TextEditingController phoneNumberController = TextEditingController();
    TextEditingController AddressController = TextEditingController();

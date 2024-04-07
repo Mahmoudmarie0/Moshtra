@@ -17,7 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
   final CollectionReference _productsCollection =
       FirebaseFirestore.instance.collection('Products');
   HomeController homeController = Get.put(HomeController());
-
+//mahih
   List<String> _searchResults = [];
   bool _isLoading = false;
 

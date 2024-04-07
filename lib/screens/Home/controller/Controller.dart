@@ -35,7 +35,7 @@ List <CategoryModel> _categoryModel=[];
 
   List <ProductModel> get productModel=>_productModel;
   List <ProductModel> _productModel=[];
-
+  final TextEditingController SearchController = TextEditingController();
 
   List <BannerModel> get bannerModel =>_bannerModel;
   List <BannerModel> _bannerModel=[];
@@ -76,6 +76,11 @@ getBestSellingProducts()async{
   });
 }
 
+
+
+
+
+
   getBanners() async{
     _loading.value=true;
      HomeService().getBanners().then((value) {
@@ -87,7 +92,6 @@ getBestSellingProducts()async{
        print("hi");
        update();
      });
-
   }
 }
 

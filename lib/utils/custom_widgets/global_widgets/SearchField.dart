@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../../screens/Search/view.dart';
 import '../../constants/colors.dart';
 import '../../custom_text/view.dart';
 
@@ -15,6 +18,7 @@ padding: EdgeInsets.only(right: 30),
       color:AppColors.white,
     ),
     child: TextFormField(
+      onTap: ()=>Get.to(SearchScreen()),
       decoration: InputDecoration(
         border: InputBorder.none,
         prefixIcon: Icon(Icons.search,color: Colors.black,),

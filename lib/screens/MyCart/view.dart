@@ -287,7 +287,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(()=>MyCart(),arguments: totalPrice );
+                          Get.to(()=>MyCart(),arguments: [totalPrice , cartList.toList()] );
 
                         },
                         child: Text(

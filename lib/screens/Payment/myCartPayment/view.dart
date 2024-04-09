@@ -1,9 +1,13 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/utils/constants/colors.dart';
+import '../../../models/cart_model.dart';
 import '../../../utils/custom_widgets/build_appbar.dart';
 import '../widgets/cart_info.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
@@ -12,8 +16,9 @@ import '../widgets/total_price.dart';
 
 class MyCart extends StatelessWidget {
    MyCart({key});
-   dynamic  total=Get.arguments;
-   final dynamic sum=Get.arguments+8;
+   dynamic  total=Get.arguments[0];
+   final dynamic sum=Get.arguments[0]+8;
+   List<Cart> cartList = Get.arguments[1];
 
    TextEditingController phoneNumberController = TextEditingController();
    TextEditingController AddressController = TextEditingController();
@@ -26,10 +31,10 @@ class MyCart extends StatelessWidget {
       appBar: buildAppBar(title: 'My Cart',SearchDisplay:false),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+            child: ListView(
                     children: [
             SizedBox(height:5 ,),
-            Expanded(child: Image.asset('assets/images/basket.png')),
+            // Expanded(child: Image.asset('assets/images/basket.png')),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         width: MediaQuery.of(context).size.width,
@@ -133,12 +138,18 @@ class MyCart extends StatelessWidget {
                                                           LengthLimitingTextInputFormatter(50),
                                                         ]
                                                     ),
-                                                    //address
+                                                    SizedBox(height: 10.h,),//address
+                                                    Align(
+                                                      alignment: Alignment.bottomRight,
+                                                      child: TextButton(onPressed: (){},
+                                                        child: Text('Submit'),),
+                                                    )
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          ));
+                                          )
+                                      );
                                     },
                                     child:Text("Change",
                                       style: TextStyle(fontSize: 18,
@@ -159,8 +170,59 @@ class MyCart extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      ), //information card
             SizedBox(height:20 ,),
+                      Container(
+                        height: 300.h,
+                        padding: EdgeInsets.only(left: 10,right: 10),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Cart List' ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                GestureDetector(
+                                  onTap: (){Get.back();},
+                                  child: Text('Edit' ,style: TextStyle(fontSize: 18,
+                                    color: Color(0xFFDB3022),
+                                  ),),
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: ListView.separated(
+                                padding: EdgeInsets.zero,
+                                itemCount:cartList.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context,index)
+                                {
+                                  return Column(
+                                    children: [
+                                      SingleChildScrollView(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                            color: AppColors.white,
+                                          ),
+                                          height: 200.h,
+                                          width: 150.w,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Image.network(cartList[index].image),
+                                        
+                                          ),
+                                        ),
+                                      ),
+                              
+                                      SizedBox(height: 1.h,),
+                                      Text(cartList[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 15.sp,color: AppColors.black),),
+                                    ],
+                                  );
+                                }, separatorBuilder: (context, index) { return SizedBox(width: 20.w,);},),
+                            ),
+                          ],
+                        ),
+                      ),
                       OrderInfoItem(
               title: 'Order Subtotal',
               value: '$total EGP',

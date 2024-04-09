@@ -87,9 +87,9 @@ class ProfileScreen extends StatelessWidget {
                               SizedBox(height: 12.h,),
                               Row(
                                 children: [
-                                  SvgPicture.asset(AssetsPaths.PaymentMethodIcon),
+                                  SvgPicture.asset(AssetsPaths.Profile),
                                   SizedBox(width: 12.w,),
-                                  Text("Payment Method",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
+                                  Text("Edit your profile",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.grey4 ),),
                                   Spacer(),
                                   Icon(Icons.arrow_forward_ios,size: 15,color:AppColors.grey4 ,),
                                 ],

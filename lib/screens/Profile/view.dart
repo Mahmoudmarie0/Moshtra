@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment:CrossAxisAlignment.start ,
                           children: [
-                            Text("Hello,mahmoud",style: TextStyle(fontSize:16,fontWeight: FontWeight.w600 ,color: AppColors.white),),
+                            Text("Hello,"+' ${controller.userName}',style: TextStyle(fontSize:16,fontWeight: FontWeight.w600 ,color: AppColors.white),),
                             Text(FirebaseAuth.instance.currentUser!.email.toString(),style: TextStyle(fontSize:16,fontWeight: FontWeight.w500 ,color: AppColors.white)),
                           ],
                         ),

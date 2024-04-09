@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Chatbot/view.dart';
 import '../auth/NewPassword/view.dart';
 import 'controller/Controller.dart';
@@ -130,7 +131,12 @@ class ProfileScreen extends StatelessWidget {
                               Text("Support & Information",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w800,color: AppColors.black ),),
                               SizedBox(height:24.h ,),
                               InkWell(
-                                onTap: controller.launchURL ,
+                                onTap: () async {
+                                  final url =  'https://docs.google.com/document/d/1N7Ploa5PLqshNt9n68DVjDn17IJy1GC7IU-R9O_K354/edit?usp=sharing';
+                                  if(await canLaunch(url)){
+                                    await launch(url);
+                                  }
+                                } ,
                                 child: Row(
                                   children: [
                                     SvgPicture.asset(AssetsPaths.PrivacyPolicyIcon),

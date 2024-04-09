@@ -9,8 +9,11 @@ import 'package:moshtra/screens/Categories/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/Home/widgets/ListViewProduct.dart';
 import 'package:moshtra/screens/Home/widgets/ListviewCategory.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../models/fav_model.dart';
 import '../../models/products_model.dart';
+import '../../service/home_service.dart';
+import '../../service/home_service.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
@@ -115,86 +118,100 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height:  20.h),
 
             Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+              child: SmartRefresher(
+                onRefresh: () async {
+                  controller.productModel.clear();
+                  await controller.getBestSellingProducts();
+                  controller.refreshController.refreshCompleted();
 
-                children: [
-
-                  Column(
+                },
+                // onLoading: () {
+                //   controller.getInvoices(isRefresh: false);
+                // },
+                enablePullUp: true,
+                controller: controller.refreshController,
+                scrollController: controller.scrollController,
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
 
                   children: [
 
-                  CarouselSlider(items: controller.bannerModel.map(
-                      (e) =>
-                      Container(
-                        padding: EdgeInsets.only(left: 13,right: 13),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.r),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Image(
-                            image:NetworkImage('${e.Image}'),
-                            width: 400.w,
-                            height: 150.h,
-                            fit: BoxFit.cover,
+                    Column(
+
+                    children: [
+
+                    CarouselSlider(items: controller.bannerModel.map(
+                        (e) =>
+                        Container(
+                          padding: EdgeInsets.only(left: 13,right: 13),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.r),
                           ),
-                        ),
-                      ),).toList(),
-                  options: CarouselOptions(
-                    height: 200.0,
-                    initialPage: 0,
-                    viewportFraction:1.0 ,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(seconds: 1),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    scrollDirection: Axis.horizontal,
-                  ),),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image(
+                              image:NetworkImage('${e.Image}'),
+                              width: 400.w,
+                              height: 150.h,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),).toList(),
+                    options: CarouselOptions(
+                      height: 200.0,
+                      initialPage: 0,
+                      viewportFraction:1.0 ,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(seconds: 1),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      scrollDirection: Axis.horizontal,
+                    ),),
 
-                  SizedBox(height:15.h,),
+                    SizedBox(height:15.h,),
 
-                  Padding(
-                  padding: const EdgeInsets.only(left: 16,right: 16),
-                  child: Row(
-                    mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-                   children: [
-                   CustomText(text: 'Categories',fontSize: 18,fontweight: FontWeight.w800,),
-                    TextButton(onPressed: (){Get.to(CategoriesScreen());},
-                    child:   CustomText(text: 'See All',fontSize: 16,fontweight: FontWeight.w500,color: AppColors.orange,),
-                      )
-                    ],
-                  ),
-                  ),
-
-                 SizedBox(height: 5.h,),
-
-                  ListViewCategory(),
-
-                  SizedBox(height: 10.h,),
-
-                  Padding(
-                   padding: const EdgeInsets.only(left: 16,right: 16),
-                   child: Row(
-                     mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                    Padding(
+                    padding: const EdgeInsets.only(left: 16,right: 16),
+                    child: Row(
+                      mainAxisAlignment:MainAxisAlignment.spaceBetween ,
                      children: [
+                     CustomText(text: 'Categories',fontSize: 18,fontweight: FontWeight.w800,),
+                      TextButton(onPressed: (){Get.to(CategoriesScreen());},
+                      child:   CustomText(text: 'See All',fontSize: 16,fontweight: FontWeight.w500,color: AppColors.orange,),
+                        )
+                      ],
+                    ),
+                    ),
 
-                      CustomText(text: 'Latest Products',fontSize: 18,fontweight: FontWeight.w800,),
+                   SizedBox(height: 5.h,),
 
-                    ],
-                  ),
-               ),
+                    ListViewCategory(),
 
-                  SizedBox(height: 20.h,),
+                    SizedBox(height: 10.h,),
 
-                  ListViewProduct(),
-                        ],
-                        ),
-                ]
+                    Padding(
+                     padding: const EdgeInsets.only(left: 16,right: 16),
+                     child: Row(
+                       mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                       children: [
+
+                        CustomText(text: 'Latest Products',fontSize: 18,fontweight: FontWeight.w800,),
+
+                      ],
+                    ),
+                 ),
+
+                    SizedBox(height: 20.h,),
+
+                    ListViewProduct(),
+                          ],
+                          ),
+                  ]
+                ),
               ),
             ),
           ]

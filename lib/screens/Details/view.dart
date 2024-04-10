@@ -329,7 +329,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             'userId': FirebaseAuth.instance.currentUser!
                                                 .uid.toString(),
                                             'createdAt': DateTime.now(),
-                                            //'color': '#${widget.model.color!.value.toRadixString(16).substring(2)}',
+                                            'color': '#${widget.model.color!.value.toRadixString(16).substring(2)}',
                                             'description': widget.model.description,
                                             'sub_description': widget.model.sub_description,
                                             'Sized': widget.model.Sized

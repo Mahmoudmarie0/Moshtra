@@ -304,7 +304,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     'createdAt': DateTime.now(),
                                     'description': controller.productModel[index].description,
                                     'sub_description': controller.productModel[index].sub_description,
-                                    'Sized': controller.productModel[index].Sized
+                                    'Sized': controller.productModel[index].Sized,
+                                    'color': '#${controller.productModel[index].color!.value.toRadixString(16).substring(2)}',
+
                                   });
 
                                   showSnackBarFun(context , 'The product has been added to\nyour Favorite');

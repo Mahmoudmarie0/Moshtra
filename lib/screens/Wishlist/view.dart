@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:moshtra/screens/Details/controller/extension.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 import '../../models/fav_model.dart';
@@ -74,8 +75,11 @@ class _MyFavScreenState extends State<MyFavScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: (){
-                                    ProductModel product = ProductModel(name: favtList[index].name , /*color: Color(0xFFFFA500) ,*/ Sized:favtList[index].description , description: favtList[index].Sized ,sub_description: favtList[index].sub_description ,  image:favtList[index].image , price:favtList[index].price , productId:favtList[index].productId);
+
+                                    Color c = HexColor.fromHex(favtList[index].description);
+                                    ProductModel product = ProductModel(name: favtList[index].name , color: c , Sized:favtList[index].description , description: favtList[index].Sized ,sub_description: favtList[index].sub_description ,  image:favtList[index].image , price:favtList[index].price , productId:favtList[index].productId);
                                     Get.to(DetailsScreen(product));
+
                                   },
                                   child: Container(
                                       width: 120.w,

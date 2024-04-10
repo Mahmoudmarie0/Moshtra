@@ -7,17 +7,19 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/utils/constants/colors.dart';
+import 'package:moshtra/utils/custom_text/view.dart';
 import '../../../models/cart_model.dart';
 import '../../../utils/custom_widgets/build_appbar.dart';
 import '../widgets/cart_info.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import '../widgets/payment_method_bottom_sheet.dart';
 import '../widgets/total_price.dart';
+import 'controller/controller.dart';
 
 class MyCart extends StatelessWidget {
    // MyCart({key});
    dynamic  total=Get.arguments;
-   final dynamic sum=Get.arguments;
+   final dynamic sum=Get.arguments+ 8;
    List<Cart> cartList ;
    MyCart(this.cartList);
 
@@ -27,19 +29,23 @@ class MyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: buildAppBar(title: 'My Cart',SearchDisplay:false),
+    return  GetBuilder<PaymentController>(
+              init: PaymentController(),
+              builder: (controller)=>
+              controller.loading.value ? Center(child: CircularProgressIndicator())
+
+      :Scaffold(
+        backgroundColor: AppColors.white,
+        appBar: buildAppBar(title: 'My Cart',SearchDisplay:false),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView(
                     children: [
-            SizedBox(height:5 ,),
+              SizedBox(height:5 ,),
             // Expanded(child: Image.asset('assets/images/basket.png')),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
                         width: MediaQuery.of(context).size.width,
-                        height:130 ,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -58,12 +64,14 @@ class MyCart extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Dear Proggrammer",
+                                  Text("Dear Customer",
                                     style: TextStyle(
                                         fontSize: 16
                                     ),),
                                   TextButton(
                                     onPressed: () {
+                                      phoneNumberController.text = controller.userModel!.phoneNumber;
+                                      AddressController.text = controller.userModel!.address;
                                       showDialog(context: context,
                                           builder: (context)=> Dialog(
                                             child: Padding(
@@ -142,7 +150,16 @@ class MyCart extends StatelessWidget {
                                                     SizedBox(height: 10.h,),//address
                                                     Align(
                                                       alignment: Alignment.bottomRight,
-                                                      child: TextButton(onPressed: (){},
+                                                      child: TextButton(onPressed: ()
+                                                      {
+                                                        if (formKey.currentState!.validate())
+                                                        {
+                                                          controller.phone = phoneNumberController.text;
+                                                          controller.address = AddressController.text;
+                                                          Navigator.pop(context);
+                                                        }
+
+                                                        },
                                                         child: Text('Submit'),),
                                                     )
                                                   ],
@@ -160,14 +177,39 @@ class MyCart extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Text("mohamed hossam,01158814259,3 Newbdidge court",
-                                style: TextStyle(
-                                    fontSize: 16),
+                              Row(
+                                children: [
+                                  CustomText(text: 'Name: ', fontweight: FontWeight.w400,),
+                                  CustomText(text: controller.userModel!.name, fontweight: FontWeight.w400,)
+
+                                ],
                               ),
-                              Text("Chino Hills, CA,97545,United State",
-                                style: TextStyle(
-                                    fontSize: 16
-                                ),),
+                              SizedBox(height:5.h,),
+                              Row(
+                                children: [
+                                  CustomText(text: 'Email: ', fontweight: FontWeight.w400,),
+                                  CustomText(text: controller.userModel!.email, fontweight: FontWeight.w400,)
+                                ],
+                              ),
+                              SizedBox(height: 5.h,),
+                              Row(
+                                children: [
+                                  CustomText(text: 'Phone number: 0',fontweight: FontWeight.w400,),
+                                  CustomText(text: controller.phone.toString(),fontweight: FontWeight.w400,)
+                                ],
+                              ),
+                              SizedBox(height: 5.h,),
+                              Row(
+                                children: [
+                                  CustomText(text: 'Address: ',fontweight: FontWeight.w400,),
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                        child: CustomText(text: controller.address.toString(),fontweight: FontWeight.w400,)),
+                                  )
+                                ],
+                              )
+
                             ],
                           ),
                         ),
@@ -210,11 +252,11 @@ class MyCart extends StatelessWidget {
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Image.network(cartList[index].image),
-                                        
+
                                           ),
                                         ),
                                       ),
-                              
+
                                       SizedBox(height: 1.h,),
                                       Text(cartList[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 15.sp,color: AppColors.black),),
                                     ],
@@ -275,6 +317,7 @@ class MyCart extends StatelessWidget {
                   ],
                 ),
           ),
+    )
     );
   }
 

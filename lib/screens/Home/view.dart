@@ -287,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                           
                           return Container(
-                            padding: EdgeInsets.only(left: 100 , bottom: 110),
+                            padding: EdgeInsets.only(left: 110 , bottom: 100),
                             child: MaterialButton(
                               onPressed: () async{
 
@@ -302,6 +302,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     'productId': controller.productModel[index].productId,
                                     'userId': FirebaseAuth.instance.currentUser!.uid.toString(),
                                     'createdAt': DateTime.now(),
+                                    'description': controller.productModel[index].description,
+                                    'sub_description': controller.productModel[index].sub_description,
+                                    'Sized': controller.productModel[index].Sized
                                   });
 
                                   showSnackBarFun(context , 'The product has been added to\nyour Favorite');
@@ -329,8 +332,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 }
                               },
                               child: productIds.length == 0 ? Center(child: Icon(Icons.favorite_border)) : productIds.contains(controller.productModel[index].productId) ? Center(child: Icon(Icons.favorite)) : Center(child: Icon(Icons.favorite_border)),
-                              color: Colors.black,
-                              shape: CircleBorder(),
                               textColor: Colors.red,
                             ),
                           );

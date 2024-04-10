@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -200,14 +201,40 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+
+
+
+
+
+
+
   Future verifyEmail() async{
-    try {
+    QuerySnapshot users = await FirebaseFirestore.instance.collection("Users").get() as QuerySnapshot<Object?>;
+    List<String> userEmails = [];
+
+    for(int i = 0 ; i < users.size ; i++){
+      userEmails.add(users.docs[i]['email']);
+    }
+
+    print('LengthOfEmails => ${userEmails.length}');
+
+
+    if(userEmails.contains(_confirmationController.text.trim())){
       await FirebaseAuth.instance
           .sendPasswordResetEmail(
           email: _confirmationController.text.trim());
       showSnackBarFun(context , 'Check Your Email');
-    }on FirebaseAuthException {
+    }else{
       showSnackBarFun(context, 'Invalid Email Address');
     }
+
+    // try {
+    //   await FirebaseAuth.instance
+    //       .sendPasswordResetEmail(
+    //       email: _confirmationController.text.trim());
+    //   showSnackBarFun(context , 'Check Your Email');
+    // }on FirebaseAuthException {
+    //   showSnackBarFun(context, 'Invalid Email Address');
+    // }
   }
 }

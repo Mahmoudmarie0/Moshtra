@@ -10,6 +10,7 @@ import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 import '../../../models/cart_model.dart';
 import '../../../utils/custom_widgets/build_appbar.dart';
+import '../../auth/register/controller/controller.dart';
 import '../widgets/cart_info.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import '../widgets/payment_method_bottom_sheet.dart';
@@ -26,8 +27,10 @@ class MyCart extends StatelessWidget {
    TextEditingController phoneNumberController = TextEditingController();
    TextEditingController AddressController = TextEditingController();
    GlobalKey<FormState> formKey = GlobalKey();
+   RegisterController registerController=Get.put(RegisterController());
 
-  @override
+
+   @override
   Widget build(BuildContext context) {
     return  GetBuilder<PaymentController>(
               init: PaymentController(),
@@ -131,7 +134,12 @@ class MyCart extends StatelessWidget {
 
                                                         controller: AddressController,
                                                         decoration: InputDecoration(
-                                                          suffixIcon: Icon(Icons.location_on),
+                                                          suffixIcon: GestureDetector(
+                                                            onTap: ()async
+                                                            {
+                                                              AddressController.text = await registerController.getCurrentLocation();
+                                                            },
+                                                              child: Icon(Icons.location_on)),
                                                           focusedBorder: OutlineInputBorder(
                                                             borderSide: BorderSide(
                                                                 color: AppColors.blue,

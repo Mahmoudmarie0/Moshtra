@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:moshtra/models/cart_product_model.dart';
 import 'package:moshtra/screens/checkout/OrderSuccess.dart';
 import 'package:moshtra/screens/checkout/Payment_method_screen.dart';
 import 'package:moshtra/screens/checkout/shipping_adress_screen.dart';

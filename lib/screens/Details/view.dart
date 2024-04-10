@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/models/cart_product_model.dart';
 import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Home/view.dart';
 import 'package:moshtra/screens/Home_layout/view.dart';
@@ -330,6 +329,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             'userId': FirebaseAuth.instance.currentUser!
                                                 .uid.toString(),
                                             'createdAt': DateTime.now(),
+                                            //'color': '#${widget.model.color!.value.toRadixString(16).substring(2)}',
+                                            'description': widget.model.description,
+                                            'sub_description': widget.model.sub_description,
+                                            'Sized': widget.model.Sized
                                           });
 
                                           showSnackBarFun(context , 'The product has been added to\nyour cart');

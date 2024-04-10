@@ -9,7 +9,10 @@ import 'package:moshtra/screens/Payment/myCartPayment/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 import '../../models/cart_model.dart';
+import '../../models/products_model.dart';
 import '../../utils/constants/assets.dart';
+import '../../utils/custom_widgets/global_widgets/empty_screen.dart';
+import '../Details/view.dart';
 import '../Home_layout/controller.dart';
 
 
@@ -29,87 +32,29 @@ class _MyCartScreenState extends State<MyCartScreen> {
     return cartListScreen();
   }
 
-  Widget buildEmptyCartList() {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Lottie.asset(AssetsPaths.CartListEmpty),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: Text('Your Cart is empty',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24,
-                    color: AppColors.black,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: Text(
-                  'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.',
-
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: Color(0xff6F7384),
-                    height: 1.55,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-
-                  onPressed: () {
-                    homeLayoutController.SeeAll();
-
-                  },
-                  style: ElevatedButton.styleFrom(
-                      splashFactory: NoSplash.splashFactory,
-                      minimumSize: Size(328, 60),
-                      backgroundColor: AppColors.orange,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                      )
-                  ),
-                  child: Text(
-                    'Explore Categories',
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  )
-              ),
-            ]
-        ),
-      ),
-    );
-  }
-
   Widget cartListScreen() {
     return StreamBuilder<QuerySnapshot>(
         stream: cart.orderBy('createdAt').snapshots(),
         builder: (context , snapshot) {
           List<Cart> cartList = [];
-          totalPrice = 0;
+          if(!snapshot.hasData)
+            return CircularProgressIndicator();
+          else {
+            totalPrice = 0;
 
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            if( snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid ) {
+            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+              if (snapshot.data!.docs[i].get('userId') ==
+                  FirebaseAuth.instance.currentUser!.uid) {
+                cartList.add(Cart.fromJson(snapshot.data!.docs[i]));
 
-              cartList.add(Cart.fromJson(snapshot.data!.docs[i]));
-
-              totalPrice += int.parse(snapshot.data!.docs[i].get('price')) *
-                  int.parse(snapshot.data!.docs[i].get('quantity'));
+                totalPrice += int.parse(snapshot.data!.docs[i].get('price')) *
+                    int.parse(snapshot.data!.docs[i].get('quantity'));
+              }
             }
           }
 
           if(cartList.length == 0)
-            return buildEmptyCartList();
+            return   buildEmptyScreen(titleText: 'Your Cart is empty' ,subTitleText:  'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.' ,btnText:  'Explore Categories' ,homeLayoutController:  homeLayoutController);
           else
             return Column(
               children: [
@@ -129,6 +74,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                   onTap: () {
                                     //Get.to(DetailsScreen(ProductModel()));
                                     //Get.to(DetailsScreen(cartList[index] as ProductModel));
+                                    print(" descriptionFromCart => ${cartList[index].description}");
+                                    print(" nameFromCart => ${cartList[index].name}");
+                                    print(" SizedFromCart => ${cartList[index].Sized}");
+                                    print(" sub_descriptionFromCart => ${cartList[index].sub_description}");
+                                    ProductModel product = ProductModel(name: cartList[index].name , /*color: Color(0xFFFFA500) ,*/ Sized:cartList[index].description , description: cartList[index].Sized ,sub_description: cartList[index].sub_description ,  image:cartList[index].image , price:cartList[index].price , productId:cartList[index].productId);
+                                    Get.to(DetailsScreen(product));
                                   },
                                   child: Container(
                                       width: 120.w,
@@ -317,4 +268,5 @@ class _MyCartScreenState extends State<MyCartScreen> {
         }
     );
   }
+
 }

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:moshtra/screens/Details/controller/extension.dart';
 import 'package:moshtra/screens/Payment/myCartPayment/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
@@ -78,7 +79,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     print(" nameFromCart => ${cartList[index].name}");
                                     print(" SizedFromCart => ${cartList[index].Sized}");
                                     print(" sub_descriptionFromCart => ${cartList[index].sub_description}");
-                                    ProductModel product = ProductModel(name: cartList[index].name , /*color: Color(0xFFFFA500) ,*/ Sized:cartList[index].description , description: cartList[index].Sized ,sub_description: cartList[index].sub_description ,  image:cartList[index].image , price:cartList[index].price , productId:cartList[index].productId);
+
+                                    Color c = HexColor.fromHex(cartList[index].description);
+                                    ProductModel product = ProductModel(name: cartList[index].name , color: c , Sized:cartList[index].description , description: cartList[index].Sized ,sub_description: cartList[index].sub_description ,  image:cartList[index].image , price:cartList[index].price , productId:cartList[index].productId);
                                     Get.to(DetailsScreen(product));
                                   },
                                   child: Container(
@@ -238,7 +241,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(()=>MyCart(),arguments: [totalPrice , cartList.toList()] );
+                          Get.to(()=>MyCart(cartList.toList()),arguments: totalPrice );
 
                         },
                         child: Text(

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:moshtra/screens/Details/controller/extension.dart';
 
 class ProductModel{
-  String ?name,image ,description,Sized,price,sub_description,productId;
+  String ?name,image ,description,Sized,price,sub_description,productId,type;
   Color? color;
 
   ProductModel({
@@ -16,7 +16,8 @@ class ProductModel{
       this.Sized,
       this.price,
       this.sub_description,
-      this.productId
+      this.productId,
+      this.type
   });
 
 
@@ -29,6 +30,7 @@ class ProductModel{
     price=map['price'];
     sub_description=map['sub_description'];
     productId=map['productId'];
+    type=map['type'];
   }
   ProductModel.fromSnapshot(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
       :productId = snapshot.id,
@@ -37,8 +39,10 @@ class ProductModel{
         description = snapshot['description'],
         Sized = snapshot['Sized'],
         price = snapshot['price'],
+        type = snapshot['type'],
         sub_description = snapshot['sub_description'],
         color = HexColor.fromHex(snapshot['color']);
+
 
   toJson(){
     return{
@@ -49,7 +53,8 @@ class ProductModel{
       'Sized':Sized,
       'price':price,
       'sub_description':sub_description,
-      'productId':productId
+      'productId':productId,
+      'type':type
     };
 
 

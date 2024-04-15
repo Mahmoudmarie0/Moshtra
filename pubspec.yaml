@@ -20,6 +20,10 @@ dependencies:
     #SvgPicture
   flutter_svg: ^2.0.8
 
+  image_picker: ^1.0.7
+  tflite_flutter: ^0.10.4
+
+
   #FlutterSwitch
   flutter_switch: ^0.3.2
 
@@ -133,6 +137,7 @@ flutter:
     #Assets
     assets:
       - assets/images/
+      - assets/MLModel/
 
     #Fonts
     fonts:

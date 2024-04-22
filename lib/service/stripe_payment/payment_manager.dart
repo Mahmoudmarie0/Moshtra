@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
+
+import '../../screens/Payment/thankyou/view.dart';
 
 abstract class PaymentManager{
 
@@ -10,7 +14,7 @@ abstract class PaymentManager{
       String clientSecret=  await _getClientSecret((amount*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);
     await Stripe.instance.presentPaymentSheet();
-
+      Get.to(ThankYouView());
 
 
 

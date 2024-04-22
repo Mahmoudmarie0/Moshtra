@@ -109,6 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: (value) {
                     _searchProducts(value);
                   },
+                  //ddd
                 ),
               ),
               // SizedBox(height: 20),

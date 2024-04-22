@@ -25,7 +25,7 @@ class searchController extends GetxController {
   void searchProducts(String searchText) {
 
       isLoading = true;
-
+//dddd
 
     productsCollection
         .where('name',

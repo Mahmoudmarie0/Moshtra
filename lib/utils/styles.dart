@@ -19,7 +19,7 @@ abstract class Styles{
      height: 0,
    );
 
-
+//sjlkjd
    static const TextStyle styleBold18=TextStyle(
      color: Colors.black,
      fontSize: 18,

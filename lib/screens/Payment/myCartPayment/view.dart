@@ -227,6 +227,18 @@ class MyCart extends StatelessWidget {
                               ),
                             ), //information card
                   SizedBox(height:20 ,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Cart List' ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                GestureDetector(
+                                  onTap: (){Get.back();},
+                                  child: Text('Edit' ,style: TextStyle(fontSize: 18,
+                                    color: Color(0xFFDB3022),
+                                  ),),
+                                ),
+                              ],
+                            ),
                             productsList(cartList),//horizontal Product List
                             OrderInfoItem(
                     title: 'Order Subtotal',

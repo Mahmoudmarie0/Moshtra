@@ -19,18 +19,6 @@ class productsList extends StatelessWidget {
       padding: EdgeInsets.only(left: 10,right: 10),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Cart List' ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-              GestureDetector(
-                onTap: (){Get.back();},
-                child: Text('Edit' ,style: TextStyle(fontSize: 18,
-                  color: Color(0xFFDB3022),
-                ),),
-              ),
-            ],
-          ),
           Expanded(
             child: ListView.separated(
               padding: EdgeInsets.zero,

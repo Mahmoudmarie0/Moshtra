@@ -21,7 +21,7 @@ dependencies:
   flutter_svg: ^2.0.8
 
   image_picker: ^1.0.7
-  tflite_flutter: ^0.10.4
+  tflite_flutter: ^0.10.2
 
 
   #FlutterSwitch

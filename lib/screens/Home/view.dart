@@ -350,6 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           children: [
             FloatingActionButton.small(
+              heroTag: 'camera',
               onPressed: (){
                 pickImageFromCamera();
               } ,
@@ -360,6 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 5,),
             FloatingActionButton(
+              heroTag: 'gallery',
               onPressed: (){
                 pickImageFromGallery();
               } ,

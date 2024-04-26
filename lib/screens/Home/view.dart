@@ -23,7 +23,7 @@ import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
 import '../Details/view.dart';
 import '../Wishlist/view.dart';
-import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
+// import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 
@@ -72,120 +72,120 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  late File _image;
-  dynamic _probability = 0;
-  String? _result;
-  final picker = ImagePicker();
-  late tfl.Interpreter _interpreter;
-  List<String>? _labels;
-
-  @override
-  void initState() {
-    super.initState();
-    loadModel().then((_) {
-      loadLabels().then((loadedLabels) {
-        setState(() {
-          _labels = loadedLabels;
-        });
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _interpreter.close();
-    super.dispose();
-  }
-
-  void pickImageFromGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if(pickedFile != null)
-      _setImage(File(pickedFile.path));
-  }
-
-  void pickImageFromCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    if(pickedFile != null)
-      _setImage(File(pickedFile.path));
-  }
-
-  void _setImage(File image){
-    setState(() {
-      _image = image;
-    });
-    runInference();
-  }
-
-  Future<void> loadModel() async {
-    try {
-      _interpreter = await tfl.Interpreter.fromAsset('assets/MLModel/model_unquant.tflite');
-      print('Model Loaded');
-    } catch (e) {
-      print('Error loading model: $e');
-    }
-  }
-
-  Future<List<String>> loadLabels() async {
-    final labelsData =
-    await DefaultAssetBundle.of(context).loadString('assets/MLModel/labels.txt');
-    print('Labels Loaded');
-    return labelsData.split('\n');
-  }
-
-  Future<Uint8List> preprocessImage(File imageFile) async {
-    // Decode the image to an Image object
-    img.Image? originalImage = img.decodeImage(await imageFile.readAsBytes());
-
-    // Resize the image to the correct size
-    img.Image resizedImage =
-    img.copyResize(originalImage!, width: 224, height: 224);
-
-    // Convert to a byte buffer in the format suitable for TensorFlow Lite (RGB)
-    // The model expects a 4D tensor [1, 224, 224, 3]
-    // Flatten the resized image to match this shape
-    Uint8List bytes = resizedImage.getBytes();
-
-
-    return bytes;
-  }
-
-  Future<void> runInference() async {
-    if (_labels == null) {
-      return;
-    }
-
-    try {
-      Uint8List inputBytes = await preprocessImage(_image);
-      var input = inputBytes.buffer.asUint8List().reshape([1, 224, 224, 3]);
-      var outputBuffer = List<dynamic>.filled(1 * 7, 0).reshape([1, 7]);
-
-      _interpreter.run(input, outputBuffer);
-
-      // Assuming output is now List<List<int>> after inference
-      List<double> output = outputBuffer[0];
-
-      // Print raw output for debugging
-      print('Raw output: $output');
-
-      // Calculate probability
-      double maxScore = output.reduce(max);
-      _probability = (maxScore / 255.0); // Convert to percentage
-
-      // Get the classification result
-      int highestProbIndex = output.indexOf(maxScore);
-      String classificationResult = _labels![highestProbIndex];
-
-      setState(() {
-        _result = classificationResult;
-        // _probability is updated with the calculated probability
-      });
-
-      print("Class Label is => ${_result}");
-      //navigateToResult();
-    } catch (e) {
-      print('Error during inference: $e');
-    }
-  }
+  // late File _image;
+  // dynamic _probability = 0;
+  // String? _result;
+  // final picker = ImagePicker();
+  // late tfl.Interpreter _interpreter;
+  // List<String>? _labels;
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   loadModel().then((_) {
+  //     loadLabels().then((loadedLabels) {
+  //       setState(() {
+  //         _labels = loadedLabels;
+  //       });
+  //     });
+  //   });
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   _interpreter.close();
+  //   super.dispose();
+  // }
+  //
+  // void pickImageFromGallery() async {
+  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  //   if(pickedFile != null)
+  //     _setImage(File(pickedFile.path));
+  // }
+  //
+  // void pickImageFromCamera() async {
+  //   final pickedFile = await picker.pickImage(source: ImageSource.camera);
+  //   if(pickedFile != null)
+  //     _setImage(File(pickedFile.path));
+  // }
+  //
+  // void _setImage(File image){
+  //   setState(() {
+  //     _image = image;
+  //   });
+  //   runInference();
+  // }
+  //
+  // Future<void> loadModel() async {
+  //   try {
+  //     _interpreter = await tfl.Interpreter.fromAsset('assets/MLModel/model_unquant.tflite');
+  //     print('Model Loaded');
+  //   } catch (e) {
+  //     print('Error loading model: $e');
+  //   }
+  // }
+  //
+  // Future<List<String>> loadLabels() async {
+  //   final labelsData =
+  //   await DefaultAssetBundle.of(context).loadString('assets/MLModel/labels.txt');
+  //   print('Labels Loaded');
+  //   return labelsData.split('\n');
+  // }
+  //
+  // Future<Uint8List> preprocessImage(File imageFile) async {
+  //   // Decode the image to an Image object
+  //   img.Image? originalImage = img.decodeImage(await imageFile.readAsBytes());
+  //
+  //   // Resize the image to the correct size
+  //   img.Image resizedImage =
+  //   img.copyResize(originalImage!, width: 224, height: 224);
+  //
+  //   // Convert to a byte buffer in the format suitable for TensorFlow Lite (RGB)
+  //   // The model expects a 4D tensor [1, 224, 224, 3]
+  //   // Flatten the resized image to match this shape
+  //   Uint8List bytes = resizedImage.getBytes();
+  //
+  //
+  //   return bytes;
+  // }
+  //
+  // Future<void> runInference() async {
+  //   if (_labels == null) {
+  //     return;
+  //   }
+  //
+  //   try {
+  //     Uint8List inputBytes = await preprocessImage(_image);
+  //     var input = inputBytes.buffer.asUint8List().reshape([1, 224, 224, 3]);
+  //     var outputBuffer = List<dynamic>.filled(1 * 7, 0).reshape([1, 7]);
+  //
+  //     _interpreter.run(input, outputBuffer);
+  //
+  //     // Assuming output is now List<List<int>> after inference
+  //     List<double> output = outputBuffer[0];
+  //
+  //     // Print raw output for debugging
+  //     print('Raw output: $output');
+  //
+  //     // Calculate probability
+  //     double maxScore = output.reduce(max);
+  //     _probability = (maxScore / 255.0); // Convert to percentage
+  //
+  //     // Get the classification result
+  //     int highestProbIndex = output.indexOf(maxScore);
+  //     String classificationResult = _labels![highestProbIndex];
+  //
+  //     setState(() {
+  //       _result = classificationResult;
+  //       // _probability is updated with the calculated probability
+  //     });
+  //
+  //     print("Class Label is => ${_result}");
+  //     //navigateToResult();
+  //   } catch (e) {
+  //     print('Error during inference: $e');
+  //   }
+  // }
 
 
 
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
             FloatingActionButton.small(
               heroTag: 'camera',
               onPressed: (){
-                pickImageFromCamera();
+               // pickImageFromCamera();
               } ,
               child: Icon(Icons.camera_alt_outlined),
               foregroundColor: Colors.white,
@@ -363,7 +363,7 @@ class _HomeScreenState extends State<HomeScreen> {
             FloatingActionButton(
               heroTag: 'gallery',
               onPressed: (){
-                pickImageFromGallery();
+               // pickImageFromGallery();
               } ,
               child: Icon(Icons.image),
               foregroundColor: Colors.white,

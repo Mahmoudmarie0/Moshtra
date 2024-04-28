@@ -629,15 +629,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            GestureDetector(
-              child: Text(
-                'View Favorite',
-                style: TextStyle(color: AppColors.orange),
-              ),
-              onTap: () {
-                Get.to(MyFavScreen());
-              },
-            )
+        Expanded(
+        child: GestureDetector(
+        child: Text('View Favorite'
+        ,style: TextStyle(
+        color: AppColors.orange
+    ),
+    ),
+    onTap: (){ Get.to(MyFavScreen()); },
+    ),),
           ],
         ));
 

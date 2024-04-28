@@ -95,6 +95,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   color: AppColors.white,
                 ),
                 child: TextFormField(
+
                   controller: _searchController,
                   decoration: InputDecoration(
                     border: InputBorder.none,

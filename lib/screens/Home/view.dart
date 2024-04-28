@@ -22,6 +22,8 @@ import '../../service/home_service.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
+import '../Categories/Electronic/electronics.dart';
+import '../Categories/controller/Controller.dart';
 import '../Details/view.dart';
 import '../Wishlist/view.dart';
 // import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
@@ -36,6 +38,7 @@ class  HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   ProductModel? model;
+  CategoryController categoryController = Get.put(CategoryController());
 
   List<QueryDocumentSnapshot> data = [];
 
@@ -247,8 +250,16 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: SmartRefresher(
                 onRefresh: () async {
-                  controller.productModel.clear();
-                  await controller.getBestSellingProducts();
+                  // controller.productModel.clear();
+                  // await controller.getBestSellingProducts();
+                  controller.onRefresh();
+                  //  controller. productModel.clear();
+                  //  controller. categoryModel.clear();
+                  //  controller.  bannerModel.clear();
+                  //  await controller. getCategory();
+                  //  await controller. getBanners();
+                  //  await controller.getBestSellingProducts();
+                  controller.refreshController.refreshCompleted();
                   controller.refreshController.refreshCompleted();
 
                 },
@@ -271,18 +282,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     CarouselSlider(items: controller.bannerModel.map(
                         (e) =>
-                        Container(
-                          padding: EdgeInsets.only(left: 13,right: 13),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.r),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image(
-                              image:NetworkImage('${e.Image}'),
-                              width: 400.w,
-                              height: 150.h,
-                              fit: BoxFit.cover,
+                        GestureDetector(
+                          onTap: () async {
+                            await categoryController.LoadData(3);
+                            if (categoryController
+                                .CatModel[3].product.isNotEmpty) {
+                              Get.to(ElectronicsScreen(
+                                  categoryController
+                                      .CatModel[3].product
+                                      .toList(),
+                                  categoryController
+                                      .CatModel[3].name
+                                      .toString()));
+                              //print(controller.CatModel[index].product[0].name);
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(left: 13,right: 13),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.r),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Image(
+                                image:NetworkImage('${e.Image}'),
+                                width: 400.w,
+                                height: 150.h,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),).toList(),

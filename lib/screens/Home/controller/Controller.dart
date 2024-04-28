@@ -70,6 +70,18 @@ class HomeController extends GetxController {
   }
 
 
+
+  onRefresh() async {
+    productModel.clear();
+    categoryModel.clear();
+    bannerModel.clear();
+    await getCategory();
+    await getBanners();
+    await getBestSellingProducts();
+
+
+  }
+
  //  Future refresh() async {
  // //   await HomeService().getCategory();
  //    _productModel.clear();

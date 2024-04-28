@@ -569,13 +569,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 )
               ],
             ),
-            GestureDetector(
-              child: Text('View Cart'
-                ,style: TextStyle(
-                    color: AppColors.orange
+            Expanded(
+              child: GestureDetector(
+                child: Text('View Cart'
+                  ,style: TextStyle(
+                      color: AppColors.orange
+                  ),
                 ),
+                onTap: (){ Get.to(MyCartScreen()); },
               ),
-              onTap: (){ Get.to(MyCartScreen()); },
             )
           ],
         )

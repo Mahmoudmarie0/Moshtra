@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -556,13 +557,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            GestureDetector(
-              child: Text('View Favorite'
-                ,style: TextStyle(
-                    color: AppColors.orange
+            Expanded(
+              child: GestureDetector(
+                child: Text('View Favorite'
+                  ,style: TextStyle(
+                      color: AppColors.orange
+                  ),
                 ),
+                onTap: (){ Get.to(MyFavScreen()); },
               ),
-              onTap: (){ Get.to(MyFavScreen()); },
             )
           ],
         )

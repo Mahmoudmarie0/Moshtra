@@ -6,9 +6,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../utils/translation/translation.dart';
 
 
 class MainAppController extends GetxController {
+
+
+
+
+
+
+
+
+
+
+  changeAppLang(){
+    Get.locale == const Locale('ar','SA') ? Get.updateLocale(const Locale('en','US')) : Get.updateLocale(const Locale('ar','SA'));
+  }
+
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -36,6 +54,10 @@ class MainAppController extends GetxController {
       print('Token Refreshed: $event');
     });
   }
+
+
+
+
 
   void requestPermission() async {
     if (Platform.isIOS) {

@@ -51,6 +51,9 @@ static String Earbuds="assets/images/airbuds.jpg";
   static String Sucess ="assets/images/sucess.json";
   static  String bootAvatar = "assets/images/bootAvatar.svg";
   static String deleteAccount="assets/images/Delete2.json";
+  static String language ="assets/images/Language.svg";
+
+
 
 
 }

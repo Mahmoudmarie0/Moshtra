@@ -5,13 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:moshtra/screens/Details/controller/extension.dart';
 
 class ProductModel{
-  String ?name,image ,description,Sized,price,sub_description,productId,type;
+  String ?name,image ,descriptionAR,descriptionEN,Sized,price,sub_description,productId,type;
   Color? color;
 
   ProductModel({
       this.name,
       this.image,
-      this.description,
+      this.descriptionAR,
+      this.descriptionEN,
       this.color,
       this.Sized,
       this.price,
@@ -24,7 +25,8 @@ class ProductModel{
   ProductModel.fromJson(Map<dynamic,dynamic>map){
     name=map['name'];
     image=map['image'];
-    description=map['description'];
+    descriptionEN=map['descriptionEN'];
+    descriptionAR=map['descriptionAR'];
     color= HexColor.fromHex(map['color']);
     Sized=map['Sized'];
     price=map['price'];
@@ -36,7 +38,8 @@ class ProductModel{
       :productId = snapshot.id,
         name = snapshot['name'],
         image = snapshot['image'],
-        description = snapshot['description'],
+        descriptionEN = snapshot['descriptionEN'],
+        descriptionAR = snapshot['descriptionAR'],
         Sized = snapshot['Sized'],
         price = snapshot['price'],
         type = snapshot['type'],
@@ -48,7 +51,8 @@ class ProductModel{
     return{
       'name':name,
       'image':image,
-      'description':description,
+      'descriptionEN':descriptionEN,
+      'descriptionAR':descriptionAR,
       'color':color,
       'Sized':Sized,
       'price':price,

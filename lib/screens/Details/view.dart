@@ -330,7 +330,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 .uid.toString(),
                                             'createdAt': DateTime.now(),
                                             'color': '#${widget.model.color!.value.toRadixString(16).substring(2)}',
-                                            'description': widget.model.description,
+                                            'descriptionEN': widget.model.descriptionEN,
+                                            'descriptionAR': widget.model.descriptionAR,
                                             'sub_description': widget.model.sub_description,
                                             'Sized': widget.model.Sized
                                           });
@@ -457,7 +458,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Text(
-              widget.model.description as String,
+              Get.locale?.languageCode=="en"?  widget.model.descriptionEN as String: widget.model.descriptionAR as String,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,),

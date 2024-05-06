@@ -23,7 +23,8 @@ class AppColors{
   static HexColor grey5=HexColor("F4F5FD");
   static HexColor grayish_blue=HexColor("F4F6F9");
   static const Color placeholder = Color(0xff99ADBE);
-
+  static const Color secondary = Color(0xffFF8E5B);
+  static const Color greyBottomSheet = Color(0xffC0D2E3);
 
 
 

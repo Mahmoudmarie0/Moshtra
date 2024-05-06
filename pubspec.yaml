@@ -14,12 +14,15 @@ dependencies:
   geolocator: ^8.2.0
   geocoding: ^2.0.4
   flutter:
+
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   status_change: ^2.0.0
 
     #SvgPicture
   flutter_svg: ^2.0.8
-
+  auto_direction: ^0.0.7
   image_picker: ^1.0.7
   # tflite_flutter: ^0.10.2
 
@@ -29,6 +32,9 @@ dependencies:
 
   #FlutterCreditCard
   flutter_credit_card: ^4.0.1
+
+  #GetStorage
+  get_storage: ^2.1.1
 
   #Dio
   dio: ^5.4.1

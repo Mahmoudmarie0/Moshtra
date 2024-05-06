@@ -27,7 +27,8 @@ class ProfileScreen extends StatelessWidget {
             body: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
               Padding(
                 padding: const EdgeInsetsDirectional.only(top: 20, start: 20,end: 20),
-                child:Get.locale?.languageCode=="en"? Row(
+                child:Get.locale?.languageCode=="en"?
+                Row(
                   children: [
                     Column(
                      crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +81,8 @@ class ProfileScreen extends StatelessWidget {
                       },
                     ),
                   ],
-                ):Row(
+                ):
+                Row(
                   children: [
                     InkWell(
                       child: Container(

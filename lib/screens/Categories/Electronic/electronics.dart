@@ -192,7 +192,8 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                                           'productId': widget.products[index].productId,
                                           'userId': FirebaseAuth.instance.currentUser!.uid.toString(),
                                           'createdAt': DateTime.now(),
-                                          'description': widget.products[index].description,
+                                          'descriptionEN': widget.products[index].descriptionEN,
+                                          'descriptionAR': widget.products[index].descriptionAR,
                                           'sub_description': widget.products[index].sub_description,
                                           'Sized': widget.products[index].Sized,
                                           'color': '#${widget.products[index].color!.value.toRadixString(16).substring(2)}',                                        });

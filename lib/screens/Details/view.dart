@@ -364,7 +364,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           }
           else
           {
-            return Text('Loading...');
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),

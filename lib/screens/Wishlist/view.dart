@@ -10,6 +10,7 @@ import 'package:moshtra/screens/Details/controller/extension.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 import '../../models/fav_model.dart';
+import '../../models/newFav_model.dart';
 import '../../models/products_model.dart';
 import '../../utils/constants/assets.dart';
 
@@ -42,7 +43,8 @@ class _MyFavScreenState extends State<MyFavScreen> {
         stream: fav.orderBy('createdAt').snapshots(),
         builder: (context , snapshot) {
 
-          List<Fav> favtList = [];
+          List<new_fav> favtList = [];
+          List<ProductModel> products = [];
           if(!snapshot.hasData){
             return CircularProgressIndicator();
           }
@@ -51,7 +53,8 @@ class _MyFavScreenState extends State<MyFavScreen> {
             for (int i = 0; i < snapshot.data!.docs.length; i++) {
               if (snapshot.data!.docs[i].get('userId') ==
                   FirebaseAuth.instance.currentUser!.uid) {
-                favtList.add(Fav.fromJson(snapshot.data!.docs[i]));
+                favtList.add(new_fav.fromSnapshot(snapshot.data!.docs[i]));
+                products.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
               }
             }
           }
@@ -75,17 +78,13 @@ class _MyFavScreenState extends State<MyFavScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: (){
-
-                                    Color c = HexColor.fromHex(favtList[index].description);
-                                    ProductModel product = ProductModel(nameEN: favtList[index].name, nameAR: favtList[index].name , color: c , Sized:favtList[index].description , descriptionEN: favtList[index].Sized, descriptionAR: favtList[index].Sized ,sub_descriptionAR: favtList[index].sub_description , sub_descriptionEN: favtList[index].sub_description,  image:favtList[index].image , price:favtList[index].price , productId:favtList[index].productId);
-                                    Get.to(DetailsScreen(product));
-
+                                    Get.to(DetailsScreen(products[index]));
                                   },
                                   child: Container(
                                       width: 120.w,
                                       height: 120.h,
                                       child: Image.network(
-                                        favtList[index].image,
+                                        favtList[index].product!.image!,
                                       )
                                   ),
                                 ),
@@ -98,7 +97,8 @@ class _MyFavScreenState extends State<MyFavScreen> {
                                             left: 10, right: 10, top: 8),
                                         width: 165,
                                         child: Text(
-                                          favtList[index].name,
+                                          Get.locale?.languageCode == "en"?
+                                          favtList[index].product!.nameEN! : favtList[index].product!.nameAR!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 20,
@@ -108,7 +108,7 @@ class _MyFavScreenState extends State<MyFavScreen> {
                                       margin: EdgeInsets.only(left: 10, right: 10),
                                       child:
                                       Text(
-                                        '${favtList[index].price} EGP',
+                                        '${favtList[index].product!.price!} EGP',
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 16,
@@ -127,7 +127,7 @@ class _MyFavScreenState extends State<MyFavScreen> {
 
                                             for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
                                               if (snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid &&
-                                                  snapshot.data!.docs[i].get('productId') == favtList[index].productId){
+                                                  snapshot.data!.docs[i]['product']['productId'] == favtList[index].product!.productId){
                                                 fav.doc(snapshot.data!.docs[i].id).delete();
                                               }
                                             }

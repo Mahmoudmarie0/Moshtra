@@ -95,7 +95,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                         margin: EdgeInsets.only(
                                             left: 10, right: 10, top: 8),
                                         width: 165,
-                                        child: Text(Get.locale?.languageCode == "en"?
+                                        child: Text(
+                                          Get.locale?.languageCode == "en"?
                                           cartList[index].product!.nameEN! : cartList[index].product!.nameAR!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,

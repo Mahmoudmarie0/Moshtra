@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/models/newFav_model.dart';
 import 'package:moshtra/screens/Categories/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/Home/widgets/ListviewCategory.dart';
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     for (int i = 0; i < data.length; i++) {
       if (data[i]['userId'] == FirebaseAuth.instance.currentUser!.uid &&
-          data[i]['productId'] == productId) {
+          data[i]['product']['productId'] == productId) {
         ++count;
       }
     }
@@ -442,7 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 if (!snapshot.hasData) {
                                   return CircularProgressIndicator();
                                 } else {
-                                  List<Fav> favList = [];
+                                  List<new_fav> favList = [];
                                   for (int i = 0;
                                       i < snapshot.data!.docs.length;
                                       i++) {
@@ -450,10 +451,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         FirebaseAuth
                                             .instance.currentUser!.uid) {
                                       favList.add(
-                                          Fav.fromJson(snapshot.data!.docs[i]));
+                                          new_fav.fromSnapshot(snapshot.data!.docs[i]));
 
-                                      productIds.add(snapshot.data!.docs[i]
-                                          .get('productId'));
+                                      productIds.add(snapshot.data!.docs[i]['product']['productId']);
                                     }
                                   }
                                 }
@@ -469,46 +469,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                       if (isNotExist) {
                                         fav.add({
-                                          'image': controller
-                                              .productModel[index].image,
-                                          'name':
-                                              Get.locale?.languageCode == "en"
-                                                  ? controller
-                                                      .productModel[index]
-                                                      .nameEN as String
-                                                  : controller
-                                                      .productModel[index]
-                                                      .nameAR as String,
-                                          'price': controller
-                                              .productModel[index].price,
-                                          'productId': controller
-                                              .productModel[index].productId,
-                                          'userId': FirebaseAuth
-                                              .instance.currentUser!.uid
-                                              .toString(),
+                                          'product': controller.productModel[index].toJson(),
                                           'createdAt': DateTime.now(),
-                                          'description':
-                                              Get.locale?.languageCode == "en"
-                                                  ? controller
-                                                      .productModel[index]
-                                                      .descriptionEN
-                                                  : controller
-                                                      .productModel[index]
-                                                      .descriptionAR,
-                                          'sub_description':
-                                              Get.locale?.languageCode == "en"
-                                                  ? controller
-                                                          .productModel[index]
-                                                          .sub_descriptionEN
-                                                      as String
-                                                  : controller
-                                                          .productModel[index]
-                                                          .sub_descriptionAR
-                                                      as String,
-                                          'Sized': controller
-                                              .productModel[index].Sized,
-                                          'color':
-                                              '#${controller.productModel[index].color!.value.toRadixString(16).substring(2)}',
+                                          'userId': FirebaseAuth.instance.currentUser!.uid.toString()
                                         });
 
                                         showSnackBarFun(context,
@@ -526,8 +489,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .get('userId') ==
                                                   FirebaseAuth.instance
                                                       .currentUser!.uid &&
-                                              snapshot.data!.docs[i]
-                                                      .get('productId') ==
+                                              snapshot.data!
+                                                  .docs[i]['product']['productId'] ==
                                                   controller.productModel[index]
                                                       .productId) {
                                             fav

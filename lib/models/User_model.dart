@@ -5,10 +5,19 @@ class User_Model {
 
   User_Model(this.name, this.phoneNumber, this.email, this.address);
 
-  User_Model.fromJson(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
+  User_Model.fromsnapshot(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
       :name = snapshot['name'],
         email= snapshot['email'],
         phoneNumber = snapshot['phoneNumber'],
         address = snapshot['address'];
 
+
+  toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'address': address,
+    };
+  }
 }

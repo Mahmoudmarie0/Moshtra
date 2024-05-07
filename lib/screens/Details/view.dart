@@ -19,6 +19,7 @@ import 'package:moshtra/models/comment_model.dart';
 
 import '../../models/cart_model.dart';
 import '../../models/newCart_model.dart';
+import '../../utils/custom_widgets/global_widgets/products_ListView.dart';
 import '../MyCart/view.dart';
 import 'Components/ChatBubble.dart';
 import 'Components/Details_Tabs.dart';
@@ -131,7 +132,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               Get.back();
                                             },
                                             child: Icon(Icons.arrow_back_ios))),
-                        
+
                                   ]
                               ),
                             ),//Image Container
@@ -191,7 +192,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ProductDetails(),
                                         Column(
                                           children: [
-                        
+
                                             Expanded(child:
                                             ListView.builder(
                                                 controller: controller,
@@ -261,7 +262,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
 
                             // Container(color: Colors.red,height: 600,)//details container
-                        
+                            SizedBox(height: 10.h,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('Realted Products' ,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500
+                                  ),),
+                              ),
+                            ),
+                            GetBuilder<DetailsController>(
+                              init: DetailsController(),
+                              builder: (controller)=> controller.loading.value ?
+                              Center(child: CircularProgressIndicator())
+                                  :productsList(controller.CatModel!.product),
+                            ),
                           ],
                         ),
                       ),
@@ -332,26 +350,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             });
 
                                             showSnackBarFun(context , 'The product has been added to\nyour cart');
-                                          count = 1;
-                                          isNotExist = true;
-                                        }else{
-                                          showSnackBarFun(context , 'The product already existed');
-                                          count = 1;
-                                          isNotExist = true;
-                                        }
+                                            count = 1;
+                                            isNotExist = true;
+                                          }else{
+                                            showSnackBarFun(context , 'The product already existed');
+                                            count = 1;
+                                            isNotExist = true;
+                                          }
 
-                                      },
-                                      child: Text('Add To Cart',
-                                        style: TextStyle(
-                                          color: AppColors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14.sp,
+                                        },
+                                        child: Text('Add To Cart',
+                                          style: TextStyle(
+                                            color: AppColors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14.sp,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SvgPicture.asset(AssetsPaths.MyCartWhite),
-                                  ],
-                                );},
+                                      SvgPicture.asset(AssetsPaths.MyCartWhite),
+                                    ],
+                                  );},
                               ),
                             )
                           ],

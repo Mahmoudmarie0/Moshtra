@@ -25,19 +25,15 @@ class PaymentController extends GetxController{
   {
     _loading.value = true;
 
+    String? useEmail =  FirebaseAuth.instance.currentUser!.email;
 
     final QuerySnapshot<Map<String,dynamic>> userquery = await FirebaseFirestore.instance
-        .collection('Users').get();
+        .collection('Users').where('email',isEqualTo: useEmail).get();
 
-    final user = userquery.docs.map((user) => User_Model.fromJson(user)).toList();
+    final user = User_Model.fromsnapshot(userquery.docs[0]);
 
-    for(int i=0;i<user.length;i++)
-    {
-      if(user[i].email == FirebaseAuth.instance.currentUser!.email)
-      {
-        _userModel = user[i];
-      }
-    }
+    _userModel = user;
+
     phone = _userModel!.phoneNumber;
     address = _userModel!.address;
 

@@ -38,8 +38,8 @@ class ProductModel{
     productId=map['productId'];
     type=map['type'];
   }
-  ProductModel.fromSnapshot(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
-      :productId = snapshot.id,
+  ProductModel.fromSnapshot(snapshot)
+      :productId = snapshot['productId'],
         nameAR = snapshot['nameAR'],
         nameEN = snapshot['nameEN'],
         image = snapshot['image'],
@@ -60,7 +60,7 @@ class ProductModel{
       'image':image,
       'descriptionEN':descriptionEN,
       'descriptionAR':descriptionAR,
-      'color':color,
+      'color': '#${color!.value.toRadixString(16).substring(2)}',
       'Sized':Sized,
       'price':price,
       'sub_descriptionEN':sub_descriptionEN,

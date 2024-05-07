@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:moshtra/models/products_model.dart';
 
 import '../../../models/cart_model.dart';
 import '../../constants/colors.dart';
@@ -9,9 +10,9 @@ import '../../custom_text/view.dart';
 
 class productsList extends StatelessWidget {
 
-  List<Cart> cartList ;
+  List<ProductModel> products ;
 
-  productsList(this.cartList);
+  productsList(this.products);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +23,7 @@ class productsList extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               padding: EdgeInsets.zero,
-              itemCount:cartList.length,
+              itemCount:products.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context,index)
               {
@@ -39,18 +40,18 @@ class productsList extends StatelessWidget {
                           height: 200.h,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image.network(cartList[index].image),
+                            child: Image.network(products[index]!.image!),
 
                           ),
                         ),
                       ),
 
                       SizedBox(height: 1.h,),
-                      CustomText(text: cartList[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                      CustomText(text:Get.locale?.languageCode == "en"? products[index].nameEN as String : products[index].nameAR as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
                       SizedBox(height: 5.h,),
-                      CustomText(text: cartList[index].color as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                      CustomText(text:Get.locale?.languageCode == "en"? products[index].sub_descriptionEN as String : products[index].sub_descriptionAR as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                       SizedBox(height: 5.h,),
-                      CustomText(text: cartList[index].price.toString()+' EGP',color:AppColors.blue,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+                      CustomText(text: products[index].price.toString()+' EGP',color:AppColors.blue,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
                     ],
                   ),

@@ -10,6 +10,7 @@ import 'package:moshtra/screens/Payment/myCartPayment/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 import '../../models/cart_model.dart';
+import '../../models/newCart_model.dart';
 import '../../models/products_model.dart';
 import '../../utils/constants/assets.dart';
 import '../../utils/custom_widgets/global_widgets/empty_screen.dart';
@@ -37,7 +38,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
     return StreamBuilder<QuerySnapshot>(
         stream: cart.orderBy('createdAt').snapshots(),
         builder: (context , snapshot) {
-          List<Cart> cartList = [];
+          List<new_cart> cartList = [];
+          List<ProductModel> products = [];
           if(!snapshot.hasData)
             return CircularProgressIndicator();
           else {
@@ -46,9 +48,10 @@ class _MyCartScreenState extends State<MyCartScreen> {
             for (int i = 0; i < snapshot.data!.docs.length; i++) {
               if (snapshot.data!.docs[i].get('userId') ==
                   FirebaseAuth.instance.currentUser!.uid) {
-                cartList.add(Cart.fromJson(snapshot.data!.docs[i]));
+                cartList.add(new_cart.fromSnapshot(snapshot.data!.docs[i]));
+                products.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
 
-                totalPrice += int.parse(snapshot.data!.docs[i].get('price')) *
+                totalPrice += int.parse(cartList[i].product!.price!) *
                     int.parse(snapshot.data!.docs[i].get('quantity'));
               }
             }
@@ -73,22 +76,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    //Get.to(DetailsScreen(ProductModel()));
-                                    //Get.to(DetailsScreen(cartList[index] as ProductModel));
-                                    print(" descriptionFromCart => ${cartList[index].description}");
-                                    print(" nameFromCart => ${cartList[index].name}");
-                                    print(" SizedFromCart => ${cartList[index].Sized}");
-                                    print(" sub_descriptionFromCart => ${cartList[index].sub_description}");
-
-                                    Color c = HexColor.fromHex(cartList[index].description);
-                                    ProductModel product = ProductModel(nameEN: cartList[index].name,nameAR: cartList[index].name , color: c , Sized:cartList[index].description , descriptionEN: cartList[index].description , descriptionAR: cartList[index].description ,sub_descriptionAR: cartList[index].sub_description, sub_descriptionEN: cartList[index].sub_description ,  image:cartList[index].image , price:cartList[index].price , productId:cartList[index].productId);
-                                    Get.to(DetailsScreen(product));
+                                    Get.to(DetailsScreen(cartList[index]!.product!));
                                   },
                                   child: Container(
                                       width: 120.w,
                                       height: 120.h,
                                       child: Image.network(
-                                        cartList[index].image,
+                                        cartList[index].product!.image!,
                                       )
                                   ),
                                 ),
@@ -101,8 +95,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                         margin: EdgeInsets.only(
                                             left: 10, right: 10, top: 8),
                                         width: 165,
-                                        child: Text(
-                                          cartList[index].name,
+                                        child: Text(Get.locale?.languageCode == "en"?
+                                          cartList[index].product!.nameEN! : cartList[index].product!.nameAR!,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 20,
@@ -113,7 +107,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                           left: 10, right: 10),
                                       child:
                                       Text(
-                                        '${cartList[index].price} EGP',
+                                        '${cartList[index].product!.price} EGP',
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 16,
@@ -134,14 +128,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                     for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
                                                       if (snapshot.data!.docs[i].get('userId') ==
                                                           FirebaseAuth.instance.currentUser!.uid &&
-                                                          snapshot.data!.docs[i].get('productId') ==
-                                                              cartList[index].productId) {
-                                                        if (int.parse(cartList[index].quantity) > 1 ) {
+                                                          snapshot.data!.docs[i]['product']['productId'] ==
+                                                              cartList[index].product!.productId) {
+                                                        if (int.parse(cartList[index].quantity!) > 1 ) {
                                                           cart.doc(snapshot.data!.docs[i].id).update(
-                                                              {'quantity': (int.parse(cartList[index].quantity) - 1).toString()});
+                                                              {'quantity': (int.parse(cartList[index].quantity!) - 1).toString()});
 
                                                           totalPrice -= double.parse(
-                                                              cartList[index].price);
+                                                              cartList[index].product!.price!);
                                                         }
                                                       }
                                                     }
@@ -152,7 +146,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                           Expanded(
                                               child: Text(
                                                 '${int.parse(
-                                                    cartList[index].quantity)}',
+                                                    cartList[index].quantity!)}',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold),
                                               )),
@@ -162,13 +156,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                     for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
                                                       if (snapshot.data!.docs[i].get('userId') ==
                                                           FirebaseAuth.instance.currentUser!.uid &&
-                                                          snapshot.data!.docs[i].get('productId') ==
-                                                              cartList[index].productId) {
+                                                          snapshot.data!.docs[i]['product']['productId'] ==
+                                                              cartList[index].product!.productId) {
                                                         cart.doc(snapshot.data!.docs[i].id).update(
-                                                            {'quantity': (int.parse(cartList[index].quantity) + 1).toString()});
+                                                            {'quantity': (int.parse(cartList[index].quantity!) + 1).toString()});
 
                                                         totalPrice += double.parse(
-                                                            cartList[index].price);
+                                                            cartList[index].product!.price!);
                                                       }
                                                     }
                                                     setState(() {});
@@ -188,7 +182,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                           onTap: () async {
                                             for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
                                               if (snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid &&
-                                                  snapshot.data!.docs[i].get('productId') == cartList[index].productId){
+                                                  snapshot.data!.docs[i]['product']['productId'] == cartList[index].product!.productId){
                                                 cart.doc(snapshot.data!.docs[i].id).delete();
                                               }
                                             }
@@ -241,7 +235,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(()=>MyCart(cartList.toList()),arguments: totalPrice );
+                          Get.to(()=>MyCart(products),arguments: totalPrice );
 
                         },
                         child: Text(

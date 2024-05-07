@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 import '../../../models/cart_model.dart';
@@ -22,8 +23,8 @@ class MyCart extends StatelessWidget {
    // MyCart({key});
    dynamic  total=Get.arguments;
    final dynamic sum=Get.arguments+ 8;
-   List<Cart> cartList ;
-   MyCart(this.cartList);
+   List<ProductModel> products ;
+   MyCart(this.products);
 
    TextEditingController phoneNumberController = TextEditingController();
    TextEditingController AddressController = TextEditingController();
@@ -239,7 +240,7 @@ class MyCart extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            productsList(cartList),//horizontal Product List
+                            productsList(products),//horizontal Product List
                             OrderInfoItem(
                     title: 'Order Subtotal',
                     value: '$total EGP',

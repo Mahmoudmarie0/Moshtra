@@ -18,6 +18,7 @@ import 'package:moshtra/models/comment_model.dart';
 
 
 import '../../models/cart_model.dart';
+import '../../models/newCart_model.dart';
 import '../MyCart/view.dart';
 import 'Components/ChatBubble.dart';
 import 'Components/Details_Tabs.dart';
@@ -50,7 +51,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     print('DataLength => ${data.length}');
 
     for(int i = 0 ; i < data.length ; i++){
-      if(data[i]['userId'] == FirebaseAuth.instance.currentUser!.uid && data[i]['productId'] == widget.model.productId){
+      if(data[i]['userId'] == FirebaseAuth.instance.currentUser!.uid && data[i]['product']['productId'] == widget.model.productId){
         count++;
       }
     }
@@ -63,6 +64,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     setState(() {});
   }
+
 
   @override
   void initState(){
@@ -299,43 +301,37 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   if(!snapshot.hasData){
                                     return Text("");
                                   }else {
-                                    List<Cart> cartList = [];
+                                    List<new_cart> cartList = [];
                                     for (int i = 0; i <
                                         snapshot.data!.docs.length; i++) {
                                       if (snapshot.data!.docs[i].get(
                                           'userId') ==
                                           FirebaseAuth.instance.currentUser!
                                               .uid) {
-                                        cartList.add(Cart.fromJson(
+                                        cartList.add(new_cart.fromSnapshot(
                                             snapshot.data!.docs[i]));
                                       }
                                     }
                                   }
                                   return Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    MaterialButton(
-                                      onPressed: () async{
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      MaterialButton(
+                                        onPressed: () async{
 
-                                        await getData();
+                                          await getData();
 
-                                        if(isNotExist) {
-                                          cart.add({
-                                            'image': widget.model.image,
-                                            'name':Get.locale?.languageCode=="en"? widget.model.nameEN as String: widget.model.nameAR as String,
-                                            'price': widget.model.price,
-                                            'quantity': 1.toString(),
-                                            'productId': widget.model.productId,
-                                            'userId': FirebaseAuth.instance.currentUser!
-                                                .uid.toString(),
-                                            'createdAt': DateTime.now(),
-                                            'color': '#${widget.model.color!.value.toRadixString(16).substring(2)}',
-                                            'description': Get.locale?.languageCode=="en"?widget.model.descriptionEN:widget.model.descriptionAR,
-                                            'sub_description':Get.locale?.languageCode=="en"? widget.model.sub_descriptionEN as String: widget.model.sub_descriptionAR as String,
-                                            'Sized': widget.model.Sized
-                                          });
+                                          if(isNotExist) {
+                                            print("555555555555555");
+                                            print(widget.model.productId);
+                                            cart.add({
+                                              'product':widget.model.toJson(),
+                                              'quantity': 1.toString(),
+                                              'createdAt': DateTime.now(),
+                                              'userId': FirebaseAuth.instance.currentUser!.uid.toString()
+                                            });
 
-                                          showSnackBarFun(context , 'The product has been added to\nyour cart');
+                                            showSnackBarFun(context , 'The product has been added to\nyour cart');
                                           count = 1;
                                           isNotExist = true;
                                         }else{

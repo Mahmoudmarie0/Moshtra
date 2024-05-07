@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/models/newFav_model.dart';
 import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
 import 'package:moshtra/screens/Details/view.dart';
@@ -39,27 +40,28 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
   String productId = "";
 
   getData() async {
-
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('favorites').get() as QuerySnapshot<Object?>;
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('favorites')
+        .get() as QuerySnapshot<Object?>;
     data = [];
     data.addAll(querySnapshot.docs);
     print('DataLength => ${data.length}');
 
-
-    for(int i = 0 ; i < data.length ; i++){
-      if(data[i]['userId'] == FirebaseAuth.instance.currentUser!.uid && data[i]['productId'] == productId ){
+    for (int i = 0; i < data.length; i++) {
+      if (data[i]['userId'] == FirebaseAuth.instance.currentUser!.uid &&
+          data[i]['product']['productId'] == productId) {
         ++count;
       }
     }
 
-    if(count > 1)
-      isNotExist = false;
+    if (count > 1) isNotExist = false;
 
     print('isExist => ${isNotExist}');
     print('Counter => ${count}');
 
     setState(() {});
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -163,15 +165,15 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                                   return CircularProgressIndicator();
                                 }
                                 else {
-                                  List<Fav> favList = [];
+                                  List<new_fav> favList = [];
                                   for (int i = 0; i <
                                       snapshot.data!.docs.length; i++) {
                                     if (snapshot.data!.docs[i].get('userId') ==
                                         FirebaseAuth.instance.currentUser!.uid) {
                                       favList.add(
-                                          Fav.fromJson(snapshot.data!.docs[i]));
+                                          new_fav.fromSnapshot(snapshot.data!.docs[i]));
                                       productIds.add(
-                                          snapshot.data!.docs[i].get('productId'));
+                                          snapshot.data!.docs[i]['product']['productId']);
                                     }
                                   }
                                 }
@@ -186,17 +188,10 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
 
                                       if(isNotExist) {
                                         fav.add({
-                                          'image': widget.products[index].image,
-                                          'name':Get.locale?.languageCode=="en"? widget.products[index].nameEN as String: widget.products[index].nameAR as String,
-                                          'price': widget.products[index].price,
-                                          'productId': widget.products[index].productId,
-                                          'userId': FirebaseAuth.instance.currentUser!.uid.toString(),
+                                          'product': widget.products[index].toJson(),
                                           'createdAt': DateTime.now(),
-                                          'descriptionEN': widget.products[index].descriptionEN,
-                                          'descriptionAR': widget.products[index].descriptionAR,
-                                          'sub_description':Get.locale?.languageCode=="en"? widget.products[index].sub_descriptionEN as String: widget.products[index].sub_descriptionAR as String,
-                                          'Sized': widget.products[index].Sized,
-                                          'color': '#${widget.products[index].color!.value.toRadixString(16).substring(2)}',                                        });
+                                          'userId': FirebaseAuth.instance.currentUser!.uid.toString()
+                                        });
 
                                         showSnackBarFun(context , 'The product has been added to\nyour Favorite');
                                         count = 1;
@@ -205,16 +200,27 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
 
                                         print(' ProIndexFromModel => ${widget.products[index].productId}');
 
-                                        for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
-                                          if(snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid &&
-                                              snapshot.data!.docs[i].get('productId') == widget.products[index].productId){
-                                            fav.doc(snapshot.data!.docs[i].id).delete();
-                                            print('DocID => ${snapshot.data!.docs[i].id}');
-                                            print('ProductID (snapshot) => ${snapshot.data!.docs[i].get('productId')}');
-                                            print('ProductID (model) => ${widget.products[index].productId}');
-
+                                        for (int i = 0;
+                                        i < snapshot.data!.docs.length;
+                                        i++) {
+                                          if (snapshot.data!.docs[i]
+                                              .get('userId') ==
+                                              FirebaseAuth.instance
+                                                  .currentUser!.uid &&
+                                              snapshot.data!
+                                                  .docs[i]['product']['productId'] ==
+                                                  widget.products[index]
+                                                      .productId) {
+                                            fav
+                                                .doc(snapshot.data!.docs[i].id)
+                                                .delete();
+                                            print(
+                                                'DocID => ${snapshot.data!.docs[i].id}');
+                                            print(
+                                                'ProductID (snapshot) => ${snapshot.data!.docs[i]['product']['productId']}');
+                                            print(
+                                                'ProductID (model) => ${widget.products[index].productId}');
                                           }
-
                                         }
 
                                         showSnackBarFun(context , 'The product has been deleted\nfrom your Favorite');

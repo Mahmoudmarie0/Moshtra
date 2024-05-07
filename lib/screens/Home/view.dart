@@ -499,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             print(
                                                 'DocID => ${snapshot.data!.docs[i].id}');
                                             print(
-                                                'ProductID (snapshot) => ${snapshot.data!.docs[i].get('productId')}');
+                                                'ProductID (snapshot) => ${snapshot.data!.docs[i]['product']['productId']}');
                                             print(
                                                 'ProductID (model) => ${controller.productModel[index].productId}');
                                           }

@@ -147,9 +147,9 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                                 ),
                               ),
                               SizedBox(height: 9.h,),
-                              CustomText(text: widget.products[index].name as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, maxLine: 1,),
+                              CustomText(text:Get.locale?.languageCode=="en"? widget.products[index].nameEN as String:widget.products[index].nameAR as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, maxLine: 1,),
                               SizedBox(height: 5.h,),
-                              CustomText(text: widget.products[index].sub_description as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                              CustomText(text:Get.locale?.languageCode=="en"? widget.products[index].sub_descriptionEN as String:widget.products[index].sub_descriptionAR as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                               SizedBox(height: 5.h,),
                               CustomText(text: widget.products[index].price.toString()+' EGP',color:AppColors.black,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
 
@@ -187,14 +187,14 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                                       if(isNotExist) {
                                         fav.add({
                                           'image': widget.products[index].image,
-                                          'name': widget.products[index].name,
+                                          'name':Get.locale?.languageCode=="en"? widget.products[index].nameEN as String: widget.products[index].nameAR as String,
                                           'price': widget.products[index].price,
                                           'productId': widget.products[index].productId,
                                           'userId': FirebaseAuth.instance.currentUser!.uid.toString(),
                                           'createdAt': DateTime.now(),
                                           'descriptionEN': widget.products[index].descriptionEN,
                                           'descriptionAR': widget.products[index].descriptionAR,
-                                          'sub_description': widget.products[index].sub_description,
+                                          'sub_description':Get.locale?.languageCode=="en"? widget.products[index].sub_descriptionEN as String: widget.products[index].sub_descriptionAR as String,
                                           'Sized': widget.products[index].Sized,
                                           'color': '#${widget.products[index].color!.value.toRadixString(16).substring(2)}',                                        });
 

@@ -47,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void _navigateToDetailsScreen(String productName) {
     // Find the corresponding product in homeController's productModel list
     var product = homeController.productModel.firstWhere(
-      (product) => product.name == productName,
+      (product) => product.nameEN == productName|| product.nameAR == productName,
       // orElse: () => null,
     );
 

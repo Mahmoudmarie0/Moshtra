@@ -77,7 +77,7 @@ class _MyFavScreenState extends State<MyFavScreen> {
                                   onTap: (){
 
                                     Color c = HexColor.fromHex(favtList[index].description);
-                                    ProductModel product = ProductModel(name: favtList[index].name , color: c , Sized:favtList[index].description , descriptionEN: favtList[index].Sized, descriptionAR: favtList[index].Sized ,sub_description: favtList[index].sub_description ,  image:favtList[index].image , price:favtList[index].price , productId:favtList[index].productId);
+                                    ProductModel product = ProductModel(nameEN: favtList[index].name, nameAR: favtList[index].name , color: c , Sized:favtList[index].description , descriptionEN: favtList[index].Sized, descriptionAR: favtList[index].Sized ,sub_descriptionAR: favtList[index].sub_description , sub_descriptionEN: favtList[index].sub_description,  image:favtList[index].image , price:favtList[index].price , productId:favtList[index].productId);
                                     Get.to(DetailsScreen(product));
 
                                   },

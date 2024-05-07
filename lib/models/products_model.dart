@@ -5,58 +5,66 @@ import 'package:flutter/cupertino.dart';
 import 'package:moshtra/screens/Details/controller/extension.dart';
 
 class ProductModel{
-  String ?name,image ,descriptionAR,descriptionEN,Sized,price,sub_description,productId,type;
+  String ?nameAR,nameEN,image ,descriptionAR,descriptionEN,Sized,price,sub_descriptionAR,sub_descriptionEN,productId,type;
   Color? color;
 
   ProductModel({
-      this.name,
+      this.nameAR,
+      this.nameEN,
       this.image,
       this.descriptionAR,
       this.descriptionEN,
       this.color,
       this.Sized,
       this.price,
-      this.sub_description,
+      this.sub_descriptionEN,
+      this.sub_descriptionAR,
       this.productId,
       this.type
   });
 
 
   ProductModel.fromJson(Map<dynamic,dynamic>map){
-    name=map['name'];
+    nameAR=map['nameAR'];
+    nameEN=map['nameEN'];
     image=map['image'];
     descriptionEN=map['descriptionEN'];
     descriptionAR=map['descriptionAR'];
     color= HexColor.fromHex(map['color']);
     Sized=map['Sized'];
     price=map['price'];
-    sub_description=map['sub_description'];
+    sub_descriptionEN=map['sub_descriptionEN'];
+    sub_descriptionAR=map['sub_descriptionAR'];
     productId=map['productId'];
     type=map['type'];
   }
   ProductModel.fromSnapshot(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
       :productId = snapshot.id,
-        name = snapshot['name'],
+        nameAR = snapshot['nameAR'],
+        nameEN = snapshot['nameEN'],
         image = snapshot['image'],
         descriptionEN = snapshot['descriptionEN'],
         descriptionAR = snapshot['descriptionAR'],
         Sized = snapshot['Sized'],
         price = snapshot['price'],
         type = snapshot['type'],
-        sub_description = snapshot['sub_description'],
+        sub_descriptionEN = snapshot['sub_descriptionEN'],
+        sub_descriptionAR = snapshot['sub_descriptionAR'],
         color = HexColor.fromHex(snapshot['color']);
 
 
   toJson(){
     return{
-      'name':name,
+      'nameAR':nameAR,
+      'nameEN':nameEN,
       'image':image,
       'descriptionEN':descriptionEN,
       'descriptionAR':descriptionAR,
       'color':color,
       'Sized':Sized,
       'price':price,
-      'sub_description':sub_description,
+      'sub_descriptionEN':sub_descriptionEN,
+      'sub_descriptionAR':sub_descriptionAR,
       'productId':productId,
       'type':type
     };

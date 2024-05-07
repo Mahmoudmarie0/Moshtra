@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:moshtra/models/products_model.dart';
+import 'package:moshtra/screens/Details/view.dart';
 
 import '../../../models/cart_model.dart';
 import '../../constants/colors.dart';
@@ -32,16 +33,25 @@ class productsList extends StatelessWidget {
                   child: Column(
                     children: [
                       SingleChildScrollView(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.white,
-                          ),
-                          height: 200.h,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(products[index]!.image!),
+                        child: GestureDetector(
+                          onTap:(){
+                            String currentRoute = ModalRoute.of(context)!.settings.name ?? '';
+                            if(currentRoute == '/DetailsScreen')
+                              Get.off(DetailsScreen(products[index]));
+                            else
+                              Get.to(DetailsScreen(products[index]));
+                            },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.white,
+                            ),
+                            height: 200.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.network(products[index]!.image!),
 
+                            ),
                           ),
                         ),
                       ),

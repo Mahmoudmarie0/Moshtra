@@ -322,7 +322,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         if(isNotExist) {
                                           cart.add({
                                             'image': widget.model.image,
-                                            'name': widget.model.name,
+                                            'name':Get.locale?.languageCode=="en"? widget.model.nameEN as String: widget.model.nameAR as String,
                                             'price': widget.model.price,
                                             'quantity': 1.toString(),
                                             'productId': widget.model.productId,
@@ -330,9 +330,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 .uid.toString(),
                                             'createdAt': DateTime.now(),
                                             'color': '#${widget.model.color!.value.toRadixString(16).substring(2)}',
-                                            'descriptionEN': widget.model.descriptionEN,
-                                            'descriptionAR': widget.model.descriptionAR,
-                                            'sub_description': widget.model.sub_description,
+                                            'description': Get.locale?.languageCode=="en"?widget.model.descriptionEN:widget.model.descriptionAR,
+                                            'sub_description':Get.locale?.languageCode=="en"? widget.model.sub_descriptionEN as String: widget.model.sub_descriptionAR as String,
                                             'Sized': widget.model.Sized
                                           });
 
@@ -428,7 +427,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Text(widget.model.name as String ,
+              child: Text( Get.locale?.languageCode=="en"? widget.model.nameEN as String: widget.model.nameAR as String ,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 18,

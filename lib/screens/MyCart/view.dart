@@ -81,7 +81,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                     print(" sub_descriptionFromCart => ${cartList[index].sub_description}");
 
                                     Color c = HexColor.fromHex(cartList[index].description);
-                                    ProductModel product = ProductModel(name: cartList[index].name , color: c , Sized:cartList[index].description , descriptionEN: cartList[index].Sized , descriptionAR: cartList[index].Sized ,sub_description: cartList[index].sub_description ,  image:cartList[index].image , price:cartList[index].price , productId:cartList[index].productId);
+                                    ProductModel product = ProductModel(nameEN: cartList[index].name,nameAR: cartList[index].name , color: c , Sized:cartList[index].description , descriptionEN: cartList[index].description , descriptionAR: cartList[index].description ,sub_descriptionAR: cartList[index].sub_description, sub_descriptionEN: cartList[index].sub_description ,  image:cartList[index].image , price:cartList[index].price , productId:cartList[index].productId);
                                     Get.to(DetailsScreen(product));
                                   },
                                   child: Container(

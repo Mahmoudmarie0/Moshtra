@@ -9,7 +9,6 @@ import 'package:moshtra/screens/Categories/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/Home/widgets/ListviewCategory.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../models/fav_model.dart';
 import '../../models/products_model.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
@@ -18,8 +17,9 @@ import '../Categories/Electronic/electronics.dart';
 import '../Categories/controller/Controller.dart';
 import '../Details/view.dart';
 import '../Wishlist/view.dart';
-// import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
 
+// import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
+//Get.locale?.languageCode == "en"
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -195,9 +195,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 11),
+                          padding: Get.locale?.languageCode == "en"
+                              ? const EdgeInsets.only(left: 11)
+                              : const EdgeInsets.only(left: 290),
                           child: CustomText(
-                            text: 'Welcome to',
+                            text: 'Welcome_to'.tr,
                             color: AppColors.black,
                             fontSize: 20.sp,
                             fontweight: FontWeight.w500,
@@ -207,9 +209,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 5.h,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 11),
+                          padding: Get.locale?.languageCode == "en"
+                              ? const EdgeInsets.only(left: 11)
+                              : const EdgeInsets.only(left: 315),
                           child: CustomText(
-                            text: 'Moshtra',
+                            text: 'Moshtra'.tr,
                             color: AppColors.blue,
                             fontSize: 25.sp,
                             fontweight: FontWeight.w800,
@@ -264,10 +268,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 categoryController
                                                     .CatModel[3].product
                                                     .toList(),
-                                                categoryController
-                                                    .CatModel[3].name
-                                                    .toString()));
-                                            //print(controller.CatModel[index].product[0].name);
+                                                Get.locale?.languageCode == "en"
+                                                    ? categoryController
+                                                        .CatModel[3].nameEN
+                                                        .toString()
+                                                    : categoryController
+                                                        .CatModel[3].nameAR
+                                                        .toString()));
                                           }
                                         },
                                         child: Container(
@@ -311,28 +318,51 @@ class _HomeScreenState extends State<HomeScreen> {
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 16, right: 16),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(
-                                      text: 'Categories',
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Get.to(CategoriesScreen());
-                                      },
-                                      child: CustomText(
-                                        text: 'See All',
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
+                                child: Get.locale?.languageCode == "en"
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomText(
+                                            text: 'Categories'.tr,
+                                            fontSize: 18,
+                                            fontweight: FontWeight.w800,
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Get.to(CategoriesScreen());
+                                            },
+                                            child: CustomText(
+                                              text: 'See_All'.tr,
+                                              fontSize: 16,
+                                              fontweight: FontWeight.w500,
+                                              color: AppColors.orange,
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Get.to(CategoriesScreen());
+                                            },
+                                            child: CustomText(
+                                              text: 'See_All'.tr,
+                                              fontSize: 16,
+                                              fontweight: FontWeight.w500,
+                                              color: AppColors.orange,
+                                            ),
+                                          ),
+                                          CustomText(
+                                            text: 'Categories'.tr,
+                                            fontSize: 18,
+                                            fontweight: FontWeight.w800,
+                                          ),
+                                        ],
                                       ),
-                                    )
-                                  ],
-                                ),
                               ),
                               SizedBox(
                                 height: 5.h,
@@ -344,17 +374,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 16, right: 16),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(
-                                      text: 'Latest Products',
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    ),
-                                  ],
-                                ),
+                                child: Get.locale?.languageCode == "en"
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomText(
+                                            text: 'Latest_Products'.tr,
+                                            fontSize: 18,
+                                            fontweight: FontWeight.w800,
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Spacer(),
+                                          CustomText(
+                                            text: 'Latest_Products'.tr,
+                                            fontSize: 18,
+                                            fontweight: FontWeight.w800,
+                                          ),
+                                        ],
+                                      ),
                               ),
                               SizedBox(
                                 height: 20.h,
@@ -450,10 +493,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     if (snapshot.data!.docs[i].get('userId') ==
                                         FirebaseAuth
                                             .instance.currentUser!.uid) {
-                                      favList.add(
-                                          new_fav.fromSnapshot(snapshot.data!.docs[i]));
+                                      favList.add(new_fav.fromSnapshot(
+                                          snapshot.data!.docs[i]));
 
-                                      productIds.add(snapshot.data!.docs[i]['product']['productId']);
+                                      productIds.add(snapshot.data!.docs[i]
+                                          ['product']['productId']);
                                     }
                                   }
                                 }
@@ -469,9 +513,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                       if (isNotExist) {
                                         fav.add({
-                                          'product': controller.productModel[index].toJson(),
+                                          'product': controller
+                                              .productModel[index]
+                                              .toJson(),
                                           'createdAt': DateTime.now(),
-                                          'userId': FirebaseAuth.instance.currentUser!.uid.toString()
+                                          'userId': FirebaseAuth
+                                              .instance.currentUser!.uid
+                                              .toString()
                                         });
 
                                         showSnackBarFun(context,
@@ -489,8 +537,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .get('userId') ==
                                                   FirebaseAuth.instance
                                                       .currentUser!.uid &&
-                                              snapshot.data!
-                                                  .docs[i]['product']['productId'] ==
+                                              snapshot.data!.docs[i]['product']
+                                                      ['productId'] ==
                                                   controller.productModel[index]
                                                       .productId) {
                                             fav

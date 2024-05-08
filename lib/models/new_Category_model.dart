@@ -3,13 +3,14 @@ import 'package:moshtra/models/products_model.dart';
 
 
 class Cat_Model {
-  String? id,name,image;
+  String? id,nameAR,nameEN,image;
   List<ProductModel> product = [];
 
-  Cat_Model(this.id,this.name,this.image,this.product);
+  Cat_Model(this.id,this.nameAR,this.nameEN,this.image,this.product);
   Cat_Model.fromSnapshot(QueryDocumentSnapshot<Map<String,dynamic>>snapshot)
       :id = snapshot.id,
-       name = snapshot['name'],
+        nameAR = snapshot['nameAR'],
+        nameEN = snapshot['nameEN'],
        image = snapshot['image'],
        product=[];
 

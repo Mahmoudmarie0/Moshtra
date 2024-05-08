@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../../utils/constants/colors.dart';
 import '../controller/Controller.dart';
@@ -36,7 +38,7 @@ Widget ListViewCategory() {
               ),
 
               SizedBox(height: 1.h,),
-              Text(controller.categoryModel[index].name as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
+              Text(Get.locale?.languageCode == "en"?controller.categoryModel[index].nameEN as String:controller.categoryModel[index].nameAR as String,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 10.sp,color: AppColors.black),),
             ],
           );
 

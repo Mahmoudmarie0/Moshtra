@@ -21,8 +21,10 @@ padding: EdgeInsets.only(right: 30),
       onTap: ()=>Get.to(SearchScreen()),
       decoration: InputDecoration(
         border: InputBorder.none,
-        prefixIcon: Icon(Icons.search,color: Colors.black,),
-        label:CustomText(text: 'What are you looking for? ',fontSize: 18,fontweight: FontWeight.w300,color: AppColors.placeholder,alignment: Alignment.centerLeft,),
+        prefixIcon:Get.locale?.languageCode == "en"? Icon(Icons.search,color: Colors.black, ): null,
+        suffixIcon:Get.locale?.languageCode == "ar"? Icon(Icons.search,color: Colors.black, ):null ,
+        label:
+        CustomText(text: 'search_hint'.tr,fontSize: 18,fontweight: FontWeight.w300,color: AppColors.placeholder,alignment: Get.locale?.languageCode == "en"? Alignment.centerLeft:Alignment.centerRight,),
       ),
     ),
   );

@@ -12,6 +12,7 @@ import 'package:moshtra/utils/custom_text/view.dart';
 import '../../models/cart_model.dart';
 import '../../models/newCart_model.dart';
 import '../../models/products_model.dart';
+import '../../service/stripe_payment/payment_manager.dart';
 import '../../utils/constants/assets.dart';
 import '../../utils/custom_widgets/global_widgets/empty_screen.dart';
 import '../Details/view.dart';
@@ -237,6 +238,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       ElevatedButton(
                         onPressed: () {
                           Get.to(()=>MyCart(products),arguments: totalPrice );
+
+
 
                         },
                         child: Text(

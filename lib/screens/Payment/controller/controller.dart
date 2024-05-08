@@ -16,7 +16,7 @@ class PaymentController extends GetxController{
   ValueNotifier<bool>_loading=ValueNotifier(false);
   String? phone , address;
 
-
+int activeIndex=0;
 
   User_Model? get userModel => _userModel;
   User_Model? _userModel ;

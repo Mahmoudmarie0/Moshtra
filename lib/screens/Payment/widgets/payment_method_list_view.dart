@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:moshtra/screens/Payment/widgets/payment_method_item.dart';
+
+import '../controller/controller.dart';
+
+
 
 
 class PaymentMethodsListView extends StatefulWidget {
@@ -14,31 +19,34 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
     "assets/images/credit.svg",
     "assets/images/paypal.svg",
   ];
-int activeIndex=0;
+//int activeIndex=0;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height:62 ,
-      // width: 103,
-      child: ListView.builder(
-          itemCount: PaymentMethodsItems.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context,index){
-            return Padding(
+    return GetBuilder<PaymentController>(
 
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: GestureDetector(
-                onTap: (){
-                  activeIndex=index;
-                  setState(() {
-                  });
-                },
-                child: PaymentMethoditem(
-                  isActive: activeIndex==index,
-                  img: PaymentMethodsItems[index],),
-              ),
-            );
-          }
+      builder: (controller)=> SizedBox(
+        height:62 ,
+        // width: 103,
+        child: ListView.builder(
+            itemCount: PaymentMethodsItems.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context,index){
+              return Padding(
+
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: GestureDetector(
+                  onTap: (){
+                    controller. activeIndex=index;
+                    setState(() {
+                    });
+                  },
+                  child: PaymentMethoditem(
+                    isActive: controller.activeIndex==index,
+                    img: PaymentMethodsItems[index],),
+                ),
+              );
+            }
+        ),
       ),
     );
   }

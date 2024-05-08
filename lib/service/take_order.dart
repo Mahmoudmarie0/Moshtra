@@ -6,7 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:moshtra/models/User_model.dart';
 
 import '../models/products_model.dart';
-import '../screens/Payment/myCartPayment/controller/controller.dart';
+
 import '../screens/auth/register/controller/controller.dart';
 
 class take_order {

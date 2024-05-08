@@ -13,11 +13,12 @@ import '../../../models/cart_model.dart';
 import '../../../utils/custom_widgets/build_appbar.dart';
 import '../../../utils/custom_widgets/global_widgets/products_ListView.dart';
 import '../../auth/register/controller/controller.dart';
+import '../controller/controller.dart';
 import '../widgets/cart_info.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import '../widgets/payment_method_bottom_sheet.dart';
 import '../widgets/total_price.dart';
-import 'controller/controller.dart';
+
 
 class MyCart extends StatelessWidget {
    // MyCart({key});

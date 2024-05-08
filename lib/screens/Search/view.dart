@@ -17,7 +17,6 @@ class _SearchScreenState extends State<SearchScreen> {
   final CollectionReference _productsCollection =
       FirebaseFirestore.instance.collection('Products');
   HomeController homeController = Get.put(HomeController());
-//mahih
   List<String> _searchResults = [];
   bool _isLoading = false;
 
@@ -68,9 +67,11 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 11),
+                padding: Get.locale?.languageCode == "en"
+                    ? const EdgeInsets.only(left: 11)
+                    : const EdgeInsets.only(left: 290),
                 child: CustomText(
-                  text: 'Welcome to',
+                  text: 'Welcome_to'.tr,
                   color: AppColors.black,
                   fontSize: 20,
                   fontweight: FontWeight.w500,
@@ -78,9 +79,11 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               SizedBox(height: 5.h),
               Padding(
-                padding: const EdgeInsets.only(left: 11),
+                padding: Get.locale?.languageCode == "en"
+                    ? const EdgeInsets.only(left: 11)
+                    : const EdgeInsets.only(left: 315),
                 child: CustomText(
-                  text: 'Moshtra',
+                  text: 'Moshtra'.tr,
                   color: AppColors.blue,
                   fontSize: 25,
                   fontweight: FontWeight.w800,
@@ -88,8 +91,10 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               SizedBox(height: 20.h),
               Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                width: 343.w,
+                height: 48.h,
+               // width: double.infinity,
+                padding: EdgeInsets.only(right: 30),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.white,
@@ -99,8 +104,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   controller: _searchController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    prefixIcon: Icon(Icons.search, color: Colors.black),
-                    hintText: 'What are you looking for?',
+                    prefixIcon:Get.locale?.languageCode == "en"? Icon(Icons.search,color: Colors.black, ): null,
+                    suffixIcon:Get.locale?.languageCode == "ar"? Icon(Icons.search,color: Colors.black, ):null ,
+                    hintText: 'search_hint'.tr,
                     hintStyle: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w300,

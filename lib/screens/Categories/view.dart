@@ -64,7 +64,7 @@ class CategoriesScreen extends StatelessWidget {
                           if (controller.CatModel[index].product.isNotEmpty) {
                             Get.to(ElectronicsScreen(
                                 controller.CatModel[index].product.toList(),
-                                controller.CatModel[index].name.toString()));
+                                Get.locale?.languageCode == "en"? controller.CatModel[index].nameEN.toString():  controller.CatModel[index].nameAR.toString()));
                             //print(controller.CatModel[index].product[0].name);
                           }
                         },
@@ -82,7 +82,7 @@ class CategoriesScreen extends StatelessWidget {
                         height: 4.h,
                       ),
                       CustomText(
-                        text: controller.CatModel[index].name as String,
+                        text:Get.locale?.languageCode == "en"? controller.CatModel[index].nameEN.toString():  controller.CatModel[index].nameAR.toString(),
                         alignment: Alignment.center,
                         fontweight: FontWeight.w600,
                         fontSize: 14,

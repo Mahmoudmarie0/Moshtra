@@ -87,7 +87,7 @@ class CategoryController extends GetxController {
         .toList();
 
     _CatModel = Category;
-    print(_CatModel[0].name);
+    //print(_CatModel[0].name);
     print(_CatModel.length);
 
     _loading.value = false;

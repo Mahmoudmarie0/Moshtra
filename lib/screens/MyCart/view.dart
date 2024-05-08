@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -91,85 +93,92 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                   mainAxisAlignment: MainAxisAlignment
                                       .spaceBetween,
                                   children: [
-                                    Container(
+                                    Expanded(
+                                      child: Container(
+                                          margin: EdgeInsets.only(
+                                              left: 10, right: 10, top: 8),
+                                          width: 165,
+                                          child: Text(
+                                            Get.locale?.languageCode == "en"?
+                                            cartList[index].product!.nameEN! : cartList[index].product!.nameAR!,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20,
+                                            ),
+                                          )),
+                                    ),
+                                    Expanded(
+                                      child: Container(
                                         margin: EdgeInsets.only(
-                                            left: 10, right: 10, top: 8),
-                                        width: 165,
-                                        child: Text(
-                                          Get.locale?.languageCode == "en"?
-                                          cartList[index].product!.nameEN! : cartList[index].product!.nameAR!,
+                                            left: 10, right: 10),
+                                        child:
+                                        Text(
+                                          '${cartList[index].product!.price} EGP',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 20,
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400
                                           ),
-                                        )),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child:
-                                      Text(
-                                        '${cartList[index].product!.price} EGP',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      width: 96.w,
-                                      height: 24.h,
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .center,
-                                        children: [
-                                          Expanded(
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
-                                                      if (snapshot.data!.docs[i].get('userId') ==
-                                                          FirebaseAuth.instance.currentUser!.uid &&
-                                                          snapshot.data!.docs[i]['product']['productId'] ==
-                                                              cartList[index].product!.productId) {
-                                                        if (int.parse(cartList[index].quantity!) > 1 ) {
+                                    Expanded(
+                                      child: Container(
+                                        width: 96.w,
+                                        height: 24.h,
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment
+                                              .center,
+                                          children: [
+                                            Expanded(
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
+                                                        if (snapshot.data!.docs[i].get('userId') ==
+                                                            FirebaseAuth.instance.currentUser!.uid &&
+                                                            snapshot.data!.docs[i]['product']['productId'] ==
+                                                                cartList[index].product!.productId) {
+                                                          if (int.parse(cartList[index].quantity!) > 1 ) {
+                                                            cart.doc(snapshot.data!.docs[i].id).update(
+                                                                {'quantity': (int.parse(cartList[index].quantity!) - 1).toString()});
+                                      
+                                                            totalPrice -= double.parse(
+                                                                cartList[index].product!.price!);
+                                                          }
+                                                        }
+                                                      }
+                                                      setState(() {});
+                                                    },
+                                                    icon: Icon(Icons.remove))),
+                                            Spacer(),
+                                            Expanded(
+                                                child: Text(
+                                                  '${int.parse(
+                                                      cartList[index].quantity!)}',
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold),
+                                                )),
+                                            Expanded(
+                                                child: IconButton(
+                                                    onPressed: () {
+                                                      for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
+                                                        if (snapshot.data!.docs[i].get('userId') ==
+                                                            FirebaseAuth.instance.currentUser!.uid &&
+                                                            snapshot.data!.docs[i]['product']['productId'] ==
+                                                                cartList[index].product!.productId) {
                                                           cart.doc(snapshot.data!.docs[i].id).update(
-                                                              {'quantity': (int.parse(cartList[index].quantity!) - 1).toString()});
-
-                                                          totalPrice -= double.parse(
+                                                              {'quantity': (int.parse(cartList[index].quantity!) + 1).toString()});
+                                      
+                                                          totalPrice += double.parse(
                                                               cartList[index].product!.price!);
                                                         }
                                                       }
-                                                    }
-                                                    setState(() {});
-                                                  },
-                                                  icon: Icon(Icons.remove))),
-                                          Spacer(),
-                                          Expanded(
-                                              child: Text(
-                                                '${int.parse(
-                                                    cartList[index].quantity!)}',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold),
-                                              )),
-                                          Expanded(
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
-                                                      if (snapshot.data!.docs[i].get('userId') ==
-                                                          FirebaseAuth.instance.currentUser!.uid &&
-                                                          snapshot.data!.docs[i]['product']['productId'] ==
-                                                              cartList[index].product!.productId) {
-                                                        cart.doc(snapshot.data!.docs[i].id).update(
-                                                            {'quantity': (int.parse(cartList[index].quantity!) + 1).toString()});
-
-                                                        totalPrice += double.parse(
-                                                            cartList[index].product!.price!);
-                                                      }
-                                                    }
-                                                    setState(() {});
-                                                  },
-                                                  icon: Icon(Icons.add)))
-                                        ],
+                                                      setState(() {});
+                                                    },
+                                                    icon: Icon(Icons.add)))
+                                          ],
+                                        ),
                                       ),
                                     )
                                   ],

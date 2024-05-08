@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -92,27 +94,32 @@ class _MyFavScreenState extends State<MyFavScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                        margin: EdgeInsets.only(
-                                            left: 10, right: 10, top: 8),
-                                        width: 165,
-                                        child: Text(
-                                          Get.locale?.languageCode == "en"?
-                                          favtList[index].product!.nameEN! : favtList[index].product!.nameAR!,
+                                    Expanded(
+                                      child: Container(
+                                          margin: EdgeInsets.only(
+                                              left: 10, right: 10, top: 8),
+                                          width: 165,
+                                          child: Text(
+                                            Get.locale?.languageCode == "en"?
+                                            favtList[index].product!.nameEN! : favtList[index].product!.nameAR!,
+                                            style: TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20,
+                                            ),
+                                          )),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.only(left: 10, right: 10),
+                                        child:
+                                        Text(
+                                          '${favtList[index].product!.price!} EGP',
                                           style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 20,
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400
                                           ),
-                                        )),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 10, right: 10),
-                                      child:
-                                      Text(
-                                        '${favtList[index].product!.price!} EGP',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400
                                         ),
                                       ),
                                     ),

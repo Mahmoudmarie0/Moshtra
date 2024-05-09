@@ -175,7 +175,7 @@ class LoginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("Don’t have an account yet? ",style: TextStyle(fontSize: 12.sp,color:Colors.black,fontWeight:FontWeight.w300),),
+                            Text("Don’t have an account yet? ".tr,style: TextStyle(fontSize: 12.sp,color:Colors.black,fontWeight:FontWeight.w300),),
                             TextButton(
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
@@ -188,7 +188,7 @@ class LoginScreen extends StatelessWidget {
                                 Get.to(RegisterScreen(),transition:  Transition.leftToRight);
                               },
                               child:
-                              Text("Register Here",style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
+                              Text("Register Here".tr,style: TextStyle(fontSize:12.sp,fontWeight: FontWeight.w800,color: AppColors.orange),),
                             ),
                           ],
                         ),

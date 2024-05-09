@@ -32,7 +32,7 @@ class LoginController extends GetxController{
 
   void validateCredentials(String email, String password) {
     if(email.isEmpty || password.isEmpty)
-      GetSnackbarError( message: 'Please Enter Your Email OR Password',Color: AppColors.Red);
+      GetSnackbarError( message: 'Please Enter Your Email OR Password'.tr,Color: AppColors.Red);
     else {
       FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email, password: password
@@ -46,10 +46,10 @@ class LoginController extends GetxController{
       }).catchError((error){
         print(error.toString());
         if(error is FirebaseAuthException && error.code=='invalid-email')
-          GetSnackbarError( message: "The email address is badly formatted.",Color: AppColors.Red);
+          GetSnackbarError( message: "The email address is badly formatted.".tr,Color: AppColors.Red);
 
         else {
-          GetSnackbarError( message: "Wrong Password",Color: AppColors.Red);
+          GetSnackbarError( message: "Wrong Password".tr,Color: AppColors.Red);
         }
 
       });

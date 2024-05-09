@@ -10,7 +10,7 @@ class EmailConfirmationController extends GetxController {
   void validateEmail(String email) {
     if (email.isEmpty) {
       GetSnackbarError(
-          message: 'Please Enter Your Email', Color: AppColors.Red);
+          message: 'Please Enter Your Email'.tr, Color: AppColors.Red);
 
       return;
     }

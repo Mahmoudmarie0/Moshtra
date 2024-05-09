@@ -27,7 +27,7 @@ class NewPasswordScreen extends StatelessWidget {
               Expanded(
                 child:Padding(
                   padding: const EdgeInsets.only(left: 24,top: 90),
-                  child: Text("New\nPassword",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35.sp,color: AppColors.white),),
+                  child: Text("New\nPassword".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35.sp,color: AppColors.white),),
                 ),
               ),
               Expanded(
@@ -54,7 +54,7 @@ class NewPasswordScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        child: Text('Enter your new password and remember it.',
+                        child: Text('Enter your new password and remember it.'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Color(0xff6F7384)
@@ -82,7 +82,7 @@ class NewPasswordScreen extends StatelessWidget {
                               child: Icon(controller.oobscureText?Icons.visibility:Icons.visibility_off_outlined),
                             ),
                             border:OutlineInputBorder(),
-                            labelText: 'Password',
+                            labelText: 'Password'.tr,
                            // hintText: 'Enter your password',
                             //hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
                             //labelStyle: TextStyle(color: Colors.black),
@@ -113,7 +113,7 @@ class NewPasswordScreen extends StatelessWidget {
                               child: Icon(controller.oobscureText?Icons.visibility:Icons.visibility_off_outlined),
                             ),
                             border:OutlineInputBorder(),
-                            labelText: 'Confirm Password',
+                            labelText: 'Confirm Password'.tr,
                            // hintText: 'Enter your password',
                            // hintStyle: TextStyle(color: AppColors.LightGrey1,fontWeight:FontWeight.w300 ),
                            // labelStyle: TextStyle(color: Colors.black),
@@ -139,7 +139,7 @@ class NewPasswordScreen extends StatelessWidget {
                               //  controller.onSubmit();
                             },
                             child: Text(
-                              "Send",
+                              "Send".tr,
                               style: TextStyle(
                                 color:  AppColors.white,
                                 fontWeight: FontWeight.w500,

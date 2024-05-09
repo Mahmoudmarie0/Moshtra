@@ -62,7 +62,7 @@ class _MyFavScreenState extends State<MyFavScreen> {
           }
 
           if(favtList.length == 0)
-            return buildEmptyScreen(titleText: 'Your Favorite is empty' ,subTitleText:  'Looks like you have not added anything in your \nFavorite. Go ahead and explore top categories.' ,btnText:  'Explore Categories' ,homeLayoutController:  homeLayoutController );
+            return buildEmptyScreen(titleText: 'Your Favorite is empty'.tr ,subTitleText:  'Looks like you have not added anything in your \nFavorite. Go ahead and explore top categories.' .tr,btnText:  'Explore Categories'.tr ,homeLayoutController:  homeLayoutController );
           else
             return Column(
               children: [

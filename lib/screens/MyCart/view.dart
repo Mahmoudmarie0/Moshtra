@@ -61,7 +61,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
           }
 
           if(cartList.length == 0)
-            return   buildEmptyScreen(titleText: 'Your Cart is empty' ,subTitleText:  'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.' ,btnText:  'Explore Categories' ,homeLayoutController:  homeLayoutController);
+            return   buildEmptyScreen(titleText: 'Your Cart is empty'.tr ,subTitleText:  'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.' .tr,btnText:  'Explore Categories'.tr ,homeLayoutController:  homeLayoutController);
           else
             return Column(
               children: [
@@ -152,7 +152,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                       setState(() {});
                                                     },
                                                     icon: Icon(Icons.remove))),
-
+                                              Spacer(),
                                             Expanded(
                                                 child: Text(
                                                   '${int.parse(

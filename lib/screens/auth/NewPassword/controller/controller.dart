@@ -19,9 +19,9 @@ class NewPasswordController extends GetxController{
 
   void validateNewPassword(String password,String confirmPassword) {
     if(password.isEmpty || confirmPassword.isEmpty)
-      GetSnackbarError( message: 'Please Enter Password ',Color: AppColors.Red);
+      GetSnackbarError( message: 'Please Enter Password '.tr,Color: AppColors.Red);
     else {
-      GetSnackbarError( message: 'Your Password has been changed successfully ',Color: AppColors.Green);
+      GetSnackbarError( message: 'Your Password has been changed successfully '.tr,Color: AppColors.Green);
       Get.to(LoginScreen(),transition:  Transition.leftToRight);
       // Perform login or other actions
     }

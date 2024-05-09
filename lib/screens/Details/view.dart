@@ -216,7 +216,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 maxLines: null,
                                                 keyboardType: TextInputType.multiline,
                                                 decoration: InputDecoration(
-                                                  hintText: 'Write a comment...',
+                                                  hintText: 'Write a comment...'.tr,
                                                   suffixIcon: GestureDetector(
                                                       onTap: ()
                                                       {
@@ -267,7 +267,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               padding: const EdgeInsets.only(left: 16),
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text('Realted Products' ,
+                                child: Text('Related Products'.tr ,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500
@@ -294,7 +294,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               height: 60.h,
                               width: 160.w,
                               child: ElevatedButton(onPressed: (){},
-                                child: Text('Buy Now', style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
+                                child: Text('Buy Now'.tr, style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: AppColors.grey5,
                                     elevation: 0,
@@ -349,17 +349,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               'userId': FirebaseAuth.instance.currentUser!.uid.toString()
                                             });
 
-                                            showSnackBarFun(context , 'The product has been added to\nyour cart');
+                                            showSnackBarFun(context , 'The product has been added to\nyour cart'.tr);
                                             count = 1;
                                             isNotExist = true;
                                           }else{
-                                            showSnackBarFun(context , 'The product already existed');
+                                            showSnackBarFun(context , 'The product already existed'.tr);
                                             count = 1;
                                             isNotExist = true;
                                           }
 
                                         },
-                                        child: Text('Add To Cart',
+                                        child: Text('Add To Cart'.tr,
                                           style: TextStyle(
                                             color: AppColors.white,
                                             fontWeight: FontWeight.w500,
@@ -404,7 +404,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   borderRadius: BorderRadius.circular(8)
               ),
               child: Center(
-                child: Text('Top Rated',
+                child: Text('Top Rated'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 10,
@@ -422,7 +422,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   borderRadius: BorderRadius.circular(8)
               ),
               child: Center(
-                child: Text('Free Shipping',
+                child: Text('Free Shipping'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 10,
@@ -461,7 +461,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ],
         ),
         SizedBox(height: 15.h,),
-        Text('Details:' ,
+        Text('Details:'.tr ,
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w500
@@ -495,7 +495,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Size',
+                    Text('Size'.tr,
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600
@@ -518,7 +518,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Color',
+                    Text('Color'.tr,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -585,7 +585,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             Expanded(
               child: GestureDetector(
-                child: Text('View Cart'
+                child: Text('View Cart'.tr
                   ,style: TextStyle(
                       color: AppColors.orange
                   ),

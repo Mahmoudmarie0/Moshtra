@@ -55,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 26,top: 112),
-                  child: Text("Register",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 41.sp,color: AppColors.white),),
+                  child: Text("Register".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 41.sp,color: AppColors.white),),
                 ),
                 Expanded(
                   child:SvgPicture.asset(AssetsPaths.Ellipse,),
@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   border:OutlineInputBorder(),
-                                  labelText: 'Name',
+                                  labelText: 'Name'.tr,
                                 ),
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(15),
@@ -121,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   //floatingLabelBehavior: FloatingLabelBehavior.always,
                                   border:OutlineInputBorder(),
-                                  labelText: 'Email',
+                                  labelText: 'Email'.tr,
 
                                 ),
                                 inputFormatters: [
@@ -153,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   //floatingLabelBehavior: FloatingLabelBehavior.always,
                                   border:OutlineInputBorder(),
-                                  labelText: 'Address',
+                                  labelText: 'Address'.tr,
 
                                 ),
                                 inputFormatters: [
@@ -181,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   prefixText: '+20',
                                   //floatingLabelBehavior: FloatingLabelBehavior.always,
                                   border:OutlineInputBorder(),
-                                  labelText: 'Phone Number',
+                                  labelText: 'Phone Number'.tr,
 
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -220,7 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: Icon(controller.oobscureText?Icons.visibility:Icons.visibility_off_outlined),
                                   ),
                                   border:OutlineInputBorder(),
-                                  labelText: 'Password',
+                                  labelText: 'Password'.tr,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: AppColors.blue,
@@ -266,7 +266,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     }
                                   },
                                   child: Text(
-                                    "Register",
+                                    "Register".tr,
                                     style: TextStyle(
                                       color:  AppColors.white,
                                       fontWeight: FontWeight.w500,

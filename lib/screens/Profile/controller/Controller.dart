@@ -100,7 +100,7 @@ class ProfileCopntroller extends GetxController {
                                 height: 11.h,
                               ),
                               Text(
-                                "Are you sure you \n want to log out? ",
+                                "Are you sure you \n want to log out? ".tr,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.black,
@@ -204,7 +204,7 @@ class ProfileCopntroller extends GetxController {
                                 height: 11.h,
                               ),
                               Text(
-                                "Are you sure you \n want to delete your account? ",
+                                "Are you sure you \n want to delete your account? ".tr,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.black,
@@ -236,7 +236,7 @@ class ProfileCopntroller extends GetxController {
                                     FirebaseAuth.instance.currentUser!.delete();
                                     GetSnackbarError(
                                         message:
-                                            'Your account has been successfully deleted',
+                                            'Your account has been successfully deleted'.tr,
                                         Color: AppColors.green);
                                     Get.offAll(() => LoginScreen(),
                                         transition: Transition.downToUp);

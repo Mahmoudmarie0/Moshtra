@@ -35,10 +35,10 @@ class RegisterController extends GetxController{
 
   void validateRegisterCredentials(String name, String email,String phoneNumber,String password,String address) {
     if(name.isEmpty||email.isEmpty || phoneNumber.isEmpty || password.isEmpty || address.isEmpty)
-      GetSnackbarError( message: 'Please fill in all fields ',Color: AppColors.Red);
+      GetSnackbarError( message: 'Please fill in all fields '.tr,Color: AppColors.Red);
 
     else if(phoneNumber.length!=10){
-      GetSnackbarError( message: "Enter correct phone number",Color: AppColors.Red);
+      GetSnackbarError( message: "Enter correct phone number".tr,Color: AppColors.Red);
 
     }
     else {
@@ -50,17 +50,17 @@ class RegisterController extends GetxController{
         print("Register Succes"),
         print(value.user!.email),
         print(value.user!.uid),
-      GetSnackbarError( message: 'Your account has been created successfully ',Color: AppColors.Green),
+      GetSnackbarError( message: 'Your account has been created successfully '.tr,Color: AppColors.Green),
       Get.to(HomeLayout(),transition:  Transition.leftToRight),
 
 
       })
           .catchError((error){
             if(error is FirebaseAuthException && error.code=='invalid-email')
-        GetSnackbarError( message: "The email address is badly formatted.",Color: AppColors.Red);
+        GetSnackbarError( message: "The email address is badly formatted.".tr,Color: AppColors.Red);
 
             else if(error is FirebaseAuthException && error.code=='weak-password')
-              GetSnackbarError( message: "Password should be at least 6 characters ",Color: AppColors.Red);
+              GetSnackbarError( message: "Password should be at least 6 characters ".tr,Color: AppColors.Red);
 
         else if(error is FirebaseAuthException && error.code=='email-already-in-use')
         GetSnackbarError( message: "The email address is already in use ",Color: AppColors.Red);

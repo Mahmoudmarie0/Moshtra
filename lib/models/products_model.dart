@@ -1,26 +1,26 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:moshtra/screens/Details/controller/extension.dart';
 
 class ProductModel{
-  String ?nameAR,nameEN,image ,descriptionAR,descriptionEN,Sized,price,sub_descriptionAR,sub_descriptionEN,productId,type;
+  String ?nameAR,nameEN,image ,descriptionAR,descriptionEN,Sized,price,sub_descriptionAR,sub_descriptionEN,productId,type,quantity,number_of_order;
   Color? color;
 
   ProductModel({
-      this.nameAR,
-      this.nameEN,
-      this.image,
-      this.descriptionAR,
-      this.descriptionEN,
-      this.color,
-      this.Sized,
-      this.price,
-      this.sub_descriptionEN,
-      this.sub_descriptionAR,
-      this.productId,
-      this.type
+    this.nameAR,
+    this.nameEN,
+    this.image,
+    this.descriptionAR,
+    this.descriptionEN,
+    this.color,
+    this.Sized,
+    this.price,
+    this.sub_descriptionEN,
+    this.sub_descriptionAR,
+    this.productId,
+    this.type,
+    this.quantity,
+    this.number_of_order
   });
 
 
@@ -37,6 +37,8 @@ class ProductModel{
     sub_descriptionAR=map['sub_descriptionAR'];
     productId=map['productId'];
     type=map['type'];
+    quantity=map['quantity'];
+    number_of_order=map['number_of_order'];
   }
   ProductModel.fromSnapshot(snapshot)
       :productId = snapshot['productId'],
@@ -48,6 +50,8 @@ class ProductModel{
         Sized = snapshot['Sized'],
         price = snapshot['price'],
         type = snapshot['type'],
+        quantity = snapshot['quantity'],
+        number_of_order = snapshot['number_of_order'],
         sub_descriptionEN = snapshot['sub_descriptionEN'],
         sub_descriptionAR = snapshot['sub_descriptionAR'],
         color = HexColor.fromHex(snapshot['color']);
@@ -66,8 +70,10 @@ class ProductModel{
       'sub_descriptionEN':sub_descriptionEN,
       'sub_descriptionAR':sub_descriptionAR,
       'productId':productId,
-      'type':type
+      'type':type,
+      'quantity':quantity,
+      'number_of_order':number_of_order
     };
 
 
-}}
+  }}

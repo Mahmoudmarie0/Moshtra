@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/get_transition_mixin.dart';
 import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
@@ -31,6 +33,9 @@ class MyCart extends StatelessWidget {
    TextEditingController AddressController = TextEditingController();
    GlobalKey<FormState> formKey = GlobalKey();
    RegisterController registerController=Get.put(RegisterController());
+
+   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
+
 
 
    @override
@@ -262,10 +267,17 @@ class MyCart extends StatelessWidget {
                               height: 34,
                               color: Color(0xFFC6C6C6),
                             ),
-                            Total_price(
+                            GestureDetector(
+                              onTap: (){
 
-                              price: '$sum EGP',
 
+                                // controller.deleteCart();
+                              },
+                              child: Total_price(
+
+                                price: '$sum EGP',
+
+                              ),
                             ),
                             SizedBox(height:16 ,),
                             buttonWidget(

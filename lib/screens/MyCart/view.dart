@@ -197,12 +197,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                   )),
                                               Expanded(
                                                   child: IconButton(
-                                                      onPressed: () {
+                                                      onPressed: () async {
                                                         for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
                                                           if (snapshot.data!.docs[i].get('userId') ==
                                                               FirebaseAuth.instance.currentUser!.uid &&
                                                               snapshot.data!.docs[i]['product']['productId'] ==
-                                                                  cartList[index].product!.productId) {
+                                                                  cartList[index].product!.productId && cartList[index].quantity! != products[index].quantity) {
                                                             cart.doc(snapshot.data!.docs[i].id).update(
                                                                 {'quantity': (int.parse(cartList[index].quantity!) + 1).toString()});
 
@@ -212,6 +212,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                         }
                                                         setState(() {});
                                                       },
+
+
                                                       icon: Icon(Icons.add)))
                                             ],
                                           ),

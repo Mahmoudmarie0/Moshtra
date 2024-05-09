@@ -228,7 +228,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                            text: 'TOTAL',
+                            text: 'TOTAL'.tr,
                             fontSize: 18,
                             color: Colors.grey,
                             fontweight: FontWeight.w400,
@@ -252,7 +252,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
 
                         },
                         child: Text(
-                          'Checkout(${cartList.length})',
+                          'Checkout(${cartList.length})'.tr,
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 18,

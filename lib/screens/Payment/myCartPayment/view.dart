@@ -42,7 +42,7 @@ class MyCart extends StatelessWidget {
 
       :Scaffold(
         backgroundColor: AppColors.white,
-        appBar: buildAppBar(title: 'My Cart',SearchDisplay:false),
+        appBar: buildAppBar(title: 'My Cart'.tr,SearchDisplay:false),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -73,7 +73,7 @@ class MyCart extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Dear Customer",
+                                        Text("Dear Customer".tr,
                                           style: TextStyle(
                                               fontSize: 16
                                           ),),
@@ -90,7 +90,7 @@ class MyCart extends StatelessWidget {
                                                       child: Column(
                                                         mainAxisSize: MainAxisSize.min,
                                                         children: [
-                                                          Text('Change Data',style: TextStyle(
+                                                          Text('Change Data'.tr,style: TextStyle(
                                                               fontWeight: FontWeight.w600,
                                                               fontSize: 16
                                                           ),),
@@ -115,7 +115,7 @@ class MyCart extends StatelessWidget {
                                                                 prefixText: '+20',
                                                                 //floatingLabelBehavior: FloatingLabelBehavior.always,
                                                                 border:OutlineInputBorder(),
-                                                                labelText: 'Phone Number',
+                                                                labelText: 'Phone Number'.tr,
                   
                                                                 focusedBorder: OutlineInputBorder(
                                                                   borderSide: BorderSide(
@@ -154,7 +154,7 @@ class MyCart extends StatelessWidget {
                                                                 ),
                                                                 //floatingLabelBehavior: FloatingLabelBehavior.always,
                                                                 border:OutlineInputBorder(),
-                                                                labelText: 'Address',
+                                                                labelText: 'Address'.tr,
                   
                                                               ),
                                                               inputFormatters: [
@@ -174,7 +174,7 @@ class MyCart extends StatelessWidget {
                                                               }
                   
                                                               },
-                                                              child: Text('Submit'),),
+                                                              child: Text('Submit'.tr),),
                                                           )
                                                         ],
                                                       ),
@@ -183,7 +183,7 @@ class MyCart extends StatelessWidget {
                                                 )
                                             );
                                           },
-                                          child:Text("Change",
+                                          child:Text("Change".tr,
                                             style: TextStyle(fontSize: 18,
                                               color: Color(0xFFDB3022),
                                             ),
@@ -193,7 +193,7 @@ class MyCart extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        CustomText(text: 'Name: ', fontweight: FontWeight.w400,),
+                                        CustomText(text: 'Name: '.tr, fontweight: FontWeight.w400,),
                                         CustomText(text: controller.userModel!.name, fontweight: FontWeight.w400,)
                   
                                       ],
@@ -201,21 +201,21 @@ class MyCart extends StatelessWidget {
                                     SizedBox(height:5.h,),
                                     Row(
                                       children: [
-                                        CustomText(text: 'Email: ', fontweight: FontWeight.w400,),
+                                        CustomText(text: 'Email: '.tr, fontweight: FontWeight.w400,),
                                         CustomText(text: controller.userModel!.email, fontweight: FontWeight.w400,)
                                       ],
                                     ),
                                     SizedBox(height: 5.h,),
                                     Row(
                                       children: [
-                                        CustomText(text: 'Phone number: 0',fontweight: FontWeight.w400,),
+                                        CustomText(text: 'Phone number: 0'.tr,fontweight: FontWeight.w400,),
                                         CustomText(text: controller.phone.toString(),fontweight: FontWeight.w400,)
                                       ],
                                     ),
                                     SizedBox(height: 5.h,),
                                     Row(
                                       children: [
-                                        CustomText(text: 'Address: ',fontweight: FontWeight.w400,),
+                                        CustomText(text: 'Address: '.tr,fontweight: FontWeight.w400,),
                                         Expanded(
                                           child: SingleChildScrollView(
                                             scrollDirection: Axis.horizontal,
@@ -232,10 +232,10 @@ class MyCart extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Cart List' ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                Text('Cart List'.tr ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
                                 GestureDetector(
                                   onTap: (){Get.back();},
-                                  child: Text('Edit' ,style: TextStyle(fontSize: 18,
+                                  child: Text('Edit'.tr ,style: TextStyle(fontSize: 18,
                                     color: Color(0xFFDB3022),
                                   ),),
                                 ),
@@ -243,17 +243,17 @@ class MyCart extends StatelessWidget {
                             ),
                             productsList(products),//horizontal Product List
                             OrderInfoItem(
-                    title: 'Order Subtotal',
+                    title: 'Order Subtotal'.tr,
                     value: '$total EGP',
                   ),
                             SizedBox(height:3 ,),
                             OrderInfoItem(
-                              title: 'Discount',
+                              title: 'Discount'.tr,
                               value: r'0 EGP',
                             ),
                             SizedBox(height:3 ,),
                             OrderInfoItem(
-                              title: 'Shipping',
+                              title: 'Shipping'.tr,
                               value: r'8 EGP',
                             ),
                             SizedBox(height:17 ,),
@@ -269,7 +269,7 @@ class MyCart extends StatelessWidget {
                             ),
                             SizedBox(height:16 ,),
                             buttonWidget(
-                              text: 'Complete Payment',
+                              text: 'Complete Payment'.tr,
                               width: 350,
                               height: 73,
                               radius: 15,

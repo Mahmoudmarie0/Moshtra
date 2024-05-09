@@ -62,7 +62,7 @@ import 'controller.dart';
                             width: 6.w,
                           ),
                           Text(
-                            'Home',
+                            'Home'.tr,
                             style: TextStyle(
                                 color:Controller.bottom_Item_1_pressed ? AppColors.black:AppColors.placeholder,
                                 fontSize:12.sp,
@@ -92,7 +92,7 @@ import 'controller.dart';
                             width: 6.w,
                           ),
                           Text(
-                            'Categorie',
+                            'Categories'.tr,
                             style: TextStyle(
                                 color: Controller.bottom_Item_2_pressed ? AppColors.black:AppColors.placeholder,
                                 fontSize:12.sp,
@@ -122,7 +122,7 @@ import 'controller.dart';
                             width: 6.w,
                           ),
                           Text(
-                            'My Cart',
+                            'My Cart'.tr,
                             style: TextStyle(
                                 color: Controller.bottom_Item_3_pressed ? AppColors.black:AppColors.placeholder,
                                 fontSize:12.sp,
@@ -152,7 +152,7 @@ import 'controller.dart';
                             width: 6.w,
                           ),
                           Text(
-                            'Wishlist',
+                            'Wishlist'.tr,
                             style: TextStyle(
                                 color: Controller.bottom_Item_4_pressed ? AppColors.black:AppColors.placeholder,
                                 fontSize:12.sp,
@@ -182,7 +182,7 @@ import 'controller.dart';
                             width: 6.w,
                           ),
                           Text(
-                            'Profile',
+                            'Profile'.tr,
                             style: TextStyle(
                                 color: Controller.bottom_Item_5_pressed ? AppColors.black:AppColors.placeholder,
                                 fontSize:12.sp,

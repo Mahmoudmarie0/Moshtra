@@ -44,8 +44,19 @@ final Map<String, String> en = {
   "Shipping": "Shipping",
   "Complete Payment": "Complete Payment",
   "Cart List": "Cart List",
-
-
+  "Confirmation\nEmail": "Confirmation\nEmail",
+  "Enter your email address for verification.": "Enter your email address for verification.",
+  "Email Address": "Email Address",
+  "Reset Your Password": "Reset Your Password",
+  "Email\nVerification": "Email\nVerification",
+  "Enter the 5-digit verification code send to your\nemail address": "Enter the 5-digit verification code send to your\nemail address",
+  "Don\'t receive the code?": "Don\'t receive the code?",
+  "Resend Code": "Resend Code",
+  "Verify": "Verify",
+  "Login": "Login",
+  "Password": "Password",
+  "Forgot Password?": "Forgot Password?",
+  "Password": "Password",
 
 
 

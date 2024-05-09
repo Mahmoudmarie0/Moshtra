@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 26,top: 112),
-                child: Text("Login",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 48.sp,color: AppColors.white),),
+                child: Text("Login".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 48.sp,color: AppColors.white),),
               ),
               SizedBox(width: 24.w,),
               SvgPicture.asset(AssetsPaths.Ellipse,),
@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                                     width: 2.0),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              labelText: 'Email',
+                              labelText: 'Email'.tr,
                             ),
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(50),
@@ -118,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                                     width: 2.0),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              labelText: 'Password',
+                              labelText: 'Password'.tr,
 
                             ),
                             obscureText:controller.oobscureText,
@@ -136,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: (){
                                   Get.to(EmailConfirmation());
                                 }, child:
-                            Text("Forgot Password?",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300,color:AppColors.LightGrey1 ),)
+                            Text("Forgot Password?".tr,style: TextStyle(fontSize: 12,fontWeight: FontWeight.w300,color:AppColors.LightGrey1 ),)
 
                             ),
                           ],
@@ -161,7 +161,7 @@ class LoginScreen extends StatelessWidget {
                                 //  controller.onSubmit();
                               },
                               child: Text(
-                                "Login",
+                                "Login".tr,
                                 style: TextStyle(
                                   color:  AppColors.white,
                                   fontWeight: FontWeight.w500,

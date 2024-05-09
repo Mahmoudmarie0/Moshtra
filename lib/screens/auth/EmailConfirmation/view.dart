@@ -54,7 +54,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                 Container(
                   padding: EdgeInsets.only(left: 30 , top: 112),
                   alignment: Alignment.centerLeft,
-                  child: Text('Confirmation\nEmail' ,
+                  child: Text('Confirmation\nEmail'.tr ,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       color: AppColors.white,
@@ -89,7 +89,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                       Container(
                         margin: EdgeInsets.only(left: 10 , bottom: 10 , top: 30),
                         child: Text(
-                          'Enter your email address for verification.',
+                          'Enter your email address for verification.'.tr,
                           style: TextStyle(
                             color: AppColors.grey,
                           ),
@@ -117,7 +117,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               border: OutlineInputBorder(),
-                              labelText: 'Email Address',
+                              labelText: 'Email Address'.tr,
 
                             ),
                           ),
@@ -134,7 +134,7 @@ class _EmailConfirmationState extends State<EmailConfirmation> {
                                 verifyEmail();
                               }
                             },
-                            child: Text('Reset Your Password' ,
+                            child: Text('Reset Your Password'.tr ,
                               style: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 18,

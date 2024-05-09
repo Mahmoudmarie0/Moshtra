@@ -28,7 +28,7 @@ class EmailVerification extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 30),
             alignment: Alignment.centerLeft,
-            child: Text('Email\nVerification' ,
+            child: Text('Email\nVerification'.tr,
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 color: AppColors.white,
@@ -52,7 +52,7 @@ class EmailVerification extends StatelessWidget {
                   Container(
                     // margin: EdgeInsets.symmetric(vertical: 20),
                     margin: EdgeInsets.only(left: 10 , bottom: 10 , top: 30),
-                    child: Text('Enter the 5-digit verification code send to your\nemail address' ,
+                    child: Text('Enter the 5-digit verification code send to your\nemail address'.tr ,
                       style: TextStyle(
                         color: Color.fromRGBO(147, 150, 163 , 1.0),
                       ),
@@ -123,12 +123,12 @@ class EmailVerification extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Don\'t receive the code? ' ,
+                          Text('Don\'t receive the code? '.tr ,
                             style: TextStyle(
                               color: AppColors.grey,
                             ),
                           ),
-                          Text('Resend Code' ,
+                          Text('Resend Code'.tr ,
                             style: TextStyle(
                               color: AppColors.orange,
                               fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class EmailVerification extends StatelessWidget {
                           // To New Password
                           emailVetification.validateOTP();
                         },
-                        child: Text('Verify' , style: TextStyle(
+                        child: Text('Verify'.tr , style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),),

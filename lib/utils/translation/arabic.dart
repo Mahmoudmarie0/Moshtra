@@ -44,7 +44,19 @@ final Map<String, String> ar = {
   "Discount": " تخفيض",
   "Shipping": " شحن",
   "Complete Payment": " اتمام عمليه الدفع",
-
+  "Confirmation\nEmail": "التأكيد\nالبريد الإلكتروني",
+  "Enter your email address for verification.": "أدخل عنوان بريدك الإلكتروني للتحقق.",
+  "Email Address": " عنوان البريد الإلكتروني",
+  "Reset Your Password": "اعد ضبط كلمه السر",
+  "Email\nVerification": "البريد الإلكتروني\nالتحقق",
+  "Enter the 5-digit verification code send to your\nemail address": "أدخل رمز التحقق المكون من 5 أرقام والذي تم إرساله إلى\nعنوان بريدك الإلكتروني",
+  "Don\'t receive the code?": "ألا تتلقى الرمز؟",
+  "Resend Code": "أعد إرسال الرمز",
+  "Verify": "تاكيد",
+  "Login": "تسجيل الدخول",
+  "Password": "كلمة المرور",
+  "Forgot Password?": "هل نسيت كلمة السر؟",
+  "Password": "كلمة المرور",
 
 
 };

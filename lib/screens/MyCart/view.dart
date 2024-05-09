@@ -53,9 +53,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
                   FirebaseAuth.instance.currentUser!.uid) {
                 cartList.add(new_cart.fromSnapshot(snapshot.data!.docs[i]));
                 products.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
-
-                totalPrice += int.parse(cartList[i].product!.price!) *
+                totalPrice += int.parse(snapshot.data!.docs[i]['product']['price']) *
                     int.parse(snapshot.data!.docs[i].get('quantity'));
+
               }
             }
           }
@@ -152,7 +152,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                       setState(() {});
                                                     },
                                                     icon: Icon(Icons.remove))),
-                                            Spacer(),
+
                                             Expanded(
                                                 child: Text(
                                                   '${int.parse(

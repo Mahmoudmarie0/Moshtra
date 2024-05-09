@@ -14,8 +14,10 @@ class DetailsController extends GetxController{
   Cat_Model? get CatModel => _CatModel;
   Cat_Model? _CatModel ;
 
-  DetailsController() {
-    RelatedProducts('Phones');
+  String type;
+
+  DetailsController(this.type) {
+    RelatedProducts(type);
   }
 
 
@@ -34,7 +36,7 @@ class DetailsController extends GetxController{
     final QuerySnapshot<Map<String, dynamic>> categoryQuery =
     await FirebaseFirestore.instance
         .collection('Categories')
-        .where('name', isEqualTo: categotyName).get();
+        .where('nameEN', isEqualTo: categotyName).get();
     final Category = Cat_Model.fromSnapshot(categoryQuery.docs[0]);
 
     _CatModel = Category;

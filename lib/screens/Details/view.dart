@@ -275,7 +275,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                             GetBuilder<DetailsController>(
-                              init: DetailsController(),
+                              init: DetailsController(widget.model!.type!),
                               builder: (controller)=> controller.loading.value ?
                               Center(child: CircularProgressIndicator())
                                   :productsList(controller.CatModel!.product),

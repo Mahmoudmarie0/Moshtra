@@ -8,6 +8,7 @@ import 'package:moshtra/utils/constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../global_controller/main_app_controller.dart';
 import '../Chatbot/view.dart';
+import '../OrderHistory/orderScreen.dart';
 import '../auth/NewPassword/view.dart';
 import 'controller/Controller.dart';
 
@@ -311,50 +312,57 @@ class ProfileScreen extends StatelessWidget {
                                 height: 12.h,
                               ),
                               Get.locale?.languageCode == "en"
-                                  ? Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            AssetsPaths.OrderHistoryIcon),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Text(
-                                          "Order_History".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                      ],
-                                    )
-                                  : Row(
-                                      children: [
-                                        Icon(
-                                          Icons.arrow_back_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          "Order_History".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        SvgPicture.asset(
-                                            AssetsPaths.OrderHistoryIcon),
-                                      ],
-                                    ),
+                                  ? InkWell(
+                                onTap: () => Get.to(OrderScreen()),
+                                child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              AssetsPaths.OrderHistoryIcon),
+                                          SizedBox(
+                                            width: 12.w,
+                                          ),
+                                          Text(
+                                            "Order_History".tr,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppColors.grey4),
+                                          ),
+                                          Spacer(),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            size: 15,
+                                            color: AppColors.grey4,
+                                          ),
+                                        ],
+                                      ),
+                                  )
+                                  : InkWell(
+                                onTap: () => Get.to(OrderScreen()),
+
+                                child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.arrow_back_ios,
+                                            size: 15,
+                                            color: AppColors.grey4,
+                                          ),
+                                          Spacer(),
+                                          Text(
+                                            "Order_History".tr,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppColors.grey4),
+                                          ),
+                                          SizedBox(
+                                            width: 12.w,
+                                          ),
+                                          SvgPicture.asset(
+                                              AssetsPaths.OrderHistoryIcon),
+                                        ],
+                                      ),
+                                  ),
                               SizedBox(
                                 height: 8.h,
                               ),

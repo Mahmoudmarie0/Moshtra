@@ -8,8 +8,10 @@ import 'package:moshtra/models/newFav_model.dart';
 import 'package:moshtra/screens/Categories/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/Home/widgets/ListviewCategory.dart';
+import 'package:moshtra/utils/custom_widgets/global_widgets/products_ListView.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../models/products_model.dart';
+import '../../models/user_history_model.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
@@ -32,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<QueryDocumentSnapshot> data = [];
 
   CollectionReference fav = FirebaseFirestore.instance.collection('favorites');
+  CollectionReference User_history = FirebaseFirestore.instance.collection('User_history');
+
 
   bool isNotExist = true;
 
@@ -367,7 +371,29 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(
                                 height: 5.h,
                               ),
-                              ListViewCategory(),
+                              // ListViewCategory(),
+                              StreamBuilder<QuerySnapshot>(
+                                stream: User_history.orderBy('createdAt', descending: true).snapshots(),
+                                builder:(context , snapshot) {
+                                  List<user_history> histList = [];
+                                  List<ProductModel> myhistproducts = [];
+                                  if(!snapshot.hasData)
+                                    return CircularProgressIndicator();
+                                  else{
+                                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                      if (snapshot.data!.docs[i].get('userId') ==
+                                      FirebaseAuth.instance.currentUser!.uid) {
+                                      histList.add(user_history.fromSnapshot(snapshot.data!.docs[i]));
+                                      myhistproducts.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
+
+                                      }
+                                    }
+                                  }
+                                  if(histList.length == 0)
+                                    return Container();
+                                  else
+                                    return productsList(myhistproducts);
+                                }),
                               SizedBox(
                                 height: 10.h,
                               ),
@@ -403,6 +429,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 20.h,
                               ),
                               ListViewProduct(),
+                              // productsList(controller.histProducts),
                             ],
                           ),
                         ]),
@@ -459,6 +486,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
+                      controller.addHistory(index);
                       Get.to(DetailsScreen(controller.productModel[index]));
                     },
                     child: Container(

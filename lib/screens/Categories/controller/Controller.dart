@@ -27,7 +27,7 @@ class CategoryController extends GetxController {
   CategoryController() {
     getElectronics();
     getSmartWatches();
-    getSubCat();
+    // getSubCat();
     newCatQuery();
   }
 

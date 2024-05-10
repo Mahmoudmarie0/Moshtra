@@ -28,14 +28,14 @@ class searchController extends GetxController {
 //dddd
 
     productsCollection
-        .where('name',
+        .where('nameEN',
         isGreaterThanOrEqualTo: searchText,
         isLessThan: searchText + 'z')
         .get()
         .then((QuerySnapshot querySnapshot) {
 
         searchResults = querySnapshot.docs
-            .map((doc) => doc['name'] as String )
+            .map((doc) => doc['nameEN'] as String )
             .toList();
 
 

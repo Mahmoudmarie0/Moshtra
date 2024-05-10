@@ -24,8 +24,20 @@ import '../widgets/total_price.dart';
 
 class MyCart extends StatelessWidget {
    // MyCart({key});
-   dynamic  total=Get.arguments;
-   final dynamic sum=Get.arguments+ 8;
+   dynamic  subtotal;
+
+   dynamic shipping= 8;
+   dynamic total;
+
+
+
+
+
+
+
+
+
+  // dynamic total=Get.arguments+ 8;
    List<ProductModel> products ;
    MyCart(this.products);
 
@@ -40,6 +52,8 @@ class MyCart extends StatelessWidget {
 
    @override
   Widget build(BuildContext context) {
+     subtotal =Get.arguments;
+     total=subtotal+shipping;
     return  GetBuilder<PaymentController>(
               init: PaymentController(),
               builder: (controller)=>
@@ -249,7 +263,7 @@ class MyCart extends StatelessWidget {
                             productsList(products),//horizontal Product List
                             OrderInfoItem(
                     title: 'Order Subtotal'.tr,
-                    value: '$total EGP',
+                    value: '$subtotal EGP',
                   ),
                             SizedBox(height:3 ,),
                             OrderInfoItem(
@@ -259,7 +273,7 @@ class MyCart extends StatelessWidget {
                             SizedBox(height:3 ,),
                             OrderInfoItem(
                               title: 'Shipping'.tr,
-                              value: r'8 EGP',
+                              value: '$shipping EGP',
                             ),
                             SizedBox(height:17 ,),
                             Divider(
@@ -275,7 +289,8 @@ class MyCart extends StatelessWidget {
                               },
                               child: Total_price(
 
-                                price: '$sum EGP',
+
+                                price: '$total EGP',
 
                               ),
                             ),
@@ -288,8 +303,16 @@ class MyCart extends StatelessWidget {
                               onPress: () {
                                Get.bottomSheet(
 
+
                                         PaymentMethodsBottomSheet(),
-                                 settings: RouteSettings(arguments:sum),
+                                 settings: RouteSettings(
+                                   arguments: [
+
+                                   total   ,
+                                   shipping  ,
+                                   subtotal  ,
+
+                                 ],),
 
                                     );
                               },

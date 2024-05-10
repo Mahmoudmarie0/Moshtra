@@ -26,13 +26,18 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     _productsCollection
-        .where('name',
-            isGreaterThanOrEqualTo: searchText, isLessThan: searchText + 'z')
+        .where(Get.locale?.languageCode == "en" ? 'nameEN' : 'nameAR',
+            isGreaterThanOrEqualTo: searchText,
+            isLessThanOrEqualTo:
+                searchText + (Get.locale!.languageCode == "en" ? 'z' : 'ي'))
         .get()
         .then((QuerySnapshot querySnapshot) {
       setState(() {
-        _searchResults =
-            querySnapshot.docs.map((doc) => doc['name'] as String).toList();
+        _searchResults = querySnapshot.docs
+            .map((doc) => Get.locale?.languageCode == "en"
+                ? doc['nameEN'] as String
+                : doc['nameAR'] as String)
+            .toList();
         _isLoading = false;
       });
     }).catchError((error) {
@@ -46,7 +51,8 @@ class _SearchScreenState extends State<SearchScreen> {
   void _navigateToDetailsScreen(String productName) {
     // Find the corresponding product in homeController's productModel list
     var product = homeController.productModel.firstWhere(
-      (product) => product.nameEN == productName|| product.nameAR == productName,
+      (product) =>
+          product.nameEN == productName || product.nameAR == productName,
       // orElse: () => null,
     );
 
@@ -93,19 +99,28 @@ class _SearchScreenState extends State<SearchScreen> {
               Container(
                 width: 343.w,
                 height: 48.h,
-               // width: double.infinity,
+                // width: double.infinity,
                 padding: EdgeInsets.only(right: 30),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.white,
                 ),
                 child: TextFormField(
-
                   controller: _searchController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    prefixIcon:Get.locale?.languageCode == "en"? Icon(Icons.search,color: Colors.black, ): null,
-                    suffixIcon:Get.locale?.languageCode == "ar"? Icon(Icons.search,color: Colors.black, ):null ,
+                    prefixIcon: Get.locale?.languageCode == "en"
+                        ? Icon(
+                            Icons.search,
+                            color: Colors.black,
+                          )
+                        : null,
+                    suffixIcon: Get.locale?.languageCode == "ar"
+                        ? Icon(
+                            Icons.search,
+                            color: Colors.black,
+                          )
+                        : null,
                     hintText: 'search_hint'.tr,
                     hintStyle: TextStyle(
                       fontSize: 18,
@@ -114,7 +129,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   onChanged: (value) {
-                    _searchProducts(value);
+                    setState(() {
+                      value == ""
+                          ? _searchResults = []
+                          : _searchProducts(value);
+                    });
                   },
                   //ddd
                 ),
@@ -124,19 +143,22 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? Center(
                       child: CircularProgressIndicator(),
                     )
-                  : ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemCount: _searchResults.length,
-                      itemBuilder: (context, index) {
-                        final productName = _searchResults[index];
-                        return ListTile(
-                          title: Text(productName),
-                          onTap: () {
-                            _navigateToDetailsScreen(productName);
-                          },
-                        );
-                      },
+                  : Expanded(
+                      child: ListView.builder(
+                        //physics: NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        itemCount: _searchResults.length,
+                        itemBuilder: (context, index) {
+                          final productName = _searchResults[index];
+                          return ListTile(
+                            title: Text(productName),
+                            onTap: () {
+                              _navigateToDetailsScreen(productName);
+                            },
+                          );
+                        },
+                      ),
                     ),
             ],
           ),

@@ -15,6 +15,7 @@ class PaymentController extends GetxController{
     CartQuery();
   }
 
+
   ValueNotifier<bool>get loading=>_loading;
   ValueNotifier<bool>_loading=ValueNotifier(false);
   String? phone , address;

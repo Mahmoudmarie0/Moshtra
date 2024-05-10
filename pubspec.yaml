@@ -30,6 +30,9 @@ dependencies:
   #FlutterSwitch
   flutter_switch: ^0.3.2
 
+  #paypal
+  flutter_paypal_checkout: ^1.0.1
+
   #FlutterCreditCard
   flutter_credit_card: ^4.0.1
 

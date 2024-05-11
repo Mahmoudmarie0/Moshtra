@@ -54,11 +54,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 26,top: 112),
-                  child: Text("Register".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 41.sp,color: AppColors.white),),
+                  padding:  Get.locale?.languageCode == "en" ? const EdgeInsets.only(left: 26,top: 112): const EdgeInsets.only(right: 50,top: 112),
+                  child: Text("Register".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: Get.locale?.languageCode == "en"? 48.sp: 30.sp,color: AppColors.white),),
                 ),
                 Expanded(
-                  child:SvgPicture.asset(AssetsPaths.Ellipse,),
+                  child:Get.locale?.languageCode == "en"?  SvgPicture.asset(AssetsPaths.Ellipse,):  SizedBox(),
                 )
               ],
             ),

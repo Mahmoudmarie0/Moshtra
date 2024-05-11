@@ -37,11 +37,11 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 26,top: 112),
-                child: Text("Login".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: 48.sp,color: AppColors.white),),
+                padding: Get.locale?.languageCode == "en" ? const EdgeInsets.only(left: 26,top: 112): const EdgeInsets.only(left: 150,top: 112),
+                child: Text("Login".tr,style: TextStyle(fontWeight: FontWeight.w700,fontSize: Get.locale?.languageCode == "en"? 48.sp: 30.sp,color: AppColors.white),),
               ),
               SizedBox(width: 24.w,),
-              SvgPicture.asset(AssetsPaths.Ellipse,),
+              Get.locale?.languageCode == "en"?  SvgPicture.asset(AssetsPaths.Ellipse,):  SizedBox(),
 
             ],
 

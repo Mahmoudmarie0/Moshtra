@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+
 import 'package:moshtra/screens/Payment/widgets/payment_method_list_view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
+import '../../../models/newCart_model.dart';
+import '../../../models/products_model.dart';
 import '../../../service/paypal_payment/paypal_management.dart';
 import '../../../service/stripe_payment/payment_manager.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
@@ -11,14 +12,20 @@ import '../controller/controller.dart';
 
 class PaymentMethodsBottomSheet extends StatelessWidget {
   @override
- // final int sum = Get.arguments ;
+  // final int sum = Get.arguments ;
 
+  final dynamic total;
+  final dynamic shipping;
+  final dynamic subtotal;
+  List<ProductModel> products;
+  List<new_cart> cartList;
+
+  //final dynamic data;
+
+  PaymentMethodsBottomSheet(
+      {required this.total, required this.shipping, required this.subtotal, required this.products, required this.cartList});
 
   Widget build(BuildContext context) {
-    final List<dynamic> arguments = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-    final dynamic total = arguments[0];
-    final dynamic shipping = arguments[1];
-    final dynamic subtotal = arguments[2];
 
     return GetBuilder<PaymentController>(
       builder: (controller) => Container(
@@ -41,9 +48,9 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
               buttonWidget(
                 onPress: () async {
                   controller.activeIndex == 0
-                      ? PaymentManager.makePayment(total , "EGP")
+                      ? PaymentManager.makePayment(total, "EGP")
                       : Get.to(
-                          PaypalManager.buildPaypalCheckout(context),
+                          PaypalManager.buildPaypalCheckout(context, products, total, shipping, subtotal,cartList ),
                         );
                   ;
                 },

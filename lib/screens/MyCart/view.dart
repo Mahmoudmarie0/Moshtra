@@ -20,7 +20,6 @@ import '../../utils/custom_widgets/global_widgets/empty_screen.dart';
 import '../Details/view.dart';
 import '../Home_layout/controller.dart';
 
-
 class MyCartScreen extends StatefulWidget {
   //MyCartScreen({super.key});
 
@@ -29,7 +28,8 @@ class MyCartScreen extends StatefulWidget {
 }
 
 class _MyCartScreenState extends State<MyCartScreen> {
-  HomeLayoutController homeLayoutController=Get.put(HomeLayoutController(),permanent: true);
+  HomeLayoutController homeLayoutController =
+      Get.put(HomeLayoutController(), permanent: true);
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
   dynamic totalPrice = 0;
   @override
@@ -40,10 +40,10 @@ class _MyCartScreenState extends State<MyCartScreen> {
   Widget cartListScreen() {
     return StreamBuilder<QuerySnapshot>(
         stream: cart.orderBy('createdAt').snapshots(),
-        builder: (context , snapshot) {
+        builder: (context, snapshot) {
           List<new_cart> cartList = [];
           List<ProductModel> products = [];
-          if(!snapshot.hasData)
+          if (!snapshot.hasData)
             return CircularProgressIndicator();
           else {
             totalPrice = 0;
@@ -52,16 +52,23 @@ class _MyCartScreenState extends State<MyCartScreen> {
               if (snapshot.data!.docs[i].get('userId') ==
                   FirebaseAuth.instance.currentUser!.uid) {
                 cartList.add(new_cart.fromSnapshot(snapshot.data!.docs[i]));
-                products.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
-                totalPrice += int.parse(snapshot.data!.docs[i]['product']['price']) *
-                    int.parse(snapshot.data!.docs[i].get('quantity'));
-
+                products.add(
+                    ProductModel.fromJson(snapshot.data!.docs[i]['product']));
+                totalPrice +=
+                    int.parse(snapshot.data!.docs[i]['product']['price']) *
+                        int.parse(snapshot.data!.docs[i].get('quantity'));
               }
             }
           }
 
-          if(cartList.length == 0)
-            return   buildEmptyScreen(titleText: 'Your Cart is empty'.tr ,subTitleText:  'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.' .tr,btnText:  'Explore Categories'.tr ,homeLayoutController:  homeLayoutController);
+          if (cartList.length == 0)
+            return buildEmptyScreen(
+                titleText: 'Your Cart is empty'.tr,
+                subTitleText:
+                    'Looks like you have not added anything in your \ncart. Go ahead and explore top categories.'
+                        .tr,
+                btnText: 'Explore Categories'.tr,
+                homeLayoutController: homeLayoutController);
           else
             return Padding(
               padding: const EdgeInsets.only(top: 24),
@@ -73,12 +80,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
                         onPressed: () {
-                          for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
-                            if (snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid){
+                          for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                            if (snapshot.data!.docs[i].get('userId') ==
+                                FirebaseAuth.instance.currentUser!.uid) {
                               cart.doc(snapshot.data!.docs[i].id).delete();
                             }
                           }
-
                         },
                         child: Text(
                           'Clear',
@@ -93,10 +100,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             minimumSize: Size(150, 50),
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(10)),
-                            )
-                        ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            )),
                       ),
                     ),
                   ),
@@ -114,20 +120,21 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Get.to(DetailsScreen(cartList[index]!.product!));
+                                      Get.to(DetailsScreen(
+                                          cartList[index]!.product!));
                                     },
                                     child: Container(
                                         width: 120.w,
                                         height: 120.h,
                                         child: Image.network(
                                           cartList[index].product!.image!,
-                                        )
-                                    ),
+                                        )),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment
-                                        .spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Container(
@@ -135,8 +142,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                                 left: 10, right: 10, top: 8),
                                             width: 165,
                                             child: Text(
-                                              Get.locale?.languageCode == "en"?
-                                              cartList[index].product!.nameEN! : cartList[index].product!.nameAR!,
+                                              Get.locale?.languageCode == "en"
+                                                  ? cartList[index]
+                                                      .product!
+                                                      .nameEN!
+                                                  : cartList[index]
+                                                      .product!
+                                                      .nameAR!,
                                               style: TextStyle(
                                                 overflow: TextOverflow.ellipsis,
                                                 fontWeight: FontWeight.w500,
@@ -148,14 +160,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                         child: Container(
                                           margin: EdgeInsets.only(
                                               left: 10, right: 10),
-                                          child:
-                                          Text(
+                                          child: Text(
                                             '${cartList[index].product!.price} EGP',
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w400
-                                            ),
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ),
                                       ),
@@ -164,56 +174,128 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                           width: 96.w,
                                           height: 24.h,
                                           child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Expanded(
                                                   child: IconButton(
                                                       onPressed: () {
-                                                        for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
-                                                          if (snapshot.data!.docs[i].get('userId') ==
-                                                              FirebaseAuth.instance.currentUser!.uid &&
-                                                              snapshot.data!.docs[i]['product']['productId'] ==
-                                                                  cartList[index].product!.productId) {
-                                                            if (int.parse(cartList[index].quantity!) > 1 ) {
-                                                              cart.doc(snapshot.data!.docs[i].id).update(
-                                                                  {'quantity': (int.parse(cartList[index].quantity!) - 1).toString()});
+                                                        for (int i = 0;
+                                                            i <
+                                                                snapshot
+                                                                    .data!
+                                                                    .docs
+                                                                    .length;
+                                                            i++) {
+                                                          if (snapshot.data!
+                                                                      .docs[i]
+                                                                      .get(
+                                                                          'userId') ==
+                                                                  FirebaseAuth
+                                                                      .instance
+                                                                      .currentUser!
+                                                                      .uid &&
+                                                              snapshot.data!.docs[
+                                                                              i]
+                                                                          [
+                                                                          'product']
+                                                                      [
+                                                                      'productId'] ==
+                                                                  cartList[
+                                                                          index]
+                                                                      .product!
+                                                                      .productId) {
+                                                            if (int.parse(cartList[
+                                                                        index]
+                                                                    .quantity!) >
+                                                                1) {
+                                                              cart
+                                                                  .doc(snapshot
+                                                                      .data!
+                                                                      .docs[i]
+                                                                      .id)
+                                                                  .update({
+                                                                'quantity':
+                                                                    (int.parse(cartList[index].quantity!) -
+                                                                            1)
+                                                                        .toString()
+                                                              });
 
-                                                              totalPrice -= double.parse(
-                                                                  cartList[index].product!.price!);
+                                                              totalPrice -= double
+                                                                  .parse(cartList[
+                                                                          index]
+                                                                      .product!
+                                                                      .price!);
                                                             }
                                                           }
                                                         }
                                                         setState(() {});
                                                       },
-                                                      icon: Icon(Icons.remove))),
-                                                Spacer(),
+                                                      icon:
+                                                          Icon(Icons.remove))),
+                                              Spacer(),
                                               Expanded(
                                                   child: Text(
-                                                    '${int.parse(
-                                                        cartList[index].quantity!)}',
-                                                    style: TextStyle(
-                                                        fontWeight: FontWeight.bold),
-                                                  )),
+                                                '${int.parse(cartList[index].quantity!)}',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
                                               Expanded(
                                                   child: IconButton(
                                                       onPressed: () async {
-                                                        for(int i = 0 ; i < snapshot.data!.docs.length ; i++) {
-                                                          if (snapshot.data!.docs[i].get('userId') ==
-                                                              FirebaseAuth.instance.currentUser!.uid &&
-                                                              snapshot.data!.docs[i]['product']['productId'] ==
-                                                                  cartList[index].product!.productId && cartList[index].quantity! != products[index].quantity) {
-                                                            cart.doc(snapshot.data!.docs[i].id).update(
-                                                                {'quantity': (int.parse(cartList[index].quantity!) + 1).toString()});
+                                                        for (int i = 0;
+                                                            i <
+                                                                snapshot
+                                                                    .data!
+                                                                    .docs
+                                                                    .length;
+                                                            i++) {
+                                                          if (snapshot.data!
+                                                                      .docs[i]
+                                                                      .get(
+                                                                          'userId') ==
+                                                                  FirebaseAuth
+                                                                      .instance
+                                                                      .currentUser!
+                                                                      .uid &&
+                                                              snapshot.data!.docs[
+                                                                              i]
+                                                                          [
+                                                                          'product']
+                                                                      [
+                                                                      'productId'] ==
+                                                                  cartList[
+                                                                          index]
+                                                                      .product!
+                                                                      .productId &&
+                                                              cartList[index]
+                                                                      .quantity! !=
+                                                                  products[
+                                                                          index]
+                                                                      .quantity) {
+                                                            cart
+                                                                .doc(snapshot
+                                                                    .data!
+                                                                    .docs[i]
+                                                                    .id)
+                                                                .update({
+                                                              'quantity':
+                                                                  (int.parse(cartList[index]
+                                                                              .quantity!) +
+                                                                          1)
+                                                                      .toString()
+                                                            });
 
-                                                            totalPrice += double.parse(
-                                                                cartList[index].product!.price!);
+                                                            totalPrice += double
+                                                                .parse(cartList[
+                                                                        index]
+                                                                    .product!
+                                                                    .price!);
                                                           }
                                                         }
                                                         setState(() {});
                                                       },
-
-
                                                       icon: Icon(Icons.add)))
                                             ],
                                           ),
@@ -223,27 +305,37 @@ class _MyCartScreenState extends State<MyCartScreen> {
                                   ),
                                   Expanded(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          for (int i = 0;
+                                              i < snapshot.data!.docs.length;
+                                              i++) {
+                                            if (snapshot.data!.docs[i]
+                                                        .get('userId') ==
+                                                    FirebaseAuth.instance
+                                                        .currentUser!.uid &&
+                                                snapshot.data!.docs[i]
+                                                            ['product']
+                                                        ['productId'] ==
+                                                    cartList[index]
+                                                        .product!
+                                                        .productId) {
+                                              cart
+                                                  .doc(
+                                                      snapshot.data!.docs[i].id)
+                                                  .delete();
+                                            }
+                                          }
 
-                                          GestureDetector(
-                                            onTap: () async {
-                                              for(int i = 0 ; i < snapshot.data!.docs.length ; i++){
-                                                if (snapshot.data!.docs[i].get('userId') == FirebaseAuth.instance.currentUser!.uid &&
-                                                    snapshot.data!.docs[i]['product']['productId'] == cartList[index].product!.productId){
-                                                  cart.doc(snapshot.data!.docs[i].id).delete();
-                                                }
-                                              }
-
-                                              setState(() {});
-                                            },
-                                            child: SvgPicture.asset(
-                                                AssetsPaths.Trash
-                                            ),
-                                          )
-
-                                        ],
-                                      )),
+                                          setState(() {});
+                                        },
+                                        child:
+                                            SvgPicture.asset(AssetsPaths.Trash),
+                                      )
+                                    ],
+                                  )),
                                 ],
                               ),
                             ),
@@ -283,10 +375,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(()=>MyCart(products),arguments: totalPrice );
-
-
-
+                            Get.to(() => MyCart(products, totalPrice,cartList));
                           },
                           child: Text(
                             'Checkout(${cartList.length})'.tr,
@@ -301,10 +390,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
                               minimumSize: Size(150, 50),
                               backgroundColor: Color(0xfff88160),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(10)),
-                              )
-                          ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              )),
                         ),
                       ],
                     ),
@@ -312,9 +400,6 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 ],
               ),
             );
-
-        }
-    );
+        });
   }
-
 }

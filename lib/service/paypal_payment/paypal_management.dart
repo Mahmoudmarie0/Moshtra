@@ -1,15 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'package:moshtra/service/paypal_payment/paypal_keys.dart';
 import 'package:path/path.dart';
 
+import '../../models/newCart_model.dart';
+import '../../models/products_model.dart';
+
  abstract class PaypalManager  {
 
-   static  PaypalCheckout buildPaypalCheckout(BuildContext context) {
-     double subtotal = 100.0;
-     double shipping = 0.0;
-     double calculatedTotal = subtotal + shipping;
+   static  PaypalCheckout buildPaypalCheckout(BuildContext context,List<ProductModel> products,dynamic total, dynamic shipping, dynamic subtotal, List<new_cart> cartList) {
+     List<Map<String, dynamic>> items = [];
+     List<Map<String, dynamic>> newItems = [];
+
+     cartList.forEach((product) {
+       newItems.add({
+
+         "name": Get.locale?.languageCode == "en"? product. product!.nameEN : product. product!.nameAR,
+
+         "price": product.product!.price.toString(),
+
+
+         "currency": "USD",
+
+
+         "quantity": product.quantity,
+
+       });
+     });
+
+
+
+     // products.forEach((product) {
+     //   items.add({
+     //     "name": product.nameEN,
+     //     "quantity": newItems as dynamic,
+     //     "price": product.price.toString(),
+     //     "currency": "USD"
+     //   });
+     // });
+
+     print(newItems);
+
 
        return PaypalCheckout(
          sandboxMode: true,
@@ -21,7 +55,7 @@ import 'package:path/path.dart';
            {
 
              "amount": {
-               "total": calculatedTotal,
+               "total": total,
                "currency": "USD",
                "details": {
                  "subtotal": subtotal,
@@ -35,20 +69,7 @@ import 'package:path/path.dart';
              //       "INSTANT_FUNDING_SOURCE"
              // },
              "item_list": {
-               "items": [
-                 {
-                   "name": "Apple",
-                   "quantity": 20,
-                   "price": '5',
-                   "currency": "USD"
-                 },
-                 // {
-                 //   "name": "Pineapple",
-                 //   "quantity": 0,
-                 //   "price": '0',
-                 //   "currency": "USD"
-                 // }
-               ],
+               "items": newItems,
 
                // shipping address is not required though
                //   "shipping_address": {

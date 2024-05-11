@@ -7,25 +7,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/models/newFav_model.dart';
 import 'package:moshtra/models/products_model.dart';
-import 'package:moshtra/screens/Categories/Electronic/controller/Controller.dart';
 import 'package:moshtra/screens/Details/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
 import '../../../models/fav_model.dart';
+import '../../Home/controller/Controller.dart';
 import '../../Wishlist/view.dart';
+import 'controller/Controller.dart';
 
 
-class ElectronicsScreen  extends StatefulWidget {
+class SubCategoryScreen  extends StatefulWidget {
   List<ProductModel> products = [];
   String catName;
-  ElectronicsScreen(this.products,this.catName);
+  SubCategoryScreen(this.products,this.catName);
+
+  HomeController homeController = Get.put(HomeController(),permanent: true);
 
   @override
-  State<ElectronicsScreen> createState() => _ElectronicsScreenState();
+  State<SubCategoryScreen> createState() => _SubCategoryScreenState();
 }
 
-class _ElectronicsScreenState extends State<ElectronicsScreen> {
+class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
   List<QueryDocumentSnapshot> data = [];
 
@@ -65,8 +68,8 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ElectronicsController>(
-      init: ElectronicsController(),
+    return GetBuilder<subcategoryController>(
+      init: subcategoryController(),
       builder: (controller) =>
       controller.loading.value ? Center(child: CircularProgressIndicator())
           : Scaffold(
@@ -99,7 +102,7 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
   }
 
   Widget GridViewElectronics() {
-    return GetBuilder<ElectronicsController>(
+    return GetBuilder<subcategoryController>(
       builder: (controller) =>
           Container(
 
@@ -130,6 +133,7 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                             children: [
                               GestureDetector(
                                 onTap:() {
+                                  widget.homeController.addHistory(widget.products[index]);
                                   Get.to(DetailsScreen(widget.products[index]));
                                 },
                                 child:  Container(

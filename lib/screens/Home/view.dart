@@ -15,7 +15,7 @@ import '../../models/user_history_model.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
-import '../Categories/Electronic/electronics.dart';
+import '../Categories/SubCategory/subCategory_view.dart';
 import '../Categories/controller/Controller.dart';
 import '../Details/view.dart';
 import '../Wishlist/view.dart';
@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           await categoryController.LoadData(3);
                                           if (categoryController
                                               .CatModel[3].product.isNotEmpty) {
-                                            Get.to(ElectronicsScreen(
+                                            Get.to(SubCategoryScreen(
                                                 categoryController
                                                     .CatModel[3].product
                                                     .toList(),
@@ -490,7 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      controller.addHistory(index);
+                      controller.addHistory(controller.productModel[index]);
                       Get.to(DetailsScreen(controller.productModel[index]));
                     },
                     child: Container(

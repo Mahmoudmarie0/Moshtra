@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:moshtra/screens/Categories/Electronic/electronics.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
+import 'SubCategory/subCategory_view.dart';
 import 'controller/Controller.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -62,7 +62,7 @@ class CategoriesScreen extends StatelessWidget {
                         onTap: () async {
                           await controller.LoadData(index);
                           if (controller.CatModel[index].product.isNotEmpty) {
-                            Get.to(ElectronicsScreen(
+                            Get.to(SubCategoryScreen(
                                 controller.CatModel[index].product.toList(),
                                 Get.locale?.languageCode == "en"? controller.CatModel[index].nameEN.toString():  controller.CatModel[index].nameAR.toString()));
                             //print(controller.CatModel[index].product[0].name);

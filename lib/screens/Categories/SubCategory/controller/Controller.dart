@@ -6,7 +6,7 @@ import 'package:moshtra/models/smart_watches_model.dart';
 import '../../../../models/products_model.dart';
 import '../../../../service/home_service.dart';
 
-class ElectronicsController extends GetxController {
+class subcategoryController extends GetxController {
   ValueNotifier<bool> get loading => _loading;
   ValueNotifier<bool> _loading = ValueNotifier(false);
 
@@ -20,7 +20,7 @@ class ElectronicsController extends GetxController {
   List<SmartWatchesModel> get smartwatchesModel => _smartwatchesModel;
   List<SmartWatchesModel> _smartwatchesModel = [];
 
-  ElectronicsController() {
+  subcategoryController() {
     // getElectronics();
     // getSmartWatches();
   }

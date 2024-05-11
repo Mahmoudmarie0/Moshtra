@@ -124,14 +124,14 @@ class HomeController extends GetxController {
 
 
 
-  addHistory(int index)
+  addHistory(product)
   async {
 
     final  histquery = await FirebaseFirestore.instance
         .collection('User_history').where('userId',isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
 
     for(int i=0; i<histquery.docs.length; i++){
-      if(histquery.docs[i]['product']['productId'] == _productModel[index].productId)
+      if(histquery.docs[i]['product']['productId'] == product.productId)
       {
         DocumentReference docRef = FirebaseFirestore.instance
             .collection('User_history').doc(histquery.docs[i].id);
@@ -143,8 +143,7 @@ class HomeController extends GetxController {
 
     User_history.add({
       'product':
-      _productModel[index]
-          .toJson(),
+      product.toJson(),
       'createdAt': DateTime.now(),
       'userId': FirebaseAuth
           .instance.currentUser!.uid
@@ -156,5 +155,7 @@ class HomeController extends GetxController {
 
 
   }
+
+
 
 }

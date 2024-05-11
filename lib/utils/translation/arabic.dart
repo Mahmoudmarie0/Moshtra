@@ -60,7 +60,7 @@ final Map<String, String> ar = {
   "Email": "بريد إلكتروني",
   "Don’t have an account yet?": "لا تملك حسابا حتى الآن؟",
   "Register Here": "سجل هنا",
-  "Register": "سجل",
+  "Register": "انشاء حساب",
   "Name": "الاسم",
   "Send": "يرسل",
   "Confirm Password": "تأكيد كلمة المرور",

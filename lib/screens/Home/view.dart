@@ -33,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<QueryDocumentSnapshot> data = [];
 
+  List<ProductModel> BestSellerProducts = [];
+
+
   CollectionReference fav = FirebaseFirestore.instance.collection('favorites');
   CollectionReference User_history = FirebaseFirestore.instance.collection('User_history');
 
@@ -377,6 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder:(context , snapshot) {
                                   List<user_history> histList = [];
                                   List<ProductModel> myhistproducts = [];
+                                  BestSellerList();
                                   if(!snapshot.hasData)
                                     return CircularProgressIndicator();
                                   else{
@@ -601,6 +605,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 );
                               }),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 105 , right: 50),
+                            child: controller.productModel[index].quantity == "0" ?
+                            Container(
+                              height: 20,
+                              width: 100,
+                              alignment: Alignment.center,
+                              color: Colors.red,
+                              child: Text("Out Of Stock" , style: TextStyle(color: Colors.white),),
+                            ) : Container(),
+                          )
                         ]),
                       ),
                     ),
@@ -698,5 +713,44 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future<void> BestSellerList() async {
+
+    BestSellerProducts = [];
+
+    // Get a reference to the main collection
+    CollectionReference categories = FirebaseFirestore.instance.collection('Categories');
+
+    // Get all documents from the main collection
+    QuerySnapshot categoriesDocs = await categories.get();
+
+    // Iterate over each document in the main collection
+    categoriesDocs.docs.forEach((mainDocument) async {
+      // Get a reference to the subcollection of the current document
+      CollectionReference products = mainDocument.reference.collection('Products');
+      // mainDocument.get('name');
+      // print('categoriesDocs =>  ${mainDocument.id}');
+
+      // Get all documents from the subcollection
+      QuerySnapshot productsDocs = await products.get();
+
+
+        for (int j = 0; j < productsDocs.size; j++) {
+
+          if(int.parse(productsDocs.docs[j].get('number_of_order')) > 5){
+
+            print('ProductDocId Added => ${productsDocs.docs[j].id}');
+
+            BestSellerProducts.add(ProductModel.fromSnapshot(productsDocs.docs[j]));
+
+          }
+
+        }
+      }
+    );
+
+    print('Length Of BestSeller List => ${BestSellerProducts.length}');
+
   }
 }

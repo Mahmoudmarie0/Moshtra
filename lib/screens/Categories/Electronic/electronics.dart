@@ -234,6 +234,17 @@ class _ElectronicsScreenState extends State<ElectronicsScreen> {
                                 );
                               }
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 95 , right: 50),
+                            child: int.parse(widget.products[index].quantity!) == 0 ?
+                            Container(
+                              height: 20,
+                              width: 100,
+                              alignment: Alignment.center,
+                              color: Colors.red,
+                              child: Text("Out Of Stock" , style: TextStyle(color: Colors.white),),
+                            ) : Container(),
+                          )
                         ]
                     ),
                   );

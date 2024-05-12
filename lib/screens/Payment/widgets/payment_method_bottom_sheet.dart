@@ -47,6 +47,9 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
               ),
               buttonWidget(
                 onPress: () async {
+
+
+
                   controller.activeIndex == 0
                       ? PaymentManager.makePayment(total, "EGP")
                       : Get.to(

@@ -6,30 +6,24 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/components.dart';
-import '../../../Home_layout/view.dart';
 import '../../EmailVerification/view.dart';
 
-
-
-
-class RegisterController extends GetxController{
-  bool oobscureText=true;
+class RegisterController extends GetxController {
+  bool oobscureText = true;
 
   Position? position;
   List<Placemark>? placemarks;
   var formKey = GlobalKey<FormState>();
 
-  void ontap(){
-    oobscureText=!oobscureText;
+  void ontap() {
+    oobscureText = !oobscureText;
     update();
   }
 
-
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
 
-  void buttonFunction()
-  {
-    if(formKey.currentState!.validate()) {
+  void buttonFunction() {
+    if (formKey.currentState!.validate()) {
       //  Get.offAll(() => OnBoarding());
     }
   }
@@ -75,14 +69,19 @@ class RegisterController extends GetxController{
   //   }
   // }
 
-  void validateRegisterCredentials(String name, String email, String phoneNumber, String password, String address) {
-    if (name.isEmpty || email.isEmpty || phoneNumber.isEmpty || password.isEmpty || address.isEmpty) {
-      GetSnackbarError(message: 'Please fill in all fields '.tr, Color: AppColors.Red);
+  void validateRegisterCredentials(String name, String email,
+      String phoneNumber, String password, String address) {
+    if (name.isEmpty ||
+        email.isEmpty ||
+        phoneNumber.isEmpty ||
+        password.isEmpty ||
+        address.isEmpty) {
+      GetSnackbarError(
+          message: 'Please fill in all fields '.tr, Color: AppColors.Red);
     } else if (phoneNumber.length != 10) {
-      GetSnackbarError(message: "Enter correct phone number".tr, Color: AppColors.Red);
+      GetSnackbarError(
+          message: "Enter correct phone number".tr, Color: AppColors.Red);
     } else {
-
-
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(
         email: email,
@@ -92,9 +91,6 @@ class RegisterController extends GetxController{
         print("Register Success");
         print(value.user!.email);
         print(value.user!.uid);
-
-
-
 
         // Send verification email
         value.user!.sendEmailVerification().then((_) {
@@ -106,41 +102,32 @@ class RegisterController extends GetxController{
           // Handle error sending verification email
         });
 
-
-
-
-       // Get.to(HomeLayout(), transition: Transition.leftToRight);
+        // Get.to(HomeLayout(), transition: Transition.leftToRight);
       }).catchError((error) {
         if (error is FirebaseAuthException && error.code == 'invalid-email') {
-          GetSnackbarError(message: "The email address is badly formatted.".tr, Color: AppColors.Red);
-        } else if (error is FirebaseAuthException && error.code == 'weak-password') {
-          GetSnackbarError(message: "Password should be at least 6 characters ".tr, Color: AppColors.Red);
-        } else if (error is FirebaseAuthException && error.code == 'email-already-in-use') {
-          GetSnackbarError(message: "The email address is already in use ", Color: AppColors.Red);
+          GetSnackbarError(
+              message: "The email address is badly formatted.".tr,
+              Color: AppColors.Red);
+        } else if (error is FirebaseAuthException &&
+            error.code == 'weak-password') {
+          GetSnackbarError(
+              message: "Password should be at least 6 characters ".tr,
+              Color: AppColors.Red);
+        } else if (error is FirebaseAuthException &&
+            error.code == 'email-already-in-use') {
+          GetSnackbarError(
+              message: "The email address is already in use ",
+              Color: AppColors.Red);
         }
         print(error.toString());
       });
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-  onChange(bool value){
+  onChange(bool value) {
     //  isChecked=!value;
     update();
   }
-
-
-
-
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
@@ -148,35 +135,34 @@ class RegisterController extends GetxController{
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      GetSnackbarError( message: "Location services are disabled. Please enable it",Color: AppColors.Red);
+      GetSnackbarError(
+          message: "Location services are disabled. Please enable it",
+          Color: AppColors.Red);
       return false;
-
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        GetSnackbarError( message: " Location permissions are denied",Color: AppColors.Red);
+        GetSnackbarError(
+            message: " Location permissions are denied", Color: AppColors.Red);
         return false;
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      GetSnackbarError( message: "Location permissions are permanently denied",Color: AppColors.Red);
+      GetSnackbarError(
+          message: "Location permissions are permanently denied",
+          Color: AppColors.Red);
       return false;
-
     }
     return true;
   }
 
-
-
-  Future<String>getCurrentLocation() async
-  {
+  Future<String> getCurrentLocation() async {
     final hasPermission = await _handleLocationPermission();
     if (!hasPermission) return '';
     Position newPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high
-    );
+        desiredAccuracy: LocationAccuracy.high);
     position = newPosition;
 
     placemarks = await placemarkFromCoordinates(
@@ -184,30 +170,18 @@ class RegisterController extends GetxController{
       position!.longitude,
     );
     Placemark pMark = placemarks![0];
-    String completeAddress = '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+    String completeAddress =
+        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
     // String completeAddress = '${pMark.street}, ${pMark.subLocality}, ${pMark.subAdministrativeArea} ${pMark.administrativeArea}, ${pMark.country}';
     return completeAddress;
   }
 
-
-
-
-
-
-  addUser(String name, String email, String phoneNumber, String address){
-    users.add(
-      {
-        'name' : name,
-        'email' : email,
-        'phoneNumber' : phoneNumber,
-        'address' : address
-      }
-    );
+  addUser(String name, String email, String phoneNumber, String address) {
+    users.add({
+      'name': name,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'address': address
+    });
   }
-
-
-
-
-
-
 }

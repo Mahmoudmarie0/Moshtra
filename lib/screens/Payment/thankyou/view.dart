@@ -3,13 +3,14 @@ import '../widgets/ThankYouViewBody.dart';
 import '../../../utils/custom_widgets/build_appbar.dart';
 
 class ThankYouView extends StatelessWidget {
-  const ThankYouView({Key? key}) : super(key: key);
+  final dynamic total;
+  const ThankYouView({Key? key, required this.total}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return   Scaffold(
-      appBar: buildAppBar(),
-      body: ThankYouViewBody(),
+      appBar: buildAppBar( SearchDisplay : false),
+      body: ThankYouViewBody( total: total),
 
     );
   }

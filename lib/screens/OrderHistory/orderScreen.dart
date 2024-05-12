@@ -21,8 +21,7 @@ class OrderScreen extends StatelessWidget {
                 brand: 'Zara Brand',
                 size: '42.5',
                 color: 'Green',
-                imageUrl:
-                'https://via.placeholder.com/150', // Replace with your image URL
+                imageUrl: 'https://via.placeholder.com/150', // Replace with your image URL
               ),
               // Add more items...
             ],
@@ -76,16 +75,19 @@ class OrderCard extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 8.0),
-              Column(
-                children: items
-                    .map(
-                      (item) => ListTile(
+              ExpansionTile(
+                title: Text(
+                  'Items',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                children: items.map((item) {
+                  return ListTile(
                     leading: Image.network(
                       item.imageUrl,
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
-                    ), // Image displayed here
+                    ),
                     title: Text(
                       item.title,
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -103,9 +105,8 @@ class OrderCard extends StatelessWidget {
                       item.price,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                )
-                    .toList(),
+                  );
+                }).toList(),
               ),
               SizedBox(height: 8.0),
               Row(
@@ -122,8 +123,33 @@ class OrderCard extends StatelessWidget {
                         color: Colors.orange,
                       ),
                       SizedBox(width: 4.0),
-                      Text('On Process ',style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(
+                        'On Process ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.0),
+              Stepper(
+                type: StepperType.vertical, // Adjust type as needed
+                currentStep: 0, // Set the current step
+                steps: [
+                  Step(
+                    title: Text('Step 1'),
+                    content: Text('Content for Step 1'),
+                    isActive: true,
+                  ),
+                  Step(
+                    title: Text('Step 2'),
+                    content: Text('Content for Step 2'),
+                    isActive: false,
+                  ),
+                  Step(
+                    title: Text('Step 3'),
+                    content: Text('Content for Step 3'),
+                    isActive: false,
                   ),
                 ],
               ),

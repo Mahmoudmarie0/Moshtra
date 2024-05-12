@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.blue,
-      body: ListView(
+      body: Stack(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -46,8 +46,9 @@ class LoginScreen extends StatelessWidget {
             ],
 
           ),
+          // Spacer(),
           Padding(
-            padding: const EdgeInsets.only(top: 115),
+            padding: const EdgeInsets.only(top: 250),
             child: Container(
               width: 375.w,
               decoration: BoxDecoration(
@@ -57,19 +58,25 @@ class LoginScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only( left: 27,right: 27,top: 70,bottom: 20),
                 child: Container(
+
                   width:320.w ,
                   child:  Form(
                     key: formKey,
                     child: Column(
 
+
                       children: [
+
+
+                        SizedBox(height: 100.h,),
+
                         TextFormField (
-                          validator: (data)
-                          {
-                            if (data!.isEmpty)
-                              return 'Please enter your e-mail';
-                            return null;
-                          },
+                            validator: (data)
+                            {
+                              if (data!.isEmpty)
+                                return 'Please enter your e-mail';
+                              return null;
+                            },
                             controller: emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
@@ -192,25 +199,25 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 29.h,),
-                        SvgPicture.asset(AssetsPaths.OrLoginWith),
-                        SizedBox(height: 16.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(AssetsPaths.Google),
-                            SvgPicture.asset(AssetsPaths.Facebook),
-                            SvgPicture.asset(AssetsPaths.Apple),
-                          ],
-                        ),
+                        // SizedBox(height: 29.h,),
+                        // SvgPicture.asset(AssetsPaths.OrLoginWith),
+                        // SizedBox(height: 16.h,),
+                        // // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     SvgPicture.asset(AssetsPaths.Google),
+                        //     SvgPicture.asset(AssetsPaths.Facebook),
+                        //     SvgPicture.asset(AssetsPaths.Apple),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          )
+        ]
       ),
     );
   }

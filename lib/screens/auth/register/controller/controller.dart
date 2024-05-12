@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/components.dart';
 import '../../../Home_layout/view.dart';
+import '../../EmailVerification/view.dart';
 
 
 
@@ -33,46 +34,88 @@ class RegisterController extends GetxController{
     }
   }
 
-  void validateRegisterCredentials(String name, String email,String phoneNumber,String password,String address) {
-    if(name.isEmpty||email.isEmpty || phoneNumber.isEmpty || password.isEmpty || address.isEmpty)
-      GetSnackbarError( message: 'Please fill in all fields '.tr,Color: AppColors.Red);
+  // void validateRegisterCredentials(String name, String email,String phoneNumber,String password,String address) {
+  //   if(name.isEmpty||email.isEmpty || phoneNumber.isEmpty || password.isEmpty || address.isEmpty)
+  //     GetSnackbarError( message: 'Please fill in all fields '.tr,Color: AppColors.Red);
+  //
+  //   else if(phoneNumber.length!=10){
+  //     GetSnackbarError( message: "Enter correct phone number".tr,Color: AppColors.Red);
+  //
+  //   }
+  //   else {
+  //
+  //     FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //       email: email,
+  //       password: password,
+  //     ).then((value) => {
+  //       print("Register Succes"),
+  //       print(value.user!.email),
+  //       print(value.user!.uid),
+  //     GetSnackbarError( message: 'Your account has been created successfully '.tr,Color: AppColors.Green),
+  //     Get.to(HomeLayout(),transition:  Transition.leftToRight),
+  //
+  //
+  //     })
+  //         .catchError((error){
+  //           if(error is FirebaseAuthException && error.code=='invalid-email')
+  //       GetSnackbarError( message: "The email address is badly formatted.".tr,Color: AppColors.Red);
+  //
+  //           else if(error is FirebaseAuthException && error.code=='weak-password')
+  //             GetSnackbarError( message: "Password should be at least 6 characters ".tr,Color: AppColors.Red);
+  //
+  //       else if(error is FirebaseAuthException && error.code=='email-already-in-use')
+  //       GetSnackbarError( message: "The email address is already in use ",Color: AppColors.Red);
+  //           print(error.toString());
+  //
+  //
+  //
+  //     });
+  //
+  //     // Perform login or other actions
+  //   }
+  // }
 
-    else if(phoneNumber.length!=10){
-      GetSnackbarError( message: "Enter correct phone number".tr,Color: AppColors.Red);
-
-    }
-    else {
-
-      FirebaseAuth.instance.createUserWithEmailAndPassword(
+  void validateRegisterCredentials(String name, String email, String phoneNumber, String password, String address) {
+    if (name.isEmpty || email.isEmpty || phoneNumber.isEmpty || password.isEmpty || address.isEmpty) {
+      GetSnackbarError(message: 'Please fill in all fields '.tr, Color: AppColors.Red);
+    } else if (phoneNumber.length != 10) {
+      GetSnackbarError(message: "Enter correct phone number".tr, Color: AppColors.Red);
+    } else {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: email,
         password: password,
-      ).then((value) => {
-        print("Register Succes"),
-        print(value.user!.email),
-        print(value.user!.uid),
-      GetSnackbarError( message: 'Your account has been created successfully '.tr,Color: AppColors.Green),
-      Get.to(HomeLayout(),transition:  Transition.leftToRight),
+      )
+          .then((value) {
+        print("Register Success");
+        print(value.user!.email);
+        print(value.user!.uid);
+
+        // Send verification email
+        value.user!.sendEmailVerification().then((_) {
+          print("Verification email sent");
+          // Navigate to the email verification screen
+          Get.to(EmailVerification());
+        }).catchError((error) {
+          print("Error sending verification email: $error");
+          // Handle error sending verification email
+        });
 
 
-      })
-          .catchError((error){
-            if(error is FirebaseAuthException && error.code=='invalid-email')
-        GetSnackbarError( message: "The email address is badly formatted.".tr,Color: AppColors.Red);
-
-            else if(error is FirebaseAuthException && error.code=='weak-password')
-              GetSnackbarError( message: "Password should be at least 6 characters ".tr,Color: AppColors.Red);
-
-        else if(error is FirebaseAuthException && error.code=='email-already-in-use')
-        GetSnackbarError( message: "The email address is already in use ",Color: AppColors.Red);
-            print(error.toString());
-
-
-
+       // Get.to(HomeLayout(), transition: Transition.leftToRight);
+      }).catchError((error) {
+        if (error is FirebaseAuthException && error.code == 'invalid-email') {
+          GetSnackbarError(message: "The email address is badly formatted.".tr, Color: AppColors.Red);
+        } else if (error is FirebaseAuthException && error.code == 'weak-password') {
+          GetSnackbarError(message: "Password should be at least 6 characters ".tr, Color: AppColors.Red);
+        } else if (error is FirebaseAuthException && error.code == 'email-already-in-use') {
+          GetSnackbarError(message: "The email address is already in use ", Color: AppColors.Red);
+        }
+        print(error.toString());
       });
-
-      // Perform login or other actions
     }
   }
+
 
   onChange(bool value){
     //  isChecked=!value;

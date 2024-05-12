@@ -407,7 +407,7 @@ class MyCart extends StatelessWidget {
                             ),
                             buttonWidget(
                               text: 'Complete Payment'.tr,
-                              width: 350,
+                              width: double.infinity,
                               height: 73,
                               radius: 15,
                               onPress: () {

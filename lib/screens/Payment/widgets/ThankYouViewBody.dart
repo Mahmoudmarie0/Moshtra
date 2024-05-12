@@ -83,50 +83,50 @@ class ThankYouViewBody extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  Container(
-                    width: 305,
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 22),
-                    decoration: ShapeDecoration(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        )),
-                    child: Row(
-                      children: [
-                        Image(image: AssetImage('assets/images/logo.png')),
-                        SizedBox(
-                          width: 23,
-                        ),
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              const TextSpan(
-                                text: 'Credit Card',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                              TextSpan(
-                                text: 'Mastercard **78 ',
-                                style: TextStyle(
-                                  color: Colors.black
-                                      .withOpacity(0.69999998807971),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                  height: 0,
-                                  fontFamily: 'Inter',
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   width: 305,
+                  //   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 22),
+                  //   decoration: ShapeDecoration(
+                  //       color: Colors.white,
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(15),
+                  //       )),
+                  //   child: Row(
+                  //     children: [
+                  //       Image(image: AssetImage('assets/images/logo.png')),
+                  //       SizedBox(
+                  //         width: 23,
+                  //       ),
+                  //       // Text.rich(
+                  //       //   TextSpan(
+                  //       //     children: [
+                  //       //       const TextSpan(
+                  //       //         text: 'Credit Card',
+                  //       //         style: TextStyle(
+                  //       //           color: Colors.black,
+                  //       //           fontSize: 18,
+                  //       //           fontFamily: 'Inter',
+                  //       //           fontWeight: FontWeight.w400,
+                  //       //           height: 0,
+                  //       //         ),
+                  //       //       ),
+                  //       //       TextSpan(
+                  //       //         text: 'Mastercard **78 ',
+                  //       //         style: TextStyle(
+                  //       //           color: Colors.black
+                  //       //               .withOpacity(0.69999998807971),
+                  //       //           fontWeight: FontWeight.w400,
+                  //       //           fontSize: 16,
+                  //       //           height: 0,
+                  //       //           fontFamily: 'Inter',
+                  //       //         ),
+                  //       //       ),
+                  //       //     ],
+                  //       //   ),
+                  //       // )
+                  //     ],
+                  //   ),
+                  // ),
                   Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -214,13 +214,13 @@ class ThankYouViewBody extends StatelessWidget {
                 ),
               )),
           Positioned(
-            top: 710,
+            top: 450,
             left: 0,
             right: 0,
             child: buttonWidget(
               color: AppColors.black,
               text: 'Save as PDF',
-              width: 12,
+              width: 13.0,
               height: 12,
               radius: 12,
               onPress: () => printDoc(total ),

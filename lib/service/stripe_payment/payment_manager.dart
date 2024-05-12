@@ -16,7 +16,7 @@ abstract class PaymentManager{
       String clientSecret=  await _getClientSecret((amount*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);
     await Stripe.instance.presentPaymentSheet();
-      Get.to(ThankYouView());
+      Get.to(ThankYouView( total: amount));
 
       CollectionReference cart = FirebaseFirestore.instance.collection('cart');
 

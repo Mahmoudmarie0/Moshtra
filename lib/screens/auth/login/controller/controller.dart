@@ -41,7 +41,13 @@ class LoginController extends GetxController{
         print("login success"),
         print(value.user!.email),
         print(value.user!.uid),
-      Get.to(HomeLayout()),
+
+        if( value.user!.emailVerified){
+          Get.to(HomeLayout()),}
+        else{
+          GetSnackbarError( message: " Please Verify Your Email".tr,Color: AppColors.Red),
+
+          },
 
       }).catchError((error){
         print(error.toString());

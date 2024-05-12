@@ -72,11 +72,12 @@ class EmailVerification extends StatelessWidget {
                            //  controller.verify();
                             // To New Password
                            // emailVetification.validateOTP();
+                            Get.back();
 
 
 
                           },
-                          child: Text('Verify'.tr , style: TextStyle(
+                          child: Text('Register'.tr , style: TextStyle(
                             color: AppColors.white,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

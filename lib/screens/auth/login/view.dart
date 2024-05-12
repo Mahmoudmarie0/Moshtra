@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -158,6 +159,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           child: MaterialButton(
                               onPressed: (){
+
                                 String email = emailController.text;
                                 String password = passwordController.text;
                                 if(formKey.currentState!.validate())

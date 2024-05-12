@@ -81,6 +81,8 @@ class RegisterController extends GetxController{
     } else if (phoneNumber.length != 10) {
       GetSnackbarError(message: "Enter correct phone number".tr, Color: AppColors.Red);
     } else {
+
+
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(
         email: email,
@@ -91,6 +93,9 @@ class RegisterController extends GetxController{
         print(value.user!.email);
         print(value.user!.uid);
 
+
+
+
         // Send verification email
         value.user!.sendEmailVerification().then((_) {
           print("Verification email sent");
@@ -100,6 +105,8 @@ class RegisterController extends GetxController{
           print("Error sending verification email: $error");
           // Handle error sending verification email
         });
+
+
 
 
        // Get.to(HomeLayout(), transition: Transition.leftToRight);
@@ -115,6 +122,15 @@ class RegisterController extends GetxController{
       });
     }
   }
+
+
+
+
+
+
+
+
+
 
 
   onChange(bool value){

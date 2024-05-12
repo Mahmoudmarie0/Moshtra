@@ -10,155 +10,106 @@ import 'controller/controller.dart';
 
 class EmailVerification extends StatelessWidget {
 
-  TextEditingController verificationController = TextEditingController();
+
   EmailVerificationController emailVetification = Get.put(EmailVerificationController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset : false,
-      backgroundColor: AppColors.blue,
-      body:
-      Column(
-        children: [
-          Container(
-              alignment: Alignment.topRight,
-              child: SvgPicture.asset(AssetsPaths.Ellipse)
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 30),
-            alignment: Alignment.centerLeft,
-            child: Text('Email\nVerification'.tr,
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                color: AppColors.white,
-                fontSize: 40,
+    return GetBuilder<EmailVerificationController>(
+      builder : (controller) => Scaffold(
+        resizeToAvoidBottomInset : false,
+        backgroundColor: AppColors.blue,
+        body:
+        Column(
+          children: [
+            Container(
+                alignment: Alignment.topRight,
+                child: SvgPicture.asset(AssetsPaths.Ellipse)
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 30),
+              alignment: Alignment.centerLeft,
+              child: Text('Email\nVerification'.tr,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.white,
+                  fontSize: 40,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(20) , topRight: Radius.circular(20)),
-                color: AppColors.white,
-              ),
-              padding: EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    // margin: EdgeInsets.symmetric(vertical: 20),
-                    margin: EdgeInsets.only(left: 10 , bottom: 10 , top: 30),
-                    child: Text('Enter the 5-digit verification code send to your\nemail address'.tr ,
-                      style: TextStyle(
-                        color: Color.fromRGBO(147, 150, 163 , 1.0),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                      Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Pinput(
-                          onChanged: (pin) {
-                            emailVetification.onPinChanged();
-                          },
-                          onCompleted: (pin) {
-                            emailVetification.onPinCompleted();
-                          },
-                          controller: verificationController,
-                          length: 5,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                          defaultPinTheme: PinTheme(
-                            width: 65,
-                            height: 65,
-                            textStyle: TextStyle(
-                              fontSize: 22,
-                              color: AppColors.grey,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.orange),
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppColors.white,
-                            ),
-                          ),
-
-                          submittedPinTheme: PinTheme(
-                            width: 65,
-                            height: 65,
-                            textStyle: TextStyle(
-                              fontSize: 14,
-                              color: AppColors.black,
-                              fontWeight: FontWeight.w400,
-                            ),
-
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.Green),
-                              borderRadius: BorderRadius.circular(10),
-                              color: AppColors.white,
-                            ),
+            SizedBox(
+              height: 50,
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20) , topRight: Radius.circular(20)),
+                  color: AppColors.white,
+                ),
+                padding: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      // margin: EdgeInsets.symmetric(vertical: 20),
+                      margin: EdgeInsets.only(left: 10 , bottom: 10 , top: 30),
+                      child:
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text('Conguratulation! Your Acoount Awaits; Verify Your Email \n to Start Shopping and Experience a World of Unrivaled \n Deals and Personalized Offers '.tr ,
+                          style: TextStyle(
+                            color: Color.fromRGBO(147, 150, 163 , 1.0),
                           ),
                         ),
-                      ],
-                    ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: GestureDetector(
-                      onTap: (){
-                        // print('Taped');
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Don\'t receive the code? '.tr ,
-                            style: TextStyle(
-                              color: AppColors.grey,
-                            ),
-                          ),
-                          Text('Resend Code'.tr ,
-                            style: TextStyle(
-                              color: AppColors.orange,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // To New Password
-                          emailVetification.validateOTP();
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child: Center(
+                        child:
+                        ElevatedButton(
+                          onPressed: () {
+                           //  controller.verify();
+                            // To New Password
+                           // emailVetification.validateOTP();
+                            Get.back();
+
+
+
+                          },
+                          child: Text('Register'.tr , style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                          style: button,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 10),
+                      child: GestureDetector(
+                        onTap: (){
+                          controller.resendVerificationEmail();
+                          // print('Taped');
                         },
-                        child: Text('Verify'.tr , style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                        style: button,
+                        child: Text('Resend Email'.tr ,
+                          style: TextStyle(
+                            color: AppColors.orange,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                  )
-                ],
+
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

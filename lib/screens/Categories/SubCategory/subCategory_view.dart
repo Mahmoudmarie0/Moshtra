@@ -238,16 +238,16 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                 );
                               }
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 95 , right: 50),
-                            child: int.parse(widget.products[index].quantity!) == 0 ?
+                          Padding(  //Edited
+                            padding: const EdgeInsets.only(bottom: 50 , right: 50),
+                            child: int.parse(widget.products[index].quantity!) > 0 ? Container() :
                             Container(
                               height: 20,
                               width: 100,
                               alignment: Alignment.center,
                               color: Colors.red,
                               child: Text("Out Of Stock" , style: TextStyle(color: Colors.white),),
-                            ) : Container(),
+                            ) ,
                           )
                         ]
                     ),

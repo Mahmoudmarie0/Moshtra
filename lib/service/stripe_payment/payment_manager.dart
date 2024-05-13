@@ -199,16 +199,16 @@ Future<void> updateQuantityInHome(List<new_cart> cartList) async {
 
 Future<void> DeleteCartAfterPayment(List<new_cart> cartList) async {
 
-  CollectionReference cart = FirebaseFirestore.instance.collection('Products');
+  CollectionReference cart = FirebaseFirestore.instance.collection('cart');
 
-  QuerySnapshot homeProducts = await cart.get();
+  QuerySnapshot cartProducts = await cart.get();
 
   for(int i = 0 ; i < cartList.length ; i++){
-    for(int j = 0 ; j < homeProducts.size ; j++){
+    for(int j = 0 ; j < cartProducts.size ; j++){
 
-      if(cartList[i].product!.productId! == homeProducts.docs[j].get('productId')){
+      if(cartList[i].product!.productId! == cartProducts.docs[j].get('productId')){
 
-        homeProducts.docs[j].reference.delete();
+        cartProducts.docs[j].reference.delete();
 
         print('User Cart Deleted !!');
 

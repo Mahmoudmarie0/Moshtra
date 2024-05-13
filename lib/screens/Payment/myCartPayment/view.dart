@@ -37,6 +37,7 @@ class MyCart extends StatelessWidget {
   GlobalKey<FormState> formKey = GlobalKey();
   RegisterController registerController = Get.put(RegisterController());
 
+
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
 
   @override
@@ -417,7 +418,9 @@ class MyCart extends StatelessWidget {
                                       shipping: shipping,
                                       subtotal: subtotal,
                                       products: products,
-                                      cartList: cartList
+                                      cartList: cartList,
+                                      phone: controller.phone,
+                                      address: controller.address
 
                                   ),
                                 );

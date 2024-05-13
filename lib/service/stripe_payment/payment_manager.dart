@@ -5,25 +5,32 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
 import '../../models/newCart_model.dart';
+import '../../models/products_model.dart';
 import '../../screens/Payment/thankyou/view.dart';
 
 abstract class PaymentManager{
 
 
 //3
-  static Future<void>makePayment(int amount ,String currency )async{
+  static Future<void>makePayment(int total ,String currency,List<ProductModel> products,List<new_cart> cartList,dynamic phone,dynamic address )async{
     try{
-      String clientSecret=  await _getClientSecret((amount*100).toString(), currency);
+      String clientSecret=  await _getClientSecret((total*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);
     await Stripe.instance.presentPaymentSheet();
-      Get.to(ThankYouView( total: amount));
+      Get.to(ThankYouView( total: total));
+      products;
+      cartList;
+      total;
+      phone;
+      address;
+
 
       CollectionReference cart = FirebaseFirestore.instance.collection('cart');
 
       // CollectionReference cart = FirebaseFirestore.instance.collection('cart');
       QuerySnapshot cartProducts = await cart.get();
 
-      List<new_cart> cartList = [];
+      //List<new_cart> cartList = [];
 
       cartProducts.docs.forEach((doc) {
 

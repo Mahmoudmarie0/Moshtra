@@ -17,13 +17,15 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
   final dynamic total;
   final dynamic shipping;
   final dynamic subtotal;
+  final dynamic phone;
+  final dynamic address;
   List<ProductModel> products;
   List<new_cart> cartList;
 
   //final dynamic data;
 
   PaymentMethodsBottomSheet(
-      {required this.total, required this.shipping, required this.subtotal, required this.products, required this.cartList});
+      {required this.total, required this.shipping, required this.subtotal, required this.products, required this.cartList, required this.phone, required this.address});
 
   Widget build(BuildContext context) {
 
@@ -51,9 +53,9 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
 
 
                   controller.activeIndex == 0
-                      ? PaymentManager.makePayment(total, "EGP")
+                      ? PaymentManager.makePayment(total, "EGP",products,cartList,phone,address)
                       : Get.to(
-                          PaypalManager.buildPaypalCheckout(context, products, total, shipping, subtotal,cartList ),
+                          PaypalManager.buildPaypalCheckout(context, products, total, shipping, subtotal,cartList,phone,address),
                         );
                   ;
                 },

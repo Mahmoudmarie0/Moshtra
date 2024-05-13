@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:get/get.dart';
-
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../../../utils/constants/assets.dart';
 import '../../../utils/constants/colors.dart';
-
 import '../login/controller/controller.dart';
-
 import 'controller/controller.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -36,14 +30,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     TextEditingController PasswordController = TextEditingController();
     TextEditingController AddressController = TextEditingController();
 
-
     GlobalKey<FormState> formKey = GlobalKey();
     return ModalProgressHUD(
       inAsyncCall: isLoading,
       child: Scaffold(
         //resizeToAvoidBottomInset: true,
         backgroundColor: AppColors.blue,
-        body: ListView(
+        body: Stack(
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -71,11 +64,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 45),
+              padding: const EdgeInsets.only(top: 225),
               child: Container(
+                height: 565.h,
                 width: 375.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20.r),
+                      bottomLeft: Radius.circular(20.r),
                       topRight: Radius.circular(20.r),
                       topLeft: Radius.circular(20.r)),
                   color: AppColors.white,

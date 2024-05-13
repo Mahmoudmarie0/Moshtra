@@ -30,7 +30,8 @@ class MyCart extends StatelessWidget {
   List<ProductModel> products;
   final dynamic subtotal;
   List<new_cart> cartList;
-  MyCart(this.products, this.subtotal,   this.cartList );
+  String currentRoute;
+  MyCart(this.products, this.subtotal,   this.cartList , this.currentRoute);
 
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController AddressController = TextEditingController();

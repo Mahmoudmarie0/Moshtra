@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/screens/Payment/thankyou/view.dart';
 
 import 'package:moshtra/screens/Payment/widgets/payment_method_list_view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
+import 'package:paymob_payment/paymob_payment.dart';
 import '../../../models/newCart_model.dart';
 import '../../../models/products_model.dart';
 import '../../../service/paypal_payment/paypal_management.dart';
 import '../../../service/stripe_payment/payment_manager.dart';
+import '../../../utils/constants/components.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import '../controller/controller.dart';
 
@@ -21,14 +24,23 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
   final dynamic address;
   List<ProductModel> products;
   List<new_cart> cartList;
+  PaymobResponse? response;
+
+
+
 
   //final dynamic data;
 
   PaymentMethodsBottomSheet(
-      {required this.total, required this.shipping, required this.subtotal, required this.products, required this.cartList, required this.phone, required this.address});
+      {required this.total,
+      required this.shipping,
+      required this.subtotal,
+      required this.products,
+      required this.cartList,
+      required this.phone,
+      required this.address});
 
   Widget build(BuildContext context) {
-
     return GetBuilder<PaymentController>(
       builder: (controller) => Container(
         decoration: BoxDecoration(
@@ -49,14 +61,43 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
               ),
               buttonWidget(
                 onPress: () async {
+                  if (controller.activeIndex == 0) {
+                    PaymentManager.makePayment(
+                        total, "EGP", products, cartList, phone, address);
+                  }
+
+                  if (controller.activeIndex == 1) {
+                    Get.to(PaypalManager.buildPaypalCheckout(context, products,
+                        total, shipping, subtotal, cartList, phone, address));
+                  }
+
+                  if (controller.activeIndex == 2) {
+                    PaymobPayment.instance.pay(
+                        context: context,
+                        currency: "EGP",
+                        amountInCents: total.toString()+"00",
+                        onPayment: (response)async {
+                          print(response);
+                          if (response.success == true) {
 
 
-
-                  controller.activeIndex == 0
-                      ? PaymentManager.makePayment(total, "EGP",products,cartList,phone,address)
-                      : Get.to(
-                          PaypalManager.buildPaypalCheckout(context, products, total, shipping, subtotal,cartList,phone,address),
+                           //await Get.to(()=> ThankYouView( total: total,));
+                            GetSnackbarError(
+                              message: 'The payment was completed successfully'.tr,
+                              Color: AppColors.Green,
+                            );
+                            print(response.success);
+                            products;
+                            cartList;
+                            phone;
+                            address;
+                            total;
+                          }
+                        }
+                        // onPayment: (response) => setState(() => this.response = response),
                         );
+                  }
+
                   ;
                 },
                 text: 'Continue',

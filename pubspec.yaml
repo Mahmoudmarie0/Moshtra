@@ -40,6 +40,8 @@ dependencies:
   #flutter_printing
   printing: ^5.12.0
 
+  paymob_payment: ^0.0.1+1
+
   #GetStorage
   get_storage: ^2.1.1
 

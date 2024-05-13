@@ -22,7 +22,7 @@ class PaymentMethoditem extends StatelessWidget {
                 width: 1.50,
                 color:isActive? AppColors.blue:Colors.grey,
             ),
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
           ),
       ),
       duration: const Duration(microseconds: 300),
@@ -33,8 +33,7 @@ class PaymentMethoditem extends StatelessWidget {
 
         ),
         child: Center(
-          child: SvgPicture.asset(img,
-          ),
+          child:img=="assets/images/paymob.png"? Image(image: AssetImage(img,)):SvgPicture.asset(img,),
         ),
 
 

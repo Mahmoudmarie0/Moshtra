@@ -7,9 +7,11 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/firebase_options.dart';
 import 'package:moshtra/screens/splash/view.dart';
+import 'package:moshtra/service/paypal_payment/view.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
 import 'package:moshtra/utils/constants/localizations.dart';
 import 'package:moshtra/utils/translation/translation.dart';
+import 'package:paymob_payment/paymob_payment.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,6 +39,14 @@ class MyApp extends StatelessWidget {
   //const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    // integrationID: 4575911,
+    // iFrameID: 846387,
+    apiKey:// "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2libUZ0WlNJNkltbHVhWFJwWVd3aUxDSndjbTltYVd4bFgzQnJJam8yT1RBMk56VjkuX3lZTklHVGkwVXBLTmVzdjh0Q0dxc0ZlTmVkNnJobGFid2RoUXlJNFFuMlBUZ2k1Q3VyaGFxbmt2SGlrbXo1enBzaUdxYmhiU0pDU3VCTzA4bGxpcFE=",
+    PaymobPayment.instance.initialize(
+      apiKey: "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RjMk5URXlMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuS2pXUjRUU1BjVXVTT3BRUzdnZlpmelU0RnJBX1RnSERPYjI5SmZ0UVR5XzRmUU51SVNtbVVMTXB3UXU0VjFoT0k2MW1ZQjIyM3hTYkhlRlI5RjdTMWc=",
+      integrationID: 4575911,
+      iFrameID: 846387,
+    );
     return ScreenUtilInit(
       useInheritedMediaQuery: true,
       designSize: const Size(375, 812),
@@ -66,7 +76,7 @@ class MyApp extends StatelessWidget {
               child: child!,
             ));
       },
-      child: SplashScreen(),
+      child:  SplashScreen(),
     );
   }
 }

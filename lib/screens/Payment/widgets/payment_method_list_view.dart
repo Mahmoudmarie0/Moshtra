@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/screens/Payment/widgets/payment_method_item.dart';
 
@@ -18,6 +19,7 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
   final List<String>PaymentMethodsItems=const[
     "assets/images/credit.svg",
     "assets/images/paypal.svg",
+    "assets/images/paymob.png" ,
   ];
 //int activeIndex=0;
   @override

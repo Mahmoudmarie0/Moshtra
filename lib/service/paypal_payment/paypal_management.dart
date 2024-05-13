@@ -25,19 +25,11 @@ abstract class PaypalManager {
             ? product.product!.nameEN
             : product.product!.nameAR,
         "price": product.product!.price.toString(),
-        "currency": "USD",
+        "currency": "EUR",
         "quantity": product.quantity,
       });
     });
 
-    // products.forEach((product) {
-    //   items.add({
-    //     "name": product.nameEN,
-    //     "quantity": newItems as dynamic,
-    //     "price": product.price.toString(),
-    //     "currency": "USD"
-    //   });
-    // });
 
     print(newItems);
 
@@ -49,9 +41,11 @@ abstract class PaypalManager {
       cancelURL: "cancel.snippetcoder.com",
       transactions: [
         {
+
+
           "amount": {
             "total": total,
-            "currency": "USD",
+            "currency": "EUR",
             "details": {
               "subtotal": subtotal,
               "shipping": shipping,

@@ -7,7 +7,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/firebase_options.dart';
 import 'package:moshtra/screens/splash/view.dart';
-import 'package:moshtra/service/paypal_payment/view.dart';
+// import 'package:moshtra/service/paypal_payment/view.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
 import 'package:moshtra/utils/constants/localizations.dart';
 import 'package:moshtra/utils/translation/translation.dart';

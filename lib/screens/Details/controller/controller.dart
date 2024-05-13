@@ -45,23 +45,26 @@ class DetailsController extends GetxController{
 
     if (Type == 'Phones' || Type == 'Labtops' || Type == 'Smart watches' || Type == 'camera')
     {
-      _loading.value = true;
-      final QuerySnapshot<Map<String, dynamic>> LoadProductsQuery =
-      await FirebaseFirestore.instance
-          .collection('Categories')
-          .doc(_CatModel!.id)
-          .collection('Products').where('type', isEqualTo: Type)
-          .get();
+      if(_CatModel!.product.isEmpty){
+        _loading.value = true;
 
-      final LoadProducts = LoadProductsQuery.docs
-          .map((product) => ProductModel.fromSnapshot(product))
-          .toList();
+        final QuerySnapshot<Map<String, dynamic>> LoadProductsQuery =
+        await FirebaseFirestore.instance
+            .collection('Categories')
+            .doc(_CatModel!.id)
+            .collection('Products').where('type', isEqualTo: Type)
+            .get();
 
-      _CatModel!.product = LoadProducts;
+        final LoadProducts = LoadProductsQuery.docs
+            .map((product) => ProductModel.fromSnapshot(product))
+            .toList();
 
-      print('newwwwwwwwwww');
-      print(_CatModel!.product.length);
-      _loading.value = false;
+        _CatModel!.product = LoadProducts;
+
+
+        _loading.value = false;
+
+      }
       update();
     }
     else
@@ -80,12 +83,11 @@ class DetailsController extends GetxController{
 
       _CatModel!.product = LoadProducts;
 
-      print('newwwwwwwwwww');
-      print('yousef');
-      print(_CatModel!.product.length);
+
       _loading.value = false;
       update();
     }
 
   }
 }
+

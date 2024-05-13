@@ -95,7 +95,8 @@ final Map<String, String> en = {
   "Your account has been created successfully ": "Your account has been created successfully ",
   "Password should be at least 6 characters ": "Password should be at least 6 characters ",
   "The email address is already in use ": "The email address is already in use ",
-
+  "Best Sellers" : " Best Sellers",
+  "See All": "See All"
 
 
 

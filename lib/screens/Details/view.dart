@@ -334,6 +334,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   return Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      widget.model.quantity == 0 ? MaterialButton( onPressed: null,)  :
                                       MaterialButton(
                                         onPressed: () async{
 

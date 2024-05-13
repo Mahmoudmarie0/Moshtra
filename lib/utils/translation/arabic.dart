@@ -96,5 +96,6 @@ final Map<String, String> ar = {
   "Your account has been created successfully ": "لقد تم إنشاء حسابك بنجاح",
   "Password should be at least 6 characters ": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
   "The email address is already in use ": "عنوان البريد الإلكتروني مستخدم من قبل",
-
+  "Best Sellers": "الأكثر مبيعًا",
+  "See All": "اظهار الكل",
 };

@@ -71,6 +71,15 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  @override
+  void initState() {
+    super.initState();
+    BestSellerList();
+    setState(() {
+    });
+  }
+
+
   // late File _image;
   // dynamic _probability = 0;
   // String? _result;
@@ -249,6 +258,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       //  await controller.getBestSellingProducts();
                       controller.refreshController.refreshCompleted();
                       controller.refreshController.refreshCompleted();
+                      await BestSellerList();
+                      setState(() {
+
+                      });
                     },
                     // onLoading: () {
                     //   controller.getInvoices(isRefresh: false);
@@ -380,7 +393,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder:(context , snapshot) {
                                   List<user_history> histList = [];
                                   List<ProductModel> myhistproducts = [];
-                                  BestSellerList();
                                   if(!snapshot.hasData)
                                     return CircularProgressIndicator();
                                   else{
@@ -398,8 +410,62 @@ class _HomeScreenState extends State<HomeScreen> {
                                   else
                                     return productsList(myhistproducts);
                                 }),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Get.locale?.languageCode == "en" ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: 'Best Sellers'.tr,
+                                      fontSize: 18,
+                                      fontweight: FontWeight.w800,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(SubCategoryScreen(BestSellerProducts , "Best Sellers"));
+                                      },
+                                      child: CustomText(
+                                        text: 'See All'.tr,
+                                        fontSize: 16,
+                                        fontweight: FontWeight.w500,
+                                        color: AppColors.orange,
+                                      ),
+                                    )
+                                  ],
+                                ) : Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(SubCategoryScreen(BestSellerProducts , "الأكثر مبيعًا"));
+                                      },
+                                      child: CustomText(
+                                        text: 'See All'.tr,
+                                        fontSize: 16,
+                                        fontweight: FontWeight.w500,
+                                        color: AppColors.orange,
+
+                                      ),
+                                    ),
+                                    CustomText(
+                                      text: 'Best Sellers'.tr,
+                                      fontSize: 18,
+                                      fontweight: FontWeight.w800,
+                                    )
+                                  ],
+                                ),
+                              ),
                               SizedBox(
-                                height: 10.h,
+                                height: 5.h,
+                              ),// Editing
+                              StreamBuilder(
+                                  stream:  User_history.orderBy('createdAt', descending: true).snapshots(),
+                                  builder: (context , snapshot) {
+                                    if(BestSellerProducts == 0)
+                                      return Container();
+                                    else
+                                      return productsList(BestSellerProducts);
+                                  }
                               ),
                               Padding(
                                 padding:
@@ -607,7 +673,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               }),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 105 , right: 50),
-                            child: controller.productModel[index].quantity == "0" ?
+                            child: int.parse(controller.productModel[index].quantity!) <= 0 ?
                             Container(
                               height: 20,
                               width: 100,
@@ -736,21 +802,22 @@ class _HomeScreenState extends State<HomeScreen> {
       QuerySnapshot productsDocs = await products.get();
 
 
-        for (int j = 0; j < productsDocs.size; j++) {
+      for (int j = 0; j < productsDocs.size; j++) {
 
-          if(int.parse(productsDocs.docs[j].get('number_of_order')) > 5){
+        if(int.parse(productsDocs.docs[j].get('number_of_order')) > 5){
 
-            print('ProductDocId Added => ${productsDocs.docs[j].id}');
+          print('ProductDocId Added => ${productsDocs.docs[j].id}');
 
-            BestSellerProducts.add(ProductModel.fromSnapshot(productsDocs.docs[j]));
-
-          }
+          BestSellerProducts.add(ProductModel.fromSnapshot(productsDocs.docs[j]));
 
         }
+
       }
+    }
     );
 
     print('Length Of BestSeller List => ${BestSellerProducts.length}');
 
   }
+
 }

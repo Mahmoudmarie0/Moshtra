@@ -6,10 +6,12 @@ import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Details/view.dart';
 
 import '../../../models/cart_model.dart';
+import '../../../screens/Home/controller/Controller.dart';
 import '../../constants/colors.dart';
 import '../../custom_text/view.dart';
 
 class productsList extends StatelessWidget {
+  HomeController homeController = Get.put(HomeController());
 
   List<ProductModel> products ;
 
@@ -36,10 +38,14 @@ class productsList extends StatelessWidget {
                         child: GestureDetector(
                           onTap:(){
                             String currentRoute = ModalRoute.of(context)!.settings.name ?? '';
-                            if(currentRoute == '/DetailsScreen')
+                            if(currentRoute == '/DetailsScreen'){
                               Get.off(DetailsScreen(products[index]));
-                            else
+                            }
+                            else {
+                              homeController.addHistory(products[index]);
                               Get.to(DetailsScreen(products[index]));
+                            }
+
                             },
                           child: Container(
                             decoration: BoxDecoration(

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/service/stripe_payment/stripe_Keys.dart';
+import 'package:moshtra/service/take_order.dart';
 import '../../models/newCart_model.dart';
 import '../../models/products_model.dart';
 import '../../screens/Payment/thankyou/view.dart';
@@ -39,15 +40,15 @@ abstract class PaymentManager{
           cartList.add(new_cart.fromSnapshot(doc));
         }
       });
-
-
+      take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).CartPayment();
+      print('order taken');
       // print('CartLength in Payment ${cartList[0].product!.quantity!}');
       //
       // print('CartLength in Payment ${cartList.length}');
 
-      await addQuantityAndNumberOfOrderFields(cartList);
-      await updateQuantityInHome(cartList);
-      await updateQuantityInCart(cartList);
+      // await addQuantityAndNumberOfOrderFields(cartList);
+      // await updateQuantityInHome(cartList);
+      // await updateQuantityInCart(cartList);
 
 
 

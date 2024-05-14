@@ -255,9 +255,6 @@ class HomeController extends GetxController {
     String categotyName1 = getCatName(firstMax);
     String categotyName2 = getCatName(secondtMax);
 
-    print('cat1=>$categotyName1');
-
-    print('cat2=>$categotyName2');
 
     if(_forYouProductModel.isEmpty)
     {
@@ -321,8 +318,6 @@ class HomeController extends GetxController {
 
     }
 
-    for(int i=0; i<_forYouProductModel.length;i++){print(_forYouProductModel[i].nameEN);}
-    print('-----------');
     _forYouProductModel.shuffle();
 
 

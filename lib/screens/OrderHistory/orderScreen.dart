@@ -1,36 +1,81 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:moshtra/models/orders_model.dart';
+import 'package:moshtra/models/orderProduct_model.dart';
+
+import 'controller/Controller.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+  // const OrderScreen({Key? key}) : super(key: key);
+
+  orderController controller = Get.put(orderController());
+
+
+  CollectionReference order = FirebaseFirestore.instance.collection('Users').doc('PpSZavBW43YINs1F6qTf')
+                              .collection('orders');
 
   @override
   Widget build(BuildContext context) {
+    controller.getOrder();
     return Scaffold(
       appBar: AppBar(
         title: Text('Order List'),
       ),
-      body: ListView(
-        children: <Widget>[
-          OrderCard(
-            orderId: '230866',
-            orderDate: 'Yesterday, 9:55 AM',
-            items: [
-              OrderItem(
-                title: 'Jacket collection1',
-                price: '\$564.0',
-                brand: 'Zara Brand',
-                size: '42.5',
-                color: 'Green',
-                imageUrl: 'https://via.placeholder.com/150', // Replace with your image URL
-              ),
-              // Add more items...
-            ],
-            total: '\$358.0',
-            status: 'On process',
-          ),
-          // Add more OrderCard widgets...
-        ],
-      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: order.orderBy('orderDate').snapshots(),
+        builder: (context, snapshot){
+          List<orders> myorders = [];
+          List<String> dates = [];
+          if (!snapshot.hasData)
+            return CircularProgressIndicator();
+          else {
+            for (int i = 0; i < snapshot.data!.docs.length; i++) {
+              myorders.add(orders.fromSnapshot(snapshot.data!.docs[i]));
+              DateTime dateTime = snapshot.data!.docs[i]['orderDate'].toDate();
+              String formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+              dates.add(formattedDate);
+            }
+          }
+          if (myorders.length == 0)
+            return Container();
+          else
+             {
+              return ListView.builder(
+                itemCount: myorders.length,
+                itemBuilder: (context,index){
+                  return Padding(padding: EdgeInsets.all(8),
+                    child: Column(
+                      children: <Widget>[
+                        OrderCard(
+                          orderId: myorders[index].orderId.toString().substring(0,10),
+                          orderDate: dates[index],
+                          items: [
+                            OrderItem(
+                              title: 'sadasd',
+                              price: '',
+                              brand: 'Zara Brand',
+                              size: myorders[index].orderProducts[0].productModel.Sized.toString(),
+                              color: myorders[index].orderProducts[0].productModel.color.toString(),
+                              imageUrl: myorders[index].orderProducts[0].productModel.image.toString(), // Replace with your image URL
+                            ),
+                            // Add more items...
+                          ],
+                          total: myorders[index].totalPrice.toString(),
+                          status: myorders[index].status.toString(),
+                        ),
+                        // Add more OrderCard widgets...
+                      ],
+                    ),
+                  );
+                },
+
+              );
+            }
+
+        },
+      )
     );
   }
 }

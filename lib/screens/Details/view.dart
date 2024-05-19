@@ -280,6 +280,25 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Center(child: CircularProgressIndicator())
                                   :productsList(controller.CatModel!.product),
                             ),
+
+                            SizedBox(height: 10.h,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('Related Egyptian products'.tr ,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500
+                                  ),),
+                              ),
+                            ),
+                            GetBuilder<DetailsController>(
+                              init: DetailsController(widget.model!.type!),
+                              builder: (controller)=> controller.loading.value ?
+                              Center(child: CircularProgressIndicator())
+                                  :productsList(controller.EgCatModel!.product),
+                            ),
                           ],
                         ),
                       ),

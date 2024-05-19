@@ -96,7 +96,8 @@ final Map<String, String> en = {
   "Password should be at least 6 characters ": "Password should be at least 6 characters ",
   "The email address is already in use ": "The email address is already in use ",
   "Best Sellers" : " Best Sellers",
-  "See All": "See All"
+  "See All": "See All",
+  "Related Egyptian products" : "Related Egyptian products"
 
 
 

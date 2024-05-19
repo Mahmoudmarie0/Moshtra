@@ -98,4 +98,5 @@ final Map<String, String> ar = {
   "The email address is already in use ": "عنوان البريد الإلكتروني مستخدم من قبل",
   "Best Sellers": "الأكثر مبيعًا",
   "See All": "اظهار الكل",
+  "Related Egyptian products": "منتجات مصريه ذات صله"
 };

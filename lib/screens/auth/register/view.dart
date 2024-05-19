@@ -145,7 +145,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             await registerController
                                                 .getCurrentLocation();
                                       },
-                                      child: Icon(Icons.location_on)),
+                                      child: Icon(Icons.location_on,color: Colors.blueAccent,)
+                                  ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: AppColors.blue, width: 2.0),

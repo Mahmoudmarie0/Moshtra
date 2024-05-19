@@ -15,7 +15,9 @@ class productsList extends StatelessWidget {
 
   List<ProductModel> products ;
 
-  productsList(this.products);
+  ProductModel? model;
+
+  productsList(this.products, [this.model]);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +41,8 @@ class productsList extends StatelessWidget {
                           onTap:(){
                             String currentRoute = ModalRoute.of(context)!.settings.name ?? '';
                             if(currentRoute == '/DetailsScreen'){
-                              Get.off(DetailsScreen(products[index]));
+                              homeController.addHistory(products[index]);
+                              model = products[index];
                             }
                             else {
                               homeController.addHistory(products[index]);

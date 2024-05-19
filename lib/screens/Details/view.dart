@@ -20,6 +20,7 @@ import 'package:moshtra/models/comment_model.dart';
 import '../../models/cart_model.dart';
 import '../../models/newCart_model.dart';
 import '../../utils/custom_widgets/global_widgets/products_ListView.dart';
+import '../Home/controller/Controller.dart';
 import '../MyCart/view.dart';
 import 'Components/ChatBubble.dart';
 import 'Components/Details_Tabs.dart';
@@ -75,6 +76,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
 
   final controller = ScrollController();
+  HomeController homeController = Get.put(HomeController());
+
+
   CollectionReference messages =
   FirebaseFirestore.instance
       .collection('Messages');
@@ -263,41 +267,177 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                             // Container(color: Colors.red,height: 600,)//details container
                             SizedBox(height: 10.h,),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Related Products'.tr ,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500
-                                  ),),
-                              ),
-                            ),
+
                             GetBuilder<DetailsController>(
                               init: DetailsController(widget.model!.type!),
-                              builder: (controller)=> controller.loading.value ?
-                              Center(child: CircularProgressIndicator())
-                                  :productsList(controller.CatModel!.product),
+                              builder: (controller) {
+                                if(controller.loading.value)
+                                {
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                                else
+                                {
+                                  if(controller.CatModel!.product.isNotEmpty)
+                                  {
+                                    return Container(
+                                      height: 300.h,
+                                      padding: EdgeInsets.only(left: 10,right: 10),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text('Related Products'.tr ,
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w500
+                                                ),),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: ListView.separated(
+                                              padding: EdgeInsets.zero,
+                                              itemCount:controller.CatModel!.product.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context,index)
+                                              {
+                                                return Container(
+                                                  width: 150.w,
+                                                  child: Column(
+                                                    children: [
+                                                      SingleChildScrollView(
+                                                        child: GestureDetector(
+                                                          onTap:(){
+                                                            homeController.addHistory(controller.CatModel!.product[index]);
+                                                            widget.model = controller.CatModel!.product[index];
+
+                                                            setState(() {
+
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(12),
+                                                              color: AppColors.white,
+                                                            ),
+                                                            height: 200.h,
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Image.network(controller.CatModel!.product[index]!.image!),
+
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+
+                                                      SizedBox(height: 1.h,),
+                                                      CustomText(text:Get.locale?.languageCode == "en"? controller.CatModel!.product[index].nameEN as String : controller.EgCatModel!.product[index].nameAR as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                                                      SizedBox(height: 5.h,),
+                                                      CustomText(text:Get.locale?.languageCode == "en"? controller.CatModel!.product[index].sub_descriptionEN as String : controller.CatModel!.product[index].sub_descriptionAR as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                                                      SizedBox(height: 5.h,),
+                                                      CustomText(text: controller.CatModel!.product[index].price.toString()+' EGP',color:AppColors.blue,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+
+                                                    ],
+                                                  ),
+                                                );
+                                              }, separatorBuilder: (context, index) { return SizedBox(width: 20.w,);},),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  else
+                                    return Container();
+                                }
+                              }
                             ),
 
                             SizedBox(height: 10.h,),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text('Related Egyptian products'.tr ,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500
-                                  ),),
-                              ),
-                            ),
                             GetBuilder<DetailsController>(
                               init: DetailsController(widget.model!.type!),
-                              builder: (controller)=> controller.loading.value ?
-                              Center(child: CircularProgressIndicator())
-                                  :productsList(controller.EgCatModel!.product),
+                              builder: (controller)
+                              {
+                                if(controller.loading.value){
+                                  return Center(child: CircularProgressIndicator());
+                                }
+                                else
+                                {
+                                  if(controller.EgCatModel!.product.isNotEmpty)
+                                  {
+
+                                    return Container(
+                                      height: 300.h,
+                                      padding: EdgeInsets.only(left: 10,right: 10),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 16),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text('Related Egyptian products'.tr ,
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w500
+                                                ),),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: ListView.separated(
+                                              padding: EdgeInsets.zero,
+                                              itemCount:controller.EgCatModel!.product.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context,index)
+                                              {
+                                                return Container(
+                                                  width: 150.w,
+                                                  child: Column(
+                                                    children: [
+                                                      SingleChildScrollView(
+                                                        child: GestureDetector(
+                                                          onTap:(){
+                                                            homeController.addHistory(controller.EgCatModel!.product[index]);
+                                                            widget.model = controller.EgCatModel!.product[index];
+
+                                                            setState(() {
+
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(12),
+                                                              color: AppColors.white,
+                                                            ),
+                                                            height: 200.h,
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Image.network(controller.EgCatModel!.product[index]!.image!),
+
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+
+                                                      SizedBox(height: 1.h,),
+                                                      CustomText(text:Get.locale?.languageCode == "en"? controller.EgCatModel!.product[index].nameEN as String : controller.EgCatModel!.product[index].nameAR as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                                                      SizedBox(height: 5.h,),
+                                                      CustomText(text:Get.locale?.languageCode == "en"? controller.EgCatModel!.product[index].sub_descriptionEN as String : controller.EgCatModel!.product[index].sub_descriptionAR as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
+                                                      SizedBox(height: 5.h,),
+                                                      CustomText(text: controller.EgCatModel!.product[index].price.toString()+' EGP',color:AppColors.blue,fontweight: FontWeight.w500 ,alignment: Alignment.center,fontSize: 12,),
+
+                                                    ],
+                                                  ),
+                                                );
+                                              }, separatorBuilder: (context, index) { return SizedBox(width: 20.w,);},),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  else
+                                    return Container();
+                                }
+                              }
                             ),
                           ],
                         ),
@@ -360,8 +500,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           await getData();
 
                                           if(isNotExist) {
-                                            print("555555555555555");
-                                            print(widget.model.productId);
                                             cart.add({
                                               'product':widget.model.toJson(),
                                               'quantity': 1.toString(),
@@ -520,11 +658,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           fontSize: 16,
                           fontWeight: FontWeight.w600
                       ),),
-                    Text(widget.model.Sized as String,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),),
+                    SizedBox(width: 24,),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(widget.model.Sized as String,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),),
+                      ),
+                    ),
                   ],
                 ),
               ),

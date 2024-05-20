@@ -97,7 +97,8 @@ final Map<String, String> en = {
   "The email address is already in use ": "The email address is already in use ",
   "Best Sellers" : " Best Sellers",
   "See All": "See All",
-  "Related Egyptian products" : "Related Egyptian products"
+  "Related Egyptian products" : "Related Egyptian products",
+  "Confirm Password" : "Confirm Password"
 
 
 

@@ -99,5 +99,6 @@ final Map<String, String> ar = {
   "Best Sellers": "الأكثر مبيعًا",
   "See All": "اظهار الكل",
   "Related Egyptian products": "منتجات مصريه ذات صله",
-  "Confirm Password":"تأكيد كلمة المرور"
+  "Confirm Password":"تأكيد كلمة المرور",
+  "Out Of Stock" : "إنتهى من المخزن",
 };

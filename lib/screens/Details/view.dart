@@ -445,92 +445,109 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ), //Product Details
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 60.h,
-                              width: 160.w,
-                              child: ElevatedButton(onPressed: (){},
-                                child: Text('Buy Now'.tr, style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.grey5,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)
-                                    )
+                      child: Opacity(
+                        opacity: widget.model.quantity == '0' ? 0.5 : 1,
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 60.h,
+                                width: 160.w,
+                                child: widget.model.quantity == '0' ?
+                                ElevatedButton(onPressed: (){},
+                                  child: Text('Buy Now'.tr, style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
+                                  style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.grey5,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  )
+                                  ),
+                                )
+
+                                    :ElevatedButton(onPressed: (){
+                                      print('buy now');
+                                      },
+                                      child: Text('Buy Now'.tr, style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
+                                      style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.grey5,
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10)
+                                      )
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(width: 8.w,),
-                            Container(
-                              width: 160.w,
-                              height: 60.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.r),
-                                  color: AppColors.orange
-                              ),
+                              SizedBox(width: 8.w,),
+                              Container(
+                                width: 160.w,
+                                height: 60.h,
+                                decoration: BoxDecoration(
 
-                              child: StreamBuilder<QuerySnapshot>(
-                                stream: FirebaseFirestore.instance.collection('cart').snapshots(),
-                                builder: (context , snapshot) {
-                                  if(!snapshot.hasData){
-                                    return Text("");
-                                  }else {
-                                    List<new_cart> cartList = [];
-                                    for (int i = 0; i <
-                                        snapshot.data!.docs.length; i++) {
-                                      if (snapshot.data!.docs[i].get(
-                                          'userId') ==
-                                          FirebaseAuth.instance.currentUser!
-                                              .uid) {
-                                        cartList.add(new_cart.fromSnapshot(
-                                            snapshot.data!.docs[i]));
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    color: AppColors.orange
+                                ),
+
+                                child: StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance.collection('cart').snapshots(),
+                                  builder: (context , snapshot) {
+                                    if(!snapshot.hasData){
+                                      return Text("");
+                                    }else {
+                                      List<new_cart> cartList = [];
+                                      for (int i = 0; i <
+                                          snapshot.data!.docs.length; i++) {
+                                        if (snapshot.data!.docs[i].get(
+                                            'userId') ==
+                                            FirebaseAuth.instance.currentUser!
+                                                .uid) {
+                                          cartList.add(new_cart.fromSnapshot(
+                                              snapshot.data!.docs[i]));
+                                        }
                                       }
                                     }
-                                  }
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      widget.model.quantity == 0 ? MaterialButton( onPressed: null,)  :
-                                      MaterialButton(
-                                        onPressed: () async{
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        widget.model.quantity == '0' ? MaterialButton( onPressed: null,child: Text('Add To Cart'.tr),)  :
+                                        MaterialButton(
+                                          onPressed: () async{
+                                            await getData();
 
-                                          await getData();
+                                            if(isNotExist) {
+                                              cart.add({
+                                                'product':widget.model.toJson(),
+                                                'quantity': 1.toString(),
+                                                'createdAt': DateTime.now(),
+                                                'userId': FirebaseAuth.instance.currentUser!.uid.toString()
+                                              });
 
-                                          if(isNotExist) {
-                                            cart.add({
-                                              'product':widget.model.toJson(),
-                                              'quantity': 1.toString(),
-                                              'createdAt': DateTime.now(),
-                                              'userId': FirebaseAuth.instance.currentUser!.uid.toString()
-                                            });
+                                              showSnackBarFun(context , 'The product has been added to\nyour cart'.tr);
+                                              count = 1;
+                                              isNotExist = true;
+                                            }else{
+                                              showSnackBarFun(context , 'The product already existed'.tr);
+                                              count = 1;
+                                              isNotExist = true;
+                                            }
 
-                                            showSnackBarFun(context , 'The product has been added to\nyour cart'.tr);
-                                            count = 1;
-                                            isNotExist = true;
-                                          }else{
-                                            showSnackBarFun(context , 'The product already existed'.tr);
-                                            count = 1;
-                                            isNotExist = true;
-                                          }
-
-                                        },
-                                        child: Text('Add To Cart'.tr,
-                                          style: TextStyle(
-                                            color: AppColors.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14.sp,
+                                          },
+                                          child: Text('Add To Cart'.tr,
+                                            style: TextStyle(
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14.sp,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SvgPicture.asset(AssetsPaths.MyCartWhite),
-                                    ],
-                                  );},
-                              ),
-                            )
-                          ],
+                                        SvgPicture.asset(AssetsPaths.MyCartWhite),
+                                      ],
+                                    );},
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     )//Buy button
@@ -576,11 +593,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
               width: 81.w,
               height: 24.h,
               decoration: BoxDecoration(
-                  color: AppColors.green,
+                  color: widget.model.quantity == '0' ? Colors.red : AppColors.green,
                   borderRadius: BorderRadius.circular(8)
               ),
               child: Center(
-                child: Text('Free Shipping'.tr,
+                child: Text(widget.model.quantity == '0' ? 'Out Of Stock'.tr : 'Free Shipping'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 10,

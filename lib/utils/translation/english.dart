@@ -98,7 +98,8 @@ final Map<String, String> en = {
   "Best Sellers" : " Best Sellers",
   "See All": "See All",
   "Related Egyptian products" : "Related Egyptian products",
-  "Confirm Password" : "Confirm Password"
+  "Confirm Password" : "Confirm Password",
+  "Out Of Stock":"Out Of Stock",
 
 
 

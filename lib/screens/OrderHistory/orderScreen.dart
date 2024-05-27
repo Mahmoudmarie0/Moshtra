@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:moshtra/models/orders_model.dart';
 import 'package:moshtra/models/orderProduct_model.dart';
 
+import '../../utils/constants/colors.dart';
+import '../../utils/custom_text/view.dart';
 import 'controller/Controller.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -48,24 +51,87 @@ class OrderScreen extends StatelessWidget {
                   return Padding(padding: EdgeInsets.all(8),
                     child: Column(
                       children: <Widget>[
-                        OrderCard(
-                          orderId: myorders[index].orderId.toString().substring(0,10),
-                          orderDate: dates[index],
-                          items: [
-                            OrderItem(
-                              title: 'sadasd',
-                              price: '',
-                              brand: 'Zara Brand',
-                              size: myorders[index].orderProducts[0].productModel.Sized.toString(),
-                              color: myorders[index].orderProducts[0].productModel.color.toString(),
-                              imageUrl: myorders[index].orderProducts[0].productModel.image.toString(), // Replace with your image URL
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Order ID: "adham"',
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            // Add more items...
+                            Text("3/7/2002"),
                           ],
-                          total: myorders[index].totalPrice.toString(),
-                          status: myorders[index].status.toString(),
                         ),
-                        // Add more OrderCard widgets...
+                        SizedBox(height: 8.0),
+                        ExpansionTile(
+                          title: Text(
+                            'Items',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          children:<Widget>[
+                        Container(
+                        height: 300.h,
+                          padding: EdgeInsets.only(left: 10,right: 10),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  itemCount:3,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context,index)
+                                  {
+                                    return Container(
+                                      width: 150.w,
+                                      child: Column(
+                                        children: [
+                                          SingleChildScrollView(
+                                            child: GestureDetector(
+                                              // onTap:(){
+                                              //   String currentRoute = ModalRoute.of(context)!.settings.name ?? '';
+                                              //   if(currentRoute == '/DetailsScreen'){
+                                              //     homeController.addHistory(products[index]);
+                                              //     model = products[index];
+                                              //   }
+                                              //   else {
+                                              //     homeController.addHistory(products[index]);
+                                              //     Get.to(DetailsScreen(products[index]));
+                                              //   }
+                                              //
+                                              // },
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  color: AppColors.white,
+                                                ),
+                                                height: 200.h,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("adham"),
+
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+
+                                          SizedBox(height: 1.h,),
+                                          Text("data"),
+                                          SizedBox(height: 5.h,),
+                                          Text("subdescription"),
+                                          SizedBox(height: 5.h,),
+                                          Text("25")
+
+                                        ],
+                                      ),
+                                    );
+                                  }, separatorBuilder: (context, index) { return SizedBox(width: 20.w,);},),
+                              ),
+                            ],
+                          ),
+                        )
+
+
+                          ],
+                        ),// Add more OrderCard widgets...
                       ],
                     ),
                   );
@@ -177,27 +243,7 @@ class OrderCard extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 16.0),
-              Stepper(
-                type: StepperType.vertical, // Adjust type as needed
-                currentStep: 0, // Set the current step
-                steps: [
-                  Step(
-                    title: Text('Step 1'),
-                    content: Text('Content for Step 1'),
-                    isActive: true,
-                  ),
-                  Step(
-                    title: Text('Step 2'),
-                    content: Text('Content for Step 2'),
-                    isActive: false,
-                  ),
-                  Step(
-                    title: Text('Step 3'),
-                    content: Text('Content for Step 3'),
-                    isActive: false,
-                  ),
-                ],
-              ),
+
             ],
           ),
         ),

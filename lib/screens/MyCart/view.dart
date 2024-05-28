@@ -74,38 +74,6 @@ class _MyCartScreenState extends State<MyCartScreen> {
               padding: const EdgeInsets.only(top: 24),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 24),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                            if (snapshot.data!.docs[i].get('userId') ==
-                                FirebaseAuth.instance.currentUser!.uid) {
-                              cart.doc(snapshot.data!.docs[i].id).delete();
-                            }
-                          }
-                        },
-                        child: Text(
-                          'Clear',
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            splashFactory: NoSplash.splashFactory,
-                            minimumSize: Size(150, 50),
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            )),
-                      ),
-                    ),
-                  ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

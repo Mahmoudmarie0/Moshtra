@@ -13,7 +13,7 @@ import '../../../utils/constants/components.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import '../controller/controller.dart';
 
-class PaymentMethodsBottomSheet extends StatelessWidget {
+class PaymentMethodsBottomSheet extends StatefulWidget {
   @override
   // final int sum = Get.arguments ;
 
@@ -24,12 +24,6 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
   final dynamic address;
   List<ProductModel> products;
   List<new_cart> cartList;
-  PaymobResponse? response;
-
-
-
-
-  //final dynamic data;
 
   PaymentMethodsBottomSheet(
       {required this.total,
@@ -39,6 +33,14 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
       required this.cartList,
       required this.phone,
       required this.address});
+
+  @override
+  State<PaymentMethodsBottomSheet> createState() =>
+      _PaymentMethodsBottomSheetState();
+}
+
+class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
+  PaymobResponse? response;
 
   Widget build(BuildContext context) {
     return GetBuilder<PaymentController>(
@@ -63,39 +65,66 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
                 onPress: () async {
                   if (controller.activeIndex == 0) {
                     PaymentManager.makePayment(
-                        total, "EGP", products, cartList, phone, address);
+                        widget.total,
+                        "EGP",
+                        widget.products,
+                        widget.cartList,
+                        widget.phone,
+                        widget.address,
+                        widget.subtotal);
                   }
 
                   if (controller.activeIndex == 1) {
-                    Get.to(PaypalManager.buildPaypalCheckout(context, products,
-                        total, shipping, subtotal, cartList, phone, address));
+                    Get.to(PaypalManager.buildPaypalCheckout(
+                        context,
+                        widget.products,
+                        widget.total,
+                        widget.shipping,
+                        widget.subtotal,
+                        widget.cartList,
+                        widget.phone,
+                        widget.address));
                   }
 
                   if (controller.activeIndex == 2) {
                     PaymobPayment.instance.pay(
                         context: context,
                         currency: "EGP",
-                        amountInCents: total.toString()+"00",
-                        onPayment: (response)async {
+                        amountInCents: widget.total.toString() + "00",
+                        onPayment: (response) async {
                           print(response);
                           if (response.success == true) {
-
-
-                           //await Get.to(()=> ThankYouView( total: total,));
+                            //await Get.to(()=> ThankYouView( total: total,));
                             GetSnackbarError(
-                              message: 'The payment was completed successfully'.tr,
+                              message:
+                                  'The payment was completed successfully'.tr,
                               Color: AppColors.Green,
                             );
                             print(response.success);
-                            products;
-                            cartList;
-                            phone;
-                            address;
-                            total;
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ThankYouView(
+                                          total: widget.total,
+                                          subtotal: widget.subtotal,
+                                        )));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ThankYouView(
+                                          total: widget.total,
+                                          subtotal: widget.subtotal,
+                                        )));
+
+                            widget.products;
+                            widget.cartList;
+                            widget.phone;
+                            widget.address;
+                            widget.total;
                           }
-                        }
-                        // onPayment: (response) => setState(() => this.response = response),
-                        );
+                        });
                   }
 
                   ;

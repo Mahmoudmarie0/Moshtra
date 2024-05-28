@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import '../../Profile/controller/Controller.dart';
 ProfileCopntroller controller = Get.put(ProfileCopntroller());
 
-buildPrintableData(image,final dynamic total) => pw.Padding(
+buildPrintableData(image,final dynamic total,final dynamic subtotal) => pw.Padding(
       padding: const pw.EdgeInsets.all(20),
       child: pw.Stack(
         children: [
@@ -89,11 +88,11 @@ buildPrintableData(image,final dynamic total) => pw.Padding(
                   pw.Row(
                     children: [
                       pw.Text(
-                        "`shipping`",
+                        "shipping",
                       ),
                       pw.Spacer(),
                       pw.Text(
-                        r'$50.97',
+                        '8 EGP',
                       ),
                     ],
                   ),
@@ -107,7 +106,7 @@ buildPrintableData(image,final dynamic total) => pw.Padding(
                       ),
                       pw.Spacer(),
                       pw.Text(
-                        r'$50.97',
+                        subtotal.toString()+" EGP",
                       ),
                     ],
                   ),
@@ -121,7 +120,7 @@ buildPrintableData(image,final dynamic total) => pw.Padding(
                       ),
                       pw.Spacer(),
                       pw.Text(
-                        total.toString(),
+                        total.toString()+" EGP",
                       ),
                     ],
                   ),

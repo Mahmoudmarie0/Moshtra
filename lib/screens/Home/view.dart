@@ -8,6 +8,7 @@ import 'package:moshtra/models/newFav_model.dart';
 import 'package:moshtra/screens/Categories/view.dart';
 import 'package:moshtra/screens/Home/controller/Controller.dart';
 import 'package:moshtra/screens/Home/widgets/ListviewCategory.dart';
+import 'package:moshtra/screens/Payment/thankyou/printable_data.dart';
 import 'package:moshtra/utils/custom_widgets/global_widgets/products_ListView.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../models/products_model.dart';
@@ -39,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
   CollectionReference fav = FirebaseFirestore.instance.collection('favorites');
   CollectionReference User_history = FirebaseFirestore.instance.collection('User_history');
 
+
+  double avg = 0;
 
   bool isNotExist = true;
 
@@ -250,6 +253,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       // controller.productModel.clear();
                       // await controller.getBestSellingProducts();
                       controller.onRefresh();
+
+                      avg = await controller.getBestSelling();
                       //  controller. productModel.clear();
                       //  controller. categoryModel.clear();
                       //  controller.  bannerModel.clear();
@@ -783,7 +788,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> BestSellerList() async {
 
+
+
     BestSellerProducts = [];
+
 
     // Get a reference to the main collection
     CollectionReference categories = FirebaseFirestore.instance.collection('Categories');
@@ -801,10 +809,8 @@ class _HomeScreenState extends State<HomeScreen> {
       // Get all documents from the subcollection
       QuerySnapshot productsDocs = await products.get();
 
-
       for (int j = 0; j < productsDocs.size; j++) {
-
-        if(int.parse(productsDocs.docs[j].get('number_of_order')) > 5){
+        if(int.parse(productsDocs.docs[j].get('number_of_order')) > avg.ceil()){
 
           print('ProductDocId Added => ${productsDocs.docs[j].id}');
 

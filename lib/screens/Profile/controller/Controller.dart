@@ -256,9 +256,9 @@ class ProfileCopntroller extends GetxController {
                                   height: 33.h,
                                   radius: 26,
                                   onPress: () async {
-                                    CollectionReference user = FirebaseFirestore.instance.collection('Users');
-                                    final  userQuery = await user.where('email',isEqualTo: FirebaseAuth.instance.currentUser!.email).get();
-                                    user.doc(userQuery.docs[0].id).delete();
+                                    // CollectionReference user = FirebaseFirestore.instance.collection('Users');
+                                    // final  userQuery = await user.where('email',isEqualTo: FirebaseAuth.instance.currentUser!.email).get();
+                                    // user.doc(userQuery.docs[0].id).delete();
                                     navigateBack();
                                   },
                                   fontWeight: FontWeight.w500,

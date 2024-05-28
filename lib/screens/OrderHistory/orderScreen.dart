@@ -181,7 +181,7 @@ class OrderScreen extends StatelessWidget {
                                   alignment: Alignment.bottomRight,
                                   child: ElevatedButton(
                                     onPressed: () {
-
+                                      order.doc(snapshot.data!.docs[index].id).delete();
                                     },
                                     child: Text(
                                       'calncel',

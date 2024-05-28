@@ -9,6 +9,7 @@ import 'package:moshtra/service/home_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../models/category_model.dart';
+import '../../../models/new_Category_model.dart';
 import '../../../models/user_history_model.dart';
 
 class HomeController extends GetxController {
@@ -49,6 +50,7 @@ class HomeController extends GetxController {
     getBanners();
     gethistory();
     SuggestedForYou();
+    getBestSelling();
   }
 
   getCategory() async {
@@ -340,5 +342,44 @@ class HomeController extends GetxController {
 
 
 
+
+  Future<double> getBestSelling()
+  async {
+    var sum = 0;
+    double avg = 0;
+    int der = 0;
+
+    final QuerySnapshot<Map<String, dynamic>> CatQuerey =
+    await FirebaseFirestore.instance.collection('Categories').get();
+    final Category = CatQuerey.docs
+        .map((category) => Cat_Model.fromSnapshot(category))
+        .toList();
+
+
+    for(int i=0; i<Category.length;i++)
+    {
+      der += Category.length;
+      final QuerySnapshot<Map<String, dynamic>> LoadProductsQuery =
+      await FirebaseFirestore.instance
+          .collection('Categories')
+          .doc(Category[i].id)
+          .collection('Products')
+          .get();
+      final LoadProducts = LoadProductsQuery.docs
+          .map((product) => ProductModel.fromSnapshot(product))
+          .toList();
+      for(int j=0; j<LoadProducts.length; j++)
+      {
+        sum += int.parse(LoadProducts[j].number_of_order as String);
+      }
+
+    }
+    avg = sum/der;
+    print('avg=>${avg.ceil()}');
+
+    print('sum => $sum');
+    print('der=> $der');
+    return avg;
+  }
 
 }

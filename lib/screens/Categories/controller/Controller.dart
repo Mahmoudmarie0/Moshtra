@@ -62,7 +62,6 @@ class CategoryController extends GetxController {
 
     final SubCat =
         SubCatQuery.docs.map((subcat) => Sub_Cat.fromSnapshot(subcat)).toList();
-    for (int i = 0; i < SubCat.length; i++) {}
 
     for (Sub_Cat sub in SubCat) {
       final QuerySnapshot<Map<String, dynamic>> cat_productsQuery =

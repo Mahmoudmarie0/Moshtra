@@ -82,5 +82,20 @@ class orderController extends GetxController {
       myorders[i].orderProducts = LoadOrderProducts;
     }
   }
+  
+  deleteOrder()
+  async {
+    CollectionReference order = FirebaseFirestore.instance.collection('Users').doc(userRef!.id).collection('orders');
+    final QuerySnapshot<Map<String, dynamic>> orderQuerey =
+        await FirebaseFirestore.instance.collection('Users').doc(userRef?.id)
+        .collection('orders').get();
+
+    final Loadorders = orderQuerey.docs
+        .map((product) => orders.fromSnapshot(product))
+        .toList();
+    
+  }
+  
+  
 
 }

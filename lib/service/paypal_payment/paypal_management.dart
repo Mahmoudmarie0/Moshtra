@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
 import 'package:get/get.dart';
 
+import 'package:moshtra/models/newCart_model.dart';
+import 'package:moshtra/screens/Payment/thankyou/view.dart';
 import 'package:moshtra/service/paypal_payment/paypal_keys.dart';
 
-import '../../models/newCart_model.dart';
 import '../../models/products_model.dart';
 
 abstract class PaypalManager {
@@ -25,11 +27,10 @@ abstract class PaypalManager {
             ? product.product!.nameEN
             : product.product!.nameAR,
         "price": product.product!.price.toString(),
-        "currency": "EUR",
+        "currency": "USD",
         "quantity": product.quantity,
       });
     });
-
 
     print(newItems);
 
@@ -41,55 +42,43 @@ abstract class PaypalManager {
       cancelURL: "cancel.snippetcoder.com",
       transactions: [
         {
-
-
           "amount": {
             "total": total,
-            "currency": "EUR",
+            "currency": "USD",
             "details": {
               "subtotal": subtotal,
               "shipping": shipping,
-              "shipping_discount": 0
+              "shipping_discount": 0,
             }
           },
           "description": "The payment transaction description.",
-          // "payment_options": {
-          //   "allowed_payment_method":
-          //       "INSTANT_FUNDING_SOURCE"
-          // },
           "item_list": {
             "items": newItems,
-
-            // shipping address is not required though
-            //   "shipping_address": {
-            //
-            //     "recipient_name": "Raman Singh",
-            //     "line1": "Delhi",
-            //     "line2": "",
-            //     "city": "Delhi",
-            //     "country_code": "IN",
-            //     "postal_code": "11001",
-            //     "phone": "+00000000",
-            //     "state": "Texas"
-            //  },
           }
         }
       ],
       note: "Contact us for any questions on your order.",
-      onSuccess: (Map params) async {
-        products;
-        cartList;
-        total;
-        phone;
-        address;
-        print("onSuccess: $params");
+      onSuccess: (params) async {
+        print("onSuccess: $params"); // Debugging
+        Get.back();
+        await Get.to(() => ThankYouView(
+              total: total,
+              subtotal: subtotal,
+            ));
+
+        Get.to(() => ThankYouView(
+              total: total,
+              subtotal: subtotal,
+            ));
+
+        print("Navigating to ThankYouView...");
       },
       onError: (error) {
-        print("onError: $error");
+        print("onError: $error"); // Debugging
         Navigator.pop(context);
       },
       onCancel: () {
-        print('cancelled:');
+        print('cancelled:'); // Debugging
       },
     );
   }

@@ -13,12 +13,12 @@ abstract class PaymentManager{
 
 
 //3
-  static Future<void>makePayment(int total ,String currency,List<ProductModel> products,List<new_cart> cartList,dynamic phone,dynamic address )async{
+  static Future<void>makePayment(int total ,String currency,List<ProductModel> products,List<new_cart> cartList,dynamic phone,dynamic address,dynamic subtotal )async{
     try{
       String clientSecret=  await _getClientSecret((total*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);
     await Stripe.instance.presentPaymentSheet();
-      Get.to(ThankYouView( total: total));
+      Get.to(ThankYouView( total: total, subtotal: subtotal,));
       products;
       cartList;
       total;

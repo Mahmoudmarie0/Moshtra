@@ -1,20 +1,23 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:moshtra/screens/Payment/widgets/total_price.dart';
 import 'package:printing/printing.dart';
 import '../../../utils/constants/colors.dart';
-import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
 import '../../Profile/controller/Controller.dart';
 import '../thankyou/printable_data.dart';
-import 'package:intl/intl.dart'; // For time formatting
-import 'dart:async';
+
 
 class ThankYouViewBody extends StatelessWidget {
   final dynamic total;
-   ThankYouViewBody({Key? key, required this.total}) : super(key: key);
+final dynamic subtotal;
+  ThankYouViewBody({
+    Key? key,
+    required this.total,
+    required this.subtotal
+  }) : super(key: key);
   ProfileCopntroller controller = Get.put(ProfileCopntroller());
   @override
   Widget build(BuildContext context) {
@@ -57,21 +60,23 @@ class ThankYouViewBody extends StatelessWidget {
                   const SizedBox(
                     height: 42,
                   ),
-                   paymentItemInfo(
+                  paymentItemInfo(
                     title: 'Date',
-                    value:  DateTime.now().toString().substring(0, 10),
+                    value: DateTime.now().toString().substring(0, 10),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                   paymentItemInfo(
+                  paymentItemInfo(
                     title: 'Time',
-                    value: DateTime.now().hour.toString() + ":" + DateTime.now().minute.toString(),
+                    value: DateTime.now().hour.toString() +
+                        ":" +
+                        DateTime.now().minute.toString(),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                   paymentItemInfo(
+                  paymentItemInfo(
                     title: 'To',
                     value: ' ${controller.userName}',
                   ),
@@ -79,90 +84,62 @@ class ThankYouViewBody extends StatelessWidget {
                     thickness: 2,
                     height: 60,
                   ),
-                  Total_price(price: total.toString()),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  // Container(
-                  //   width: 305,
-                  //   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 22),
-                  //   decoration: ShapeDecoration(
-                  //       color: Colors.white,
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(15),
-                  //       )),
-                  //   child: Row(
-                  //     children: [
-                  //       Image(image: AssetImage('assets/images/logo.png')),
-                  //       SizedBox(
-                  //         width: 23,
-                  //       ),
-                  //       // Text.rich(
-                  //       //   TextSpan(
-                  //       //     children: [
-                  //       //       const TextSpan(
-                  //       //         text: 'Credit Card',
-                  //       //         style: TextStyle(
-                  //       //           color: Colors.black,
-                  //       //           fontSize: 18,
-                  //       //           fontFamily: 'Inter',
-                  //       //           fontWeight: FontWeight.w400,
-                  //       //           height: 0,
-                  //       //         ),
-                  //       //       ),
-                  //       //       TextSpan(
-                  //       //         text: 'Mastercard **78 ',
-                  //       //         style: TextStyle(
-                  //       //           color: Colors.black
-                  //       //               .withOpacity(0.69999998807971),
-                  //       //           fontWeight: FontWeight.w400,
-                  //       //           fontSize: 16,
-                  //       //           height: 0,
-                  //       //           fontFamily: 'Inter',
-                  //       //         ),
-                  //       //       ),
-                  //       //     ],
-                  //       //   ),
-                  //       // )
-                  //     ],
-                  //   ),
+                  Total_price(price: total.toString() + " EGP"),
+                  // SizedBox(
+                  //   height: 30,
                   // ),
+
                   Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image(image: AssetImage('assets/images/Vector.png')),
-                      Container(
-                        width: 113,
-                        height: 58,
-                        decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                            width: 1.50,
-                            color: Color(0XFF34A853),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        )),
-                        child: Center(
-                          child: Text(
-                            'PAID',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 50),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image(image: AssetImage('assets/images/Vector.png')),
+                        Container(
+                          width: 113,
+                          height: 58,
+                          decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1.50,
                               color: Color(0XFF34A853),
-                              fontFamily: 'Inter',
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              height: 0,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                          )),
+                          child: Center(
+                            child: Text(
+                              'PAID',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0XFF34A853),
+                                fontFamily: 'Inter',
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                height: 0,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height:
-                        ((MediaQuery.sizeOf(context).height * .2 + 20) / 2) -
-                            29,
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 15),
+                    child: ElevatedButton(
+                      clipBehavior: Clip.none,
+                      autofocus: false,
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(AppColors.white),
+                      ),
+                      onPressed: () => printDoc(total,subtotal),
+                      child: Text(
+                        'Save as PDF',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -213,22 +190,22 @@ class ThankYouViewBody extends StatelessWidget {
                   ),
                 ),
               )),
-          Positioned(
-            top: 450,
-            left: 0,
-            right: 0,
-            child: buttonWidget(
-              color: AppColors.black,
-              text: 'Save as PDF',
-              width: 13.0,
-              height: 12,
-              radius: 12,
-              onPress: () => printDoc(total ),
-              fontWeight: FontWeight.w500,
-              fontSize: 12,
-              conColor: AppColors.white,
-            ),
-          )
+          // Positioned(
+          //   top: 450,
+          //   left: 0,
+          //   right: 0,
+          //   child: buttonWidget(
+          //     color: AppColors.black,
+          //     text: 'Save as PDF',
+          //     width: 13.0,
+          //     height: 12,
+          //     radius: 12,
+          //     onPress: () => printDoc(total ),
+          //     fontWeight: FontWeight.w500,
+          //     fontSize: 12,
+          //     conColor: AppColors.white,
+          //   ),
+          // )
         ],
       ),
     );
@@ -247,7 +224,7 @@ class paymentItemInfo extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style:  TextStyle(
+          style: TextStyle(
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.w400,
@@ -258,7 +235,7 @@ class paymentItemInfo extends StatelessWidget {
         Text(
           value,
           textAlign: TextAlign.center,
-          style:  TextStyle(
+          style: TextStyle(
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -271,13 +248,13 @@ class paymentItemInfo extends StatelessWidget {
   }
 }
 
-Future<void> printDoc(final dynamic total ) async {
+Future<void> printDoc(final dynamic total,final dynamic subtotal) async {
   final doc = pw.Document();
   final image = await imageFromAssetBundle('assets/images/Vector.png');
   doc.addPage(pw.Page(
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
-        return buildPrintableData(image,total);
+        return buildPrintableData(image, total,subtotal);
       }));
   await Printing.layoutPdf(
       onLayout: (PdfPageFormat format) async => doc.save());

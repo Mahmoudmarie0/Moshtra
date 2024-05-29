@@ -26,6 +26,8 @@ class DetailsController extends GetxController{
   }
 
 
+
+
   RelatedProducts(String Type) async {
     String categotyName = getCatName(Type);
     

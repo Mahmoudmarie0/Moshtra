@@ -12,7 +12,7 @@ import '../../../service/home_service.dart';
 class CategoryController extends GetxController {
   ValueNotifier<bool> get loading => _loading;
   ValueNotifier<bool> _loading = ValueNotifier(false);
-
+  List<ProductModel> products = [];
   List<Cat_Model> get CatModel => _CatModel;
   List<Cat_Model> _CatModel = [];
 

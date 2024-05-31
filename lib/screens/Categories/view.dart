@@ -64,7 +64,9 @@ class CategoriesScreen extends StatelessWidget {
                           if (controller.CatModel[index].product.isNotEmpty) {
                             Get.to(SubCategoryScreen(
                                 controller.CatModel[index].product.toList(),
-                                Get.locale?.languageCode == "en"? controller.CatModel[index].nameEN.toString():  controller.CatModel[index].nameAR.toString()));
+                                Get.locale?.languageCode == "en"? controller.CatModel[index].nameEN.toString():  controller.CatModel[index].nameAR.toString(),
+                                controller.CatModel[index].id!,
+                                ));
                             //print(controller.CatModel[index].product[0].name);
                           }
                         },

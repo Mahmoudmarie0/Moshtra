@@ -20,7 +20,8 @@ import 'controller/Controller.dart';
 class SubCategoryScreen  extends StatefulWidget {
   List<ProductModel> products = [];
   String catName;
-  SubCategoryScreen(this.products,this.catName);
+  String Catid;
+  SubCategoryScreen(this.products,this.catName,this.Catid);
 
   HomeController homeController = Get.put(HomeController(),permanent: true);
 
@@ -33,6 +34,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   List<QueryDocumentSnapshot> data = [];
 
   CollectionReference fav = FirebaseFirestore.instance.collection('favorites');
+
+  CollectionReference cat = FirebaseFirestore.instance.collection('Categories');
+
 
   bool isNotExist = true;
 
@@ -238,16 +242,28 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                 );
                               }
                           ),
-                          Padding(  //Edited
-                            padding: const EdgeInsets.only(bottom: 50 , right: 50),
-                            child: int.parse(widget.products[index].quantity!) > 0 ? Container() :
-                            Container(
-                              height: 20,
-                              width: 100,
-                              alignment: Alignment.center,
-                              color: Colors.red,
-                              child: Text("Out Of Stock" , style: TextStyle(color: Colors.white),),
-                            ) ,
+
+                          StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance.collection('Categories').doc(widget.Catid).collection('Products').snapshots(),
+                              builder: (context , snapshot){
+
+                                if(!snapshot.hasData){
+                                  return CircularProgressIndicator();
+                                }
+                                return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 105, right: 50),
+                                              child: int.parse(snapshot.data!.docs[index].get("quantity")) <= 0 ?
+                                              Container(
+                                                height: 20,
+                                                width: 100,
+                                                alignment: Alignment.center,
+                                                color: Colors.red,
+                                                child: Text("Out Of Stock",
+                                                  style: TextStyle(color: Colors.white),),
+                                              ) : Container(),
+                                            );
+                              }
                           )
                         ]
                     ),
@@ -258,6 +274,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
           ),
     );
   }
+
   showSnackBarFun(context , String msg){
     SnackBar snackBar = SnackBar(
         dismissDirection: DismissDirection.up,
@@ -312,4 +329,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
+
 }

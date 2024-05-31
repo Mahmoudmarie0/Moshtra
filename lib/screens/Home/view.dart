@@ -299,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         .toString()
                                                     : categoryController
                                                         .CatModel[3].nameAR
-                                                        .toString()));
+                                                        .toString() , ""));
                                           }
                                         },
                                         child: Container(
@@ -427,7 +427,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(BestSellerProducts , "Best Sellers"));
+                                        Get.to(SubCategoryScreen(BestSellerProducts , "Best Sellers" , ""));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -442,7 +442,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(BestSellerProducts , "الأكثر مبيعًا"));
+                                        Get.to(SubCategoryScreen(BestSellerProducts , "الأكثر مبيعًا" , ""));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -676,16 +676,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 );
                               }),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 105 , right: 50),
-                            child: int.parse(controller.productModel[index].quantity!) <= 0 ?
-                            Container(
-                              height: 20,
-                              width: 100,
-                              alignment: Alignment.center,
-                              color: Colors.red,
-                              child: Text("Out Of Stock" , style: TextStyle(color: Colors.white),),
-                            ) : Container(),
+                          StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance.collection('Products').snapshots(),
+                              builder: (context , snapshot) {
+                                if (!snapshot.hasData) {
+                                  return CircularProgressIndicator();
+                                }
+                                else {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 105, right: 50),
+                                    child: int.parse(snapshot.data!.docs[index].get("quantity")) <= 0 ?
+                                    Container(
+                                      height: 20,
+                                      width: 100,
+                                      alignment: Alignment.center,
+                                      color: Colors.red,
+                                      child: Text("Out Of Stock",
+                                        style: TextStyle(color: Colors.white),),
+                                    ) : Container(),
+                                  );
+                                }
+                              }
                           )
                         ]),
                       ),

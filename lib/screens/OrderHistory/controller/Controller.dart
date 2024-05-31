@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:moshtra/models/orderProduct_model.dart';
 import 'package:moshtra/models/orders_model.dart';
@@ -9,6 +10,9 @@ import '../../../models/User_model.dart';
 
 class orderController extends GetxController {
 
+
+  ValueNotifier<bool> get loading => _loading;
+  ValueNotifier<bool> _loading = ValueNotifier(false);
 
   List<orders> get myOrders => _myOrders;
   List<orders> _myOrders = [];
@@ -20,10 +24,14 @@ class orderController extends GetxController {
   orderController()
    {
      getUser();
-     getOrder();
+     // getOrder();
+     updateOrderStatus();
    }
 
    getUser() async {
+
+     _loading.value = true;
+
      final  userQuery = await FirebaseFirestore.instance
          .collection('Users').where('email',isEqualTo: FirebaseAuth.instance.currentUser!.email).get();
 
@@ -32,6 +40,11 @@ class orderController extends GetxController {
 
      _userModel = User_Model.fromsnapshot(userQuery.docs[0]);
 
+
+     _loading.value = false;
+     update();
+
+
    }
 
 
@@ -39,7 +52,7 @@ class orderController extends GetxController {
 
    getOrder()
    async {
-
+    _loading.value = true;
 
      final QuerySnapshot<Map<String, dynamic>> orderQuerey =
          await FirebaseFirestore.instance.collection('Users').doc(userRef?.id)
@@ -68,10 +81,17 @@ class orderController extends GetxController {
      print(_myOrders[1].orderId);
      print(_myOrders[1].orderProducts[0].productModel.nameAR);
 
+
+    _loading.value = false;
+    update();
+
+
+
    }
 
 
   getMyOrders(myorders)async{
+    _loading.value = true;
 
     for(int i=0; i<myorders.length; i++)
     {
@@ -81,20 +101,47 @@ class orderController extends GetxController {
       final LoadOrderProducts = productsQuerey.docs.map((product) => orderProduct.fromSnapshot(product)).toList();
       myorders[i].orderProducts = LoadOrderProducts;
     }
-  }
-  
-  deleteOrder()
-  async {
-    CollectionReference order = FirebaseFirestore.instance.collection('Users').doc(userRef!.id).collection('orders');
-    final QuerySnapshot<Map<String, dynamic>> orderQuerey =
-        await FirebaseFirestore.instance.collection('Users').doc(userRef?.id)
-        .collection('orders').get();
 
-    final Loadorders = orderQuerey.docs
-        .map((product) => orders.fromSnapshot(product))
-        .toList();
-    
+    _loading.value = false;
+    update();
+
+
   }
+
+ updateOrderStatus() async {
+
+    _loading.value = true;
+   final  ordersQuery = await FirebaseFirestore.instance
+       .collection('Users').doc(userRef!.id).collection('orders').get();
+   CollectionReference o = FirebaseFirestore.instance.collection('Users').doc(userRef!.id)
+       .collection('orders');
+
+   print(ordersQuery.docs.length);
+   List<orders> myOrders = [];
+   for(int i=0; i<ordersQuery.docs.length;i++)
+   {
+     DateTime curr = DateTime.now();
+     Timestamp orderTime = ordersQuery.docs[i]['orderDate'];
+     DateTime myTime = orderTime.toDate();
+     Duration diff = curr.difference(myTime);
+     int diffInMin = diff.inMinutes;
+     if(diffInMin >= 2 && diffInMin < 5)
+     {
+       print(ordersQuery.docs[i].id);
+       print('------------');
+       o.doc(ordersQuery.docs[i].id).update({'status':'delivery'});
+     }
+     else if(diffInMin >= 5){
+       o.doc(ordersQuery.docs[i].id).update({'status':'deliveried'});
+
+     }
+     myOrders.add(orders.fromSnapshot(ordersQuery.docs[i]));
+   }
+    _loading.value = false;
+   update();
+
+ }
+
   
   
 

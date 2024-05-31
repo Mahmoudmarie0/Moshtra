@@ -399,7 +399,8 @@ class take_order {
     for(int i = 0 ; i < cartList.length ; i++){
       for(int j = 0 ; j < cartProducts.size ; j++){
 
-        if(cartList[i].product!.productId! == cartProducts.docs[j].get('productId')){
+
+        if(cartProducts.docs[j].get('product')["productId"] == cartList[i].product!.productId!){
 
           cartProducts.docs[j].reference.delete();
 

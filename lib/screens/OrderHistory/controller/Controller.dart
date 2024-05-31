@@ -5,6 +5,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:moshtra/models/orderProduct_model.dart';
 import 'package:moshtra/models/orders_model.dart';
 import 'package:moshtra/models/products_model.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../models/User_model.dart';
 
@@ -16,6 +17,9 @@ class orderController extends GetxController {
 
   List<orders> get myOrders => _myOrders;
   List<orders> _myOrders = [];
+
+  RefreshController refreshController = RefreshController();
+  ScrollController scrollController = ScrollController();
 
   User_Model? get userModel => _userModel;
   User_Model? _userModel ;
@@ -111,37 +115,46 @@ class orderController extends GetxController {
  updateOrderStatus() async {
 
     _loading.value = true;
-   final  ordersQuery = await FirebaseFirestore.instance
-       .collection('Users').doc(userRef!.id).collection('orders').get();
-   CollectionReference o = FirebaseFirestore.instance.collection('Users').doc(userRef!.id)
-       .collection('orders');
+    await getUser();
 
-   print(ordersQuery.docs.length);
-   List<orders> myOrders = [];
-   for(int i=0; i<ordersQuery.docs.length;i++)
-   {
-     DateTime curr = DateTime.now();
-     Timestamp orderTime = ordersQuery.docs[i]['orderDate'];
-     DateTime myTime = orderTime.toDate();
-     Duration diff = curr.difference(myTime);
-     int diffInMin = diff.inMinutes;
-     if(diffInMin >= 2 && diffInMin < 5)
-     {
-       print(ordersQuery.docs[i].id);
-       print('------------');
-       o.doc(ordersQuery.docs[i].id).update({'status':'delivery'});
-     }
-     else if(diffInMin >= 5){
-       o.doc(ordersQuery.docs[i].id).update({'status':'deliveried'});
+    final  ordersQuery = await FirebaseFirestore.instance
+           .collection('Users').doc(userRef!.id).collection('orders').get();
+       CollectionReference o = FirebaseFirestore.instance.collection('Users').doc(userRef!.id)
+           .collection('orders');
 
-     }
-     myOrders.add(orders.fromSnapshot(ordersQuery.docs[i]));
-   }
-    _loading.value = false;
+       print(ordersQuery.docs.length);
+       List<orders> myOrders = [];
+       for(int i=0; i<ordersQuery.docs.length;i++)
+       {
+         DateTime curr = DateTime.now();
+         Timestamp orderTime = ordersQuery.docs[i]['orderDate'];
+         DateTime myTime = orderTime.toDate();
+         Duration diff = curr.difference(myTime);
+         int diffInMin = diff.inMinutes;
+         if(diffInMin >= 2 && diffInMin < 5)
+         {
+           print(ordersQuery.docs[i].id);
+           print('------------');
+           o.doc(ordersQuery.docs[i].id).update({'status':'delivery'});
+         }
+         else if(diffInMin >= 5){
+           o.doc(ordersQuery.docs[i].id).update({'status':'deliveried'});
+
+         }
+         myOrders.add(orders.fromSnapshot(ordersQuery.docs[i]));
+       }
+
+
+   _loading.value = false;
    update();
 
  }
 
+ onRefersh()
+ async {
+   await updateOrderStatus();
+
+ }
   
   
 

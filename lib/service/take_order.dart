@@ -33,9 +33,13 @@ class take_order {
 
     updateQuantityInCart(cartList);
 
+    updateQuantityInFav(cartList);
+
     updateQuantityInHome(cartList);
 
     DeleteCartAfterPayment(cartList);
+
+    DeleteProductFromCart();
 
     print('Done!');
 
@@ -322,7 +326,7 @@ class take_order {
               'quantity': q.toString(),
               'number_of_order': n.toString(),
             });
-            print('Done Fun1 !!');
+            print('Products Updated Done !!');
 
           }
 
@@ -353,7 +357,37 @@ class take_order {
             'product.quantity' : q.toString() ,
             'product.number_of_order' : n.toString(),
           });
-          print('Done Fun2 !!');
+          print('Cart Updated Done !!');
+
+        }
+
+      }
+    }
+
+  }
+
+  Future<void> updateQuantityInFav(List<new_cart> cartList) async {
+
+    CollectionReference fav = FirebaseFirestore.instance.collection('favorites');
+
+    QuerySnapshot favProducts = await fav.get();
+
+    for(int i = 0 ; i < cartList.length ; i++){
+      for(int j = 0 ; j < favProducts.size ; j++){
+
+        if(cartList[i].product!.productId! == favProducts.docs[j].get('product')['productId']){
+
+          var q = int.parse(favProducts.docs[j].get('product')['quantity']) - int.parse(cartList[i].quantity!);
+          assert(q is int);
+          var n = int.parse(favProducts.docs[j].get('product')['number_of_order']) + 1;
+          assert(n is int);
+
+
+          favProducts.docs[j].reference.update({
+            'product.quantity' : q.toString() ,
+            'product.number_of_order' : n.toString(),
+          });
+          print('Fav Updated Done !!');
 
         }
 
@@ -381,7 +415,7 @@ class take_order {
             'quantity' : q.toString(),
             'number_of_order': n.toString(),
           });
-          print('Done Fun3 !!');
+          print('Home Updated Done !!');
 
         }
 
@@ -406,9 +440,28 @@ class take_order {
 
           print('User Cart Deleted !!');
 
+
         }
       }
     }
+  }
+
+  Future<void> DeleteProductFromCart() async {
+    CollectionReference cart = FirebaseFirestore.instance.collection('cart');
+
+    QuerySnapshot cartProducts = await cart.get();
+
+    for(int i = 0 ; i < cartProducts.size ; i++){
+
+      if(int.parse(cartProducts.docs[i].get('product')["quantity"]) <= 0 ){
+        cartProducts.docs[i].reference.delete();
+        print('Product Cart Whose Quantity 0 Deleted !!');
+      }
+
+    }
+
+
+
   }
 
 

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:moshtra/models/orders_model.dart';
 import 'package:moshtra/models/orderProduct_model.dart';
 
@@ -42,6 +43,7 @@ class OrderScreen extends StatelessWidget {
                     builder: (context, snapshot){
                       List<orders> myorders = [];
                       List<String> dates = [];
+                      List<String> times = [];
                       if (!snapshot.hasData)
                         return Center(child: CircularProgressIndicator());
                       else {
@@ -49,6 +51,8 @@ class OrderScreen extends StatelessWidget {
                           myorders.add(orders.fromSnapshot(snapshot.data!.docs[i]));
                           DateTime dateTime = snapshot.data!.docs[i]['orderDate'].toDate();
                           String formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+                          String formattedTime = DateFormat('hh:mm a').format(dateTime);
+                          times.add(formattedTime);
                           dates.add(formattedDate);
                         }
                       }
@@ -71,10 +75,10 @@ class OrderScreen extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Order ID: ${myorders[index].orderId?.substring(0,15)}',
+                                                'Order ID: ${myorders[index].orderId?.substring(0,10)}',
                                                 style: TextStyle(fontWeight: FontWeight.bold),
                                               ),
-                                              Text(dates[index]),
+                                              Text('${dates[index]}  ${times[index]}'),
                                             ],
                                           ),
                                           SizedBox(height: 8.0),

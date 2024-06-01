@@ -18,7 +18,7 @@ abstract class PaymentManager{
       String clientSecret=  await _getClientSecret((total*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);
     await Stripe.instance.presentPaymentSheet();
-      Get.to(ThankYouView( total: total, subtotal: subtotal,));
+      Get.off(ThankYouView( total: total, subtotal: subtotal,));
       products;
       cartList;
       total;

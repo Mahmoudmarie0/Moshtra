@@ -203,44 +203,120 @@ class _OrderScreenState extends State<OrderScreen> {
 
                                               ],
                                             ),
+                                            ExpansionTile(
+                                              title: Text(
+                                                'order details',
+                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                              ),
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Address: ',
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
+                                                      Expanded(
+                                                        child: SingleChildScrollView(
+                                                            scrollDirection: Axis.horizontal,
+                                                            child: CustomText(
+                                                              text: myorders[index].orderAddress.toString(),
+                                                              fontweight: FontWeight.w400,
+                                                            )),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Phone: ',
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
+                                                      CustomText(
+                                                        text: "0${myorders[index].orderPhone.toString()}",
+                                                        fontweight: FontWeight.w400,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Payment Method: ',
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
+                                                      CustomText(
+                                                        text: myorders[index].paymentMethod.toString(),
+                                                        fontweight: FontWeight.w400,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        'Status: ',
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
+                                                      CustomText(
+                                                        text: myorders[index].status.toString(),
+                                                        fontweight: FontWeight.w400,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
 
                                             myorders[index].status == 'Picked'? Align(
                                               alignment: Alignment.bottomRight,
-                                              child: ElevatedButton(
-                                                onPressed: () async {
-                                                  await controller.updateOrderStatus();
-                                                  if(myorders[index].status == 'Picked'){
-                                                    final  productsQuerey = await order.doc(snapshot.data!.docs[index].id).collection('products').get();
-                                                    for(int i=0;i<productsQuerey.docs.length; i++) {
-                                                      DocumentReference d =
-                                                      order.doc(snapshot.data!.docs[index].id).collection('products').doc(productsQuerey.docs[i].id);
-                                                      d.delete();
-                                                    }
-
-                                                    order.doc(snapshot.data!.docs[index].id).delete();
-                                                  }
-                                                  else{
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: ElevatedButton(
+                                                  onPressed: () async {
+                                                    await controller.updateOrderStatus();
                                                     setState(() {
 
                                                     });
-                                                  }
-                                                },
-                                                child: Text(
-                                                  'calncel',
-                                                  style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
+                                                    if(myorders[index].status == 'Picked'){
+                                                      final  productsQuerey = await order.doc(snapshot.data!.docs[index].id).collection('products').get();
+                                                      for(int i=0;i<productsQuerey.docs.length; i++) {
+                                                        DocumentReference d =
+                                                        order.doc(snapshot.data!.docs[index].id).collection('products').doc(productsQuerey.docs[i].id);
+                                                        d.delete();
+                                                      }
+
+                                                      order.doc(snapshot.data!.docs[index].id).delete();
+                                                    }
+                                                    else{
+
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                    'cancel',
+                                                    style: TextStyle(
+                                                      color: AppColors.white,
+                                                      fontSize: 18,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
                                                   ),
+                                                  style: ElevatedButton.styleFrom(
+                                                      splashFactory: NoSplash.splashFactory,
+                                                      minimumSize: Size(80, 50),
+                                                      backgroundColor: Colors.red,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius.all(Radius.circular(10)),
+                                                      )),
                                                 ),
-                                                style: ElevatedButton.styleFrom(
-                                                    splashFactory: NoSplash.splashFactory,
-                                                    minimumSize: Size(80, 50),
-                                                    backgroundColor: Colors.red,
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.all(Radius.circular(10)),
-                                                    )),
                                               ),
                                             ) :
                                             Container()

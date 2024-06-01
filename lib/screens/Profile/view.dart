@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:moshtra/EditProfile/editprofile.dart';
+import 'package:moshtra/screens/Chatbot/ChatScreen.dart';
 import 'package:moshtra/utils/constants/assets.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../global_controller/main_app_controller.dart';
-import '../Chatbot/view.dart';
 import '../OrderHistory/orderScreen.dart';
 import '../auth/NewPassword/view.dart';
 import 'controller/Controller.dart';
@@ -256,7 +257,9 @@ class ProfileScreen extends StatelessWidget {
                                 height: 12.h,
                               ),
                               Get.locale?.languageCode == "en"
-                                  ? Row(
+                                  ? InkWell(
+                                onTap: () => Get.to(UserProfilePage()),
+                                  child: Row(
                                       children: [
                                         SvgPicture.asset(AssetsPaths.Profile),
                                         SizedBox(
@@ -276,8 +279,11 @@ class ProfileScreen extends StatelessWidget {
                                           color: AppColors.grey4,
                                         ),
                                       ],
-                                    )
-                                  : Row(
+                                    ),
+                              )
+                                : InkWell(
+                                onTap: () => Get.to(UserProfilePage()),
+                                 child : Row(
                                       children: [
                                         Icon(
                                           Icons.arrow_back_ios,
@@ -298,6 +304,7 @@ class ProfileScreen extends StatelessWidget {
                                         SvgPicture.asset(AssetsPaths.Profile),
                                       ],
                                     ),
+                              ),
                               SizedBox(
                                 height: 8.h,
                               ),
@@ -827,7 +834,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               Get.locale?.languageCode == "en"
                                   ? GestureDetector(
-                                      onTap: () => Get.to(ChatScreen()),
+                                      onTap: () => Get.to(ChatbotPage()),
                                       child: Row(
                                         children: [
                                           SvgPicture.asset(
@@ -852,7 +859,7 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                     )
                                   : GestureDetector(
-                                      onTap: () => Get.to(ChatScreen()),
+                                      onTap: () => Get.to(ChatbotPage()),
                                       child: Row(
                                         children: [
                                           Icon(

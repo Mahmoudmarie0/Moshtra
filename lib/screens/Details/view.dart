@@ -206,8 +206,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   return ChatBubble(comment: commentList[index],);
                                                 })
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(16),
+                                            ConstrainedBox(
+                                              constraints: BoxConstraints(
+                                                minHeight: 30, // Set minimum height
+                                                maxHeight: 200, // Set maximum height
+                                              ),
                                               child: TextField(
                                                 // onSubmitted: (data)
                                                 // {
@@ -234,7 +237,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                               }
                                                           );
                                                         }
-
+                                              
                                                         comment.clear();
                                                         controller.animateTo(
                                                             controller.position.minScrollExtent,

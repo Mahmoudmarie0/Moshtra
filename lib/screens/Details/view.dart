@@ -45,6 +45,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
   int count = 1;
 
 
+  final ScrollController _scrollController = ScrollController();
+
+
 
   getData() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('cart').get() as QuerySnapshot<Object?>;
@@ -111,6 +114,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   children: [
                     Expanded(
                       child: SingleChildScrollView(
+                          controller: _scrollController,
                         child: Column(
                           children: [
                             Container(
@@ -316,7 +320,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                             widget.model = controller.CatModel!.product[index];
 
                                                             setState(() {
-
+                                                              _scrollController.animateTo(
+                                                                0.0,
+                                                                duration: Duration(milliseconds: 250),
+                                                                curve: Curves.easeIn,
+                                                              );
                                                             });
                                                           },
                                                           child: Container(
@@ -403,7 +411,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                             widget.model = controller.EgCatModel!.product[index];
 
                                                             setState(() {
-
+                                                              _scrollController.animateTo(
+                                                                0.0,
+                                                                duration: Duration(milliseconds: 250),
+                                                                curve: Curves.easeIn,
+                                                              );
                                                             });
                                                           },
                                                           child: Container(
@@ -573,24 +585,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
       children: [
         Row(
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 24, right: 6),
-              width: 62.w,
-              height: 24.h,
-              decoration: BoxDecoration(
-                  color: Color(0xff1f8bda),
-                  borderRadius: BorderRadius.circular(8)
-              ),
-              child: Center(
-                child: Text('Top Rated'.tr,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 10,
-                      color: Colors.white,
-                    )
-                ),
-              ),
-            ),
+             GetBuilder<DetailsController>(
+               init: DetailsController(widget.model!.type.toString()),
+               builder: (controller)=>controller.loading.value
+               ?Container()
+               : int.parse(widget.model!.number_of_order as String) >= controller.med ?Container(
+                 margin: EdgeInsets.only(top: 24, right: 6),
+                 width: 62.w,
+                 height: 24.h,
+                 decoration: BoxDecoration(
+                     color: Color(0xff1f8bda),
+                     borderRadius: BorderRadius.circular(8)
+                 ),
+                 child: Center(
+                   child: Text('Best Sellers'.tr,
+                       style: TextStyle(
+                         fontWeight: FontWeight.w600,
+                         fontSize: 10,
+                         color: Colors.white,
+                       )
+                   ),
+                 ),
+               ): Container()
+             ),
             Container(
               margin: EdgeInsets.only(top: 24),
               width: 81.w,

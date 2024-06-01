@@ -14,6 +14,11 @@ class DetailsController extends GetxController{
   Cat_Model? get CatModel => _CatModel;
   Cat_Model? _CatModel ;
 
+
+  int get med => _med;
+  int _med = 0;
+
+
   Cat_Model? get EgCatModel => _EgCatModel;
   Cat_Model? _EgCatModel ;
 
@@ -23,6 +28,7 @@ class DetailsController extends GetxController{
   DetailsController(this.type) {
     RelatedProducts(type);
     RelatedEgyptianProducts(type);
+    getBestSelling2();
   }
 
 
@@ -163,6 +169,45 @@ class DetailsController extends GetxController{
       categotyName = type;
 
     return categotyName;
+  }
+
+
+  getBestSelling2()
+  async {
+    _loading.value = true;
+    List<int> no_of_orders = [];
+    final QuerySnapshot<Map<String, dynamic>> CatQuerey =
+    await FirebaseFirestore.instance.collection('Categories').get();
+    final Category = CatQuerey.docs
+        .map((category) => Cat_Model.fromSnapshot(category))
+        .toList();
+
+
+    for(int i=0; i<Category.length;i++)
+    {
+      final QuerySnapshot<Map<String, dynamic>> LoadProductsQuery =
+      await FirebaseFirestore.instance
+          .collection('Categories')
+          .doc(Category[i].id)
+          .collection('Products')
+          .get();
+      final LoadProducts = LoadProductsQuery.docs
+          .map((product) => ProductModel.fromSnapshot(product))
+          .toList();
+      for(int j=0; j<LoadProducts.length; j++)
+      {
+        no_of_orders.add(int.parse(LoadProducts[j].number_of_order as String));
+      }
+
+
+    }
+    no_of_orders.sort();
+
+    _med = no_of_orders[no_of_orders.length-10];
+    // return _med;
+    _loading.value = false;
+    update();
+
   }
 
 

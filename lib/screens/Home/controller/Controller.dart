@@ -22,6 +22,9 @@ class HomeController extends GetxController {
   List<ProductModel> get forYouProductModel => _forYouProductModel;
   List<ProductModel> _forYouProductModel = [];
 
+  int get med => _med;
+  int _med = 0;
+
 
 
   List<CategoryModel> get categoryModel => _categoryModel;
@@ -34,6 +37,10 @@ class HomeController extends GetxController {
   List<ProductModel> get histProducts => _histProducts;
   List<ProductModel> _histProducts = [];
 
+
+  List<ProductModel> get BestSellerProducts => _BestSellerProducts;
+  List<ProductModel> _BestSellerProducts = [];
+  
   List<ProductModel> get productModel => _productModel;
   List<ProductModel> _productModel = [];
   final TextEditingController SearchController = TextEditingController();
@@ -51,6 +58,8 @@ class HomeController extends GetxController {
     gethistory();
     SuggestedForYou();
     getBestSelling();
+    // getBestSelling2();
+    BestSellerList();
   }
 
   getCategory() async {
@@ -101,6 +110,7 @@ class HomeController extends GetxController {
     await getBanners();
     await getBestSellingProducts();
     await SuggestedForYou();
+
 
 
   }
@@ -375,11 +385,80 @@ class HomeController extends GetxController {
 
     }
     avg = sum/der;
-    print('avg=>${avg.ceil()}');
 
-    print('sum => $sum');
-    print('der=> $der');
     return avg;
   }
+
+
+  getBestSelling2()
+  async {
+    List<int> no_of_orders = [];
+    final QuerySnapshot<Map<String, dynamic>> CatQuerey =
+    await FirebaseFirestore.instance.collection('Categories').get();
+    final Category = CatQuerey.docs
+        .map((category) => Cat_Model.fromSnapshot(category))
+        .toList();
+
+
+    for(int i=0; i<Category.length;i++)
+    {
+      final QuerySnapshot<Map<String, dynamic>> LoadProductsQuery =
+      await FirebaseFirestore.instance
+          .collection('Categories')
+          .doc(Category[i].id)
+          .collection('Products')
+          .get();
+      final LoadProducts = LoadProductsQuery.docs
+          .map((product) => ProductModel.fromSnapshot(product))
+          .toList();
+      for(int j=0; j<LoadProducts.length; j++)
+      {
+        no_of_orders.add(int.parse(LoadProducts[j].number_of_order as String));
+      }
+
+
+    }
+    no_of_orders.sort();
+
+    _med = no_of_orders[no_of_orders.length-10];
+    // return _med;
+  }
+
+
+  BestSellerList()async
+  {
+    await getBestSelling2();
+
+
+    final QuerySnapshot<Map<String, dynamic>> CatQuerey =
+    await FirebaseFirestore.instance.collection('Categories').get();
+    final Category = CatQuerey.docs
+        .map((category) => Cat_Model.fromSnapshot(category))
+        .toList();
+    for(int i=0; i<Category.length;i++) {
+      final QuerySnapshot<Map<String, dynamic>> LoadProductsQuery =
+      await FirebaseFirestore.instance
+          .collection('Categories')
+          .doc(Category[i].id)
+          .collection('Products')
+          .get();
+      for(int j =0; j < LoadProductsQuery.docs.length ; j++)
+      {
+        if(int.parse(LoadProductsQuery.docs[j].get('number_of_order')) >= _med)
+        {
+          _BestSellerProducts.add(ProductModel.fromSnapshot(LoadProductsQuery.docs[j]));
+        }
+      }
+      
+    }
+    for(int i=0; i<_BestSellerProducts.length;i++)
+      print('new is =>${_BestSellerProducts[i].number_of_order}');
+
+    print('my new products length is =>${_BestSellerProducts.length}');
+    
+  }
+
+
+
 
 }

@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   double avg = 0;
+  int med=0;
 
   bool isNotExist = true;
 
@@ -255,6 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller.onRefresh();
 
                       avg = await controller.getBestSelling();
+                      med = await controller.getBestSelling2();
                       //  controller. productModel.clear();
                       //  controller. categoryModel.clear();
                       //  controller.  bannerModel.clear();
@@ -349,13 +351,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           CustomText(
-                                            text: 'Categories'.tr,
+                                            text: 'History'.tr,
                                             fontSize: 18,
                                             fontweight: FontWeight.w800,
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Get.to(CategoriesScreen());
+                                              Get.to(SubCategoryScreen(controller.histProducts , "Best Sellers" , "402rlzLRvORxZt8Ysi2J"));
                                             },
                                             child: CustomText(
                                               text: 'See_All'.tr,
@@ -382,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           CustomText(
-                                            text: 'Categories'.tr,
+                                            text: 'History'.tr,
                                             fontSize: 18,
                                             fontweight: FontWeight.w800,
                                           ),
@@ -427,7 +429,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(BestSellerProducts , "Best Sellers" , ""));
+                                        Get.to(SubCategoryScreen(controller.BestSellerProducts , "Best Sellers" ,""));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -442,7 +444,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(BestSellerProducts , "الأكثر مبيعًا" , ""));
+                                        Get.to(SubCategoryScreen(controller.BestSellerProducts , "الأكثر مبيعًا" , ""));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -466,10 +468,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               StreamBuilder(
                                   stream:  User_history.orderBy('createdAt', descending: true).snapshots(),
                                   builder: (context , snapshot) {
-                                    if(BestSellerProducts == 0)
+                                    if(controller.BestSellerProducts == 0)
                                       return Container();
                                     else
-                                      return productsList(BestSellerProducts);
+                                      return productsList(controller.BestSellerProducts);
                                   }
                               ),
                               Padding(
@@ -504,7 +506,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 20.h,
                               ),
                               ListViewProduct(),
-                              // productsList(controller.histProducts),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Get.locale?.languageCode == "en" ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: ''.tr,
+                                      fontSize: 18,
+                                      fontweight: FontWeight.w800,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(SubCategoryScreen(controller.forYouProductModel , "Suggested for you", ""));
+                                      },
+                                      child: CustomText(
+                                        text: 'See All'.tr,
+                                        fontSize: 16,
+                                        fontweight: FontWeight.w500,
+                                        color: AppColors.orange,
+                                      ),
+                                    )
+                                  ],
+                                ) : Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(SubCategoryScreen(controller.forYouProductModel , "مقترح لك" , ""));
+                                      },
+                                      child: CustomText(
+                                        text: 'See All'.tr,
+                                        fontSize: 16,
+                                        fontweight: FontWeight.w500,
+                                        color: AppColors.orange,
+
+                                      ),
+                                    ),
+                                    CustomText(
+                                      text: 'Best Sellers'.tr,
+                                      fontSize: 18,
+                                      fontweight: FontWeight.w800,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              productsList(controller.forYouProductModel),
                             ],
                           ),
                         ]),
@@ -802,6 +852,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
+
+
     BestSellerProducts = [];
 
 
@@ -822,7 +874,7 @@ class _HomeScreenState extends State<HomeScreen> {
       QuerySnapshot productsDocs = await products.get();
 
       for (int j = 0; j < productsDocs.size; j++) {
-        if(int.parse(productsDocs.docs[j].get('number_of_order')) > avg.ceil()){
+        if(int.parse(productsDocs.docs[j].get('number_of_order')) >= 5){
 
           print('ProductDocId Added => ${productsDocs.docs[j].id}');
 
@@ -831,11 +883,20 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
       }
+
+
     }
     );
+
+
 
     print('Length Of BestSeller List => ${BestSellerProducts.length}');
 
   }
+
+
+
+
+
 
 }

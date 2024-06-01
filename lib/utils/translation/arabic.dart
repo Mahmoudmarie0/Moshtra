@@ -101,4 +101,6 @@ final Map<String, String> ar = {
   "Related Egyptian products": "منتجات مصريه ذات صله",
   "Confirm Password":"تأكيد كلمة المرور",
   "Out Of Stock" : "إنتهى من المخزن",
+  "History":"تم زيارته مؤخرا",
+  "Suggested for you": "مقترح لك",
 };

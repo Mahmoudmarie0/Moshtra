@@ -100,6 +100,8 @@ final Map<String, String> en = {
   "Related Egyptian products" : "Related Egyptian products",
   "Confirm Password" : "Confirm Password",
   "Out Of Stock":"Out Of Stock",
+  "History":"History",
+  "Suggested for you":"Suggested for you",
 
 
 

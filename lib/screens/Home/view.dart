@@ -16,6 +16,7 @@ import '../../models/user_history_model.dart';
 import '../../utils/constants/colors.dart';
 import '../../utils/custom_text/view.dart';
 import '../../utils/custom_widgets/global_widgets/SearchField.dart';
+import '../Categories/SubCategory/seeAll_View.dart';
 import '../Categories/SubCategory/subCategory_view.dart';
 import '../Categories/controller/Controller.dart';
 import '../Details/view.dart';
@@ -357,7 +358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              Get.to(SubCategoryScreen(controller.histProducts , "Best Sellers" , "402rlzLRvORxZt8Ysi2J"));
+                                              Get.to(SeeAll(controller.histProducts , "History"));
                                             },
                                             child: CustomText(
                                               text: 'See_All'.tr,
@@ -374,7 +375,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           TextButton(
                                             onPressed: () {
-                                              Get.to(CategoriesScreen());
+                                              Get.to(SeeAll(controller.histProducts , "أخر ما تم رؤيته"));
                                             },
                                             child: CustomText(
                                               text: 'See_All'.tr,
@@ -429,7 +430,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(controller.BestSellerProducts , "Best Sellers" ,""));
+                                        Get.to(SeeAll(controller.BestSellerProducts , "Best Sellers"));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -444,7 +445,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(controller.BestSellerProducts , "الأكثر مبيعًا" , ""));
+                                        Get.to(SeeAll(controller.BestSellerProducts , "الأكثر مبيعًا"));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -521,7 +522,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(controller.forYouProductModel , "Suggested for you", ""));
+                                        Get.to(SeeAll(controller.forYouProductModel , "Suggested for you"));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,
@@ -536,7 +537,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SubCategoryScreen(controller.forYouProductModel , "مقترح لك" , ""));
+                                        Get.to(SeeAll(controller.forYouProductModel , "مقترح لك"));
                                       },
                                       child: CustomText(
                                         text: 'See All'.tr,

@@ -58,7 +58,6 @@ class HomeController extends GetxController {
     gethistory();
     SuggestedForYou();
     getBestSelling();
-    // getBestSelling2();
     BestSellerList();
   }
 
@@ -106,11 +105,12 @@ class HomeController extends GetxController {
     forYouProductModel.clear();
     categoryModel.clear();
     bannerModel.clear();
+    BestSellerProducts.clear();
     await getCategory();
     await getBanners();
     await getBestSellingProducts();
     await SuggestedForYou();
-
+    await BestSellerList();
 
 
   }
@@ -134,14 +134,19 @@ class HomeController extends GetxController {
         _histProducts.add(ProductModel.fromSnapshot(histquery.docs[i]['product']));
       
     }
-    print('44444444444');
-    print(_histProducts.length);
-    print(_histModel.length);
     _loading.value = false;
     update();
   }
 
-
+  clearHistory()
+  async {
+    final  histquery = await FirebaseFirestore.instance
+        .collection('User_history').where('userId',isEqualTo: FirebaseAuth.instance.currentUser!.uid).get();
+    for(int i=0;i<histquery.docs.length;i++)
+    {
+      User_history.doc(histquery.docs[i].id).delete();
+    }
+  }
 
   addHistory(product)
   async {
@@ -392,6 +397,7 @@ class HomeController extends GetxController {
 
   getBestSelling2()
   async {
+    _loading.value = true;
     List<int> no_of_orders = [];
     final QuerySnapshot<Map<String, dynamic>> CatQuerey =
     await FirebaseFirestore.instance.collection('Categories').get();
@@ -422,11 +428,15 @@ class HomeController extends GetxController {
 
     _med = no_of_orders[no_of_orders.length-10];
     // return _med;
+    _loading.value = false;
+    update();
+
   }
 
 
   BestSellerList()async
   {
+    _loading.value = true;
     await getBestSelling2();
 
 
@@ -455,7 +465,10 @@ class HomeController extends GetxController {
       print('new is =>${_BestSellerProducts[i].number_of_order}');
 
     print('my new products length is =>${_BestSellerProducts.length}');
-    
+    _loading.value = false;
+    update();
+
+
   }
 
 

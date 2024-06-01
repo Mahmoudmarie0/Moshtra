@@ -103,4 +103,5 @@ final Map<String, String> ar = {
   "Out Of Stock" : "إنتهى من المخزن",
   "History":"تم زيارته مؤخرا",
   "Suggested for you": "مقترح لك",
+  "clear":"مسح الكل"
 };

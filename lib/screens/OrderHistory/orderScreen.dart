@@ -202,18 +202,14 @@ class _OrderScreenState extends State<OrderScreen> {
 
 
                                               ],
-                                            ), // Add more OrderCard widgets...
+                                            ),
+
                                             myorders[index].status == 'Picked'? Align(
                                               alignment: Alignment.bottomRight,
                                               child: ElevatedButton(
                                                 onPressed: () async {
                                                   await controller.updateOrderStatus();
                                                   if(myorders[index].status == 'Picked'){
-                                                    setState(() {
-
-                                                    });
-                                                  }
-                                                  else{
                                                     final  productsQuerey = await order.doc(snapshot.data!.docs[index].id).collection('products').get();
                                                     for(int i=0;i<productsQuerey.docs.length; i++) {
                                                       DocumentReference d =
@@ -222,6 +218,11 @@ class _OrderScreenState extends State<OrderScreen> {
                                                     }
 
                                                     order.doc(snapshot.data!.docs[index].id).delete();
+                                                  }
+                                                  else{
+                                                    setState(() {
+
+                                                    });
                                                   }
                                                 },
                                                 child: Text(

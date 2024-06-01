@@ -102,6 +102,7 @@ final Map<String, String> en = {
   "Out Of Stock":"Out Of Stock",
   "History":"History",
   "Suggested for you":"Suggested for you",
+  "clear":"clear",
 
 
 

@@ -344,80 +344,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 15.h,
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, right: 16),
-                                child: Get.locale?.languageCode == "en"
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomText(
-                                            text: 'History'.tr,
-                                            fontSize: 18,
-                                            fontweight: FontWeight.w800,
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Get.to(SeeAll(controller.histProducts , "History"));
-                                            },
-                                            child: CustomText(
-                                              text: 'See_All'.tr,
-                                              fontSize: 16,
-                                              fontweight: FontWeight.w500,
-                                              color: AppColors.orange,
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Get.to(SeeAll(controller.histProducts , "أخر ما تم رؤيته"));
-                                            },
-                                            child: CustomText(
-                                              text: 'See_All'.tr,
-                                              fontSize: 16,
-                                              fontweight: FontWeight.w500,
-                                              color: AppColors.orange,
-                                            ),
-                                          ),
-                                          CustomText(
-                                            text: 'History'.tr,
-                                            fontSize: 18,
-                                            fontweight: FontWeight.w800,
-                                          ),
-                                        ],
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Get.locale?.languageCode == "en" ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: 'Suggested for you'.tr,
+                                      fontSize: 18,
+                                      fontweight: FontWeight.w800,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(SeeAll(controller.forYouProductModel , "Suggested for you"));
+                                      },
+                                      child: CustomText(
+                                        text: 'See All'.tr,
+                                        fontSize: 16,
+                                        fontweight: FontWeight.w500,
+                                        color: AppColors.orange,
                                       ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              // ListViewCategory(),
-                              StreamBuilder<QuerySnapshot>(
-                                stream: User_history.orderBy('createdAt', descending: true).snapshots(),
-                                builder:(context , snapshot) {
-                                  List<user_history> histList = [];
-                                  List<ProductModel> myhistproducts = [];
-                                  if(!snapshot.hasData)
-                                    return CircularProgressIndicator();
-                                  else{
-                                    for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                      if (snapshot.data!.docs[i].get('userId') ==
-                                      FirebaseAuth.instance.currentUser!.uid) {
-                                      histList.add(user_history.fromSnapshot(snapshot.data!.docs[i]));
-                                      myhistproducts.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
+                                    )
+                                  ],
+                                ) : Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.to(SeeAll(controller.forYouProductModel , "مقترح لك"));
+                                      },
+                                      child: CustomText(
+                                        text: 'See All'.tr,
+                                        fontSize: 16,
+                                        fontweight: FontWeight.w500,
+                                        color: AppColors.orange,
 
-                                      }
-                                    }
-                                  }
-                                  if(histList.length == 0)
-                                    return Container();
-                                  else
-                                    return productsList(myhistproducts);
-                                }),
+                                      ),
+                                    ),
+                                    CustomText(
+                                      text: 'Suggested for you'.tr,
+                                      fontSize: 18,
+                                      fontweight: FontWeight.w800,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              productsList(controller.forYouProductModel),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 16),
                                 child: Get.locale?.languageCode == "en" ? Row(
@@ -466,15 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(
                                 height: 5.h,
                               ),// Editing
-                              StreamBuilder(
-                                  stream:  User_history.orderBy('createdAt', descending: true).snapshots(),
-                                  builder: (context , snapshot) {
-                                    if(controller.BestSellerProducts == 0)
-                                      return Container();
-                                    else
-                                      return productsList(controller.BestSellerProducts);
-                                  }
-                              ),
+                              productsList(controller.BestSellerProducts),
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 16, right: 16),
@@ -511,51 +474,140 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 20.h,
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: Get.locale?.languageCode == "en" ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                padding:
+                                const EdgeInsets.only(left: 16, right: 16),
+                                child: Get.locale?.languageCode == "en"
+                                    ? Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     CustomText(
-                                      text: ''.tr,
+                                      text: 'History'.tr,
                                       fontSize: 18,
                                       fontweight: FontWeight.w800,
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SeeAll(controller.forYouProductModel , "Suggested for you"));
+                                        setState(() {
+
+                                        });
+                                        controller.clearHistory();
                                       },
                                       child: CustomText(
-                                        text: 'See All'.tr,
+                                        text: 'clear'.tr,
                                         fontSize: 16,
                                         fontweight: FontWeight.w500,
                                         color: AppColors.orange,
                                       ),
                                     )
                                   ],
-                                ) : Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                )
+                                    : Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     TextButton(
                                       onPressed: () {
-                                        Get.to(SeeAll(controller.forYouProductModel , "مقترح لك"));
+                                        controller.clearHistory();
                                       },
                                       child: CustomText(
-                                        text: 'See All'.tr,
+                                        text: 'clear'.tr,
                                         fontSize: 16,
                                         fontweight: FontWeight.w500,
                                         color: AppColors.orange,
-
                                       ),
                                     ),
                                     CustomText(
-                                      text: 'Best Sellers'.tr,
+                                      text: 'History'.tr,
                                       fontSize: 18,
                                       fontweight: FontWeight.w800,
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
-                              productsList(controller.forYouProductModel),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              // ListViewCategory(),
+                              StreamBuilder<QuerySnapshot>(
+                                  stream: User_history.orderBy('createdAt', descending: true).snapshots(),
+                                  builder:(context , snapshot) {
+                                    List<user_history> histList = [];
+                                    List<ProductModel> myhistproducts = [];
+                                    if(!snapshot.hasData)
+                                      return CircularProgressIndicator();
+                                    else{
+                                      for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                        if (snapshot.data!.docs[i].get('userId') ==
+                                            FirebaseAuth.instance.currentUser!.uid) {
+                                          histList.add(user_history.fromSnapshot(snapshot.data!.docs[i]));
+                                          myhistproducts.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
+
+                                        }
+                                      }
+                                    }
+                                    if(histList.length == 0)
+                                      return Container();
+                                    else{
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.only(left: 16, right: 16),
+                                            child: Get.locale?.languageCode == "en"
+                                                ? Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                CustomText(
+                                                  text: 'History'.tr,
+                                                  fontSize: 18,
+                                                  fontweight: FontWeight.w800,
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    setState(() {
+
+                                                    });
+                                                    Get.to(SeeAll(myhistproducts , "History"));
+                                                  },
+                                                  child: CustomText(
+                                                    text: 'See_All'.tr,
+                                                    fontSize: 16,
+                                                    fontweight: FontWeight.w500,
+                                                    color: AppColors.orange,
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                                : Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Get.to(SeeAll(controller.histProducts , "أخر ما تم رؤيته"));
+                                                  },
+                                                  child: CustomText(
+                                                    text: 'See_All'.tr,
+                                                    fontSize: 16,
+                                                    fontweight: FontWeight.w500,
+                                                    color: AppColors.orange,
+                                                  ),
+                                                ),
+                                                CustomText(
+                                                  text: 'History'.tr,
+                                                  fontSize: 18,
+                                                  fontweight: FontWeight.w800,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                      return productsList(myhistproducts);
+                                    }
+                                  }),
                             ],
                           ),
                         ]),

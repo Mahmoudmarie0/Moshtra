@@ -344,7 +344,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                         ElevatedButton(
                           onPressed: () {
                             String currentRoute = ModalRoute.of(context)!.settings.name ?? '';
-                            Get.to(() => MyCart(products, totalPrice, cartList, currentRoute));
+                            Get.to(() => MyCart(products, totalPrice, cartList, 'cart'));
                           },
                           child: Text(
                             'Checkout(${cartList.length})'.tr,

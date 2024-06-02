@@ -6,7 +6,7 @@ class new_cart{
   ProductModel? product;
   String? quantity, userId;
 
-  new_cart(this.product, this.quantity);
+  new_cart(this.product, this.quantity,this.userId);
 
   new_cart.fromSnapshot(snapshot)
       :product = ProductModel.fromSnapshot(snapshot['product']),

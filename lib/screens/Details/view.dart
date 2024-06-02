@@ -22,6 +22,7 @@ import '../../models/newCart_model.dart';
 import '../../utils/custom_widgets/global_widgets/products_ListView.dart';
 import '../Home/controller/Controller.dart';
 import '../MyCart/view.dart';
+import '../Payment/myCartPayment/view.dart';
 import 'Components/ChatBubble.dart';
 import 'Components/Details_Tabs.dart';
 import 'controller/controller.dart';
@@ -43,6 +44,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   bool isNotExist = true;
   int count = 1;
+
+
 
 
   final ScrollController _scrollController = ScrollController();
@@ -470,7 +473,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 height: 60.h,
                                 width: 160.w,
                                 child: widget.model.quantity == '0' ?
-                                ElevatedButton(onPressed: (){},
+                                ElevatedButton(onPressed: null,
                                   child: Text('Buy Now'.tr, style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
                                   style: ElevatedButton.styleFrom(
                                   backgroundColor: AppColors.grey5,
@@ -482,8 +485,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 )
 
                                     :ElevatedButton(onPressed: (){
-                                      print('buy now');
-                                      },
+                                      List<new_cart> cartList = [];
+                                      List<ProductModel> products = [];
+
+                                      cartList.add(new_cart(widget.model, '1',FirebaseAuth.instance.currentUser!.uid.toString()));
+                                      products.add(widget.model);
+                                      Get.to(() => MyCart(products, int.parse(widget.model.price as String), cartList, 'buy'));
+
+
+                                },
                                       child: Text('Buy Now'.tr, style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.w600),),
                                       style: ElevatedButton.styleFrom(
                                       backgroundColor: AppColors.grey5,

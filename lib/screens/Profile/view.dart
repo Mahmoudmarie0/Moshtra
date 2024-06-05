@@ -195,54 +195,8 @@ class ProfileScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w800,
                                     color: AppColors.black),
                               ),
-                              SizedBox(
-                                height: 24.h,
-                              ),
-                              Get.locale?.languageCode == "en"
-                                  ? Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            AssetsPaths.ShippingAddressIcon),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Text(
-                                          "Shipping_Address".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                      ],
-                                    )
-                                  : Row(
-                                      children: [
-                                        Icon(
-                                          Icons.arrow_back_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          "Shipping_Address".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        SvgPicture.asset(
-                                            AssetsPaths.ShippingAddressIcon),
-                                      ],
-                                    ),
+
+
                               SizedBox(
                                 height: 8.h,
                               ),
@@ -448,130 +402,15 @@ class ProfileScreen extends StatelessWidget {
                                         ],
                                       ),
                               ),
+
+
+
+
+
                               SizedBox(
                                 height: 8.h,
                               ),
-                              Divider(
-                                height: 1,
-                                thickness: 1,
-                                indent: 0,
-                                endIndent: 0,
-                                color: AppColors.LightGrey,
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              Get.locale?.languageCode == "en"
-                                  ? Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            AssetsPaths.TermsConditionIcon),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Text(
-                                          "Terms_&_Conditions".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                      ],
-                                    )
-                                  : Row(
-                                      children: [
-                                        Icon(
-                                          Icons.arrow_back_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          "Terms_&_Conditions".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        SvgPicture.asset(
-                                            AssetsPaths.TermsConditionIcon),
-                                      ],
-                                    ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              Divider(
-                                height: 1,
-                                thickness: 1,
-                                indent: 0,
-                                endIndent: 0,
-                                color: AppColors.LightGrey,
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              Get.locale?.languageCode == "en"
-                                  ? Row(
-                                      children: [
-                                        SvgPicture.asset(AssetsPaths.FAQsIcon),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        Text(
-                                          "FAQs".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        Spacer(),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                      ],
-                                    )
-                                  : Row(
-                                      children: [
-                                        Icon(
-                                          Icons.arrow_back_ios,
-                                          size: 15,
-                                          color: AppColors.grey4,
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          "FAQs".tr,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.grey4),
-                                        ),
-                                        SizedBox(
-                                          width: 12.w,
-                                        ),
-                                        SvgPicture.asset(AssetsPaths.FAQsIcon),
-                                      ],
-                                    ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              Divider(
-                                height: 1,
-                                thickness: 1,
-                                indent: 0,
-                                endIndent: 0,
-                                color: AppColors.LightGrey,
-                              ),
+
                               SizedBox(
                                 height: 20.h,
                               ),
@@ -586,67 +425,67 @@ class ProfileScreen extends StatelessWidget {
                               SizedBox(
                                 height: 24.h,
                               ),
-                              Get.locale?.languageCode == "en"
-                                  ? InkWell(
-                                      onTap: () => Get.to(NewPasswordScreen()),
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                              AssetsPaths.ChangePassIcon),
-                                          SizedBox(
-                                            width: 12.w,
-                                          ),
-                                          Text(
-                                            "Change_Password".tr,
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: AppColors.grey4),
-                                          ),
-                                          Spacer(),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            size: 15,
-                                            color: AppColors.grey4,
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : InkWell(
-                                      onTap: () => Get.to(NewPasswordScreen()),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.arrow_back_ios,
-                                            size: 15,
-                                            color: AppColors.grey4,
-                                          ),
-                                          Spacer(),
-                                          Text(
-                                            "Change_Password".tr,
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: AppColors.grey4),
-                                          ),
-                                          SizedBox(
-                                            width: 12.w,
-                                          ),
-                                          SvgPicture.asset(
-                                              AssetsPaths.ChangePassIcon),
-                                        ],
-                                      ),
-                                    ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              Divider(
-                                height: 1,
-                                thickness: 1,
-                                indent: 0,
-                                endIndent: 0,
-                                color: AppColors.LightGrey,
-                              ),
+                              // Get.locale?.languageCode == "en"
+                              //     ? InkWell(
+                              //         onTap: () => Get.to(NewPasswordScreen()),
+                              //         child: Row(
+                              //           children: [
+                              //             SvgPicture.asset(
+                              //                 AssetsPaths.ChangePassIcon),
+                              //             SizedBox(
+                              //               width: 12.w,
+                              //             ),
+                              //             Text(
+                              //               "Change_Password".tr,
+                              //               style: TextStyle(
+                              //                   fontSize: 15,
+                              //                   fontWeight: FontWeight.w500,
+                              //                   color: AppColors.grey4),
+                              //             ),
+                              //             Spacer(),
+                              //             Icon(
+                              //               Icons.arrow_forward_ios,
+                              //               size: 15,
+                              //               color: AppColors.grey4,
+                              //             ),
+                              //           ],
+                              //         ),
+                              //       )
+                              //     : InkWell(
+                              //         onTap: () => Get.to(NewPasswordScreen()),
+                              //         child: Row(
+                              //           children: [
+                              //             Icon(
+                              //               Icons.arrow_back_ios,
+                              //               size: 15,
+                              //               color: AppColors.grey4,
+                              //             ),
+                              //             Spacer(),
+                              //             Text(
+                              //               "Change_Password".tr,
+                              //               style: TextStyle(
+                              //                   fontSize: 15,
+                              //                   fontWeight: FontWeight.w500,
+                              //                   color: AppColors.grey4),
+                              //             ),
+                              //             SizedBox(
+                              //               width: 12.w,
+                              //             ),
+                              //             SvgPicture.asset(
+                              //                 AssetsPaths.ChangePassIcon),
+                              //           ],
+                              //         ),
+                              //       ),
+                              // SizedBox(
+                              //   height: 8.h,
+                              // ),
+                              // Divider(
+                              //   height: 1,
+                              //   thickness: 1,
+                              //   indent: 0,
+                              //   endIndent: 0,
+                              //   color: AppColors.LightGrey,
+                              // ),
                               SizedBox(
                                 height: 12.h,
                               ),

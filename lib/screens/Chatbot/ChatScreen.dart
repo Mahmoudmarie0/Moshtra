@@ -21,14 +21,14 @@ class _ChatbotPageState extends State<ChatbotPage> {
   ];
   List<Map<String, String>> _chatHistory = [];
   Map<String, String> _questionResponses = {
-    "How to pay?": "We accept credit cards, PayPal, and bank transfers.",
+    "How to pay?": "We accept credit cards, PayPal, Paymob.",
     "Delivery time?": "3-7 business days, depending on location.",
     "Free shipping?": "Yes, for orders over 50 pounds.",
     "Return policy?": "30-day return or exchange.",
     "Track order?": "Log in and go to 'Orders'.",
     "International shipping?": "Yes, with varying fees.",
     "Damaged item?": "Contact support for replacement.",
-    "Contact support?": "support@example.com | +1 (800) 123-4567.",
+    "Contact support?": "Moshtra@example.com | +1 (800) 123-4567.",
     "Security?": "We use encryption for data security.",
   };
 

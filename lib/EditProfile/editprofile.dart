@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -139,7 +140,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'User Profile',
+          'User Profile'.tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -163,7 +164,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               children: [
                 _buildTextFieldWithIcon(
                   controller: _nameController,
-                  labelText: 'Name',
+                  labelText: 'Name'.tr,
                   icon: Icons.person,
                   validator: (value) {
                     if (value!.isNotEmpty && !_isNameValid(value)) {
@@ -175,7 +176,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 SizedBox(height: 16.0),
                 _buildTextFieldWithIcon(
                   controller: _addressController,
-                  labelText: 'Address',
+                  labelText: 'Address'.tr,
                   icon: Icons.location_on,
                   validator: (value) {
                     if (value!.isNotEmpty && !_isAddressValid(value)) {
@@ -187,7 +188,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 SizedBox(height: 16.0),
                 _buildTextFieldWithIcon(
                   controller: _phoneNumberController,
-                  labelText: 'Phone Number',
+                  labelText: 'Phone Number'.tr,
                   icon: Icons.phone,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -204,7 +205,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ElevatedButton(
                   onPressed: updateUserProfile,
                   child: Text(
-                    'Update Profile',
+                    'Update Profile'.tr,
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ButtonStyle(

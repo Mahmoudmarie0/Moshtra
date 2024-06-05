@@ -40,7 +40,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   .collection('orders');
               return Scaffold(
                   appBar: AppBar(
-                    title: Text('Order List'),
+                    title: Text('Order List'.tr),
                   ),
                   body: StreamBuilder<QuerySnapshot>(
                     stream: order.orderBy('orderDate',descending: true).snapshots(),
@@ -89,7 +89,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Order ID: ${myorders[index].orderId?.substring(0,10)}',
+                                                  'Order ID: ${myorders[index].orderId?.substring(0,10)}'.tr,
                                                   style: TextStyle(fontWeight: FontWeight.bold),
                                                 ),
                                                 Text('${dates[index]}  ${times[index]}'),
@@ -98,7 +98,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                             SizedBox(height: 8.0),
                                             ExpansionTile(
                                               title: Text(
-                                                'Items',
+                                                'Items'.tr,
                                                 style: TextStyle(fontWeight: FontWeight.bold),
                                               ),
                                               children:[
@@ -205,7 +205,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                             ),
                                             ExpansionTile(
                                               title: Text(
-                                                'order details',
+                                                'order details'.tr,
                                                 style: TextStyle(fontWeight: FontWeight.bold),
                                               ),
                                               children: [
@@ -214,7 +214,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        'Address: ',
+                                                        'Address: '.tr,
                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                       ),
                                                       Expanded(
@@ -233,7 +233,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        'Phone: ',
+                                                        'Phone: '.tr,
                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                       ),
                                                       CustomText(
@@ -248,7 +248,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        'Payment Method: ',
+                                                        'Payment Method: '.tr,
                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                       ),
                                                       CustomText(
@@ -263,7 +263,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        'Status: ',
+                                                        'Status: '.tr,
                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                       ),
                                                       CustomText(
@@ -301,7 +301,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                     }
                                                   },
                                                   child: Text(
-                                                    'cancel',
+                                                    'cancel'.tr,
                                                     style: TextStyle(
                                                       color: AppColors.white,
                                                       fontSize: 18,

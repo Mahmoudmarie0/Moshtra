@@ -127,7 +127,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   bool _isAddressValid(String address) {
-    final RegExp addressRegExp = RegExp(r'^[a-zA-Z0-9\s]*$'); // Allow spaces in addresses
+    // final RegExp addressRegExp = RegExp(r'^[a-zA-Z0-9\s]*$');
+    //Allow spaces in addresses
+    final RegExp addressRegExp = RegExp(r'^[a-zA-Z0-9\s,.-]+$');
     return addressRegExp.hasMatch(address);
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:moshtra/utils/constants/colors.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -144,7 +145,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: AppColors.white,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -152,7 +153,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             topLeft: Radius.circular(40.0),
             topRight: Radius.circular(40.0),
           ),
-          color: Colors.white,
+          color: AppColors.grayish_blue,
         ),
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -207,7 +208,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.orange),
                   ),
                 ),
               ],
@@ -228,7 +229,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.0),
-        border: Border.all(color: Colors.teal),
+        border: Border.all(color: AppColors.black),
       ),
       child: TextFormField(
         controller: controller,

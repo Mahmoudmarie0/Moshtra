@@ -20,6 +20,10 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
     "assets/images/credit.svg",
     "assets/images/paypal.svg",
     "assets/images/paymob.png" ,
+   // "assets/images/cash3.svg",
+   // "assets/images/cash.png",
+   // "assets/images/cash-icon.png"
+    "assets/images/cash-svgrepo-com.svg"
   ];
 //int activeIndex=0;
   @override

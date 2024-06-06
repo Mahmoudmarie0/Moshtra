@@ -188,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     //floatingLabelBehavior: FloatingLabelBehavior.always,
                                     border: OutlineInputBorder(),
                                     labelText: 'Phone Number'.tr,
-          
+
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: AppColors.blue, width: 2.0),
@@ -303,7 +303,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           confirmPasswordController.text;
 
                                       String address = AddressController.text;
-          
+
                                       if (formKey.currentState!.validate()) {
                                         isLoading = true;
                                         // setState(() {

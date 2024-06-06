@@ -13,7 +13,7 @@ abstract class PaymentManager{
 
 
 //3
-  static Future<void>makePayment(int total ,String currency,List<ProductModel> products,List<new_cart> cartList,dynamic phone,dynamic address,dynamic subtotal )async{
+  static Future<void>makePayment(int total ,String currency,List<ProductModel> products,List<new_cart> cartList,dynamic phone,dynamic address,dynamic subtotal, String currentRoute, )async{
     try{
       String clientSecret=  await _getClientSecret((total*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);

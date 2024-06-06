@@ -33,7 +33,9 @@ class PaymentMethoditem extends StatelessWidget {
 
         ),
         child: Center(
-          child:img=="assets/images/paymob.png"? Image(image: AssetImage(img,)):SvgPicture.asset(img,),
+
+
+          child:img=="assets/images/paymob.png"  ? Image(image: AssetImage(img,),):SvgPicture.asset(img,)  ,
         ),
 
 

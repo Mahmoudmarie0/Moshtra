@@ -9,6 +9,7 @@ import '../../../models/newCart_model.dart';
 import '../../../models/products_model.dart';
 import '../../../service/paypal_payment/paypal_management.dart';
 import '../../../service/stripe_payment/payment_manager.dart';
+import '../../../service/take_order.dart';
 import '../../../utils/constants/components.dart';
 import '../../../utils/custom_widgets/global_widgets/app_button.dart';
 import '../controller/controller.dart';
@@ -137,6 +138,11 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                                           total: widget.total,
                                           subtotal: widget.subtotal,
                                         )));
+                            if(widget.currentRoute == 'cart')
+                              take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).CartPayment();
+                            else
+                              take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).BuyNowPayment();
+
                             widget.products;
                             widget.cartList;
                             widget.phone;
@@ -150,6 +156,10 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                   //for cash
                   if (controller.activeIndex == 3) {
 
+                    if(widget.currentRoute == 'cart')
+                      take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).CartPayment();
+                    else
+                      take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).BuyNowPayment();
 
 
                   }

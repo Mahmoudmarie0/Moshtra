@@ -40,8 +40,13 @@ abstract class PaymentManager{
           cartList.add(new_cart.fromSnapshot(doc));
         }
       });
-      take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).CartPayment();
-      print('order taken');
+
+      if(currentRoute == 'cart')
+        take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).CartPayment();
+      else
+        take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).BuyNowPayment();
+
+      // print('order taken');
       // print('CartLength in Payment ${cartList[0].product!.quantity!}');
       //
       // print('CartLength in Payment ${cartList.length}');

@@ -8,6 +8,7 @@ import 'package:moshtra/screens/Payment/thankyou/view.dart';
 import 'package:moshtra/service/paypal_payment/paypal_keys.dart';
 
 import '../../models/products_model.dart';
+import '../take_order.dart';
 
 abstract class PaypalManager {
   static PaypalCheckout buildPaypalCheckout(
@@ -67,6 +68,12 @@ abstract class PaypalManager {
               total: total,
               subtotal: subtotal,
             ));
+
+        if(currentRoute == 'cart')
+          take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).CartPayment();
+        else
+          take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).BuyNowPayment();
+
 
         Get.to(() => ThankYouView(
               total: total,

@@ -94,9 +94,9 @@ class MyCart extends StatelessWidget {
                                           onPressed: () {
                                             phoneNumberController.text =
                                                 controller
-                                                    .userModel[0]!.phoneNumber;
+                                                    .userModel!.phoneNumber;
                                             AddressController.text =
-                                                controller.userModel[0]!.address;
+                                                controller.userModel!.address;
                                             showDialog(
                                                 context: context,
                                                 builder: (context) => Dialog(
@@ -285,7 +285,7 @@ class MyCart extends StatelessWidget {
                                           fontweight: FontWeight.w400,
                                         ),
                                         CustomText(
-                                          text: controller.userModel[0]!.name,
+                                          text: controller.userModel!.name,
                                           fontweight: FontWeight.w400,
                                         )
                                       ],
@@ -300,7 +300,7 @@ class MyCart extends StatelessWidget {
                                           fontweight: FontWeight.w400,
                                         ),
                                         CustomText(
-                                          text: controller.userModel[0]!.email,
+                                          text: controller.userModel!.email,
                                           fontweight: FontWeight.w400,
                                         )
                                       ],

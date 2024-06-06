@@ -124,5 +124,7 @@ final Map<String, String> ar = {
   "Smart watches":"الساعات الذكية",
   "User Profile":"ملف تعريفي للمستخدم",
   "Update Profile":"تحديث الملف",
+  "Best Seller": "الأكثر مبيعًا",
+
 
 };

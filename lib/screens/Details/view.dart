@@ -484,12 +484,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                                 )
 
-                                    :ElevatedButton(onPressed: (){
-                                      List<new_cart> cartList = [];
-                                      List<ProductModel> products = [];
-
-                                      cartList.add(new_cart(widget.model, '1',FirebaseAuth.instance.currentUser!.uid.toString()));
-                                      products.add(widget.model);
+                                    :ElevatedButton(onPressed: ()async{
+                                      List<new_cart> cartList = [await new_cart(widget.model, '1',userId)];
+                                      List<ProductModel> products = [widget.model];
+                                      // cartList.add(new_cart(widget.model, '1',userId));
                                       Get.to(() => MyCart(products, int.parse(widget.model.price as String), cartList, 'buy'));
 
 
@@ -601,14 +599,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                ?Container()
                : int.parse(widget.model!.number_of_order as String) >= controller.med ?Container(
                  margin: EdgeInsets.only(top: 24, right: 6),
-                 width: 62.w,
+                 padding: EdgeInsets.symmetric(horizontal: 5),
+                 width: 80.w,
                  height: 24.h,
                  decoration: BoxDecoration(
                      color: Color(0xff1f8bda),
                      borderRadius: BorderRadius.circular(8)
                  ),
                  child: Center(
-                   child: Text('Best Sellers'.tr,
+                   child: Text('Best Seller'.tr,
                        style: TextStyle(
                          fontWeight: FontWeight.w600,
                          fontSize: 10,
@@ -620,6 +619,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
              ),
             Container(
               margin: EdgeInsets.only(top: 24),
+              padding: EdgeInsets.symmetric(horizontal: 5),
               width: 81.w,
               height: 24.h,
               decoration: BoxDecoration(

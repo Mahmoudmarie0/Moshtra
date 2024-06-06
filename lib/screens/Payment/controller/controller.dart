@@ -9,6 +9,25 @@ import '../../../../models/User_model.dart';
 
 class PaymentController extends GetxController{
 
+
+
+  ValueNotifier<bool> get loading => _loading;
+  ValueNotifier<bool> _loading = ValueNotifier(false);
+
+
+  String phone = '0';
+  String address  ='';
+
+
+
+  List<User_Model> get userModel => _userModel;
+  List<User_Model> _userModel = [] ;
+
+  List<new_cart> get myCart => _myCart;
+  List<new_cart> _myCart = [];
+
+
+
   PaymentController()
   {
     UserQuery();
@@ -16,20 +35,9 @@ class PaymentController extends GetxController{
   }
 
 
-  ValueNotifier<bool>get loading=>_loading;
-  ValueNotifier<bool>_loading=ValueNotifier(false);
-  String? phone , address;
-
-int activeIndex=0;
-
-  User_Model? get userModel => _userModel;
-  User_Model? _userModel ;
-
-  List<new_cart> get myCart => _myCart;
-  List<new_cart> _myCart = [];
+  int activeIndex=0;
 
   CollectionReference cart = FirebaseFirestore.instance.collection('cart');
-  CollectionReference order = FirebaseFirestore.instance.collection('order');
 
 
 
@@ -38,19 +46,20 @@ int activeIndex=0;
   {
     _loading.value = true;
 
-    String? useEmail =  FirebaseAuth.instance.currentUser!.email;
+    // String? useEmail =  FirebaseAuth.instance.currentUser!.email;
 
 
 
     final QuerySnapshot<Map<String,dynamic>> userquery = await FirebaseFirestore.instance
-        .collection('Users').where('email',isEqualTo: useEmail).get();
+        .collection('Users').where('email',isEqualTo: FirebaseAuth.instance.currentUser!.email).get();
 
-    final user = User_Model.fromsnapshot(userquery.docs[0]);
+    // final user = User_Model.fromsnapshot(userquery.docs[0]);
+    _userModel.add(User_Model.fromsnapshot(userquery.docs[0]));
 
-    _userModel = user;
+    // _userModel[0] = user;
 
-    phone = _userModel!.phoneNumber;
-    address = _userModel!.address;
+    phone = _userModel[0]!.phoneNumber;
+    address = _userModel[0]!.address;
 
     _loading.value = false;
     update();
@@ -92,7 +101,6 @@ int activeIndex=0;
 
 
 
-  TakeOrder() async{
-  }
+
 
 }

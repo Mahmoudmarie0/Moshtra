@@ -18,7 +18,9 @@ abstract class PaypalManager {
       dynamic subtotal,
       List<new_cart> cartList,
       dynamic phone,
-      dynamic address) {
+      dynamic address,
+     String currentRoute,
+      ) {
     List<Map<String, dynamic>> newItems = [];
 
     cartList.forEach((product) {

@@ -33,6 +33,7 @@ class MyCart extends StatelessWidget {
   String currentRoute;
   MyCart(this.products, this.subtotal,   this.cartList , this.currentRoute);
 
+
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController AddressController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
@@ -421,9 +422,12 @@ class MyCart extends StatelessWidget {
                                       products: products,
                                       cartList: cartList,
                                       phone: controller.phone,
-                                      address: controller.address
+                                      address: controller.address,
+                                     currentRoute: currentRoute ,
 
                                   ),
+
+
                                 );
                               },
                               fontWeight: FontWeight.w500,

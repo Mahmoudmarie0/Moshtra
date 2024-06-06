@@ -24,6 +24,7 @@ class PaymentMethodsBottomSheet extends StatefulWidget {
   final dynamic address;
   List<ProductModel> products;
   List<new_cart> cartList;
+  String currentRoute;
 
   PaymentMethodsBottomSheet(
       {required this.total,
@@ -32,7 +33,10 @@ class PaymentMethodsBottomSheet extends StatefulWidget {
       required this.products,
       required this.cartList,
       required this.phone,
-      required this.address});
+      required this.address,
+      required this.currentRoute,
+
+      });
 
   @override
   State<PaymentMethodsBottomSheet> createState() =>
@@ -71,7 +75,11 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                         widget.cartList,
                         widget.phone,
                         widget.address,
-                        widget.subtotal);
+                        widget.subtotal,
+                      widget.currentRoute,
+
+
+                    );
                   }
 
                   if (controller.activeIndex == 1) {
@@ -83,7 +91,12 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                         widget.subtotal,
                         widget.cartList,
                         widget.phone,
-                        widget.address));
+                        widget.address,
+                        widget.currentRoute,
+
+
+
+                    ));
                   }
 
                   if (controller.activeIndex == 2) {
@@ -95,6 +108,13 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                           print(response);
                           if (response.success == true) {
                             //await Get.to(()=> ThankYouView( total: total,));
+
+
+
+
+                            // if (currentRoute == "myCart") {
+                            //
+                            // }
                             GetSnackbarError(
                               message:
                                   'The payment was completed successfully'.tr,
@@ -117,7 +137,6 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                                           total: widget.total,
                                           subtotal: widget.subtotal,
                                         )));
-
                             widget.products;
                             widget.cartList;
                             widget.phone;
@@ -125,6 +144,14 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                             widget.total;
                           }
                         });
+                  }
+
+
+                  //for cash
+                  if (controller.activeIndex == 3) {
+
+
+
                   }
 
                   ;

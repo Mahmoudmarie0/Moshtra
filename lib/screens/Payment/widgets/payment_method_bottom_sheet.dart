@@ -155,6 +155,10 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
 
                   //for cash
                   if (controller.activeIndex == 3) {
+                    Get.to(() => ThankYouView(
+                      total: widget.total,
+                      subtotal: widget.subtotal,
+                    ));
 
                     if(widget.currentRoute == 'cart')
                       take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).CartPayment();

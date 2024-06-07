@@ -15,8 +15,21 @@ class MainAppController extends GetxController {
 
 
 
+  bool firstOpen = true;
+  isFirstOpen() async {
 
-
+    await GetStorage.init();
+    bool? first = GetStorage().read("first");
+    if (first == null) {
+      firstOpen = true;
+      update();
+      return true;
+    } else {
+      firstOpen = false;
+      update();
+      return first;
+    }
+  }
 
 
 
@@ -30,6 +43,7 @@ class MainAppController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
+    isFirstOpen();
     isRefreshToken();
     getDeviceToken().then((value) {
       print(value);

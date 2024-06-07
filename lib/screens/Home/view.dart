@@ -292,17 +292,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                           await categoryController.LoadData(3);
                                           if (categoryController
                                               .CatModel[3].product.isNotEmpty) {
-                                            Get.to(SubCategoryScreen(
-                                                categoryController
-                                                    .CatModel[3].product
-                                                    .toList(),
-                                                Get.locale?.languageCode == "en"
-                                                    ? categoryController
-                                                        .CatModel[3].nameEN
-                                                        .toString()
-                                                    : categoryController
-                                                        .CatModel[3].nameAR
-                                                        .toString() , ""));
+                                            Get.to(SeeAll(categoryController.CatModel[3].product.toList(),Get.locale?.languageCode == "en" ? categoryController.CatModel[3].nameEN.toString() : categoryController.CatModel[3].nameAR.toString() ));
+
+                                            // Get.to(SubCategoryScreen(
+                                            //     categoryController
+                                            //         .CatModel[3].product
+                                            //         .toList(),
+                                            //     Get.locale?.languageCode == "en"
+                                            //         ? categoryController
+                                            //             .CatModel[3].nameEN
+                                            //             .toString()
+                                            //         : categoryController
+                                            //             .CatModel[3].nameAR
+                                            //             .toString() , ""));
                                           }
                                         },
                                         child: Container(

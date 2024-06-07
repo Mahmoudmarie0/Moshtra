@@ -299,7 +299,46 @@ class _SearchScreenState extends State<SearchScreen> {
   List<ProductModel> _searchResults = [];
   TextEditingController _searchController = TextEditingController();
 
+  // void searchProducts(String searchText) async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //
+  //   CollectionReference categoriesCollection = FirebaseFirestore.instance.collection('Categories');
+  //   QuerySnapshot categoriesSnapshot = await categoriesCollection.get();
+  //   List<ProductModel> allSearchResults = [];
+  //
+  //   for (QueryDocumentSnapshot categoryDoc in categoriesSnapshot.docs) {
+  //     CollectionReference productsCollection = categoryDoc.reference.collection('Products');
+  //     String searchField = Get.locale?.languageCode == "en" ? 'nameEN' : 'nameAR';
+  //     String searchEndChar = Get.locale?.languageCode == "en" ? 'z' : 'ي';
+  //
+  //     QuerySnapshot productsSnapshot = await productsCollection
+  //         .where(searchField, isGreaterThanOrEqualTo: searchText.toUpperCase())
+  //         .where(searchField, isLessThanOrEqualTo: searchText.toUpperCase() + searchEndChar)
+  //         .get();
+  //
+  //     List<ProductModel> searchResults = productsSnapshot.docs
+  //         .map((doc) => ProductModel.fromSnapshot(doc))
+  //         .toList();
+  //
+  //     allSearchResults.addAll(searchResults);
+  //   }
+  //
+  //   setState(() {
+  //     _searchResults = allSearchResults;
+  //     _isLoading = false;
+  //   });
+  // }
   void searchProducts(String searchText) async {
+    if (searchText.isEmpty) {
+      setState(() {
+        _searchResults = [];
+        _isLoading = false;
+      });
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
@@ -311,16 +350,22 @@ class _SearchScreenState extends State<SearchScreen> {
     for (QueryDocumentSnapshot categoryDoc in categoriesSnapshot.docs) {
       CollectionReference productsCollection = categoryDoc.reference.collection('Products');
       String searchField = Get.locale?.languageCode == "en" ? 'nameEN' : 'nameAR';
-      String searchEndChar = Get.locale?.languageCode == "en" ? 'z' : 'ي';
+    //  String searchEndChar = Get.locale?.languageCode == "en" ? 'z' : 'ي';
 
       QuerySnapshot productsSnapshot = await productsCollection
           .where(searchField, isGreaterThanOrEqualTo: searchText.toUpperCase())
-          .where(searchField, isLessThanOrEqualTo: searchText.toUpperCase() + searchEndChar)
+          // .where(searchField, isLessThanOrEqualTo: searchText.toUpperCase() + searchEndChar)
           .get();
 
       List<ProductModel> searchResults = productsSnapshot.docs
           .map((doc) => ProductModel.fromSnapshot(doc))
+          .where((product) =>
+      (product.nameEN != null && product.nameEN!.toLowerCase().contains(searchText.toLowerCase())) ||
+          (product.nameAR != null && product.nameAR!.contains(searchText)))
           .toList();
+
+
+      print (searchResults);
 
       allSearchResults.addAll(searchResults);
     }
@@ -330,6 +375,17 @@ class _SearchScreenState extends State<SearchScreen> {
       _isLoading = false;
     });
   }
+
+
+
+
+
+
+
+
+
+
+
 
   void _navigateToDetailsScreen(ProductModel product) {
     Get.to(() => DetailsScreen(product));

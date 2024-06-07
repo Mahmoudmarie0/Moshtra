@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:moshtra/main.dart';
+import 'package:moshtra/screens/onboarding/view.dart';
+import '../../../global_controller/main_app_controller.dart';
 import '../../../utils/constants/assets.dart';
 import '../../../utils/constants/colors.dart';
 import '../EmailConfirmation/view.dart';
@@ -13,6 +16,7 @@ import 'controller/controller.dart';
 class LoginScreen extends StatelessWidget {
   //const LoginScreen({super.key});
   LoginController loginController = Get.put(LoginController());
+  final MainAppController mainAppController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,23 +34,102 @@ class LoginScreen extends StatelessWidget {
               Padding(
                 padding: Get.locale?.languageCode == "en"
                     ? const EdgeInsets.only(left: 26, top: 112)
-                    : const EdgeInsets.only(left: 150, top: 112),
+                    : const EdgeInsets.only(left: 60, top: 112),
                 child: Text(
                   "Login".tr,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: Get.locale?.languageCode == "en" ? 48.sp : 30.sp,
+                      fontSize:
+                          Get.locale?.languageCode == "en" ? 48.sp : 30.sp,
                       color: AppColors.white),
                 ),
               ),
+
               SizedBox(
                 width: 24.w,
               ),
+
               Get.locale?.languageCode == "en"
-                  ? SvgPicture.asset(
-                      AssetsPaths.Ellipse,
-                    )
-                  : SizedBox(),
+                  ? Stack(
+
+                    children: [
+
+                      SvgPicture.asset(
+                        AssetsPaths.Ellipse,
+                      ),
+                      Positioned(
+                        top: 50.h,
+                        left: 70.h,
+                        child: InkWell(
+                          child: Container(
+                            padding: EdgeInsets.zero,
+                            height: 40.h,
+                            width: 69.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1000.r),
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'EN'.tr,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 6.w,
+                                ),
+                                SvgPicture.asset(AssetsPaths.language),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            mainAppController.changeAppLang();
+                          },
+                        ),
+                      ),
+                  ])
+                  :  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Positioned(
+                                    top: 50.h,
+                                    left: 120.h,
+                                    child: InkWell(
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      height: 40.h,
+                      width: 69.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(1000.r),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'EN'.tr,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 6.w,
+                          ),
+                          SvgPicture.asset(AssetsPaths.language),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      mainAppController.changeAppLang();
+                    },
+                                    ),
+                                  ),
+                  ),
+              
             ],
           ),
           // Spacer(),
@@ -73,10 +156,26 @@ class LoginScreen extends StatelessWidget {
                     key: formKey,
                     child: Column(
                       children: [
+                        Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Get.to(OnBoardingScreen());
+                              },
+                              child: Text(
+                                "To Defenition".tr,
+                                style: TextStyle(color: AppColors.orange),
+                              ),
+                            ),
+                            Spacer(),
+
+                          ],
+                        ),
+
                         SizedBox(
                           height: 100.h,
                         ),
-        
+
                         TextFormField(
                             validator: (data) {
                               if (data!.isEmpty)
@@ -90,8 +189,8 @@ class LoginScreen extends StatelessWidget {
                               // floatingLabelBehavior: FloatingLabelBehavior.always,
                               border: OutlineInputBorder(),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: AppColors.blue, width: 2.0),
+                                borderSide: BorderSide(
+                                    color: AppColors.blue, width: 2.0),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               labelText: 'Email'.tr,
@@ -124,8 +223,8 @@ class LoginScreen extends StatelessWidget {
                               ),
                               border: OutlineInputBorder(),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: AppColors.blue, width: 2.0),
+                                borderSide: BorderSide(
+                                    color: AppColors.blue, width: 2.0),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               labelText: 'Password'.tr,
@@ -215,6 +314,7 @@ class LoginScreen extends StatelessWidget {
                                     color: AppColors.orange),
                               ),
                             ),
+
                           ],
                         ),
                         // SizedBox(height: 29.h,),

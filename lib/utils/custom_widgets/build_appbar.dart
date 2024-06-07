@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:moshtra/screens/Home_layout/view.dart';
 import 'package:moshtra/utils/constants/colors.dart';
 
+import '../../screens/Home/view.dart';
 import '../styles.dart';
 import 'global_widgets/SearchField.dart';
 
@@ -11,7 +13,7 @@ AppBar buildAppBar( { final String? title, final bool arrowBackDisblay=true,fina
     backgroundColor: AppColors.white,
     leading: arrowBackDisblay?
     InkWell(
-      onTap: ()=>Get.back(),
+      onTap: ()=>Get.offAll(HomeLayout()),
          child: Icon(Icons.arrow_back_ios_new_outlined))
         :SizedBox(width: 0,),
 

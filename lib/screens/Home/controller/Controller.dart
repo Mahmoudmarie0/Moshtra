@@ -8,6 +8,7 @@ import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/service/home_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../../main.dart';
 import '../../../models/category_model.dart';
 import '../../../models/new_Category_model.dart';
 import '../../../models/user_history_model.dart';
@@ -26,6 +27,16 @@ class HomeController extends GetxController {
   int _med = 0;
 
 
+
+  onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    sharedPref!.setBool('onboarding', false);
+    sharedPref!.setBool('HomeLayout', true);
+    sharedPref!.setBool('Defenition', false);
+    update();
+
+  }
 
   List<CategoryModel> get categoryModel => _categoryModel;
   List<CategoryModel> _categoryModel = [];

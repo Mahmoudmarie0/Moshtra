@@ -18,7 +18,11 @@ class LoginController extends GetxController{
   @override
   void onInit() {
     // TODO: implement onInit
+
     sharedPref!.setBool('onboarding', true);
+    sharedPref!.setBool('HomeLayout', false);
+    sharedPref!.setBool('Defenition', false);
+    update();
     super.onInit();
   }
   

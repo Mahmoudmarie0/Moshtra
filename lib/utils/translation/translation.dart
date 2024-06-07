@@ -8,4 +8,5 @@ enum Lang { ar, en }
 class AppTranslation extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {'ar_SA': ar, 'en_US': en};
+
 }

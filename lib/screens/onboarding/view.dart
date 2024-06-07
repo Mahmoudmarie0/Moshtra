@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,7 +27,9 @@ class OnBoardingScreen extends StatelessWidget {
       body: Stack(
         alignment: Alignment.topLeft,
         children: [
+
           SvgPicture.asset(AssetsPaths.OnBoarding,height: 305.h ,width:470.w,),
+
           GetBuilder<OnboardingController>(
             builder: (controller)
             {
@@ -40,6 +43,41 @@ class OnBoardingScreen extends StatelessWidget {
                 },
               );
             },
+          ),
+          Positioned(
+            top: 235.h,
+            left: 20.w,
+            child: InkWell(
+              child: Container(
+                padding: EdgeInsets.zero,
+                height: 40.h,
+                width: 69.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1000.r),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'EN'.tr,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 6.w,
+                    ),
+                    SvgPicture.asset(AssetsPaths.language),
+                  ],
+                ),
+              ),
+              onTap: () {
+
+                mainAppController.changeAppLang();
+              },
+            ),
           ),
           Positioned(
             top: 770.h,

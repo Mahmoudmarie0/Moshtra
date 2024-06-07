@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:moshtra/main.dart';
 
 import '../utils/translation/translation.dart';
 
@@ -31,6 +32,7 @@ class MainAppController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     isRefreshToken();
+
     getDeviceToken().then((value) {
       print(value);
     });

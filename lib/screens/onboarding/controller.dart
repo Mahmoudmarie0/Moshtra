@@ -22,6 +22,16 @@ class OnboardingController extends GetxController
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    sharedPref!.setBool('onboarding', false);
+    sharedPref!.setBool('HomeLayout', false);
+    sharedPref!.setBool('Defenition', true);
+    update();
+
+
+
+
+
+
     if(sharedPref!.getString('lang') == 'en') {
       boardingList.add(BoardingModel(
           image:  AssetsPaths.ShapeOnBoarding1,

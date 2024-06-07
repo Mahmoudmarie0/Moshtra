@@ -46,9 +46,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
               }
 
-              // else {
-              //   Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
-              // }
+              else {
+                Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
+              }
             }
         );
       }

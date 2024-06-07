@@ -35,21 +35,26 @@ class _SplashScreenState extends State<SplashScreen> {
         Timer(
             const Duration(seconds: 3),
                 () {
-              // if (sharedPref!.getBool('Defenition') == true) {
-              //   Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
-              // }
-              // else if (sharedPref!.getBool('onboarding') == true){
-              //   Get.offAll(() => LoginScreen(),transition: Transition.upToDown);
-              // }
-              //
-              // else if (sharedPref!.getBool('HomeLayout') == true){
-              //   Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
-              // }
-              //
-              // else {
-              //   Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
-              // }
-                  Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
+              if (sharedPref!.getBool('Defenition') == null) {
+                Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
+              }
+
+              else if (sharedPref!.getBool('Defenition') == true) {
+                Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
+              }
+
+              else if (sharedPref!.getBool('onboarding') == true){
+                Get.offAll(() => LoginScreen(),transition: Transition.upToDown);
+              }
+
+              else if (sharedPref!.getBool('HomeLayout') == true){
+                Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
+              }
+
+              else {
+                Get.offAll(() => HomeLayout(),transition: Transition.upToDown);
+              }
+
             }
         );
       }

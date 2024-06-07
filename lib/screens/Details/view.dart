@@ -346,7 +346,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                       ),
 
                                                       SizedBox(height: 1.h,),
-                                                      CustomText(text:Get.locale?.languageCode == "en"? controller.CatModel!.product[index].nameEN as String : controller.EgCatModel!.product[index].nameAR as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
+                                                      CustomText(text:Get.locale?.languageCode == "en"? controller.CatModel!.product[index].nameEN as String : controller.CatModel!.product[index].nameAR as String,alignment: Alignment.center,fontweight: FontWeight.w600,fontSize: 14, ),
                                                       SizedBox(height: 5.h,),
                                                       CustomText(text:Get.locale?.languageCode == "en"? controller.CatModel!.product[index].sub_descriptionEN as String : controller.CatModel!.product[index].sub_descriptionAR as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                                                       SizedBox(height: 5.h,),
@@ -597,29 +597,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                init: DetailsController(widget.model!.type.toString()),
                builder: (controller)=>controller.loading.value
                ?Container()
-               : int.parse(widget.model!.number_of_order as String) >= controller.med ?Container(
-                 margin: EdgeInsets.only(top: 24, right: 6),
-                 padding: EdgeInsets.symmetric(horizontal: 5),
-                 width: 80.w,
-                 height: 24.h,
-                 decoration: BoxDecoration(
-                     color: Color(0xff1f8bda),
-                     borderRadius: BorderRadius.circular(8)
-                 ),
-                 child: Center(
-                   child: Text('Best Seller'.tr,
-                       style: TextStyle(
-                         fontWeight: FontWeight.w600,
-                         fontSize: 10,
-                         color: Colors.white,
-                       )
+               : int.parse(widget.model!.number_of_order as String) >= controller.med ?Padding(
+                 padding: const EdgeInsets.only(left: 8),
+                 child: Container(
+                   margin: EdgeInsets.only(top: 24, right: 6),
+                   width: 80.w,
+                   height: 24.h,
+                   decoration: BoxDecoration(
+                       color: Color(0xff1f8bda),
+                       borderRadius: BorderRadius.circular(8)
+                   ),
+                   child: Center(
+                     child: Text('Best Seller'.tr,
+                         style: TextStyle(
+                           fontWeight: FontWeight.w600,
+                           fontSize: 10,
+                           color: Colors.white,
+                         )
+                     ),
                    ),
                  ),
                ): Container()
              ),
             Container(
               margin: EdgeInsets.only(top: 24),
-              padding: EdgeInsets.symmetric(horizontal: 5),
               width: 81.w,
               height: 24.h,
               decoration: BoxDecoration(
@@ -627,7 +628,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   borderRadius: BorderRadius.circular(8)
               ),
               child: Center(
-                child: Text(widget.model.quantity == '0' ? 'Out Of Stock'.tr : 'Free Shipping'.tr,
+                child: Text(widget.model.quantity == '0' ? 'Out Of Stock'.tr : 'Available'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 10,

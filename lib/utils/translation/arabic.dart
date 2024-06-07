@@ -125,6 +125,7 @@ final Map<String, String> ar = {
   "User Profile":"ملف تعريفي للمستخدم",
   "Update Profile":"تحديث الملف",
   "Best Seller": "الأكثر مبيعًا",
+  "Available" : "متوفر للشراء"
 
 
 };

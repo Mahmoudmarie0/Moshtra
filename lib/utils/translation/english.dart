@@ -124,6 +124,7 @@ final Map<String, String> en = {
   "User Profile":"User Profile",
   "Update Profile":"Update Profile",
   "Best Seller" : " Best Seller",
+  "Available" : "Available",
 
 
 

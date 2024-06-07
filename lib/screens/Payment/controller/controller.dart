@@ -18,8 +18,8 @@ class PaymentController extends GetxController{
 
 
 
-  String phone = '0';
-  String address  ='';
+  String? phone;
+  String? address;
 
 
 
@@ -60,8 +60,8 @@ class PaymentController extends GetxController{
 
     // _userModel[0] = user;
 
-    // phone = _userModel!.phoneNumber ?? '0';
-    // address = _userModel!.address ?? '';
+    phone = _userModel!.phoneNumber;
+    address = _userModel!.address;
 
     _loading.value = false;
     update();

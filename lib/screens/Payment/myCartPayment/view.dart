@@ -278,63 +278,34 @@ class MyCart extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        CustomText(
-                                          text: 'Name: '.tr,
-                                          fontweight: FontWeight.w400,
-                                        ),
-                                        CustomText(
-                                          text: controller.userModel!.name,
-                                          fontweight: FontWeight.w400,
-                                        )
-                                      ],
+                                    CustomText(
+                                      text: 'Name: ${controller.userModel!.name}'.tr,
+                                      fontweight: FontWeight.w400,
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    CustomText(
+                                      text: 'Email: ${controller.userModel!.email}'.tr,
+                                      fontweight: FontWeight.w400,
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    CustomText(
+                                      text: 'Phone number: 0${controller.phone.toString()}'.tr,
+                                      fontweight: FontWeight.w400,
                                     ),
                                     SizedBox(
                                       height: 5.h,
                                     ),
                                     Row(
                                       children: [
-                                        CustomText(
-                                          text: 'Email: '.tr,
-                                          fontweight: FontWeight.w400,
-                                        ),
-                                        CustomText(
-                                          text: controller.userModel!.email,
-                                          fontweight: FontWeight.w400,
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        CustomText(
-                                          text: 'Phone number: 0'.tr,
-                                          fontweight: FontWeight.w400,
-                                        ),
-                                        CustomText(
-                                          text: controller.phone.toString(),
-                                          fontweight: FontWeight.w400,
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        CustomText(
-                                          text: 'Address: '.tr,
-                                          fontweight: FontWeight.w400,
-                                        ),
                                         Expanded(
                                           child: SingleChildScrollView(
                                               scrollDirection: Axis.horizontal,
                                               child: CustomText(
-                                                text: controller.address
-                                                    .toString(),
+                                                text: 'Address: ${controller.address.toString()}',
                                                 fontweight: FontWeight.w400,
                                               )),
                                         )

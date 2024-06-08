@@ -347,7 +347,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             Get.to(() => MyCart(products, totalPrice, cartList, 'cart'));
                           },
                           child: Text(
-                            'Checkout(${cartList.length})'.tr,
+                            'Checkout'.tr+ '(${cartList.length})',
                             style: TextStyle(
                               color: AppColors.white,
                               fontSize: 18,

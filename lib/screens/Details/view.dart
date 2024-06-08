@@ -192,8 +192,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               }
                                             },
                                             tabs: [
-                                              TabItem('Details',first!),
-                                              TabItem('Comments',second!),
+                                              TabItem('Details'.tr,first!),
+                                              TabItem('Comments'.tr,second!),
                                             ]
                                         ),
                                       ),

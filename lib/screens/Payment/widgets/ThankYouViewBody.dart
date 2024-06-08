@@ -48,7 +48,7 @@ final dynamic subtotal;
                     ),
                   ),
                   Text(
-                    "Your transaction was successful",
+                    "Your transaction was successful".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black.withOpacity(0.800000011520929),
@@ -61,14 +61,14 @@ final dynamic subtotal;
                     height: 42,
                   ),
                   paymentItemInfo(
-                    title: 'Date',
+                    title: 'Date'.tr,
                     value: DateTime.now().toString().substring(0, 10),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   paymentItemInfo(
-                    title: 'Time',
+                    title: 'Time'.tr,
                     value: DateTime.now().hour.toString() +
                         ":" +
                         DateTime.now().minute.toString(),
@@ -77,7 +77,7 @@ final dynamic subtotal;
                     height: 20,
                   ),
                   paymentItemInfo(
-                    title: 'To',
+                    title: 'To'.tr,
                     value: ' ${controller.userName}',
                   ),
                   const Divider(
@@ -109,7 +109,7 @@ final dynamic subtotal;
                           )),
                           child: Center(
                             child: Text(
-                              'PAID',
+                              'PAID'.tr,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Color(0XFF34A853),
@@ -136,7 +136,7 @@ final dynamic subtotal;
                       ),
                       onPressed: () => printDoc(total,subtotal),
                       child: Text(
-                        'Save as PDF',
+                        'Save as PDF'.tr,
                         style: TextStyle(color: Colors.black),
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../utils/styles.dart';
 
@@ -12,7 +13,7 @@ class Total_price extends StatelessWidget {
     return  Row(
       children: [
         Text(
-          "Total",
+          "Total".tr,
           textAlign: TextAlign.center,
           style: Styles.style24,
         ),

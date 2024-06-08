@@ -46,7 +46,7 @@ class OnboardingController extends GetxController
           width: 300.w,
           text: "Track order !!",
           subtext: "Easily track your order and stay updated",
-          btntext: 'Next'.tr));
+          btntext: 'Next'));
       boardingList.add(BoardingModel(
           image:AssetsPaths.ShapeOnBoarding3,
           height: 298.h,
@@ -60,23 +60,23 @@ class OnboardingController extends GetxController
           image:  AssetsPaths.ShapeOnBoarding1,
           height: 300.h,
           width: 280.w,
-          text: "Purchase Online !!",
-          subtext: "Shop conveniently and securely online!",
-          btntext:"Start"));
+          text: "Purchase Online !!".tr,
+          subtext: "Shop conveniently and securely online!".tr,
+          btntext:"Start".tr));
       boardingList.add(BoardingModel(
           image:AssetsPaths.ShapeOnBoarding2 ,
           height: 270.h,
           width: 300.w,
-          text: "Track order !!",
-          subtext: "Easily track your order and stay updated",
+          text: "Track order !!".tr,
+          subtext: "Easily track your order and stay updated".tr,
           btntext: 'Next'.tr));
       boardingList.add(BoardingModel(
           image:AssetsPaths.ShapeOnBoarding3,
           height: 298.h,
           width: 316.w,
-          text: "Get your order !!",
-          subtext: "Receive your orders with ease and speed!",
-          btntext: "Enter"));
+          text: "Get your order !!".tr,
+          subtext: "Receive your orders with ease and speed!".tr,
+          btntext: "Enter".tr));
 
 
 

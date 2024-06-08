@@ -279,21 +279,21 @@ class MyCart extends StatelessWidget {
                                       ],
                                     ),
                                     CustomText(
-                                      text: 'Name: ${controller.userModel!.name}'.tr,
+                                      text: 'Name:'.tr+ '${controller.userModel!.name}',
                                       fontweight: FontWeight.w400,
                                     ),
                                     SizedBox(
                                       height: 5.h,
                                     ),
                                     CustomText(
-                                      text: 'Email: ${controller.userModel!.email}'.tr,
+                                      text: 'Email:'.tr+ '${controller.userModel!.email}'.tr,
                                       fontweight: FontWeight.w400,
                                     ),
                                     SizedBox(
                                       height: 5.h,
                                     ),
                                     CustomText(
-                                      text: 'Phone number: 0${controller.phone.toString()}'.tr,
+                                      text: 'Phone number: 0'.tr+ '${controller.phone.toString()}'.tr,
                                       fontweight: FontWeight.w400,
                                     ),
                                     SizedBox(
@@ -305,7 +305,7 @@ class MyCart extends StatelessWidget {
                                           child: SingleChildScrollView(
                                               scrollDirection: Axis.horizontal,
                                               child: CustomText(
-                                                text: 'Address: ${controller.address.toString()}',
+                                                text: 'Address:'.tr+ '${controller.address.toString()}',
                                                 fontweight: FontWeight.w400,
                                               )),
                                         )

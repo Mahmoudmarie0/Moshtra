@@ -311,7 +311,7 @@ class MyCart extends StatelessWidget {
                                     Row(
                                       children: [
                                         CustomText(
-                                          text: 'Phone number: '.tr,
+                                          text: 'Phone: '.tr,
                                           fontweight: FontWeight.bold,
                                         ),
                                         CustomText(

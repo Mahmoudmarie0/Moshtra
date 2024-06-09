@@ -179,7 +179,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                                           ),
 
                                                                           SizedBox(height: 1.h,),
-                                                                          Text(myorders[index].orderProducts[productIndex].productModel.nameEN.toString()),
+                                                                          Text(Get.locale?.languageCode == "en"? myorders[index].orderProducts[productIndex].productModel.nameEN.toString() : myorders[index].orderProducts[productIndex].productModel.nameAR.toString()),
                                                                           SizedBox(height: 5.h,),
                                                                           CustomText(text:Get.locale?.languageCode == "en"? myorders[index].orderProducts[productIndex].productModel.sub_descriptionEN as String : myorders[index].orderProducts[productIndex].productModel.sub_descriptionAR as String,alignment: Alignment.center,color: AppColors.grey,fontweight: FontWeight.w400,maxLine: 1,fontSize: 13,),
                                                                           SizedBox(
@@ -309,7 +309,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                         fontweight: FontWeight.bold,
                                                       ),
                                                       CustomText(
-                                                        text: myorders[index].totalPrice.toString(),
+                                                        text: myorders[index].totalPrice.toString()+' EGP'.tr,
                                                         fontweight: FontWeight.w400,
                                                       ),
                                                     ],

@@ -48,16 +48,21 @@ class _OrderScreenState extends State<OrderScreen> {
                       List<orders> myorders = [];
                       List<String> dates = [];
                       List<String> times = [];
+                      List<String> delveryDates =[];
                       if (!snapshot.hasData)
                         return Center(child: CircularProgressIndicator());
                       else {
                         for (int i = 0; i < snapshot.data!.docs.length; i++) {
                           myorders.add(orders.fromSnapshot(snapshot.data!.docs[i]));
                           DateTime dateTime = snapshot.data!.docs[i]['orderDate'].toDate();
+                          DateTime delDate = snapshot.data!.docs[i]['DelivryDate'].toDate();
+
                           String formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+                          String formattedDelDate = "${delDate.day}/${delDate.month}/${delDate.year}";
                           String formattedTime = DateFormat('hh:mm a').format(dateTime);
                           times.add(formattedTime);
                           dates.add(formattedDate);
+                          delveryDates.add(formattedDelDate);
                         }
                       }
                       if (myorders.length == 0)
@@ -263,6 +268,21 @@ class _OrderScreenState extends State<OrderScreen> {
                                                   child: Row(
                                                     children: [
                                                       Text(
+                                                        'Delivery Date: '.tr,
+                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                      ),
+                                                      CustomText(
+                                                        text: delveryDates[index],
+                                                        fontweight: FontWeight.w400,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
                                                         'Status: '.tr,
                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                       ),
@@ -276,50 +296,73 @@ class _OrderScreenState extends State<OrderScreen> {
                                               ],
                                             ),
 
-                                            myorders[index].status == 'Picked'? Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: ElevatedButton(
-                                                  onPressed: () async {
-                                                    await controller.updateOrderStatus();
-                                                    setState(() {
-
-                                                    });
-                                                    if(myorders[index].status == 'Picked'){
-                                                      final  productsQuerey = await order.doc(snapshot.data!.docs[index].id).collection('products').get();
-                                                      for(int i=0;i<productsQuerey.docs.length; i++) {
-                                                        DocumentReference d =
-                                                        order.doc(snapshot.data!.docs[index].id).collection('products').doc(productsQuerey.docs[i].id);
-                                                        d.delete();
-                                                      }
-
-                                                      order.doc(snapshot.data!.docs[index].id).delete();
-                                                    }
-                                                    else{
-
-                                                    }
-                                                  },
-                                                  child: Text(
-                                                    'cancel'.tr,
-                                                    style: TextStyle(
-                                                      color: AppColors.white,
-                                                      fontSize: 18,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 10),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CustomText(
+                                                        text: 'Total'.tr+': ',
+                                                        fontSize: 16,
+                                                        fontweight: FontWeight.bold,
+                                                      ),
+                                                      CustomText(
+                                                        text: myorders[index].totalPrice.toString(),
+                                                        fontweight: FontWeight.w400,
+                                                      ),
+                                                    ],
                                                   ),
-                                                  style: ElevatedButton.styleFrom(
-                                                      splashFactory: NoSplash.splashFactory,
-                                                      minimumSize: Size(80, 50),
-                                                      backgroundColor: Colors.red,
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(Radius.circular(10)),
-                                                      )),
-                                                ),
+
+                                                  myorders[index].status == 'Picked'? Align(
+                                                    alignment: Alignment.bottomRight,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: ElevatedButton(
+                                                        onPressed: () async {
+                                                          await controller.updateOrderStatus();
+                                                          setState(() {
+
+                                                          });
+                                                          if(myorders[index].status == 'Picked'){
+                                                            final  productsQuerey = await order.doc(snapshot.data!.docs[index].id).collection('products').get();
+                                                            for(int i=0;i<productsQuerey.docs.length; i++) {
+                                                              DocumentReference d =
+                                                              order.doc(snapshot.data!.docs[index].id).collection('products').doc(productsQuerey.docs[i].id);
+                                                              d.delete();
+                                                            }
+
+                                                            order.doc(snapshot.data!.docs[index].id).delete();
+                                                          }
+                                                          else{
+
+                                                          }
+                                                        },
+                                                        child: Text(
+                                                          'cancel'.tr,
+                                                          style: TextStyle(
+                                                            color: AppColors.white,
+                                                            fontSize: 18,
+                                                            fontWeight: FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                        style: ElevatedButton.styleFrom(
+                                                            splashFactory: NoSplash.splashFactory,
+                                                            minimumSize: Size(80, 50),
+                                                            backgroundColor: Colors.red,
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius.all(Radius.circular(10)),
+                                                            )),
+                                                      ),
+                                                    ),
+                                                  ) :
+                                                  Container(),
+
+                                                ],
                                               ),
-                                            ) :
-                                            Container()
+                                            )
 
                                           ],
                                         ),

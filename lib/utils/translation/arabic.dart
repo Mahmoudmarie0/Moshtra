@@ -152,5 +152,6 @@ final Map<String, String> ar = {
   "Save as PDF" : "حفظ بصيغة بدف",
   "Order List" : "لائحة الطلبات",
   "Checkout" : "الدفع",
+  "Delivery Date: " : "موعد الاستلام "
 
 };

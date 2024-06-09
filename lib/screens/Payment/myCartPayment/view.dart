@@ -86,9 +86,9 @@ class MyCart extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "Dear Customer".tr,
-                                          style: TextStyle(fontSize: 16),
+                                        CustomText(
+                                          text: "Dear Customer".tr,
+                                          fontweight: FontWeight.bold,
                                         ),
                                         TextButton(
                                           onPressed: () {
@@ -278,37 +278,67 @@ class MyCart extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    CustomText(
-                                      text: 'Name:'.tr+ '${controller.userModel!.name}',
-                                      fontweight: FontWeight.w400,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    CustomText(
-                                      text: 'Email:'.tr+ '${controller.userModel!.email}'.tr,
-                                      fontweight: FontWeight.w400,
-                                    ),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    CustomText(
-                                      text: 'Phone number: 0'.tr+ '${controller.phone.toString()}'.tr,
-                                      fontweight: FontWeight.w400,
+                                    Row(
+                                      children: [
+                                        CustomText(
+                                          text: 'Name:'.tr,
+                                          fontweight: FontWeight.bold,
+                                        ),
+                                        CustomText(
+                                          text: ' '+controller.userModel!.name.tr,
+                                          fontweight: FontWeight.w400,
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(
                                       height: 5.h,
                                     ),
                                     Row(
                                       children: [
+                                        CustomText(
+                                          text: 'Email:'.tr,
+                                          fontweight: FontWeight.bold,
+                                        ),
+                                        CustomText(
+                                          text: " " + controller.userModel!.email.tr,
+                                          fontweight: FontWeight.w400,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    Row(
+                                      children: [
+                                        CustomText(
+                                          text: 'Phone number: '.tr,
+                                          fontweight: FontWeight.bold,
+                                        ),
+                                        CustomText(
+                                          text: '0'+controller.phone.toString().tr,
+                                          fontweight: FontWeight.w400,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    Row(
+                                      children: [
+
+                                        CustomText(
+                                          text: 'Address: '.tr,
+                                          fontweight: FontWeight.bold,
+                                        ),
                                         Expanded(
                                           child: SingleChildScrollView(
                                               scrollDirection: Axis.horizontal,
                                               child: CustomText(
-                                                text: 'Address:'.tr+ '${controller.address.toString()}',
+                                                text: controller.address.toString(),
                                                 fontweight: FontWeight.w400,
-                                              )),
-                                        )
+                                              )
+                                          ),
+                                        ),
                                       ],
                                     )
                                   ],

@@ -150,7 +150,7 @@ final Map<String, String> en = {
   "PAID" : "PAID",
   "Save as PDF" : "Save as PDF",
   "Checkout" : "Checkout",
-
+  "Delivery Date: " : "Delivery Date: "
 
 
 

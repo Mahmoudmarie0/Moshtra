@@ -417,7 +417,7 @@ class ProfileCopntroller extends GetxController {
   //     ),
   //   );
   // }
-
+//d[likd[p
   Future deleteAccountPopUp(context) async {
     return await showDialog(
       context: context,

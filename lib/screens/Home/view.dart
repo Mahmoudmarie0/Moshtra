@@ -270,433 +270,434 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (controller) => controller.loading.value
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
-              backgroundColor: AppColors.grayish_blue,
-              body: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
-                  child: Container(
-                    color: AppColors.grayish_blue,
-                    child: Column(
+        backgroundColor: AppColors.grayish_blue,
+        body: Column(children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
+            child: Container(
+              color: AppColors.grayish_blue,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: Get.locale?.languageCode == "en"
+                        ? const EdgeInsets.only(left: 11)
+                        : const EdgeInsets.only(left: 290),
+                    child: CustomText(
+                      text: 'Welcome_to'.tr,
+                      color: AppColors.black,
+                      fontSize: 20.sp,
+                      fontweight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Padding(
+                    padding: Get.locale?.languageCode == "en"
+                        ? const EdgeInsets.only(left: 11)
+                        : const EdgeInsets.only(left: 315),
+                    child: CustomText(
+                      text: 'Moshtra'.tr,
+                      color: AppColors.blue,
+                      fontSize: 25.sp,
+                      fontweight: FontWeight.w800,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  SearchTextFormField(),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 20.h),
+          Expanded(
+            child: SmartRefresher(
+              onRefresh: () async {
+                // controller.productModel.clear();
+                // await controller.getBestSellingProducts();
+                controller.onRefresh();
+
+                avg = await controller.getBestSelling();
+                med = await controller.getBestSelling2();
+                //  controller. productModel.clear();
+                //  controller. categoryModel.clear();
+                //  controller.  bannerModel.clear();
+                //  await controller. getCategory();
+                //  await controller. getBanners();
+                //  await controller.getBestSellingProducts();
+                controller.refreshController.refreshCompleted();
+                controller.refreshController.refreshCompleted();
+                await BestSellerList();
+                setState(() {
+
+                });
+              },
+              // onLoading: () {
+              //   controller.getInvoices(isRefresh: false);
+              // },
+              enablePullUp: true,
+              controller: controller.refreshController,
+              scrollController: controller.scrollController,
+              child: ListView(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    Column(
                       children: [
+                        CarouselSlider(
+                          items: controller.bannerModel
+                              .map(
+                                (e) => GestureDetector(
+                              onTap: () async {
+                                await categoryController.LoadData(3);
+                                if (categoryController
+                                    .CatModel[3].product.isNotEmpty) {
+                                  Get.to(SeeAll(categoryController.CatModel[3].product.toList(),Get.locale?.languageCode == "en" ? categoryController.CatModel[3].nameEN.toString() : categoryController.CatModel[3].nameAR.toString() ));
+
+                                  // Get.to(SubCategoryScreen(
+                                  //     categoryController
+                                  //         .CatModel[3].product
+                                  //         .toList(),
+                                  //     Get.locale?.languageCode == "en"
+                                  //         ? categoryController
+                                  //             .CatModel[3].nameEN
+                                  //             .toString()
+                                  //         : categoryController
+                                  //             .CatModel[3].nameAR
+                                  //             .toString() , ""));
+                                }
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    left: 13, right: 13),
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(15.r),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius:
+                                  BorderRadius.circular(15.0),
+                                  child: Image(
+                                    image: NetworkImage('${e.Image}'),
+                                    width: 400.w,
+                                    height: 150.h,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                              .toList(),
+                          options: CarouselOptions(
+                            height: 200.0,
+                            initialPage: 0,
+                            viewportFraction: 1.0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 3),
+                            autoPlayAnimationDuration:
+                            Duration(seconds: 1),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
                         Padding(
-                          padding: Get.locale?.languageCode == "en"
-                              ? const EdgeInsets.only(left: 11)
-                              : const EdgeInsets.only(left: 290),
-                          child: CustomText(
-                            text: 'Welcome_to'.tr,
-                            color: AppColors.black,
-                            fontSize: 20.sp,
-                            fontweight: FontWeight.w500,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Get.locale?.languageCode == "en" ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: 'Suggested for you'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(SeeAll(controller.forYouProductModel , "Suggested for you"));
+                                },
+                                child: CustomText(
+                                  text: 'See All'.tr,
+                                  fontSize: 16,
+                                  fontweight: FontWeight.w500,
+                                  color: AppColors.orange,
+                                ),
+                              )
+                            ],
+                          ) : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(SeeAll(controller.forYouProductModel , "مقترح لك"));
+                                },
+                                child: CustomText(
+                                  text: 'See All'.tr,
+                                  fontSize: 16,
+                                  fontweight: FontWeight.w500,
+                                  color: AppColors.orange,
+
+                                ),
+                              ),
+                              CustomText(
+                                text: 'Suggested for you'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              )
+                            ],
+                          ),
+                        ),
+                        if(controller.forYouProductModel.isEmpty)
+                          Container()
+                        else
+                          productsList(controller.forYouProductModel),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Get.locale?.languageCode == "en" ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: 'Best Sellers'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(SeeAll(controller.BestSellerProducts , "Best Sellers"));
+                                },
+                                child: CustomText(
+                                  text: 'See All'.tr,
+                                  fontSize: 16,
+                                  fontweight: FontWeight.w500,
+                                  color: AppColors.orange,
+                                ),
+                              )
+                            ],
+                          ) : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(SeeAll(controller.BestSellerProducts , "الأكثر مبيعًا"));
+                                },
+                                child: CustomText(
+                                  text: 'See All'.tr,
+                                  fontSize: 16,
+                                  fontweight: FontWeight.w500,
+                                  color: AppColors.orange,
+
+                                ),
+                              ),
+                              CustomText(
+                                text: 'Best Sellers'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              )
+                            ],
                           ),
                         ),
                         SizedBox(
                           height: 5.h,
-                        ),
+                        ),// Editing
+                        productsList(controller.BestSellerProducts),
                         Padding(
-                          padding: Get.locale?.languageCode == "en"
-                              ? const EdgeInsets.only(left: 11)
-                              : const EdgeInsets.only(left: 315),
-                          child: CustomText(
-                            text: 'Moshtra'.tr,
-                            color: AppColors.blue,
-                            fontSize: 25.sp,
-                            fontweight: FontWeight.w800,
+                          padding:
+                          const EdgeInsets.only(left: 16, right: 16),
+                          child: Get.locale?.languageCode == "en"
+                              ? Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                text: 'Latest_Products'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              ),
+                            ],
+                          )
+                              : Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Spacer(),
+                              CustomText(
+                                text: 'Latest_Products'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(
                           height: 20.h,
                         ),
-                        SearchTextFormField(),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                Expanded(
-                  child: SmartRefresher(
-                    onRefresh: () async {
-                      // controller.productModel.clear();
-                      // await controller.getBestSellingProducts();
-                      controller.onRefresh();
-
-                      avg = await controller.getBestSelling();
-                      med = await controller.getBestSelling2();
-                      //  controller. productModel.clear();
-                      //  controller. categoryModel.clear();
-                      //  controller.  bannerModel.clear();
-                      //  await controller. getCategory();
-                      //  await controller. getBanners();
-                      //  await controller.getBestSellingProducts();
-                      controller.refreshController.refreshCompleted();
-                      controller.refreshController.refreshCompleted();
-                      await BestSellerList();
-                      setState(() {
-
-                      });
-                    },
-                    // onLoading: () {
-                    //   controller.getInvoices(isRefresh: false);
-                    // },
-                    enablePullUp: true,
-                    controller: controller.refreshController,
-                    scrollController: controller.scrollController,
-                    child: ListView(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        children: [
-                          Column(
+                        ListViewProduct(),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.only(left: 16, right: 16),
+                          child: Get.locale?.languageCode == "en"
+                              ? Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
-                              CarouselSlider(
-                                items: controller.bannerModel
-                                    .map(
-                                      (e) => GestureDetector(
-                                        onTap: () async {
-                                          await categoryController.LoadData(3);
-                                          if (categoryController
-                                              .CatModel[3].product.isNotEmpty) {
-                                            Get.to(SeeAll(categoryController.CatModel[3].product.toList(),Get.locale?.languageCode == "en" ? categoryController.CatModel[3].nameEN.toString() : categoryController.CatModel[3].nameAR.toString() ));
+                              CustomText(
+                                text: 'History'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
 
-                                            // Get.to(SubCategoryScreen(
-                                            //     categoryController
-                                            //         .CatModel[3].product
-                                            //         .toList(),
-                                            //     Get.locale?.languageCode == "en"
-                                            //         ? categoryController
-                                            //             .CatModel[3].nameEN
-                                            //             .toString()
-                                            //         : categoryController
-                                            //             .CatModel[3].nameAR
-                                            //             .toString() , ""));
-                                          }
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 13, right: 13),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15.r),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                            child: Image(
-                                              image: NetworkImage('${e.Image}'),
-                                              width: 400.w,
-                                              height: 150.h,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                options: CarouselOptions(
-                                  height: 200.0,
-                                  initialPage: 0,
-                                  viewportFraction: 1.0,
-                                  enableInfiniteScroll: true,
-                                  reverse: false,
-                                  autoPlay: true,
-                                  autoPlayInterval: Duration(seconds: 3),
-                                  autoPlayAnimationDuration:
-                                      Duration(seconds: 1),
-                                  autoPlayCurve: Curves.fastOutSlowIn,
-                                  scrollDirection: Axis.horizontal,
+                                  });
+                                  controller.clearHistory();
+                                },
+                                child: CustomText(
+                                  text: 'clear'.tr,
+                                  fontSize: 16,
+                                  fontweight: FontWeight.w500,
+                                  color: AppColors.orange,
+                                ),
+                              )
+                            ],
+                          )
+                              : Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  controller.clearHistory();
+                                },
+                                child: CustomText(
+                                  text: 'clear'.tr,
+                                  fontSize: 16,
+                                  fontweight: FontWeight.w500,
+                                  color: AppColors.orange,
                                 ),
                               ),
-                              SizedBox(
-                                height: 15.h,
+                              CustomText(
+                                text: 'History'.tr,
+                                fontSize: 18,
+                                fontweight: FontWeight.w800,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: Get.locale?.languageCode == "en" ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(
-                                      text: 'Suggested for you'.tr,
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Get.to(SeeAll(controller.forYouProductModel , "Suggested for you"));
-                                      },
-                                      child: CustomText(
-                                        text: 'See All'.tr,
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
-                                      ),
-                                    )
-                                  ],
-                                ) : Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Get.to(SeeAll(controller.forYouProductModel , "مقترح لك"));
-                                      },
-                                      child: CustomText(
-                                        text: 'See All'.tr,
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
-
-                                      ),
-                                    ),
-                                    CustomText(
-                                      text: 'Suggested for you'.tr,
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    )
-                                  ],
-                                ),
-                              ),
-                              if(controller.forYouProductModel.isEmpty)
-                                Container()
-                              else
-                                productsList(controller.forYouProductModel),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16),
-                                child: Get.locale?.languageCode == "en" ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(
-                                      text: 'Best Sellers'.tr,
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Get.to(SeeAll(controller.BestSellerProducts , "Best Sellers"));
-                                      },
-                                      child: CustomText(
-                                        text: 'See All'.tr,
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
-                                      ),
-                                    )
-                                  ],
-                                ) : Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Get.to(SeeAll(controller.BestSellerProducts , "الأكثر مبيعًا"));
-                                      },
-                                      child: CustomText(
-                                        text: 'See All'.tr,
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
-
-                                      ),
-                                    ),
-                                    CustomText(
-                                      text: 'Best Sellers'.tr,
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),// Editing
-                              productsList(controller.BestSellerProducts),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, right: 16),
-                                child: Get.locale?.languageCode == "en"
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomText(
-                                            text: 'Latest_Products'.tr,
-                                            fontSize: 18,
-                                            fontweight: FontWeight.w800,
-                                          ),
-                                        ],
-                                      )
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Spacer(),
-                                          CustomText(
-                                            text: 'Latest_Products'.tr,
-                                            fontSize: 18,
-                                            fontweight: FontWeight.w800,
-                                          ),
-                                        ],
-                                      ),
-                              ),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              ListViewProduct(),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              Padding(
-                                padding:
-                                const EdgeInsets.only(left: 16, right: 16),
-                                child: Get.locale?.languageCode == "en"
-                                    ? Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CustomText(
-                                      text: 'History'.tr,
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        setState(() {
-
-                                        });
-                                        controller.clearHistory();
-                                      },
-                                      child: CustomText(
-                                        text: 'clear'.tr,
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
-                                      ),
-                                    )
-                                  ],
-                                )
-                                    : Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        controller.clearHistory();
-                                      },
-                                      child: CustomText(
-                                        text: 'clear'.tr,
-                                        fontSize: 16,
-                                        fontweight: FontWeight.w500,
-                                        color: AppColors.orange,
-                                      ),
-                                    ),
-                                    CustomText(
-                                      text: 'History'.tr,
-                                      fontSize: 18,
-                                      fontweight: FontWeight.w800,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              // ListViewCategory(),
-                              StreamBuilder<QuerySnapshot>(
-                                  stream: User_history.orderBy('createdAt', descending: true).snapshots(),
-                                  builder:(context , snapshot) {
-                                    List<user_history> histList = [];
-                                    List<ProductModel> myhistproducts = [];
-                                    if(!snapshot.hasData)
-                                      return CircularProgressIndicator();
-                                    else{
-                                      for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                                        if (snapshot.data!.docs[i].get('userId') ==
-                                            FirebaseAuth.instance.currentUser!.uid) {
-                                          histList.add(user_history.fromSnapshot(snapshot.data!.docs[i]));
-                                          myhistproducts.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
-
-                                        }
-                                      }
-                                    }
-                                    if(histList.length == 0)
-                                      return Container();
-                                    else{
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.only(left: 16, right: 16),
-                                            child: Get.locale?.languageCode == "en"
-                                                ? Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                CustomText(
-                                                  text: 'History'.tr,
-                                                  fontSize: 18,
-                                                  fontweight: FontWeight.w800,
-                                                ),
-                                                TextButton(
-                                                  onPressed: () {
-                                                    setState(() {
-
-                                                    });
-                                                    Get.to(SeeAll(myhistproducts , "History"));
-                                                  },
-                                                  child: CustomText(
-                                                    text: 'See_All'.tr,
-                                                    fontSize: 16,
-                                                    fontweight: FontWeight.w500,
-                                                    color: AppColors.orange,
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                                : Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Get.to(SeeAll(controller.histProducts , "أخر ما تم رؤيته"));
-                                                  },
-                                                  child: CustomText(
-                                                    text: 'See_All'.tr,
-                                                    fontSize: 16,
-                                                    fontweight: FontWeight.w500,
-                                                    color: AppColors.orange,
-                                                  ),
-                                                ),
-                                                CustomText(
-                                                  text: 'History'.tr,
-                                                  fontSize: 18,
-                                                  fontweight: FontWeight.w800,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                      return productsList(myhistproducts);
-                                    }
-                                  }),
                             ],
                           ),
-                        ]),
-                  ),
-                ),
-              ]),
-              floatingActionButton: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FloatingActionButton(
-                    heroTag: 'gallery',
-                    onPressed: () {
-                      // pickImageFromGallery();
-                    },
-                    child: Icon(Icons.image),
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.black,
-                  )
-                ],
-              ),
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        // ListViewCategory(),
+                        StreamBuilder<QuerySnapshot>(
+                            stream: User_history.orderBy('createdAt', descending: true).snapshots(),
+                            builder:(context , snapshot) {
+                              List<user_history> histList = [];
+                              List<ProductModel> myhistproducts = [];
+                              if(!snapshot.hasData)
+                                return CircularProgressIndicator();
+                              else{
+                                for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                                  if (snapshot.data!.docs[i].get('userId') ==
+                                      FirebaseAuth.instance.currentUser!.uid) {
+                                    histList.add(user_history.fromSnapshot(snapshot.data!.docs[i]));
+                                    myhistproducts.add(ProductModel.fromJson(snapshot.data!.docs[i]['product']));
+
+                                  }
+                                }
+                              }
+                              if(histList.length == 0)
+                                return Container();
+                              else{
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 16, right: 16),
+                                      child: Get.locale?.languageCode == "en"
+                                          ? Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomText(
+                                            text: 'History'.tr,
+                                            fontSize: 18,
+                                            fontweight: FontWeight.w800,
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              setState(() {
+
+                                              });
+                                              Get.to(SeeAll(myhistproducts , "History"));
+                                            },
+                                            child: CustomText(
+                                              text: 'See_All'.tr,
+                                              fontSize: 16,
+                                              fontweight: FontWeight.w500,
+                                              color: AppColors.orange,
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                          : Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Get.to(SeeAll(controller.histProducts , "أخر ما تم رؤيته"));
+                                            },
+                                            child: CustomText(
+                                              text: 'See_All'.tr,
+                                              fontSize: 16,
+                                              fontweight: FontWeight.w500,
+                                              color: AppColors.orange,
+                                            ),
+                                          ),
+                                          CustomText(
+                                            text: 'History'.tr,
+                                            fontSize: 18,
+                                            fontweight: FontWeight.w800,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                                return productsList(myhistproducts);
+                              }
+                            }),
+                      ],
+                    ),
+                  ]),
             ),
+          ),
+        ]),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              heroTag: 'gallery',
+              onPressed: () {
+                // pickImageFromGallery();
+              },
+              child: Icon(Icons.image),
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.black,
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -750,8 +751,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 } else {
                                   List<new_fav> favList = [];
                                   for (int i = 0;
-                                      i < snapshot.data!.docs.length;
-                                      i++) {
+                                  i < snapshot.data!.docs.length;
+                                  i++) {
                                     if (snapshot.data!.docs[i].get('userId') ==
                                         FirebaseAuth
                                             .instance.currentUser!.uid) {
@@ -759,14 +760,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                           snapshot.data!.docs[i]));
 
                                       productIds.add(snapshot.data!.docs[i]
-                                          ['product']['productId']);
+                                      ['product']['productId']);
                                     }
                                   }
                                 }
 
                                 return Container(
                                   padding:
-                                      EdgeInsets.only(left: 110, bottom: 100),
+                                  EdgeInsets.only(left: 110, bottom: 100),
                                   child: MaterialButton(
                                     onPressed: () async {
                                       productId = controller
@@ -793,14 +794,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ' ProIndexFromModel => ${controller.productModel[index].productId}');
 
                                         for (int i = 0;
-                                            i < snapshot.data!.docs.length;
-                                            i++) {
+                                        i < snapshot.data!.docs.length;
+                                        i++) {
                                           if (snapshot.data!.docs[i]
-                                                      .get('userId') ==
-                                                  FirebaseAuth.instance
-                                                      .currentUser!.uid &&
+                                              .get('userId') ==
+                                              FirebaseAuth.instance
+                                                  .currentUser!.uid &&
                                               snapshot.data!.docs[i]['product']
-                                                      ['productId'] ==
+                                              ['productId'] ==
                                                   controller.productModel[index]
                                                       .productId) {
                                             fav
@@ -823,14 +824,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: productIds.length == 0
                                         ? Center(
-                                            child: Icon(Icons.favorite_border))
+                                        child: Icon(Icons.favorite_border))
                                         : productIds.contains(controller
-                                                .productModel[index].productId)
-                                            ? Center(
-                                                child: Icon(Icons.favorite))
-                                            : Center(
-                                                child: Icon(
-                                                    Icons.favorite_border)),
+                                        .productModel[index].productId)
+                                        ? Center(
+                                        child: Icon(Icons.favorite))
+                                        : Center(
+                                        child: Icon(
+                                            Icons.favorite_border)),
                                     textColor: Colors.red,
                                   ),
                                 );
@@ -879,9 +880,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   CustomText(
                     text: Get.locale?.languageCode == "en"
                         ? controller.productModel[index].sub_descriptionEN
-                            as String
+                    as String
                         : controller.productModel[index].sub_descriptionAR
-                            as String,
+                    as String,
                     alignment: Alignment.center,
                     color: AppColors.grey,
                     fontweight: FontWeight.w400,

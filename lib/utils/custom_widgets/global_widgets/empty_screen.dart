@@ -7,6 +7,7 @@ import '../../constants/colors.dart';
 
 Widget buildEmptyScreen({String? titleText , String? subTitleText , String? btnText ,HomeLayoutController? homeLayoutController}) {
   return Scaffold(
+    backgroundColor:AppColors.grayish_blue,
     body: Container(
       alignment: Alignment.center,
       child: Column(

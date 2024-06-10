@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool? isSelected;
 
   int count = 1;
-
+  final refreshController = RefreshController();
   String productId = "";
 
   getData() async {
@@ -264,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       //  await controller. getCategory();
                       //  await controller. getBanners();
                       //  await controller.getBestSellingProducts();
-                      controller.refreshController.refreshCompleted();
+                    //  controller.refreshController.refreshCompleted();
                       controller.refreshController.refreshCompleted();
                       await BestSellerList();
                       setState(() {
@@ -275,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     //   controller.getInvoices(isRefresh: false);
                     // },
                     enablePullUp: true,
-                    controller: controller.refreshController,
+                    controller:refreshController,
                     scrollController: controller.scrollController,
                     child: ListView(
                         padding: EdgeInsets.zero,

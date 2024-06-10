@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<ProductModel> BestSellerProducts = [];
 
-
+  final refreshController = RefreshController();
   CollectionReference fav = FirebaseFirestore.instance.collection('favorites');
   CollectionReference User_history = FirebaseFirestore.instance.collection('User_history');
 
@@ -327,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //  await controller. getCategory();
                 //  await controller. getBanners();
                 //  await controller.getBestSellingProducts();
-                controller.refreshController.refreshCompleted();
+                //  controller.refreshController.refreshCompleted();
                 controller.refreshController.refreshCompleted();
                 await BestSellerList();
                 setState(() {
@@ -338,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //   controller.getInvoices(isRefresh: false);
               // },
               enablePullUp: true,
-              controller: controller.refreshController,
+              controller:refreshController,
               scrollController: controller.scrollController,
               child: ListView(
                   padding: EdgeInsets.zero,

@@ -13,7 +13,7 @@ AppBar buildAppBar( { final String? title, final bool arrowBackDisblay=true,fina
     backgroundColor: AppColors.white,
     leading: arrowBackDisblay?
     InkWell(
-      onTap: ()=>Get.offAll(HomeLayout()),
+      onTap: ()async=> await Get.to(HomeLayout()),
          child: Icon(Icons.arrow_back_ios_new_outlined))
         :SizedBox(width: 0,),
 

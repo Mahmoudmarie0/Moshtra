@@ -59,7 +59,8 @@ class HomeController extends GetxController {
   List<BannerModel> get bannerModel => _bannerModel;
   List<BannerModel> _bannerModel = [];
 
-  RefreshController refreshController = RefreshController();
+
+  final refreshController = RefreshController();
   ScrollController scrollController = ScrollController();
 
   HomeController() {

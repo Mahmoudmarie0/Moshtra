@@ -18,7 +18,8 @@ abstract class PaymentManager{
       String clientSecret=  await _getClientSecret((total*100).toString(), currency);
     await  _intializePaymentSheet(clientSecret);
     await Stripe.instance.presentPaymentSheet();
-      Get.off(ThankYouView( total: total, subtotal: subtotal,));
+    //  await Get.to(ThankYouView( total: total, subtotal: subtotal,));
+      Get.to(() => ThankYouView( total: total, subtotal: subtotal,));
       products;
       cartList;
       total;
@@ -42,9 +43,9 @@ abstract class PaymentManager{
       });
 
       if(currentRoute == 'cart')
-        take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).CartPayment();
+        take_order(total: total, phone: phone, address: address, products: products, cartList: cartList, paymentMethod: 'Credit Card').CartPayment();
       else
-        take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).BuyNowPayment();
+        take_order(total: total, phone: phone, address: address, products: products, cartList: cartList, paymentMethod: 'Credit Card').BuyNowPayment();
 
       // print('order taken');
       // print('CartLength in Payment ${cartList[0].product!.quantity!}');

@@ -70,9 +70,9 @@ abstract class PaypalManager {
             ));
 
         if(currentRoute == 'cart')
-          take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).CartPayment();
+          take_order(total: total, phone: phone, address: address, products: products, cartList: cartList, paymentMethod: 'Paypal' ).CartPayment();
         else
-          take_order(total: total, phone: phone, address: address, products: products, cartList: cartList).BuyNowPayment();
+          take_order(total: total, phone: phone, address: address, products: products, cartList: cartList, paymentMethod: 'Paypal').BuyNowPayment();
 
 
         Get.to(() => ThankYouView(

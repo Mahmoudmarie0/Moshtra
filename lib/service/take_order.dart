@@ -16,10 +16,11 @@ class take_order {
   String phone , address;
   List<ProductModel> products;
   List<new_cart> cartList;
+  String paymentMethod;
 
 
   take_order({required this.total, required this.phone, required this.address,
-    required this.products, required this.cartList});
+    required this.products, required this.cartList, required this.paymentMethod});
 
 
 
@@ -77,7 +78,7 @@ class take_order {
       'orderDate':DateTime.now(),
       'DelivryDate':DateTime.now().add(Duration(days: 5)),
       'totalPrice': total.toString(),
-      'paymentMethod': 'Cridit Card',
+      'paymentMethod': paymentMethod,
       'orderPhone' : phone,
       'orderAddress': address,
       'status': 'Picked',

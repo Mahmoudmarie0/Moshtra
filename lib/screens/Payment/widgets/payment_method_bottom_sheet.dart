@@ -139,9 +139,9 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                                           subtotal: widget.subtotal,
                                         )));
                             if(widget.currentRoute == 'cart')
-                              take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).CartPayment();
+                              take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList, paymentMethod: 'Paymob').CartPayment();
                             else
-                              take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).BuyNowPayment();
+                              take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList , paymentMethod: 'Paymob').BuyNowPayment();
 
                             widget.products;
                             widget.cartList;
@@ -161,9 +161,9 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
                     ));
 
                     if(widget.currentRoute == 'cart')
-                      take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).CartPayment();
+                      take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList, paymentMethod: 'Cash').CartPayment();
                     else
-                      take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList).BuyNowPayment();
+                      take_order(total: widget.total, phone: widget.phone, address: widget.address, products: widget.products, cartList: widget.cartList, paymentMethod: 'Cash').BuyNowPayment();
 
 
                   }

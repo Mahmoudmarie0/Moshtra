@@ -23,6 +23,9 @@ import '../Details/view.dart';
 import '../Wishlist/view.dart';
 
 // import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
+// import 'package:image_picker/image_picker.dart';
+// import 'package:image/image.dart' as img;
+
 //Get.locale?.languageCode == "en"
 class HomeScreen extends StatefulWidget {
   @override
@@ -76,13 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  @override
-  void initState() {
-    super.initState();
-    BestSellerList();
-    setState(() {
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   BestSellerList();
+  //   setState(() {
+  //   });
+  // }
 
 
   // late File _image;
@@ -193,12 +196,72 @@ class _HomeScreenState extends State<HomeScreen> {
   //       // _probability is updated with the calculated probability
   //     });
   //
+  //     // QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('Categories').doc('402rlzLRvORxZt8Ysi2J').collection('Products').get() as QuerySnapshot<Object?>;
+  //     // List<String> products = [];
+  //     //
+  //     // for(int i = 0 ; i < querySnapshot.size ; i++){
+  //     //   print("Type =>  ${querySnapshot.docs[i]['type'].toString()}");
+  //     //   if(_result == querySnapshot.docs[i]['type']) {
+  //     //     products.add(querySnapshot.docs[i]['type']);
+  //     //   }
+  //     // }
   //     print("Class Label is => ${_result}");
-  //     //navigateToResult();
+  //     navigateToResult(_result!);
   //   } catch (e) {
   //     print('Error during inference: $e');
   //   }
   // }
+  //
+  // List<ProductModel> productsForModel = [];
+  //
+  // Future getProductsForModel() async {
+  //   QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance.collection('Categories').doc('402rlzLRvORxZt8Ysi2J').collection('Products').get() as QuerySnapshot<Map<String, dynamic>>;
+  //   productsForModel = [];
+  //
+  //   for(QueryDocumentSnapshot<Map<String, dynamic>> snapshot in querySnapshot.docs){
+  //     ProductModel product = ProductModel.fromSnapshot(snapshot);
+  //     if (product.type == _result!.trim()) {
+  //       productsForModel.add(product);
+  //     }
+  //   }
+  //   print("Products Length is => ${productsForModel.length}");
+  //
+  // }
+  //
+  // void navigateToResult(String res) async {
+  //   await getProductsForModel();
+  //
+  //   if(res.trim() == 'Keyboards')
+  //   {
+  //     Get.to(SeeAll(productsForModel , res.trim()));
+  //   }
+  //   else if(res.trim() == 'Labtops')
+  //   {
+  //     Get.to(SeeAll(productsForModel , res.trim()));
+  //   }
+  //   else if(res.trim() == 'Monitors')
+  //   {
+  //     Get.to(SeeAll(productsForModel , res.trim()));
+  //   }
+  //   else if(res.trim() == 'Mouses')
+  //   {
+  //     Get.to(SeeAll(productsForModel , res.trim()));
+  //   }
+  //   else if(res.trim() == 'Phones')
+  //   {
+  //     Get.to(SeeAll(productsForModel , res.trim()));
+  //   }
+  //   else if(res.trim() == 'Smart watches')
+  //   {
+  //     Get.to(SeeAll(productsForModel , res.trim()));
+  //   }
+  //
+  //   setState(() {
+  //     // isLoading = false;
+  //   });
+  //
+  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -390,7 +453,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                               ),
-                              productsList(controller.forYouProductModel),
+                              if(controller.forYouProductModel.isEmpty)
+                                Container()
+                              else
+                                productsList(controller.forYouProductModel),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 16),
                                 child: Get.locale?.languageCode == "en" ? Row(
@@ -619,18 +685,6 @@ class _HomeScreenState extends State<HomeScreen> {
               floatingActionButton: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FloatingActionButton.small(
-                    heroTag: 'camera',
-                    onPressed: () {
-                      // pickImageFromCamera();
-                    },
-                    child: Icon(Icons.camera_alt_outlined),
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
                   FloatingActionButton(
                     heroTag: 'gallery',
                     onPressed: () {

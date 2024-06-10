@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:moshtra/models/newFav_model.dart';
 import 'package:moshtra/models/products_model.dart';
 import 'package:moshtra/screens/Details/view.dart';
@@ -12,8 +13,11 @@ import 'package:moshtra/utils/constants/colors.dart';
 import 'package:moshtra/utils/custom_text/view.dart';
 
 import '../../../models/fav_model.dart';
+import '../../../utils/constants/assets.dart';
 import '../../Home/controller/Controller.dart';
+import '../../Home/view.dart';
 import '../../Wishlist/view.dart';
+import '../view.dart';
 import 'controller/Controller.dart';
 
 
@@ -69,7 +73,7 @@ class _SubCategoryScreenState extends State<SeeAll> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<subcategoryController>(
+    return widget.products.length != 0 ? GetBuilder<subcategoryController>(
       init: subcategoryController(),
       builder: (controller) =>
       controller.loading.value ? Center(child: CircularProgressIndicator())
@@ -92,14 +96,12 @@ class _SubCategoryScreenState extends State<SeeAll> {
                 ),
                 SizedBox(height: 30.h,),
                 GridViewElectronics(),
-
-
               ],
             ),
           ),
         ),
       ),
-    );
+    ) :  buildEmptyScreen();
   }
 
   Widget GridViewElectronics() {
@@ -303,6 +305,72 @@ class _SubCategoryScreenState extends State<SeeAll> {
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
+  Widget buildEmptyScreen() {
+    return  Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(AssetsPaths.CartListEmpty
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: Text("The Product Is Not Available",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24,
+                    color: AppColors.black,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                child: Text(
+                  "The Product Is Not Available Right Now. You Can Explore Our Top Categories",
+
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: Color(0xff6F7384),
+                    height: 1.55,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+
+                  onPressed: () {
+                    // homeLayoutController!.SeeAll();
+                    Get.off(CategoriesScreen());
+                    // Get.to(CategoriesScreen(),transition: Transition.upToDown);
+                    // Go To Categories
+                  },
+                  style: ElevatedButton.styleFrom(
+                      splashFactory: NoSplash.splashFactory,
+                      minimumSize: Size(328, 60),
+                      backgroundColor: AppColors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      )
+                  ),
+                  child: Text(
+                    "Explore Categories",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  )
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+
 
 
 }

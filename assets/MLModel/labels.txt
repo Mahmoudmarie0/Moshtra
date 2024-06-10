@@ -1,7 +1,7 @@
-0 HeadPhohes
-1 Keyboards
-2 Labtops
-3 Monitors
-4 Mouses
-5 Phones
-6 Smart watches
+HeadPhohes
+Keyboards
+Labtops
+Monitors
+Mouses
+Phones
+Smart watches

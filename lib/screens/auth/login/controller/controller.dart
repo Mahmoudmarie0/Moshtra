@@ -59,7 +59,7 @@ class LoginController extends GetxController{
           GetSnackbarError( message: "The email address is badly formatted.".tr,Color: AppColors.Red);
 
         else {
-          GetSnackbarError( message: "Wrong Password".tr,Color: AppColors.Red);
+          GetSnackbarError( message: "Wrong Password or Email".tr,Color: AppColors.Red);
         }
 
       });
